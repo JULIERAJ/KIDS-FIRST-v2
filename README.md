@@ -6,6 +6,7 @@ KIDS FIRST is a co-parenting app that aspires to give divorced parents a fair an
  <h3>Installation Instructions:</h3>
 
  pull repository from GitHub
+
  **Client Side: 
 
  1. Install dependencies by running npm install 
