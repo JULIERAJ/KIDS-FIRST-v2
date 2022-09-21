@@ -7,15 +7,15 @@ KIDS FIRST is a co-parenting app that aspires to give divorced parents a fair an
 
  pull repository from GitHub
 
- **Client Side: 
+ **backend: 
 
- 1. Install dependencies by running npm install 
- 2. run 'npm start' 
+ 1. Install dependencies by running 'npm install' 
+ 2. Update mongoDB connection string in 'index.js' file
+ 3. run 'node index.js' 
 
- **Server Side:
+ **frontend:
 
  1. Install dependencies by running npm install
- 2. Update mongoDB connection string in app.js file
- 3. run 'npm start' 
+ 2. run 'npm start' 
 
 Create your own branch and use it while developing your code.
