@@ -7,6 +7,10 @@ const invitationSchema = new Schema({
     type: String,
     required: true,
   },
+  invitationUrl: {
+    type: String, 
+    required: true
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

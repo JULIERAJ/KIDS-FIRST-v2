@@ -26,12 +26,12 @@ const memberSchema = new Schema ({
   // username?????
   dateOfBirth: {
     type: Date, 
-    required: true, 
+    // required: true, 
     trim: true
   },
   relationship: {
     type: String, 
-    required: true
+    // required: true
   }, 
   allergy: [{
     type: String
