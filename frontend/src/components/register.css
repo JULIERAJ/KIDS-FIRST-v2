@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+/* signin & signup */
+.logo {
+  height: 100px;
+  width: 100px;
+}
+
+.form-container {
+  margin: auto;
+  width: 1280px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  border-radius: 10px;
+  height: 740px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 50px;
+}
+
+.form-content-left {
+  background: rgba(1, 173, 180, 0.25);
+  border-radius: 10px 0 0 10px;
+  position: relative;
+}
+
+.form-img {
+  width: 310px;
+  height: 603px;
+  left: 150px;
+  top: 137px;
+}
+
+.form-content-right {
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  background: #f8f6e4;
+}
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-title {
+  margin-top: -100px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  margin-bottom: 30px;
+  width: 282px;
+}
+
+.form-inputs {
+  margin-bottom: 1rem;
+  width: 305px;
+}
+
+.form-label {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  /* identical to box height, or 157% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.005em;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #000000;
+}
+
+.form-input:disabled {
+  color: grey;
+}
+
+.form-input {
+  display: block;
+  padding-left: 10px;
+  outline: none;
+  height: 40px;
+  width: 100%;
+  border: 1px solid rgba(60, 66, 87, 0.5);
+  box-sizing: border-box;
+  /* shadow-small */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 1px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+.form-label:disabled {
+  color: grey;
+}
+
+.form-label-profile {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  /* identical to box height, or 157% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.005em;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #000000;
+}
+
+.form-inputs-profile {
+  margin-bottom: 1rem;
+  width: 250px;
+}
+
+.form-control {
+  display: block;
+  padding-left: 10px;
+  outline: none;
+  height: 40px;
+  width: 100%;
+  border: 1px solid rgba(60, 66, 87, 0.5);
+  box-sizing: border-box;
+  /* shadow-small */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 1px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+.form-input-btn {
+  width: 306px;
+  height: 56px;
+  margin-top: 25px;
+  border: 1px solid #f08324;
+  background: #f08324;
+  border-radius: 7px;
+  margin: 15px;
+}
+
+.form-input-btn:hover {
+  width: 306px;
+  height: 56px;
+  margin-top: 25px;
+  border: 1px solid #f08324;
+  background: white;
+  border-radius: 7px;
+  margin: 15px;
+}
+
+.signup-form {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  color: #000000;
+  text-align: center !important;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.signup-form:hover {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  color: #000000;
+  text-align: center !important;
+  margin-left: 5px;
+  margin-top: 5px;
+  background-color: #fff !important;
+}
+
+.or-login-with {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+  padding-top: 50px !important;
+  margin-bottom: 40px;
+}
+
+.btn-Google,
+.btn-facebook {
+  background: white !important;
+  color: #000 !important;
+  border-color: black !important;
+  width: 120px;
+}
+
+.facebook-icon {
+  margin-top: -2px;
+}
+
+.google-icon {
+  margin-top: -2px;
+}
+
+.forget-password {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #f08324 !important;
+  margin-left: -140px;
+}
+
+.forget-password:hover {
+  text-decoration: underline;
+}
+
+.navbar-text {
+  color: #000 !important;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  margin-right: 140px;
+  margin-top: 25px;
+}
+
+.navbar-text a {
+  text-decoration: none;
+  color: #f08324 !important;
+}
+
+/* verify email */
+
+.verify-content-right {
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  background: #f8f6e4;
+}
+
+.verify {
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0px 32px;
+}
+
+.verify-h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 42px;
+  color: #000000;
+}
+
+.verify-img {
+  left: 69.1%;
+  right: 24.65%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.verify-p {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+  /* or 139% */
+  color: #000000;
+  margin-top: 50px;
+  margin-bottom: 88px;
+}
+.verify-resend {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-decoration: none;
+  /* identical to box height */
+  color: #f08324;
+}
+
+#a-tag:hover {
+  color: #f08324;
+}

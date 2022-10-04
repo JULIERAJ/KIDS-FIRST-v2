@@ -22,7 +22,7 @@ body.home {
   flex-direction: row;
   padding-left: 5%;
   padding-right: 5%;
-  width: 89%;
+  width: 100%;
 }
 
 .header-nav img {
@@ -243,8 +243,8 @@ body.home {
   font-family: Roboto, sans-serif;
   font-weight: normal;
 }
-.left-blurb a{
-    text-decoration: none;
+.left-blurb a {
+  text-decoration: none;
 }
 .left-blurb p {
   padding-right: 17%;

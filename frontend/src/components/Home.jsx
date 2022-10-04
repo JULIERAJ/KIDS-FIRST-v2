@@ -71,7 +71,7 @@ export default function Home() {
           </Button>
         </div>
       </header>
-      <section className="site-section" >
+      <section className="site-section">
         <h1 className="value">Kids First Values</h1>
         <div className="features-prev">
           <div className="feature-1">
