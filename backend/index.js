@@ -30,7 +30,7 @@ const uri =
 const Principle = require("./model/Principle");
 const Family = require("./model/Family");
 const Member = require("./model/Member");
-// const Invitation = require('./model/Invitation');
+const Invitation = require('./model/Invitation');
 
 app.post("/api/register", async (req, res) => {
   const { email, password } = req.body;
@@ -103,9 +103,6 @@ app.post("/api/member", async (req, res) => {
     console.log("backend duplicate ");
     res.status(401).send({ message: "This user already exist in this family" });
   } else {
-    // 1) if there is such familyname, but no that person name , check if that person is invitated, if so add 
-    // 2) if there is no such family name, then create a new family with that principle 
-    console.log("else");
     const m1 = new Member({ family: familyId, principle: principleId, firstname: firstname, lastname: lastname });
     await m1.save();
     console.log("m1 is", m1);
@@ -113,74 +110,21 @@ app.post("/api/member", async (req, res) => {
   }
 });
 
+app.post("/api/invitation", async (req, res) => {
+  console.log("========invitation: ", req.body);
+  const  {invitor, family, inviteeEmail, invitationUrl}= req.body;
+  console.log(invitor, family, inviteeEmail, invitationUrl); 
+  console.log ("welcome to the backend of the invitation ");
+  await mongoose.connect(uri);
+
+  const i1 = new Invitation({ invitor, family, inviteeEmail, invitationUrl});
+  await i1.save();
+  console.log("i1 is", i1);
+  res.send({i1});
+});
 
 
 
 
 
 
-
-
-
-
-// async function main() {
-//   try {
-//     await mongoose.connect(uri);
-//     console.log("connected to the mongodb");
-
-// parent 1 created an account
-// const p1 =  new Principle({email: "TEST@test.com", password: "1234"});
-// await p1.save();
-// console.log("p1 is" , p1);
-
-// parent 1 created a family name
-// const f1 = new Family({principle: ['63268f7e1a07b2b3cdfe8a7d'], familyName: '123Family'});
-// await f1.save();
-// console.log("f1 is", f1);
-
-// parent 1 added some members
-// const member_mother = new Member({
-//   family: '63268fedfe421ddbddbdc6bc',
-//   principle: '63268f7e1a07b2b3cdfe8a7d',
-//   firstname: "angelia",
-//   lastname: "jolie",
-//   dateOfBirth: "1963-09-18T03:26:36.331+00:00",
-//   relationship: "mother"
-// })
-// await member_mother.save();
-// console.log("member_mother is ", member_mother);
-
-// const member_child1 = new Member({
-//   family: '63268fedfe421ddbddbdc6bc',
-//   firstname: "angelia's kid",
-//   lastname: "jolie's kid",
-//   dateOfBirth: "2003-09-18T03:26:36.331+00:00",
-//   relationship: "kid",
-//   allergy: "peanut",
-//   dislike: "fish"
-
-// })
-// await member_child1.save();
-// console.log("member_child1 is ", member_child1);
-
-// added one co-parent and assigned that co-parent as principle, aka who needs to login/logout
-// const jolie_invitation = new Invitation({
-//   invitor: '63268f7e1a07b2b3cdfe8a7d',
-//   inviteeEmail: 'bradpitt@gmail.com'
-// })
-// await jolie_invitation.save();
-// console.log("jolie's invite", jolie_invitation);
-
-// research: the co-parent will receive an invitation email
-
-// todo: the co-parent created an account, and successfully check the dashboard information
-
-// todo: build routes and connect with the frontend
-
-//   } catch (e) {
-//     console.log("did not connect to mongodb", e);
-
-//   }
-// }
-
-// main();
