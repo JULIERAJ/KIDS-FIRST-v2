@@ -13,7 +13,7 @@ app.listen(8000, () => {
 });
 
 const uri =
-  "mongodb+srv://yb007:o4W4RLfE6v1IGHza@cluster0.58mdmyi.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://gul:123456@cluster0.8szjtwe.mongodb.net/?retryWrites=true&w=majority";
 
 const Principle = require("./model/Principle");
 const Family = require("./model/Family");
