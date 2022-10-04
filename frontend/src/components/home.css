@@ -21,7 +21,7 @@ body.home {
     flex-direction: row;
     padding-left: 5%;
     padding-right: 5%;
-    width: 100%;
+    width:89%;
 }
 
 .header-nav img {
@@ -79,6 +79,7 @@ body.home {
     align-items: center;
     justify-content: flex-end;
     gap: 7px;
+    
 }
 
 .lang-menu {
@@ -126,11 +127,12 @@ body.home {
 .home-login-btn {
     box-sizing: border-box;
     border-radius: 7px !important;
-    background: transparent !important;
+    background: #F08324 !important;
     border: solid 2px #f08324 !important;
     color: #000 !important;
     width: 108px;
     height: 42px;
+    margin-right: 0px;
     font-family: Roboto, sans-serif;
     font-weight: 500 !important;
     color: #2b2b2b;
