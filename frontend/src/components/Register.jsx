@@ -13,7 +13,7 @@ export default function Register() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [is_parent, setIs_parent] = useState(true)
+  //const [is_parent, setIs_parent] = useState(true)
 
   console.log('email is ', email)
   console.log('password is ', password)
