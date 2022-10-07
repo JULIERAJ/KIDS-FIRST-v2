@@ -12,8 +12,12 @@ app.listen(8000, () => {
   console.log("server started on 8000");
 });
 
+// const uri =
+//   "mongodb+srv://gul:123456@cluster0.8szjtwe.mongodb.net/?retryWrites=true&w=majority";
+
 const uri =
   "mongodb+srv://yb007:o4W4RLfE6v1IGHza@cluster0.58mdmyi.mongodb.net/?retryWrites=true&w=majority";
+
 
 // async function main() {
 //   try {
