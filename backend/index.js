@@ -8,12 +8,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.listen(8000, () => {
-  console.log("server started on 8000");
+app.listen(8001, () => {
+  console.log("server started on 8001");
 });
 
 const uri =
-  "mongodb+srv://gul:123456@cluster0.8szjtwe.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://gul:1979gk76@cluster0.5tyodpz.mongodb.net/?retryWrites=true&w=majority";
+// async function main() {
+//   try {
+//     await mongoose.connect(uri);
+//     console.log("connected to the mongodb");
+//   } catch (e) {
+//     console.log("did not connect to mongodb", e);
+//   }
+// }
+
+// main();
 
 const Principle = require("./model/Principle");
 const Family = require("./model/Family");
