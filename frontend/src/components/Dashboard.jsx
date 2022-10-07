@@ -13,6 +13,9 @@ export default function Dashboard() {
   const storedUser = localStorage.getItem("storedUser");
   const parsedUser = JSON.parse(storedUser).m1;
 
+ 
+
+
   const invitationUrl = `http://localhost:3000/register?inviteeEmail=${inviteeEmail}&family=${parsedUser.family}`;
   console.log("invitation url is: ", invitationUrl);
 
