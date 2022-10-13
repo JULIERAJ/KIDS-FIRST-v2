@@ -8,6 +8,7 @@ KIDS FIRST is a co-parenting app that aspires to give divorced parents a fair an
  pull repository from GitHub
 
  **backend: 
+ 
  0. make sure your node version is v14.18.1
  1. Install dependencies by running 'npm install' 
  2. Update mongoDB connection string in 'index.js' file
