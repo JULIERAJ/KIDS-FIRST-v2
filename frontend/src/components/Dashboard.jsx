@@ -6,15 +6,11 @@ import Form from "react-bootstrap/Form";
 
 export default function Dashboard() {
   const [inviteeEmail, setInviteeEmail] = useState("");
-  // const [invitationUrl, setInvitationUrl] = useState("");
 
   const emailJSForm = useRef();
 
   const storedUser = localStorage.getItem("storedUser");
   const parsedUser = JSON.parse(storedUser).m1;
-
- 
-
 
   const invitationUrl = `http://localhost:3000/register?inviteeEmail=${inviteeEmail}&family=${parsedUser.family}`;
   console.log("invitation url is: ", invitationUrl);
@@ -57,24 +53,30 @@ export default function Dashboard() {
       dashboard page === you want to invite a person to the family as a
       principle
       <br></br>
-      hello {parsedUser.firstname}
+      hello, your name is: {parsedUser.firstname}
       <Form onSubmit={handleInvitation} ref={emailJSForm}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label> family name </Form.Label>
-          <Form.Control type="text" value={parsedUser.family} name="family" />
+          <Form.Control
+            plaintext 
+            readOnly 
+            defaultValue={parsedUser.family}
+            name="family"
+          />
           <br></br>
 
           <Form.Label> invitor name </Form.Label>
           <Form.Control
-            type="text"
-            value={parsedUser.principle}
+            plaintext 
+            readOnly 
+            defaultValue={parsedUser.principle}
             name="invitor"
           />
           <br></br>
 
           <Form.Label> register url </Form.Label>
           <Form.Control
-            type="text"
+            type="text" 
             value={invitationUrl}
             name="invitationUrl"
           />

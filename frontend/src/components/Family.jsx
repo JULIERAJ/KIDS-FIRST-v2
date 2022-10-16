@@ -7,8 +7,7 @@ export default function Family() {
   const [familyName, setFamilyName] = useState("");
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
-
-  console.log(familyName);
+  const storedParamFamily = localStorage.getItem("paramFamily");
 
   function handleCreateFamily(e) {
     e.preventDefault();
@@ -35,30 +34,35 @@ export default function Family() {
 
   return (
     <div>
-      {/* conditional --- for invited co-parent .. in the cookie / session it should already show which family they belong to */}
-      <span>
-        for the invited co-parent: *family page - is this family ? if yes,
-        please click: box of family*
-      </span>
-      <br></br>
-      <span>===========</span>
+      {storedParamFamily ? (
+        <div>
+          {/* <span>
+            for the invited co-parent: *family page - is this family ? if yes,
+            please click: box of family*
+          </span>
+          <br></br>
+          <span>===========</span> */}
+          you already have a family: {storedParamFamily}
+          <br></br>
+          go to my dashboard 
+        </div>
+      ) : (
+        <div>
+          for principle to create a new family: create a new family
+          <Form onSubmit={handleCreateFamily}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Create Family Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter new family name"
+                onChange={(e) => setFamilyName(e.target.value)}
+              />
+            </Form.Group>
 
-      <div>
-        for principle to create a new family: create a new family
-        <Form onSubmit={handleCreateFamily}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Create Family Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter new family name"
-              onChange={(e) => setFamilyName(e.target.value)}
-            />
-          </Form.Group>
-
-          {/* <br></br>
+            {/* <br></br>
           <span>===========</span> */}
 
-          {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+            {/* <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label> your first name</Form.Label>
             <Form.Control
               type="text"
@@ -76,11 +80,12 @@ export default function Family() {
             />
           </Form.Group> */}
 
-          <Button variant="primary" type="submit">
-            create family
-          </Button>
-        </Form>
-      </div>
+            <Button variant="primary" type="submit">
+              create family
+            </Button>
+          </Form>
+        </div>
+      )}
     </div>
   );
 }

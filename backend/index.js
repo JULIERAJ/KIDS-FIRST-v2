@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -53,6 +54,17 @@ app.post("/api/register", async (req, res) => {
     res.send({id: p1._id, email: p1.email});
   }
 });
+
+// app.get("/api/register",  (req, res) => {
+//   console.log("are you there?????");
+//   console.log(req.query.inviteeEmail);
+//   console.log(req.query.family);
+
+//   const email = req.query.inviteeEmail; 
+//   const family = req.query.family;
+//   res.send({email, family });
+// });
+
 
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
@@ -116,9 +128,19 @@ app.post("/api/member", async (req, res) => {
 
 app.post("/api/invitation", async (req, res) => {
   console.log("========invitation: ", req.body);
-  const  {invitor, family, inviteeEmail, invitationUrl}= req.body;
-  console.log(invitor, family, inviteeEmail, invitationUrl); 
-  console.log ("welcome to the backend of the invitation ");
+  const  {invitor, family, invitationUrl,inviteeEmail}= req.body;
+  // hash information
+  // const salt = bcrypt.genSaltSync(10);
+  // function hashInformation (info) {
+  //   return bcrypt.hashSync(info, salt);
+  // }
+
+  // const hashedInviteeEmail = hashInformation(inviteeEmail); 
+  // const hashedFamily = hashInformation(family);
+  // const invitationUrl = "http://localhost:3000/register?inviteeEmail="+ hashedInviteeEmail + "&family=" + hashedFamily; 
+  // console.log(invitationUrl);
+
+
   await mongoose.connect(uri);
 
   const i1 = new Invitation({ invitor, family, inviteeEmail, invitationUrl});
