@@ -32,6 +32,18 @@ export default function Family() {
       .catch((e) => console.log(e));
   }
 
+  function handleVisitDashboard () {
+    const storedUser = localStorage.getItem("storedUser");
+    const parsedUser = JSON.parse(storedUser);
+    const user = JSON.stringify(parsedUser);
+    localStorage.setItem("storedUser", user);
+
+        window.location.href = "/member";
+  }
+
+
+  
+
   return (
     <div>
       {storedParamFamily ? (
@@ -44,7 +56,9 @@ export default function Family() {
           <span>===========</span> */}
           you already have a family: {storedParamFamily}
           <br></br>
+          <button onClick={handleVisitDashboard}> 
           go to my dashboard 
+          </button>
         </div>
       ) : (
         <div>

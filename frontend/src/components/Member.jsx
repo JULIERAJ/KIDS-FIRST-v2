@@ -18,29 +18,46 @@ export default function Family() {
     const parsedUser = JSON.parse(storedUser);
     // console.log("======storeduser: ", parsedUser);
 
-    axios
-      .post("http://localhost:8000/api/member", {
-        firstname,
-        lastname,
-        principleId: parsedUser.principleId,
-        familyId: parsedUser.familyId
-      })
-      .then((res) => {
-        console.log("posted");
-        const user = JSON.stringify(res.data);
-        console.log (user);
-        localStorage.setItem("storedUser", user);
-        window.location.href = "/dashboard";
-      })
-      .catch((e) => console.log(e));
+    if (parsedUser.familyId) {
+      axios
+        .post("http://localhost:8000/api/member", {
+          firstname,
+          lastname,
+          principleId: parsedUser.principleId,
+          familyId: parsedUser.familyId,
+        })
+        .then((res) => {
+          console.log("posted");
+          const user = JSON.stringify(res.data);
+          console.log(user);
+          localStorage.setItem("storedUser", user);
+          window.location.href = "/dashboard";
+        })
+        .catch((e) => console.log(e));
+    } else {
+      const storedParamFamily = localStorage.getItem("paramFamily");
+      axios
+        .post("http://localhost:8000/api/member", {
+          firstname,
+          lastname,
+          principleId: parsedUser.id, // ? 
+          familyId: storedParamFamily,
+        })
+        .then((res) => {
+          console.log("posted");
+          const user = JSON.stringify(res.data);
+          console.log(user);
+          localStorage.setItem("storedUser", user);
+          window.location.href = "/dashboard";
+        })
+        .catch((e) => console.log(e));
+    }
   }
 
   return (
     <div>
-
       <div>
         <Form onSubmit={handleCreateMember}>
-
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label> your first name</Form.Label>
             <Form.Control
