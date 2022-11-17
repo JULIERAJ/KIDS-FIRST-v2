@@ -4,24 +4,23 @@ const cors = require("cors");
 
 const app = express();
 
+require("dotenv").config({path: "./.env.local"});
+
+const PORT = process.env.DATABASE_URL;
+const MONGO_STRING = process.env.DATABASE_URL;
+
+
 // middlewares
 app.use(cors());
 app.use(express.json());
 
-app.listen(8000, () => {
-  console.log("server started on 8000");
+app.listen(PORT, () => {
+  console.log(`server started on ${PORT}`);
 });
-
-// const uri =
-//   "mongodb+srv://gul:123456@cluster0.8szjtwe.mongodb.net/?retryWrites=true&w=majority";
-
-const uri =
-  "mongodb+srv://yb007:o4W4RLfE6v1IGHza@cluster0.58mdmyi.mongodb.net/?retryWrites=true&w=majority";
-
 
 // async function main() {
 //   try {
-//     await mongoose.connect(uri);
+//     await mongoose.connect(MONGO_STRING);
 //     console.log("connected to the mongodb");
 //   } catch (e) {
 //     console.log("did not connect to mongodb", e);
@@ -40,7 +39,7 @@ app.post("/api/register", async (req, res) => {
   const { email, password } = req.body;
   // res.send({ message: "received in the backend " });
   console.log ("welcome to the backend of the register");
-  await mongoose.connect(uri);
+  await mongoose.connect(MONGO_STRING);
   // if cannot find the same email in the system then create the new user
   const checkDuplicate = await Principle.findOne({ email }).exec();
   if (checkDuplicate) {
@@ -58,7 +57,7 @@ app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   // res.send({ message: "received in the backend " });
 
-  await mongoose.connect(uri);
+  await mongoose.connect(MONGO_STRING);
   // find that user in the database
   const foundUser = await Principle.findOne({ email, password }).exec();
 
@@ -79,7 +78,7 @@ app.post("/api/family", async (req, res) => {
   const principleId = req.body.principleId; 
   console.log(familyName, principleId); 
   console.log ("welcome to the backend of the family");
-  await mongoose.connect(uri);
+  await mongoose.connect(MONGO_STRING);
   // if cannot find the same email in the system then create the new user
   const checkDuplicate = await Family.findOne({ familyName, principle: principleId}).exec();
   if (checkDuplicate) {
@@ -100,7 +99,7 @@ app.post("/api/member", async (req, res) => {
   const  {firstname, lastname, principleId, familyId}= req.body;
   console.log(familyId, principleId, firstname, lastname); 
   console.log ("welcome to the backend of the member");
-  await mongoose.connect(uri);
+  await mongoose.connect(MONGO_STRING);
   // if cannot find the same user in the same family  then create the new member 
   const checkDuplicate = await Member.findOne({ family: familyId, principle: principleId, firstname, lastname}).exec();
   if (checkDuplicate) {
@@ -119,7 +118,7 @@ app.post("/api/invitation", async (req, res) => {
   const  {invitor, family, inviteeEmail, invitationUrl}= req.body;
   console.log(invitor, family, inviteeEmail, invitationUrl); 
   console.log ("welcome to the backend of the invitation ");
-  await mongoose.connect(uri);
+  await mongoose.connect(MONGO_STRING);
 
   const i1 = new Invitation({ invitor, family, inviteeEmail, invitationUrl});
   await i1.save();
