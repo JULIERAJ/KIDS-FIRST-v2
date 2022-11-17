@@ -18,7 +18,7 @@ pull repository from GitHub
 2. Configure connection with Mongo DB
 3. Copy file `.env.example` and rename it to `.env.local`
 4. Open your `.env.local` file
-4. Edit `DATABASE_URL` variable and set it to the value of your MongoDB connection string 
+4. Edit `MONGODB_URI` variable and set it to the value of your MongoDB connection string 
 5. Run `npm run start`
 
 
