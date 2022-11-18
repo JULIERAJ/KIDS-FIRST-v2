@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+import { sendInvitation } from "../api";
 
 export default function Dashboard() {
   const [inviteeEmail, setInviteeEmail] = useState("");
@@ -22,13 +23,12 @@ export default function Dashboard() {
   function handleInvitation(e) {
     e.preventDefault();
 
-    axios
-      .post("http://localhost:8000/api/invitation", {
-        invitor: parsedUser.principle,
-        family: parsedUser.family,
-        inviteeEmail: inviteeEmail,
-        invitationUrl: invitationUrl,
-      })
+    sendInvitation({
+      invitor: parsedUser.principle,
+      family: parsedUser.family,
+      inviteeEmail: inviteeEmail,
+      invitationUrl: invitationUrl,
+    })
       .then((res) => {
         console.log("posted");
         emailjs

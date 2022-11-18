@@ -20,7 +20,6 @@ const principleSchema = new Schema (
     //   required: true
     // }
 
-
     createdAt: {
       type: Date, 
       default: Date.now(), 
@@ -30,8 +29,7 @@ const principleSchema = new Schema (
       type: Date, 
       default: Date.now()
     }
-  
   }
-) 
+);
 
 module.exports = mongoose.model('Principle', principleSchema); 
