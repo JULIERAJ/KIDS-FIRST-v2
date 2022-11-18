@@ -1,33 +1,44 @@
 import { useState } from "react";
-import axios from "axios";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export default function Signin() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+import { register } from "../api";
+
+export default function Register() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   console.log("email is ", email);
   console.log("password is ", password);
 
-  function handleLogin(e) {
+  function handleRegister(e) {
     e.preventDefault();
 
     console.log("email is ", email);
     console.log("password is ", password);
 
-    axios
-      .post("http://localhost:8000/api/login", { email, password })
-      .then(console.log("posted"));
-    // if signed in successfully, go to the 'families' page to select family then go to dashboard
-    // need to store user information in the session 
+      // next page should - give a family name
+      register({ email, password }).then((res) => {
+        console.log("success");
+        // need to store the user informatin in the session 
+        const user = JSON.stringify(res.data);
+        localStorage.setItem("storedUser", user); 
+        window.location.href = "/family";
+      })
+      .catch((e) => {
+        console.log(e.response.data.message);
+        setError(e.response.data.message);
+      });
+    // then firstname, last name ... fill out the information .
   }
 
   return (
     <div>
-      sign in page
-      <Form onSubmit={handleLogin}>
+      registration page
+      {error.length > 1 ? error : ""}
+      <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -47,7 +58,7 @@ export default function Signin() {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Sign in
+          Register
         </Button>
       </Form>
     </div>

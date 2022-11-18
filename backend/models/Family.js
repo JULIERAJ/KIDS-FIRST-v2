@@ -20,10 +20,8 @@ const familySchema = new Schema (
       type: Date, 
       default: Date.now()
     }
-  
-
   }
-) 
+);
 
 module.exports = mongoose.model('Family', familySchema);
 

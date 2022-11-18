@@ -11,20 +11,21 @@ KIDS FIRST is a co-parenting app that aspires to give divorced parents a fair an
 
 pull repository from GitHub
 
+<h4>Backend:</h4>
 
-###Backend: 
+1. Open `backend` folder
+2. Install dependencies: `npm i`
+3. Configure connection with Mongo DB
+4. Copy file `.env.example` and rename it to `.env.local`. Or run this command: `cp .env.example .env.local`.
+5. Open your `.env.local` file
+6. Edit `MONGODB_URI` variable and set it to the value of your MongoDB connection string 
+7. Run `npm run start`
 
-1. Install dependencies: `cd api npm i`
-2. Configure connection with Mongo DB
-3. Copy file `.env.example` and rename it to `.env.local`
-4. Open your `.env.local` file
-4. Edit `MONGODB_URI` variable and set it to the value of your MongoDB connection string 
-5. Run `npm run start`
 
+<h4>Frontend:</h4>
 
-###Frontend:
-
-1. Install dependencies by running `cd client npm i`
-2. Run `npm run start`
+1. Open `frontend` folder
+2. Install dependencies by running `npm i`
+3. Run `npm run start`
 
 Create your own branch and use it while developing your code.

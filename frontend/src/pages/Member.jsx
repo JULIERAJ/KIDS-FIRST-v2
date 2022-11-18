@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+import {createMember} from "../api";
 
 export default function Family() {
   const [firstname, setFirstname] = useState("");
@@ -18,13 +19,14 @@ export default function Family() {
     const parsedUser = JSON.parse(storedUser);
     // console.log("======storeduser: ", parsedUser);
 
-    axios
-      .post("http://localhost:8000/api/member", {
-        firstname,
-        lastname,
-        principleId: parsedUser.principleId,
-        familyId: parsedUser.familyId
-      })
+      createMember(
+        {
+          firstname,
+          lastname,
+          principleId: parsedUser.principleId,
+          familyId: parsedUser.familyId
+        }
+      )
       .then((res) => {
         console.log("posted");
         const user = JSON.stringify(res.data);
@@ -37,7 +39,6 @@ export default function Family() {
 
   return (
     <div>
-
       <div>
         <Form onSubmit={handleCreateMember}>
 

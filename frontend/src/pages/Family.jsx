@@ -1,7 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+
+import { createFamily } from "../api";
 
 export default function Family() {
   const [familyName, setFamilyName] = useState("");
@@ -19,11 +20,10 @@ export default function Family() {
     const parsedUser = JSON.parse(storedUser);
     console.log("======storeduser: ", parsedUser.id);
 
-    axios
-      .post("http://localhost:8000/api/family", {
-        familyName,
-        principleId: parsedUser.id,
-      })
+    createFamily({
+      familyName,
+      principleId: parsedUser.id,
+    })
       .then((res) => {
         console.log("posted");
         const user = JSON.stringify(res.data);

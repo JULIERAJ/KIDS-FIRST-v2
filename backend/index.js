@@ -33,6 +33,4 @@ app.use("/api", loginRoutes);
 app.use("/api", memberRoutes);
 app.use("/api", registerRoutes);
 
-app.listen(PORT, () => {
-  console.log(`server started on ${PORT}`);
-});
+app.listen(PORT, () => console.log(`server started on ${PORT}`));
