@@ -61,7 +61,7 @@ export default function Signin() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="navbar-text">
-              Not a member? <a href="/Signup">Sign up now</a>
+              Not a member? <a href="/Register">Sign up now</a>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
