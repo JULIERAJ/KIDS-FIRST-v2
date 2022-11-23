@@ -1,5 +1,14 @@
+
+
 .form-container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
+
+.or-login-with {
+  margin-top:20px;
+  text-align: center;
+}
+
+/*from version 1*/
