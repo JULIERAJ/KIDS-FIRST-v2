@@ -75,7 +75,7 @@ export default function Signin() {
           <Form className="form" onSubmit={handleLogin}>
             <h1 className="form-title">Log in Kids First</h1>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className="email-label">Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="example@email.com"
@@ -85,7 +85,7 @@ export default function Signin() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="password-label">Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
