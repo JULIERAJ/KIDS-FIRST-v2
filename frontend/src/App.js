@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Family from "./pages/Family";
 import Member from "./pages/Member";
 import Dashboard from "./pages/Dashboard";
+import ForgetPassword from "./pages/ForgetPassword";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/family" element={<Family />} /> 
           <Route path="/member" element={<Member />} /> 
           <Route path="/dashboard" element={<Dashboard />} /> 
+          <Route path="/forget" element={<ForgetPassword />} />
         </Route>
       </Routes>
     </div>

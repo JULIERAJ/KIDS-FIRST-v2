@@ -93,13 +93,13 @@ export default function Signin() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className="checkbox mb-3">
-                <a className=" btn forget-password" href="#">
+                <a className=" btn forget-password" href="/Forget">
                   Forgot your password?
                 </a>
               </div>
             </Form.Group>
             <div className="d-grid gap-2">
-              <Button variant="warning" size="lg" type="submit">
+              <Button variant="login" size="lg" type="submit">
                 Log In
               </Button>
             </div>
