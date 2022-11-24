@@ -78,7 +78,7 @@ export default function Signin() {
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Enter email"
+                placeholder="example@email.com"
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -88,7 +88,7 @@ export default function Signin() {
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Password"
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                 name="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
