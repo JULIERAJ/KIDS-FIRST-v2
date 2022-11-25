@@ -1,35 +1,35 @@
-const mongoose = require("mongoose"); 
-const Schema = mongoose.Schema; 
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const principleSchema = new Schema (
-  {
+const principleSchema = new Schema({
     email: {
-      type: String, 
-      required: true, 
-      lowercase: true,
-    }, 
+        type: String,
+        required: true,
+        lowercase: true,
+    },
 
     password: {
-      type: String, 
-      requried: true
-    }, 
+        type: String,
+        requried: true,
+    },
     // firstname??????
     // lastname????????
     // isAdmin: {
-    //   type: Boolean, 
+    //   type: Boolean,
     //   required: true
     // }
 
     createdAt: {
-      type: Date, 
-      default: Date.now(), 
-      immutable: true
+        type: Date,
+        default: Date.now(),
+        immutable: true,
     },
     updatedAt: {
-      type: Date, 
-      default: Date.now()
-    }
-  }
-);
+        type: Date,
+        default: Date.now(),
+    },
+    isActivated: { type: Boolean, default: false },
+    activationLink: { type: String },
+});
 
-module.exports = mongoose.model('Principle', principleSchema); 
+module.exports = mongoose.model("Principle", principleSchema);
