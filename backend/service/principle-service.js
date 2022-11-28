@@ -6,8 +6,7 @@ const registration = async (email, password) => {
     // if cannot find the same email in the system then create the new user
     const checkDuplicate = await Principle.findOne({ email }).exec();
     if (checkDuplicate) {
-        console.log("backend duplicate ");
-        // res.status(401).send({ message: "This user already exist" });
+        throw new Error("user already exists");
     } else {
         const activationLink = uuid.v4();
         const p1 = new Principle({ email, password, activationLink });
@@ -36,12 +35,10 @@ const activate = async (activationLink) => {
 };
 
 const login = async (email, password) => {
-    try {
-        const user = Principle.findOne({ email, password }).exec();
-        if (user) {
-            console.log("foundit");
-        }
-        return user;
-    } catch (e) {}
+    const user = Principle.findOne({ email, password }).exec();
+    if (!user) {
+        throw new Error("user not found");
+    }
+    return user;
 };
 module.exports = { registration, activate, login };

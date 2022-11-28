@@ -1,7 +1,6 @@
 const cors = require("cors");
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./routes/index");
 
 const familyRoutes = require("./routes/family");
 const invitationRoutes = require("./routes/invitation");
@@ -28,7 +27,6 @@ db.once("connected", () => console.log("Database Connected"));
 app.use(cors());
 app.use(express.json());
 
-app.use("api", router);
 app.use("/api", familyRoutes);
 app.use("/api", invitationRoutes);
 app.use("/api", loginRoutes);
