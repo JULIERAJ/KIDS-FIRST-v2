@@ -1,14 +1,14 @@
-const { findUser, isPasswordCorrect, registration } = require("../service/principle-service");
+const principleService = require("../service/principle-service");
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/;
+const passwordRegExp  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
 const registration = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await findUser(email);
+        let user = await principleService.findUser(email);
 
         if(user) {
             res.status(409).json({ message: `The user with ${email} email already exists` });
@@ -19,8 +19,8 @@ const registration = async (req, res) => {
         } else if(!emailRegExp.test(email)) {
             res.status(400).json({ message: "Invalid email" });
         } else if(!user) {
-            user = await registration(email, password);
-            res.status(201).json({ id: user._id, email: user.email });
+            user = await principleService.registration(email, password);
+            res.status(201).json({ id: user.id, email: user.email });
         }
     } catch (e) {
         res.status(500).json({ message: 'something went wrong' });
@@ -31,7 +31,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await findUser(email);
+        const user = await principleService.findUser(email);
 
         console.log("user:", user);
 
@@ -39,7 +39,7 @@ const login = async (req, res) => {
           return res.status(404).json({ error: "User not found" });
         }
 
-        const correctPassword = await isPasswordCorrect(
+        const correctPassword = await principleService.isPasswordCorrect(
             email,
             password
         );
