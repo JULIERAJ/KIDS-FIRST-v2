@@ -10,18 +10,24 @@ router.post("/login", async (req, res) => {
 console.log(res)
   // find that user in the database
   const foundUser = await Principle.findOne({ email, password }).exec();
-
+   
+   
   if (foundUser) {
 
     // send the user information to the front end including names , family info .. etc 
     console.log("foundit");
+    console.log(foundUser)
+    res.send(foundUser)
     
   } else {
     // send error message to the front end 
     console.log("check the username and password");
+    res.send({message:"false"})
    
   
 };
+
+
 })
 
 module.exports = router;

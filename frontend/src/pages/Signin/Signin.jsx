@@ -1,57 +1,44 @@
 import "./Signin.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar, Container, Row, Col, Form, Button } from "react-bootstrap";
 import logo from "../../img/kids_first_logo_beta.png";
 import signup from "../../img/signup.png";
+import axios from "axios";
 
 
 import { login } from "../../api";
 
 export default function Signin() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(true);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [email, password])
+  
 
   console.log("email is ", email);
   console.log("password is ", password);
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
 
     console.log("email is ", email);
     console.log("password is ", password);
-
-    login(email, password).then(console.log("posted"));
-    // window.location.href = "/dashboard";
+    login(email, password).then((res)=> {
+      console.log(res.data)
+    if (res.data.message){
+      setSuccess(false)
+    } else {
+      setSuccess(true)
+      window.location.href = "/dashboard"
+    }
+    })
+  
   }
-
-  // return (
-  //   <div>
-  //     sign in page
-  //     <Form onSubmit={handleLogin}>
-  //       <Form.Group className="mb-3" controlId="formBasicEmail">
-  //         <Form.Label>Email address</Form.Label>
-  //         <Form.Control
-  //           type="email"
-  //           placeholder="Enter email"
-  //           onChange={(e) => setEmail(e.target.value)}
-  //         />
-  //       </Form.Group>
-
-  //       <Form.Group className="mb-3" controlId="formBasicPassword">
-  //         <Form.Label>Password</Form.Label>
-  //         <Form.Control
-  //           type="password"
-  //           placeholder="Password"
-  //           onChange={(e) => setPassword(e.target.value)}
-  //         />
-  //       </Form.Group>
-
-  //       <Button variant="primary" type="submit">
-  //         Sign in
-  //       </Button>
-  //     </Form>
-  //   </div>
-  // );
+  
   return (
     <>
       <Navbar>
@@ -75,8 +62,8 @@ export default function Signin() {
         <div className="form-content-right">
           <Form className="form" onSubmit={handleLogin}>
             <h1 className="form-title">Log in Kids First</h1>
-            {/* <span>{errorMessage}</span> */}
-            <p className="incorrect-p correct-p">Your email address or password is incorrect. Please try again, or click "Forgot your password".</p>
+            
+            <p className={success? "correct-p" : "incorrect-p"}>Your email address or password is incorrect. Please try again, or click "Forgot your password".</p>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label className="email-label">Email address</Form.Label>
               <Form.Control
@@ -84,6 +71,8 @@ export default function Signin() {
                 placeholder="example@email.com"
                 name="email"
                 onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
               />
             </Form.Group>
 
@@ -94,6 +83,7 @@ export default function Signin() {
                 placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                 name="password"
                 onChange={(e) => setPassword(e.target.value)}
+                value={password}
               />
               <div className="checkbox mb-3">
                 <a className=" btn forget-password" href="/Forget">
