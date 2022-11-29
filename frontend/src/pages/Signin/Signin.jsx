@@ -21,6 +21,7 @@ export default function Signin() {
     console.log("password is ", password);
 
     login(email, password).then(console.log("posted"));
+    // window.location.href = "/dashboard";
   }
 
   // return (
@@ -74,6 +75,8 @@ export default function Signin() {
         <div className="form-content-right">
           <Form className="form" onSubmit={handleLogin}>
             <h1 className="form-title">Log in Kids First</h1>
+            {/* <span>{errorMessage}</span> */}
+            <p className="incorrect-p correct-p">Your email address or password is incorrect. Please try again, or click "Forgot your password".</p>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label className="email-label">Email address</Form.Label>
               <Form.Control
