@@ -1,27 +1,31 @@
 const Principle = require("../models/Principle");
 
+const isDuplicate = async (email) => {
+    const checkDuplicate = await Principle.findOne({ email });
+
+    return checkDuplicate ? true : false;
+};
+
 const registration = async (email, password) => {
     // if cannot find the same email in the system then create the new user
-    const checkDuplicate = await Principle.findOne({ email }).exec();
-    if (checkDuplicate) {
-        console.log("backend duplicate ");
-        // res.status(401).send({ message: "This user already exist" });
-        throw new Error(`user with ${email} email already exists`);
-    } else {
-        const p1 = new Principle({ email, password });
-        await p1.save();
-        console.log("email:", email);
+    const p1 = new Principle({ email, password });
+    await p1.save();
+    console.log("email:", email);
 
-        console.log("p1 is", p1);
-        return { id: p1._id, email: p1.email };
-    }
+    console.log("p1 is", p1);
+    return { id: p1._id, email: p1.email };
 };
 
-const login = async (email, password) => {
-    const user = Principle.findOne({ email, password }).exec();
-    if (!user) {
-        throw new Error("user not found");
-    }
-    return user;
+const findUser = async (email) => {
+    const user = await Principle.findOne({ email }).exec();
+    return user ? user : null;
 };
-module.exports = { registration, login };
+
+//need to add logic when campare stored password with the password provided. Depends on what crypting module is used. For ex bcrypt
+const isPasswordCorrect = async (email, password) => {
+    const passwordCorrect = await Principle.findOne({ email, password });
+
+    return passwordCorrect ? true : false;
+};
+
+module.exports = { isDuplicate, registration, findUser, isPasswordCorrect };

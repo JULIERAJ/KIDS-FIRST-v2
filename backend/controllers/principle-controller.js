@@ -1,39 +1,54 @@
 const principleService = require("../service/principle-service");
 
 const registration = async (req, res) => {
+    const { email, password } = req.body;
     try {
-        const { email, password } = req.body;
-        // res.send({ message: "received in the backend " });
-
         console.log("welcome to the backend of the register");
+        const isPrincipleDuplicate = await principleService.isDuplicate(email);
 
-        const principleData = await principleService.registration(
-            email,
-            password
-        );
+        console.log("isPrincipleDuplicate:", isPrincipleDuplicate);
 
-        return res.status(201).json(principleData);
+        if (!isPrincipleDuplicate) {
+            const principleData = await principleService.registration(
+                email,
+                password
+            );
+
+            return res.status(201).json(principleData);
+        } else {
+            return res.status(409).json({
+                message: `the user with ${email} email already exists`,
+            });
+        }
     } catch (e) {
-        res.status(409).json({ message: e.message });
+        res.status(500).json({
+            message: `something went wrong`,
+        });
     }
 };
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    // res.send({ message: "received in the backend " });
 
     try {
-        // find that user in the database
-        const foundUser = await principleService.login(email, password);
+        const user = await principleService.findUser(email);
 
-        if (!foundUser) {
-            return res.status(404).json({
-                message: "user not found",
+        console.log("user:", user);
+
+        if (!user) {
+            res.status(404).json({ error: "User not found" });
+        }
+
+        const correctPassword = await principleService.isPasswordCorrect(
+            email,
+            password
+        );
+        if (!correctPassword) {
+            res.status(401).json({
+                error: "password or username is not correct",
             });
         }
-        // send the user information to the front end including names , family info .. etc
-
-        console.log("foundit");
+        return res.status(200).json({ email: user.email, id: user._id });
     } catch (e) {
         res.status(500).json({
             message: "Failed to login",
