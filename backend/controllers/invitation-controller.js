@@ -15,8 +15,7 @@ const invitation = async (req, res) => {
         );
         res.status(201).send({ i1 });
     } catch (e) {
-        console.log(e);
-        res.status(500).json(e.message);
+        res.status(500).json("something went wrong");
     }
 };
 
