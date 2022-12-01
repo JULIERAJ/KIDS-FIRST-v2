@@ -6,28 +6,25 @@ const memberRegistration = async (
     principleId,
     familyId
 ) => {
-    const checkDuplicate = await Member.findOne({
+    const m1 = new Member({
         family: familyId,
         principle: principleId,
+        firstname: firstname,
+        lastname: lastname,
+    });
+    await m1.save();
+    console.log("m1 is", m1);
+    return { m1 };
+};
+const isDuplicate = async (firstname, lastname, principleId, familyId) => {
+    const checkDuplicate = await Member.findOne({
         firstname,
         lastname,
-    }).exec();
-    if (checkDuplicate) {
-        console.log("backend duplicate ");
-        throw new Error(
-            `The user ${firstname} ${lastname} already exists in this family `
-        );
-    } else {
-        const m1 = new Member({
-            family: familyId,
-            principle: principleId,
-            firstname: firstname,
-            lastname: lastname,
-        });
-        await m1.save();
-        console.log("m1 is", m1);
-        return { m1 };
-    }
+        principle: principleId,
+        family: familyId,
+    });
+
+    return checkDuplicate ? true : false;
 };
 
-module.exports = { memberRegistration };
+module.exports = { memberRegistration, isDuplicate };
