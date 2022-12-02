@@ -1,22 +1,20 @@
 import React from 'react';
+import {Navbar, Container} from "react-bootstrap";
+import logo from '../../media/logo.png'
 
-const Header = () => {
-  
-    <Navbar>
-        <Container>
-          <Navbar.Brand href="/">
-            <img src={logo} className="logo" alt="" />
-          </Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text className="navbar-text">
-              Not a member? <a href="/Register">Sign up now</a>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-  
-}
+const Header = ({ bg, widget }) => {
+  return (
+    <Navbar bg={bg} className="py-1">
+      <Container className="content-layout">
+        <Navbar.Brand href="/" className="py-0">
+          <img src={logo} width="80" height="80" alt="KIDS FIRST"/>
+        </Navbar.Brand>
+
+        {widget}
+      </Container>
+    </Navbar>
+  );
+};
 
 export default Header;
 

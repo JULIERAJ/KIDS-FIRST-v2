@@ -9,7 +9,7 @@ import { register } from "../../api";
 import FatherSonBlock from "../../components/FatherSonBlock";
 import FormEmailInput from "../../components/form/FormEmailInput";
 import FormPasswordInput from "../../components/form/FormPasswordInput";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import SocialButtonsGroup from "../../components/SocialButtonsGroup";
 import TextLink from "../../components/TextLink";
 import IconText from "./IconText";

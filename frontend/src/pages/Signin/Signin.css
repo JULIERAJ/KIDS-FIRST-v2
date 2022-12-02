@@ -1,83 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
-body {
-  font-family: Roboto;
-}
-
-.navbar-text a{
-  text-decoration: none;
-  color: #F08324  !important;
-}
-
-
-.form {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.form-control{
-  border: 1px solid rgba(60, 66, 87, 0.5);
-  box-sizing: border-box;
-  
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.08), 0px 1px 1px rgba(0, 0, 0, 0.04);
-  border-radius: 8px;
-  
-}
-
-.form-title {
-  margin-top: 40px; 
-  font-family: 'Roboto', sans-serif;
-  font-size: 36px;
-  font-style: normal;
-  font-weight:500;
-  width: 282px;
-  text-align: center;
-}
-
-.incorrect-p {
-  border: solid 1px salmon;
-  border-radius: 10px;
-  padding: 5px 10px;
-  background-color: salmon;
-}
-
-.correct-p {
-  visibility: hidden;
-  margin-top: -20%;
-}
-
-.form-container {
-  margin:  auto;
-  width: 1280px;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
-  position: relative;
-  border-radius: 10px;
-  height: 740px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 50px;
-  background: rgba(1, 173, 180, 0.25);
-}
-
-.form-content-left {
-  border-radius: 10px 0 0 10px;
-  margin: auto auto -1px;
-}
-
-.form-content-right {
-  border-radius: 0 10px 10px 0;
-  position: relative;
-  background: #F8F6E4;
-  
-}
 
 .forget-password{
   font-family: Roboto;
@@ -91,26 +11,10 @@ body {
   }
 
 
-.btn-login {
-  font-weight: 500;
-  background-color: #f08324;
-  margin-bottom: 15%;
-}
 
 .or-login-with {
   text-align: center;
   font-weight: 300px;
-  margin-bottom: 15%;
-}
-
-.row {
-text-align: center;
-}
-
-.btn-Google,.btn-facebook{
-  background: white;
-  color: #000;
-  border-color: black;
-  width: 120px;
+  margin-bottom: 2%;
 }
 
