@@ -1,23 +1,52 @@
 import { useState } from "react";
-
+import app from "../firebase.init";
+import { FacebookAuthProvider, getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
 import { register } from "../api";
+
+const auth = getAuth(app);
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
+  const googleProvider = new GoogleAuthProvider();
+  const facebookProvider = new FacebookAuthProvider();
 
-  console.log("email is ", email);
-  console.log("password is ", password);
+  const handleGoogleSignIn = () => {
+    signInWithPopup (auth, googleProvider)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+      window.location.href = "/family";
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
+  const handleFacebookSignIn = () => {
+    signInWithPopup (auth, facebookProvider)
+    .then(result => {
+      const user = result.user;
+      console.log(user);
+      window.location.href = "/family";
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
+  // console.log("email is ", email);
+  // console.log("password is ", password);
 
   function handleRegister(e) {
     e.preventDefault();
 
-    console.log("email is ", email);
-    console.log("password is ", password);
+    // console.log("email is ", email);
+    // console.log("password is ", password);
 
       // next page should - give a family name
       register({ email, password }).then((res) => {
@@ -28,7 +57,7 @@ export default function Register() {
         window.location.href = "/family";
       })
       .catch((e) => {
-        console.log(e.response.data.message);
+        console.log(e.response.data.message); 
         setError(e.response.data.message);
       });
     // then firstname, last name ... fill out the information .
@@ -60,6 +89,15 @@ export default function Register() {
         <Button variant="primary" type="submit">
           Register
         </Button>
+
+        <Button onClick={handleGoogleSignIn} variant="primary" type="submit">
+          Google Sign In
+        </Button> 
+
+        <Button onClick={handleFacebookSignIn} variant="primary" type="submit">
+          Facebook Sign In
+        </Button>
+
       </Form>
     </div>
   );

@@ -5,6 +5,10 @@ import Register from "./pages/Register";
 import Family from "./pages/Family";
 import Member from "./pages/Member";
 import Dashboard from "./pages/Dashboard";
+import app from "../src/firebase.init";
+import { getAuth } from "firebase/auth";
+
+const auth = getAuth(app);
 
 function App() {
   return (
