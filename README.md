@@ -4,12 +4,12 @@ Second version of the app.
 KIDS FIRST is a co-parenting app that aspires to give divorced parents a fair and practical tool to schedule child custody without conflict. Co-parenting requires a significant level of communication and cooperation, which can be a challenge for divorced parents that rather not speak with each other. Lack of communication leads to parents arguing and studies have shown this can negatively affect their child's upbringing and development.
 
 ## Requirements:
-- Node v18
+- Node (at least the 14th version)
 - MongoDB connection
 
 <h3>Installation Instructions:</h3>
 
-pull repository from GitHub
+0. Pull repository from GitHub
 
 <h4>Backend:</h4>
 

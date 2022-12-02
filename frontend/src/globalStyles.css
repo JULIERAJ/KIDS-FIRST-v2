@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+:root {
+  --main-black: #000000;
+  --main-white: #FFFFFF;
+  --main-grey: #999999;
+  --main-sand: #F7F5EC;
+  --main-mistral: #878fab;
+  --main-cyan: #01ADB4;
+  --main-blue: #64CAC7;
+  --main-lightBlue: #BFEBEC;
+  --main-green: #5BA056;
+  --main-orange: #F08324;
+  --main-red: #F05153;  
+  --main-yellow: #F4DD61;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+}
+
+.content-layout {
+  max-width: 1280px;
+  margin: auto;
+}
+
+/* =======================================
+                BACKGROUND
+   ======================================= */
+
+.bg-sand {
+  background-color: var(--main-sand);
+}
+
+.bg-orange {
+  background-color: var(--main-orange);
+}
+
+/* =======================================
+                  BUTTONS
+   ======================================= */
+
+.primary-btn {
+  background-color: var(--main-orange);
+  border: 3px solid var(--main-orange) !important;
+  border-radius: 7px;
+  font-weight: 500;
+}
+
+.primary-btn:hover,
+.primary-btn:active {
+  background-color: var(--main-white) !important;
+}
+
+.secondary-btn {}
+
+.tertiary-btn {
+  font-size: 14px;
+  line-height: 21px;
+  background-color: var(--main-white) !important;
+  color: var(--main-black) !important;
+}
