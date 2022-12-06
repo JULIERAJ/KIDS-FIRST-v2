@@ -1,23 +1,25 @@
 const express = require("express");
-
 const Principle = require("../models/Principle");
-
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  // res.send({ message: "received in the backend " });
+  console.log ("welcome to the login page");
+  try {
+    const principle = await Principle.findOne({email})
+    if(!principle){
+      return res.status(400).send({error:'Unable to login'})
+    }
+    const isMatch = await bcrypt.compare(password,principle.password )
+    if(!isMatch){
+      return res.status(400).send({error:'Unable to login'})
+    }
 
-  // find that user in the database
-  const foundUser = await Principle.findOne({ email, password }).exec();
-
-  if (foundUser) {
-
-    // send the user information to the front end including names , family info .. etc 
-    console.log("foundit");
-  } else {
-    // send error message to the front end 
-    console.log("check the username and password again");
+    res.send(principle)
+  } catch (e) {
+    console.log(e)
+    res.status(400).send(e)
   }
 });
 
