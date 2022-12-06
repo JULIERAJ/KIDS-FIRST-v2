@@ -1,15 +1,10 @@
 import "./Signin.css";
 import { useState, useEffect } from "react";
-import { Navbar, Container, Row, Col, Form, Button } from "react-bootstrap";
-import signup from "../../img/signup.png";
-import axios from "axios";
-
-
+import {Container, Form, Button } from "react-bootstrap";
 
 import { login } from "../../api";
 import FatherSonBlock from "../../components/FatherSonBlock";
 import FormEmailInput from "../../components/form/FormEmailInput";
-import FormPasswordInput from "../../components/form/FormPasswordInput";
 import Header from "../../components/Header/Header";
 import MessageBar from "../Register/MessageBar";
 import SocialButtonsGroup from "../../components/SocialButtonsGroup";
