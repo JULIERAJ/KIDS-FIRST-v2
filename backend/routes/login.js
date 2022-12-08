@@ -9,14 +9,14 @@ router.post("/login", async (req, res) => {
   try {
     const principle = await Principle.findOne({email})
     if(!principle){
-      return res.status(400).send({error:'Unable to login'})
+      return res.status(404).send({error:'User not found'})
     }
     const isMatch = await bcrypt.compare(password,principle.password )
     if(!isMatch){
-      return res.status(400).send({error:'Unable to login'})
+      return res.status(401).send({error:'You have entered an invalid username or password'})
     }
 
-    res.send(principle)
+    res.status(200).send(principle)
   } catch (e) {
     console.log(e)
     res.status(400).send(e)
