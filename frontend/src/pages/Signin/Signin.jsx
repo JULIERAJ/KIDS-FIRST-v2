@@ -25,21 +25,21 @@ export default function Signin() {
     setSuccess(true);
   }, [email, password]);
 
-  async function handleLogin(e) {
+  function handleLogin(e) {
     e.preventDefault();
 
-    login(email, password).then((res) => {
-      
-      if (res.data.message) {
+    login(email, password)
+      .then((res) => {
+        setSuccess(true);
+        window.location.href = "/dashboard";
+      })
+      .catch((err) => {
         setSuccess(false);
         setErrMsg(
           `Your email address or password is incorrect. Please try again, or click "Forgot your password"`
         );
-      } else {
-        setSuccess(true);
-        window.location.href = "/dashboard";
-      }
-    });
+        console.log(err.response.data.message);
+      });
   }
 
   return (
@@ -69,13 +69,12 @@ export default function Signin() {
               required
             />
 
-            
             <div className="checkbox mb-3">
               <a className=" btn forget-password" href="/Forget">
                 Forgot your password?
               </a>
             </div>
-            
+
             <Button
               className="primary-btn w-100 my-5"
               type="submit"

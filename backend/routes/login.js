@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   // res.send({ message: "received in the backend " });
-console.log(res)
+ 
   // find that user in the database
   const foundUser = await Principle.findOne({ email, password }).exec();
    
@@ -15,14 +15,14 @@ console.log(res)
   if (foundUser) {
 
     // send the user information to the front end including names , family info .. etc 
-    console.log("foundit");
+    // console.log("foundit");
     console.log(foundUser)
-    res.send(foundUser)
+    res.status(200).json({email: foundUser.email, password: foundUser.password})
     
   } else {
     // send error message to the front end 
     console.log("check the username and password");
-    res.send({message:"false"})
+    res.status(400).json({message:"Username or password is wrong!"})
    
   
 };
