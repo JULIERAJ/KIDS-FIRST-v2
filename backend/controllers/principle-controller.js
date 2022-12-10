@@ -36,7 +36,7 @@ const login = async (req, res) => {
         console.log("user:", user);
 
         if (!user) {
-            res.status(404).json({ error: "User not found" });
+          return res.status(404).json({ error: "User not found" });
         }
 
         const correctPassword = await principleService.isPasswordCorrect(
@@ -44,13 +44,13 @@ const login = async (req, res) => {
             password
         );
         if (!correctPassword) {
-            res.status(401).json({
+           return res.status(401).json({
                 error: "Password or username is not correct",
             });
         }
         return res.status(200).json({ email: user.email, id: user._id });
     } catch (e) {
-        res.status(500).json({
+       return res.status(500).json({
             message: "Failed to login",
         });
     }
