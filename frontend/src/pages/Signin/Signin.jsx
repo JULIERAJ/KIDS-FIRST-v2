@@ -21,10 +21,8 @@ export default function Signin() {
 
     login(email, password)
       .then((res) => {
-        console.log('posted');
-        console.log(res);
+        console.log('success');
         const user = JSON.stringify(res.data);
-        console.log(user)
         console.log('go to dashboard')
         // localStorage.setItem('sighInUser', user);
         // window.location.href = '/dashboard';
@@ -39,7 +37,7 @@ export default function Signin() {
 
   return (
     <div>
-      sign in page
+      sign in page <br></br>
       {error.length > 1 ? error : ''}
       <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="formBasicEmail">

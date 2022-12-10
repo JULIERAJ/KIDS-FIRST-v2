@@ -30,7 +30,9 @@ export default function Register() {
       .catch((e) => {
         console.log(e.response.data.message);
         setError(e.response.data.message);
-        window.location.href = '/Signin';
+        setTimeout(() => {
+          window.location.href = '/Signin';
+        }, "4000")
       });
     // then firstname, last name ... fill out the information .
 
@@ -39,7 +41,7 @@ export default function Register() {
 
   return (
     <div>
-      registration page
+      registration page <br></br>
       {error.length > 1 ? error : ''}
       <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
