@@ -6,8 +6,6 @@ import Family from "./pages/Family";
 import Member from "./pages/Member";
 import Dashboard from "./pages/Dashboard";
 
-
-
 function App() {
   return (
     <div className="App">

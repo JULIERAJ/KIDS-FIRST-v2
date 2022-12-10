@@ -1,29 +1,29 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 
-import { login } from '../../api';
+import { login } from "../../api";
 
 export default function Signin() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   //add this error
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
 
   function handleLogin(e) {
     e.preventDefault();
 
-    console.log('email is ', email);
-    console.log('password is ', password);
+    console.log("email is ", email);
+    console.log("password is ", password);
 
     login(email, password)
       .then((res) => {
-        console.log('success');
+        console.log("success");
         const user = JSON.stringify(res.data);
-        console.log('go to dashboard')
+        console.log("go to dashboard")
         // localStorage.setItem('sighInUser', user);
         // window.location.href = '/dashboard';
       })

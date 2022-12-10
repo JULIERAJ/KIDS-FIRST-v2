@@ -17,7 +17,6 @@ export default function Dashboard() {
 
 
 
-
   const invitationUrl = `http://localhost:3000/register?inviteeEmail=${inviteeEmail}&family=${parsedUser.family}`;
   console.log("invitation url is: ", invitationUrl);
 
