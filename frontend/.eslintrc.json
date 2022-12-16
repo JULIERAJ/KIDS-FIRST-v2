@@ -1,0 +1,33 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "../.eslintrc.json"
+  ],
+  "overrides": [
+    {
+      "files": ["*.jsx" ]
+    }
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": ["react", "react-hooks"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-unresolved": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}
