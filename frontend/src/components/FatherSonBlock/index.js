@@ -1,3 +1,3 @@
-import FatherSonBlock from "./FatherSonBlock";
+import FatherSonBlock from './FatherSonBlock';
 
 export default FatherSonBlock;

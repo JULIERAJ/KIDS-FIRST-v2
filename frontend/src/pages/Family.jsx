@@ -1,41 +1,39 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-import { createFamily } from "../api";
+import { createFamily } from '../api';
 
 export default function Family() {
-  const [familyName, setFamilyName] = useState("");
+  const [familyName, setFamilyName] = useState('');
   // const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
 
-  console.log(familyName);
-
   function handleCreateFamily(e) {
     e.preventDefault();
-    // check backend if there is any duplicate family names + principle name - combined primary key ???
+    // check backend if there is any duplicate 
+    // family names + principle name - combined primary key ???
     // create family name in the backend
 
-    const storedUser = localStorage.getItem("storedUser");
+    const storedUser = localStorage.getItem('storedUser');
     const parsedUser = JSON.parse(storedUser);
-    console.log("======storeduser: ", parsedUser.id);
 
     createFamily({
       familyName,
       principleId: parsedUser.id,
     })
       .then((res) => {
-        console.log("posted");
         const user = JSON.stringify(res.data);
-        localStorage.setItem("storedUser", user);
-        window.location.href = "/member";
-      })
-      .catch((e) => console.log(e));
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/member';
+      });
+    // .catch((e) => console.log(e));
   }
 
   return (
     <div>
-      {/* conditional --- for invited co-parent .. in the cookie / session it should already show which family they belong to */}
+      {/* conditional --- for invited co-parent .. in the cookie / 
+      session it should already show which family they belong to */}
       <span>
         for the invited co-parent: *family page - is this family ? if yes,
         please click: box of family*

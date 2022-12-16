@@ -1,46 +1,34 @@
-import { useState, useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 
-import "./styles.css";
+import './styles.css';
 
-import { register } from "../../api";
-import FatherSonBlock from "../../components/FatherSonBlock";
-import FormEmailInput from "../../components/form/FormEmailInput";
-import FormPasswordInput from "../../components/form/FormPasswordInput";
-import Header from "../../components/Header/Header";
-import SocialButtonsGroup from "../../components/SocialButtonsGroup";
-import TextLink from "../../components/TextLink";
-import IconText from "./IconText";
-import MessageBar from "./MessageBar";
+import IconText from './IconText';
 
+import MessageBar from './MessageBar';
 
+import { register } from '../../api';
+import FatherSonBlock from '../../components/FatherSonBlock';
+import FormEmailInput from '../../components/form/FormEmailInput';
+import FormPasswordInput from '../../components/form/FormPasswordInput';
+import Header from '../../components/Header/Header';
+import SocialButtonsGroup from '../../components/SocialButtonsGroup';
+import TextLink from '../../components/TextLink';
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [isError, setIsError] = useState(false);
   const [isPasswordsMatch, setIsPasswordsMatch] = useState(false);
 
-  const handleEmailChange = ({ target: { value }}) => setEmail(value);
-  const handlePasswordChange = ({ target: { value }}) => setPassword(value);
-  const handlePasswordConfirmChange = ({ target: { value }}) => setConfirmPassword(value);
-
-  const handleBlur = (event) => {
-    //TODO
-    const isPasswordFieldsEmpty = password === '' && confirmPassword === '';
-
-    if(!isPasswordFieldsEmpty && password !== confirmPassword) {
-      setIsError(true);
-    }
-
-    if(!(password === '' && confirmPassword === '') && (password === confirmPassword)) {
-      setIsPasswordsMatch(true);
-    }
-  }
+  const handleEmailChange = ({ target: { value } }) => setEmail(value);
+  const handlePasswordChange = ({ target: { value } }) => setPassword(value);
+  const handlePasswordConfirmChange = ({ target: { value } }) => 
+    setConfirmPassword(value);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -52,20 +40,17 @@ const Register = () => {
 
         // need to store the user informatin in the session
         const user = JSON.stringify(res.data);
-        localStorage.setItem("storedUser", user);
+        localStorage.setItem('storedUser', user);
 
         // TODO: remove redirect. First we need to verify the account ?
         // window.location.href = "/family";
       })
-      .catch((e) => {
-        console.log(e.response.data.message);
-        // setIsError(e.response.data.message);
-      });
+        .catch((e) => {
+          setIsError(e.response.data.message);
+        });
       // then firstname, last name ... fill out the information .
     }
   };
-
-
 
   // TODO
   useEffect( () => {
@@ -92,7 +77,6 @@ const Register = () => {
 
           <Form
             className="py-4"
-            onBlur={handleBlur}
             onSubmit={handleSubmit}
           >
             {isError &&
@@ -123,13 +107,17 @@ const Register = () => {
               </MessageBar>
             }
 
-            <Button className="primary-btn w-100 my-5" type="submit" size="lg" variant="light">
+            <Button 
+              className="primary-btn w-100 my-5"
+              type="submit"
+              size="lg"
+              variant="light">
               Sign up
             </Button>
 
             <div className="sign-up-text">Or sign up with</div>
 
-          {/* // TODO: check when isPasswordsMatch */}
+            {/* // TODO: check when isPasswordsMatch */}
             <SocialButtonsGroup />
           </Form>
         </FatherSonBlock>

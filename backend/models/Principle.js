@@ -1,9 +1,7 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
-
-
 
 const principleSchema = new Schema (
   {
@@ -39,16 +37,15 @@ const principleSchema = new Schema (
   }
 );
 
-
 principleSchema.pre('save', async function (next) {
-  const principle = this
+  const principle = this;
   // only hash the password if it has been modified (or is new)
   //SALT_WORK_FACTOR = 8, auto-gen a salt and hash
   if (principle.isModified('password')) {
-    principle.password = await bcrypt.hash(principle.password, 8)
+    principle.password = await bcrypt.hash(principle.password, 8);
   }
-  next()
-})
+  next();
+});
 
 // Apply the uniqueValidator plugin to principleSchema.
 principleSchema.plugin(uniqueValidator);

@@ -1,7 +1,6 @@
 {
   "env": {
-    "commonjs": true,
-    "node": true
+    "commonjs": true
   },
   "extends": ["../.eslintrc.json"]
 }

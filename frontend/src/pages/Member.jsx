@@ -1,40 +1,37 @@
-import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-import {createMember} from "../api";
+import { createMember } from '../api';
 
 export default function Family() {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-
-  console.log(firstname, lastname);
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
 
   function handleCreateMember(e) {
     e.preventDefault();
-    // check backend if there is any duplicate family names + principle name - combined primary key ???
+    // check backend if there is any duplicate family names + principle name - 
+    // combined primary key ???
     // create family name in the backend
 
-    const storedUser = localStorage.getItem("storedUser");
+    const storedUser = localStorage.getItem('storedUser');
     const parsedUser = JSON.parse(storedUser);
     // console.log("======storeduser: ", parsedUser);
 
-      createMember(
-        {
-          firstname,
-          lastname,
-          principleId: parsedUser.principleId,
-          familyId: parsedUser.familyId
-        }
-      )
+    createMember(
+      {
+        firstname,
+        lastname,
+        principleId: parsedUser.principleId,
+        familyId: parsedUser.familyId
+      }
+    )
       .then((res) => {
-        console.log("posted");
         const user = JSON.stringify(res.data);
-        console.log (user);
-        localStorage.setItem("storedUser", user);
-        window.location.href = "/dashboard";
-      })
-      .catch((e) => console.log(e));
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/dashboard';
+      });
+    // .catch((e) => console.log(e));
   }
 
   return (

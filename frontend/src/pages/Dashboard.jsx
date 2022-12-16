@@ -1,24 +1,20 @@
-import { useState, useRef } from "react";
-import emailjs from "@emailjs/browser";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { sendForm } from '@emailjs/browser';
+import { useState, useRef } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-import { sendInvitation } from "../api";
+import { sendInvitation } from '../api';
 
 export default function Dashboard() {
-  const [inviteeEmail, setInviteeEmail] = useState("");
+  const [inviteeEmail, setInviteeEmail] = useState('');
   // const [invitationUrl, setInvitationUrl] = useState("");
 
   const emailJSForm = useRef();
 
-  const storedUser = localStorage.getItem("storedUser");
-  console.log(storedUser)
+  const storedUser = localStorage.getItem('storedUser');
   const parsedUser = JSON.parse(storedUser).m1;
 
-
-
   const invitationUrl = `http://localhost:3000/register?inviteeEmail=${inviteeEmail}&family=${parsedUser.family}`;
-  console.log("invitation url is: ", invitationUrl);
 
   function handleInvitation(e) {
     e.preventDefault();
@@ -29,27 +25,25 @@ export default function Dashboard() {
       inviteeEmail: inviteeEmail,
       invitationUrl: invitationUrl,
     })
-      .then((res) => {
-        console.log("posted");
-        emailjs
-
-          // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, 'YOUR_PUBLIC_KEY')
-          .sendForm(
-            "service_60w5krl",
-            "template_4jj345i",
-            emailJSForm.current,
-            "_0Rdze2icQo-Gkevw"
-          )
+      .then(() => {
+        // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', 
+        // form.current, 'YOUR_PUBLIC_KEY')
+        sendForm(
+          'service_60w5krl',
+          'template_4jj345i',
+          emailJSForm.current,
+          '_0Rdze2icQo-Gkevw'
+        )
           .then(
             (result) => {
-              console.log(result.text);
+              result;
             },
             (error) => {
-              console.log(error.text);
+              error.text;
             }
           );
-      })
-      .catch((e) => console.log(e));
+      });
+    // .catch((e) => console.log(e));
   }
 
   return (

@@ -1,14 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "http://localhost:8000/api/";
+const BASE_URL = 'http://localhost:8000/api/';
 
-// if signed in successfully, go to the 'families' page to select family then go to dashboard
-// need to store user information in the session 
-export const login = (email, password) => axios.post(`${BASE_URL}login`, { email, password });
+/*
+if signed in successfully, go to the 'families' page to select family 
+then go to dashboard need to store user information in the session 
+*/
+export const login = (email, password) => 
+  axios.post(`${BASE_URL}login`, { email, password });
 
 export const register = (opts) => axios.post(`${BASE_URL}register`, opts);
 
-export const sendInvitation = (opts) => axios.post(`${BASE_URL}invitation`, opts);
+export const sendInvitation = (opts) => 
+  axios.post(`${BASE_URL}invitation`, opts);
   
 export const createFamily = (opts) => axios.post(`${BASE_URL}family`, opts);
 

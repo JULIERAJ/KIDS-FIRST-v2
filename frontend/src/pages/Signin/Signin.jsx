@@ -1,24 +1,24 @@
-import "./Signin.css";
-import { useState, useEffect } from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import Register from "../Register";
-import { login } from "../../api";
-import FatherSonBlock from "../../components/FatherSonBlock";
-import FormEmailInput from "../../components/form/FormEmailInput";
-import Header from "../../components/Header/Header";
-import MessageBar from "../Register/MessageBar";
-import SocialButtonsGroup from "../../components/SocialButtonsGroup";
-import TextLink from "../../components/TextLink";
-import FormPasswordInput from "../../components/form/FormPasswordInput";
+import './Signin.css';
+import { useState, useEffect } from 'react';
+import { Container, Form, Button } from 'react-bootstrap';
+
+import { login } from '../../api';
+import FatherSonBlock from '../../components/FatherSonBlock';
+import FormEmailInput from '../../components/form/FormEmailInput';
+import FormPasswordInput from '../../components/form/FormPasswordInput';
+import Header from '../../components/Header/Header';
+import SocialButtonsGroup from '../../components/SocialButtonsGroup';
+import TextLink from '../../components/TextLink';
+import MessageBar from '../Register/MessageBar';
 
 const HeaderLink = (
   <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />
 );
 
 export default function Signin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState();
 
   useEffect(() => {
@@ -29,16 +29,16 @@ export default function Signin() {
     e.preventDefault();
 
     login(email, password)
-      .then((res) => {
+      .then(() => {
         setSuccess(true);
-        window.location.href = "/dashboard";
+        window.location.href = '/dashboard';
       })
-      .catch((err) => {
+      .catch(() => {
         setSuccess(false);
         setErrMsg(
-          `Your email address or password is incorrect. Please try again, or click "Forgot your password"`
+          `Your email address or password is incorrect. 
+          Please try again, or click "Forgot your password"`
         );
-        console.log(err.response.data.message);
       });
   }
 

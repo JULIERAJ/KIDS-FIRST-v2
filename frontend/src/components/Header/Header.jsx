@@ -1,6 +1,7 @@
-import React from 'react';
-import {Navbar, Container} from "react-bootstrap";
-import logo from '../../media/logo.png'
+import PropTypes from 'prop-types';
+import { Navbar, Container } from 'react-bootstrap';
+
+import logo from '../../media/logo.png';
 
 const Header = ({ bg, widget }) => {
   return (
@@ -14,6 +15,11 @@ const Header = ({ bg, widget }) => {
       </Container>
     </Navbar>
   );
+};
+
+Header.propTypes = {
+  bg: PropTypes.string,
+  widget: PropTypes.element,
 };
 
 export default Header;

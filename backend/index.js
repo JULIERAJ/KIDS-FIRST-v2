@@ -2,6 +2,7 @@
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 const familyRoutes = require('./routes/family');
 const invitationRoutes = require('./routes/invitation');
@@ -24,9 +25,13 @@ db.on('error', (error) => console.log('MongoDB connection error:', error));
 
 db.once('connected', () => console.log('Database Connected'));
 
+morgan.token('body', req => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m \n`);
+
 // middlewares
 app.use(cors());
 app.use(express.json());
+app.use(morgan('dev'));
+app.use(morgan(':body'));
 
 app.use('/api', familyRoutes);
 app.use('/api', invitationRoutes);

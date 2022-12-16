@@ -1,16 +1,16 @@
-import React from 'react'
-import { Button, Dropdown } from 'react-bootstrap'
-import './Home.css'
-import logo from '../../media/kids_first_logo_beta.png'
-import value_1 from '../../media/homePage/value_1.png'
-import value_2 from '../../media/homePage/value_2.png'
-import value_3 from '../../media/homePage/value_3.png'
-import feature_1 from '../../media/homePage/feature_1.png'
-import feature_2 from '../../media/homePage/feature_2.png'
-import feature_3 from '../../media/homePage/feature_3.png'
-import video from '../../media/homePage/video_placeholder.png'
+import { Button, Dropdown } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
-import { NavLink } from 'react-router-dom'
+import './Home.css';
+
+import feature_1 from '../../media/homePage/feature_1.png';
+import feature_2 from '../../media/homePage/feature_2.png';
+import feature_3 from '../../media/homePage/feature_3.png';
+import value_1 from '../../media/homePage/value_1.png';
+import value_2 from '../../media/homePage/value_2.png';
+import value_3 from '../../media/homePage/value_3.png';
+import video from '../../media/homePage/video_placeholder.png';
+import logo from '../../media/kids_first_logo_beta.png';
 
 export default function Home() {
   return (
@@ -59,8 +59,12 @@ export default function Home() {
               <NavLink to="/Register">Register </NavLink>
             </Button>
 
-            {/* <Button classNameName="home-login-btn" href="/Signin">Sign in</Button>
-                        <Button classNameName="home-signup-btn" href="/Signup">Register</Button> */}
+            {/* <Button classNameName="home-login-btn" href="/Signin">
+              Sign in
+            </Button>
+            <Button classNameName="home-signup-btn" href="/Signup">
+              Register
+            </Button> */}
           </div>
         </div>
         <div className="left-blurb">
@@ -85,7 +89,7 @@ export default function Home() {
           <div className="feature-1">
             <p>
               Provide a fair and simple co-parenting solution that has less
-              chance for conflict and more time and focus on the children's
+              chance for conflict and more time and focus on the children&#39;s
               well-being.
             </p>
             <img src={value_2} alt=""></img>
@@ -146,5 +150,5 @@ export default function Home() {
         <a href="#">Our team</a>
       </footer>
     </div>
-  )
+  );
 }
