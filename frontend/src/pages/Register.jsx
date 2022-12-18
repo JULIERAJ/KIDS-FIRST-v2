@@ -3,11 +3,11 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import { register } from '../api';
 //firebase
 import { authentication } from '../config/firebase-config';
 import { signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 
-import { register } from '../api';
 
 export default function Register() {
   const [email, setEmail] = useState('');
