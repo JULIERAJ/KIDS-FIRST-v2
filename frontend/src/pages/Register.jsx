@@ -1,21 +1,20 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import { register } from '../api';
 //firebase
 import { authentication } from '../config/firebase-config';
 import { signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 
-
 export default function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  console.log('email is ', email);
-  console.log('password is ', password);
+  console.log("email is ", email);
+  console.log("password is ", password);
 
   //for facebook sign in
 const signInWithFacebook = () => {
@@ -47,21 +46,24 @@ const signInWithFacebook = () => {
 
   function handleRegister(e) {
     e.preventDefault();
-    console.log('email is ', email);
-    console.log('password is ', password);
+    console.log("email is ", email);
+    console.log("password is ", password);
     // next page should - give a family name
     register({ email, password })
       .then((res) => {
-        console.log('success');
+        console.log("success");
+        console.log(res)
         // need to store the user information in the session
         const user = JSON.stringify(res.data);
-        localStorage.setItem('storedUser', user);
-        window.location.href = '/family';
+        localStorage.setItem("storedUser", user);
+        window.location.href = "/family";
       })
       .catch((e) => {
         console.log(e.response.data.message);
         setError(e.response.data.message);
-        window.location.href = '/Signin';
+        setTimeout(() => {
+          window.location.href = "/Signin";
+        }, "4000")
       });
     // then firstname, last name ... fill out the information .
 
@@ -70,8 +72,8 @@ const signInWithFacebook = () => {
 
   return (
     <div>
-      registration page
-      {error.length > 1 ? error : ''}
+      registration page <br></br>
+      {error.length > 1 ? error : ""}
       <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
