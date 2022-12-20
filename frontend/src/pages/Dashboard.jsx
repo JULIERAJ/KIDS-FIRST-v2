@@ -12,9 +12,9 @@ export default function Dashboard() {
   const emailJSForm = useRef();
 
   const storedUser = localStorage.getItem("storedUser");
+  console.log(storedUser)
   const parsedUser = JSON.parse(storedUser).m1;
 
- 
 
 
   const invitationUrl = `http://localhost:3000/register?inviteeEmail=${inviteeEmail}&family=${parsedUser.family}`;
