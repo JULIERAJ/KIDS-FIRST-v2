@@ -5,6 +5,7 @@ const FormEmailInput = (props) =>
     id="email"
     label="Email"
     name="email"
+    placeholder="example@email.com"
     type="email"
     {...props}
   />;

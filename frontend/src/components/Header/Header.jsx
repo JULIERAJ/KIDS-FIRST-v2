@@ -17,4 +17,3 @@ const Header = ({ bg, widget }) => {
 };
 
 export default Header;
-

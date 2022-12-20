@@ -1,7 +1,10 @@
 import FromInput from "./FormInput";
 
-//TODO 
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/;
+/**
+  RegExp: at least one symbol, uppercase letter, lowercase letter, number,
+  min length 8 characters, max length 20 characters
+*/
+const passwordRegExp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$";
 
 const FormPasswordInput = ({ 
   id = "password",
@@ -18,11 +21,12 @@ const FormPasswordInput = ({
       name={name}
       minLength="8"
       maxLength="20"
-      // pattern={passwordRegExp}
+      pattern={passwordRegExp}
+      placeholder="********"
       type="password" 
-      {...rest}
       onCopy={preventCopyPaste}
       onPaste={preventCopyPaste}
+      {...rest}
     />
   );
 }

@@ -51,26 +51,21 @@ export default function Signin() {
             <h1 className="login-title">Log in Kids First</h1>
 
             {!success && <MessageBar variant="error">{errMsg}</MessageBar>}
+
             <FormEmailInput
-              type="email"
-              placeholder="example@email.com"
-              name="email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               required
             />
 
             <FormPasswordInput
-              type="password"
-              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-              name="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               required
             />
 
             <div className="checkbox mb-3">
-              <a className=" btn forget-password" href="/Forget">
+              <a className="btn forget-password" href="/Forget">
                 Forgot your password?
               </a>
             </div>
