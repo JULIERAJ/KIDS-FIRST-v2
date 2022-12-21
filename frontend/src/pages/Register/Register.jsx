@@ -15,14 +15,16 @@ import TextLink from "../../components/TextLink";
 import IconText from "./IconText";
 import MessageBar from "./MessageBar";
 
+
+
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
+
   const [isError, setIsError] = useState(false);
   const [isPasswordsMatch, setIsPasswordsMatch] = useState(false);
-  
+
   const handleEmailChange = ({ target: { value }}) => setEmail(value);
   const handlePasswordChange = ({ target: { value }}) => setPassword(value);
   const handlePasswordConfirmChange = ({ target: { value }}) => setConfirmPassword(value);
@@ -30,7 +32,7 @@ const Register = () => {
   const handleBlur = (event) => {
     //TODO
     const isPasswordFieldsEmpty = password === '' && confirmPassword === '';
-    
+
     if(!isPasswordFieldsEmpty && password !== confirmPassword) {
       setIsError(true);
     }
@@ -47,10 +49,10 @@ const Register = () => {
     } else if(isPasswordsMatch) {
       // next page should - give a family name
       register({ email, password }).then((res) => {
-          
-        // need to store the user informatin in the session 
+
+        // need to store the user informatin in the session
         const user = JSON.stringify(res.data);
-        localStorage.setItem("storedUser", user); 
+        localStorage.setItem("storedUser", user);
 
         // TODO: remove redirect. First we need to verify the account ?
         // window.location.href = "/family";
@@ -62,6 +64,8 @@ const Register = () => {
       // then firstname, last name ... fill out the information .
     }
   };
+
+
 
   // TODO
   useEffect( () => {
@@ -85,7 +89,7 @@ const Register = () => {
       <Container className="content-layout py-4" >
         <FatherSonBlock>
           <h1 className="register-title">Sign up Kids First</h1>
-                
+
           <Form
             className="py-4"
             onBlur={handleBlur}
@@ -101,15 +105,15 @@ const Register = () => {
 
             <FormEmailInput onChange={handleEmailChange} required/>
             <FormPasswordInput onChange={handlePasswordChange} required/>
-            <FormPasswordInput 
+            <FormPasswordInput
               id="confirmPassword"
               label="Password Confirmation"
               name="confirmPassword"
-              onChange={handlePasswordConfirmChange} 
+              onChange={handlePasswordConfirmChange}
               required
             />
 
-            {isPasswordsMatch && 
+            {isPasswordsMatch &&
               <MessageBar variant="success">
                 {/* TODO: missing msg for symbols?*/}
                 <IconText title="English uppercase/lowercase characters"/>
@@ -124,7 +128,7 @@ const Register = () => {
             </Button>
 
             <div className="sign-up-text">Or sign up with</div>
-          
+
           {/* // TODO: check when isPasswordsMatch */}
             <SocialButtonsGroup />
           </Form>
