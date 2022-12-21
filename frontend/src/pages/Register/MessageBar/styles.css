@@ -1,0 +1,12 @@
+.message-bar {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.message-bar-error {
+  background-color: var(--main-red);
+}
+ 
+.message-bar-success {
+  background-color: var(--main-green);
+}
