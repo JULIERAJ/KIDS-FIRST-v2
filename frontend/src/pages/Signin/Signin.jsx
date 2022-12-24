@@ -1,67 +1,89 @@
-import { useState } from "react";
-
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-
-
+import "./Signin.css";
+import { useState, useEffect } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import Register from "../Register";
 import { login } from "../../api";
+import FatherSonBlock from "../../components/FatherSonBlock";
+import FormEmailInput from "../../components/form/FormEmailInput";
+import Header from "../../components/Header/Header";
+import MessageBar from "../Register/MessageBar";
+import SocialButtonsGroup from "../../components/SocialButtonsGroup";
+import TextLink from "../../components/TextLink";
+import FormPasswordInput from "../../components/form/FormPasswordInput";
+
+const HeaderLink = (
+  <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />
+);
 
 export default function Signin() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  //add this error
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState();
 
+  useEffect(() => {
+    setSuccess(true);
+  }, [email, password]);
 
   function handleLogin(e) {
     e.preventDefault();
 
-    console.log("email is ", email);
-    console.log("password is ", password);
-
     login(email, password)
       .then((res) => {
-        console.log("success");
-        const user = JSON.stringify(res.data);
-        console.log("go to dashboard")
-        // localStorage.setItem('sighInUser', user);
-        // window.location.href = '/dashboard';
+        setSuccess(true);
+        window.location.href = "/dashboard";
       })
-      .catch((e) => {
-        console.log("error - - ",e)
-        console.log(e.response.data.error);
-        setError(e.response.data.error);
+      .catch((err) => {
+        setSuccess(false);
+        setErrMsg(
+          `Your email address or password is incorrect. Please try again, or click "Forgot your password"`
+        );
+        console.log(err.response.data.message);
       });
   }
 
-
   return (
-    <div>
-      sign in page <br></br>
-      {error.length > 1 ? error : ''}
-      <Form onSubmit={handleLogin}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
+    <>
+      <Header widget={HeaderLink} />
+      <Container className="content-layout py-4">
+        <FatherSonBlock>
+          <Form className="py-4" onSubmit={handleLogin}>
+            <h1 className="login-title">Log in Kids First</h1>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
+            {!success && <MessageBar variant="error">{errMsg}</MessageBar>}
 
-        <Button variant="primary" type="submit">
-          Sign in
-        </Button>
-      </Form>
-    </div>
+            <FormEmailInput
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+            />
+
+            <FormPasswordInput
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              required
+            />
+
+            <div className="checkbox mb-3">
+              <a className="btn forget-password" href="/Forget">
+                Forgot your password?
+              </a>
+            </div>
+
+            <Button
+              className="primary-btn w-100 my-5"
+              type="submit"
+              size="lg"
+              variant="light"
+            >
+              Log In
+            </Button>
+
+            <div className="or-login-with">Or Log in with</div>
+            <SocialButtonsGroup />
+          </Form>
+        </FatherSonBlock>
+      </Container>
+    </>
   );
 }

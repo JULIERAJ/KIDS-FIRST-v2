@@ -1,0 +1,22 @@
+.col-left,
+.col-right {
+  height: 740px;
+}
+
+.col-left {
+  border-radius: 20px 0px 0px 20px;
+  background: url("../../media/father-and-son.png") no-repeat center bottom;
+  background-size: 50%;
+  background-color: var(--main-lightBlue);
+}
+
+.col-right {
+  padding: 40px;
+  border-radius: 0px 20px 20px 0px;
+  background-color: var(--main-sand);
+}
+
+.col-right-content {
+  margin: 0 auto;
+  max-width: 305px;
+}
