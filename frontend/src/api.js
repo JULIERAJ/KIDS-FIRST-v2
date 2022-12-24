@@ -17,3 +17,6 @@ export const sendInvitation = (opts) =>
 export const createFamily = (opts) => axios.post(`${BASE_URL}family`, opts);
 
 export const createMember = (opts) => axios.post(`${BASE_URL}member`, opts);
+
+export const activate = (email, emailVerificationToken) =>
+  axios.get(`${BASE_URL}activate/${email}/${emailVerificationToken}`);

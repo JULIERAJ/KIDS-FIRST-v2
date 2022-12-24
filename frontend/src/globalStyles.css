@@ -51,8 +51,9 @@
   font-weight: 500;
 }
 
+.primary-btn:active,
 .primary-btn:hover,
-.primary-btn:active {
+.primary-btn:focus {
   background-color: var(--main-white) !important;
 }
 

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 
+import Activate from './pages/Activate';
 import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
 import ForgetPassword from './pages/ForgetPassword';
@@ -14,7 +15,11 @@ const App = () => (
       <Route> 
         <Route path="/" element={<Home />} /> 
         <Route path="/signin" element={<Signin />} /> 
-        <Route path="/register" element={<Register />} /> 
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/activate/:email/:emailVerificationToken"
+          element={<Activate />}
+        />
         <Route path="/family" element={<Family />} /> 
         <Route path="/member" element={<Member />} /> 
         <Route path="/dashboard" element={<Dashboard />} />
