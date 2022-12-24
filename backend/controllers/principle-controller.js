@@ -1,4 +1,9 @@
+const jwt = require("jsonwebtoken");
+
 const principleService = require("../service/principle-service");
+const emailService = require("../service/email-service");
+
+require("dotenv").config({ path: "./.env.local" });
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
 const passwordRegExp  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
@@ -20,10 +25,50 @@ const registration = async (req, res) => {
             res.status(400).json({ message: "Invalid email" });
         } else if(!user) {
             user = await principleService.registration(email, password);
-            res.status(201).json({ id: user.id, email: user.email });
+
+            const emailVerificationToken = jwt.sign(
+                { email },
+                process.env.JWT_EMAIL_VERIFICATION_SECRET,
+                { expiresIn: "1h" }
+            );
+
+            await emailService.sendActivationEmail(email, emailVerificationToken);
+            
+            res.status(201).json({
+                message: `user ${principleData.email} registered, verification link sent`,
+                email: principleData.email,
+                emailIsActivated: principleData.emailIsActivated,
+            });
         }
     } catch (e) {
         res.status(500).json({ message: 'something went wrong' });
+    }
+};
+
+const accountActivation = async (req, res) => {
+    const activationToken = req.params.emailVerificationToken;
+
+    const email = req.params.email;
+
+    try {
+        const activationTokenVerified =
+            await principleService.emailTokenVerification(activationToken);
+
+        if (!activationTokenVerified) {
+            return res
+                .status(400)
+                .json({ message: `activation link is not correct` });
+        } else {
+            const principleData = await principleService.activateAccount(email);
+            console.log("principleData:", principleData);
+            return res.status(200).json({
+                message: `the account is successfully activated`,
+                email: principleData.email,
+                emailIsActivated: principleData.emailIsActivated,
+            });
+        }
+    } catch (e) {
+        res.status(500).json({ message: e.message });
     }
 };
 
@@ -36,7 +81,7 @@ const login = async (req, res) => {
         console.log("user:", user);
 
         if (!user) {
-          return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({ error: "User not found" });
         }
 
         const correctPassword = await principleService.isPasswordCorrect(
@@ -44,15 +89,16 @@ const login = async (req, res) => {
             password
         );
         if (!correctPassword) {
-           return res.status(401).json({
+            return res.status(401).json({
                 error: "Password or username is not correct",
             });
         }
         return res.status(200).json({ email: user.email, id: user._id });
     } catch (e) {
-       return res.status(500).json({
+        return res.status(500).json({
             message: "Failed to login",
         });
     }
 };
-module.exports = { registration, login };
+
+module.exports = { registration, accountActivation, login };
