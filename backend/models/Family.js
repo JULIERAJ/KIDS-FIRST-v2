@@ -1,10 +1,10 @@
-const mongoose = require("mongoose"); 
+const mongoose = require('mongoose'); 
 const Schema = mongoose.Schema; 
 
 const familySchema = new Schema (
   {
     principle: {
-      type: [{type: Schema.Types.ObjectId, ref: 'Principle'}]
+      type: [{ type: Schema.Types.ObjectId, ref: 'Principle' }]
     },
     
     familyName: {
@@ -24,7 +24,6 @@ const familySchema = new Schema (
 );
 
 module.exports = mongoose.model('Family', familySchema);
-
 
 //import mongoose from 'mongoose';
 // const { Schema } = mongoose;

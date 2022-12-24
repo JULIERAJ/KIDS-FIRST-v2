@@ -1,12 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 
-import Home from "./pages/Home"; 
-import Signin from "./pages/Signin"; 
-import Register from "./pages/Register";
-import Family from "./pages/Family";
-import Member from "./pages/Member";
-import Dashboard from "./pages/Dashboard";
-import ForgetPassword from "./pages/ForgetPassword";
+import Activate from './pages/Activate';
+import Dashboard from './pages/Dashboard';
+import Family from './pages/Family';
+import ForgetPassword from './pages/ForgetPassword';
+import Home from './pages/Home'; 
+import Member from './pages/Member';
+import Register from './pages/Register';
+import Signin from './pages/Signin'; 
 
 const App = () => (
   <BrowserRouter>
@@ -14,7 +15,11 @@ const App = () => (
       <Route> 
         <Route path="/" element={<Home />} /> 
         <Route path="/signin" element={<Signin />} /> 
-        <Route path="/register" element={<Register />} /> 
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/activate/:email/:emailVerificationToken"
+          element={<Activate />}
+        />
         <Route path="/family" element={<Family />} /> 
         <Route path="/member" element={<Member />} /> 
         <Route path="/dashboard" element={<Dashboard />} />

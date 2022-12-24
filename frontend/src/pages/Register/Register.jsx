@@ -1,35 +1,36 @@
-import { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
 
-import "./styles.css";
+import './styles.css';
 
-import { register } from "../../api";
-import FatherSonBlock from "../../components/FatherSonBlock";
-import FormEmailInput from "../../components/form/FormEmailInput";
-import FormPasswordInput from "../../components/form/FormPasswordInput";
-import Header from "../../components/Header";
-import MessageBar from "../../components/MessageBar";
-import SocialButtonsGroup from "../../components/SocialButtonsGroup";
-import TextLink from "../../components/TextLink";
+import { register } from '../../api';
+import FatherSonBlock from '../../components/FatherSonBlock';
+import FormEmailInput from '../../components/form/FormEmailInput';
+import FormPasswordInput from '../../components/form/FormPasswordInput';
+import Header from '../../components/Header';
+import MessageBar from '../../components/MessageBar';
+import SocialButtonsGroup from '../../components/SocialButtonsGroup';
+import TextLink from '../../components/TextLink';
 // import IconText from "../../components/IconText";
 
-const DEFAULT_ERROR_MESSAGE = "You are using symbols in your passwords or your passwords do not match.";
-
-const HeaderLink = <TextLink title="Already a member?" to="/signin" linkTitle="Log in" />;
+// eslint-disable-next-line max-len
+const DEFAULT_ERROR_MESSAGE = 'You are using symbols in your passwords or your passwords do not match.';
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isTouched, setIsTouched] = useState(false);
   const [validated, setIsValidated] = useState(false);
 
-  const handleEmailChange = ({ target: { value }}) => setEmail(value);
-  const handlePasswordChange = ({ target: { value }}) => setPassword(value);
-  const handlePasswordConfirmChange = ({ target: { value }}) => setPasswordConfirm(value);
+  const handleEmailChange = ({ target: { value } }) => setEmail(value);
+  const handlePasswordChange = ({ target: { value } }) => setPassword(value);
+  const handlePasswordConfirmChange = ({ target: { value } }) => 
+    setPasswordConfirm(value);
 
   const hendleFromChange = () => !isTouched && setIsTouched(true);
 
@@ -42,26 +43,26 @@ const Register = () => {
       register({ email, password }).then((res) => {
         // need to store the user informatin in the session 
         const user = JSON.stringify(res.data);
-        localStorage.setItem("storedUser", user); 
+        localStorage.setItem('storedUser', user); 
   
         // TODO: remove redirect. First we need to verify the account
-        window.location.href = "/family";
+        window.location.href = '/family';
       })
-      .catch((e) => {
-        console.log(e.response.data.message);
-        setErrorMessage(e.response.data.message);
-      });
+        .catch((e) => {
+          setErrorMessage(e.response.data.message);
+        });
     } else {
-      setErrorMessage(DEFAULT_ERROR_MESSAGE)
+      setErrorMessage(DEFAULT_ERROR_MESSAGE);
     }
 
     setIsValidated(true);
-  }
-
+  };
 
   return (
     <>
-      <Header widget={HeaderLink}/>
+      <Header widget={
+        <TextLink title="Already a member?" to="/signin" linkTitle="Log in" />
+      }/>
 
       <Container className="content-layout py-4" >
         <FatherSonBlock>
@@ -100,7 +101,12 @@ const Register = () => {
               <IconText title="Minimum eight characters"/>
             </MessageBar> */}
 
-            <Button className="primary-btn w-100 my-5" type="submit" size="lg" variant="light">
+            <Button
+              className="primary-btn w-100 my-5"
+              type="submit"
+              size="lg"
+              variant="light"
+            >
               Sign up
             </Button>
 

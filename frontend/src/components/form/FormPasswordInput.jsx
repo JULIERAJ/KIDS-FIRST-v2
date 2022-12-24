@@ -1,15 +1,18 @@
-import FromInput from "./FormInput";
+import PropTypes from 'prop-types';
+
+import FromInput from './FormInput';
 
 /**
   RegExp: at least one symbol, uppercase letter, lowercase letter, number,
   min length 8 characters, max length 20 characters
 */
-const passwordRegExp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$";
+// eslint-disable-next-line max-len
+const passwordRegExp = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$';
 
 const FormPasswordInput = ({ 
-  id = "password",
-  name = "password", 
-  label = "Password", 
+  id = 'password',
+  name = 'password', 
+  label = 'Password', 
   ...rest
 }) => {
   const preventCopyPaste = (e) => e.preventDefault();
@@ -29,6 +32,12 @@ const FormPasswordInput = ({
       {...rest}
     />
   );
-}
+};
+
+FormPasswordInput.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  label: PropTypes.string,
+};
 
 export default FormPasswordInput;

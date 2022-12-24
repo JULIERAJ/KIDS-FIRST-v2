@@ -1,7 +1,8 @@
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import PropTypes from 'prop-types';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-import "./styles.css";
+import './styles.css';
 
 const FatherSonBlock = ({ children }) => (
   <Row>
@@ -14,5 +15,9 @@ const FatherSonBlock = ({ children }) => (
     </Col>
   </Row>
 );
+
+FatherSonBlock.propTypes = {
+  children: PropTypes.element,
+};
 
 export default FatherSonBlock;
