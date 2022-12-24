@@ -3,20 +3,11 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "./.env.local" });
 const Principle = require("../models/Principle");
 
-const isDuplicate = async (email) => {
-    const checkDuplicate = await Principle.findOne({ email });
-
-    return checkDuplicate ? true : false;
-};
-
 const registration = async (email, password) => {
-    // if cannot find the same email in the system then create the new user
-    const p1 = new Principle({ email, password });
-    await p1.save();
-    console.log("email:", email);
+    const principle = new Principle({ email, password });
+    await principle.save();
 
-    console.log("p1 is", p1);
-    return { id: p1._id, email: p1.email };
+    return { id: principle._id, email: principle.email };
 };
 
 const findUser = async (email) => {
@@ -39,15 +30,16 @@ const emailTokenVerification = async (activationToken) => {
 
     return tokenVerified ? true : false;
 };
+
 const activateAccount = async (email) => {
     const user = await Principle.findOneAndUpdate(
         { email: email },
         { emailIsActivated: true },
         { new: true }
     );
-    console.log("user", user);
     return user;
 };
+
 module.exports = {
     isDuplicate,
     registration,

@@ -1,48 +1,47 @@
-require("dotenv").config({ path: "./.env.local" });
 const jwt = require("jsonwebtoken");
+
 const principleService = require("../service/principle-service");
 const emailService = require("../service/email-service");
 
+require("dotenv").config({ path: "./.env.local" });
+
+// 1 upper/lower case letter, 1 number, 1 special symbol
+const passwordRegExp  = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+const emailRegExp = /^\S+@\S+\.\S+$/;
+
 const registration = async (req, res) => {
     const { email, password } = req.body;
+
     try {
-        console.log("welcome to the backend of the register");
-        const isPrincipleDuplicate = await principleService.isDuplicate(email);
+        let user = await principleService.findUser(email);
 
-        console.log("isPrincipleDuplicate:", isPrincipleDuplicate);
+        if(user) {
+            res.status(409).json({ message: `The user with ${email} email already exists` });
+        }
 
-        if (!isPrincipleDuplicate) {
-            const principleData = await principleService.registration(
-                email,
-                password
-            );
+        if(!passwordRegExp.test(password)) {
+            res.status(400).json({ message: "Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number" });
+        } else if(!emailRegExp.test(email)) {
+            res.status(400).json({ message: "Invalid email" });
+        } else if(!user) {
+            user = await principleService.registration(email, password);
 
             const emailVerificationToken = jwt.sign(
-                {
-                    email,
-                },
+                { email },
                 process.env.JWT_EMAIL_VERIFICATION_SECRET,
                 { expiresIn: "1h" }
             );
 
-            await emailService.sendActivationEmail(
-                email,
-                emailVerificationToken
-            );
-            return res.status(201).json({
+            await emailService.sendActivationEmail(email, emailVerificationToken);
+            
+            res.status(201).json({
                 message: `user ${principleData.email} registered, verification link sent`,
                 email: principleData.email,
                 emailIsActivated: principleData.emailIsActivated,
             });
-        } else {
-            return res.status(409).json({
-                message: `The user with ${email} email already exists`,
-            });
         }
     } catch (e) {
-        res.status(500).json({
-            message: `something went wrong`,
-        });
+        res.status(500).json({ message: 'something went wrong' });
     }
 };
 
@@ -69,12 +68,10 @@ const accountActivation = async (req, res) => {
             });
         }
     } catch (e) {
-        console.log(e);
-        res.status(500).json({
-            message: e.message,
-        });
+        res.status(500).json({ message: e.message });
     }
 };
+
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -103,4 +100,5 @@ const login = async (req, res) => {
         });
     }
 };
+
 module.exports = { registration, accountActivation, login };
