@@ -10,9 +10,9 @@ const invitation = async (req, res) => {
       inviteeEmail,
       invitationUrl
     );
-    res.status(201).send({ i1 });
+    return res.status(201).send({ i1 });
   } catch (e) {
-    res.status(500).json('something went wrong');
+    return res.status(500).json('something went wrong');
   }
 };
 

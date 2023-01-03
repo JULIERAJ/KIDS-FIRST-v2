@@ -82,7 +82,7 @@ const Register = () => {
             }
 
             <FormEmailInput 
-              autocomplete="off"
+              autoComplete="off"
               required
               onChange={handleEmailChange}
             />
