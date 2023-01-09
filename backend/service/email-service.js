@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+
 require('dotenv').config({ path: './.env.local' });
 
 // create reusable transporter object using the default SMTP transport
@@ -23,12 +24,12 @@ const sendActivationEmail = async (email, emailVerificationToken) => {
       subject: 'Your KidsFirst verification link',
       text: '',
       html: `
-                <div>
-                    <h1>Welcome to the KidsFirst community</h1>
-                    <p>To approve your account, please verify your email now:</p>
-                  <a href='${href}'>click here</a>
-                </div>
-                `,
+              <div>
+                  <h1>Welcome to the KidsFirst community</h1>
+                  <p>To approve your account, please verify your email now:</p>
+                <a href='${href}'>click here</a>
+              </div>
+      `,
     });
   } catch (e) {
     return e;

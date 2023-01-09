@@ -17,13 +17,6 @@ const principleSchema = new Schema({
     requried: true,
     trim: true,
   },
-  // firstname??????
-  // lastname????????
-  // isAdmin: {
-  //   type: Boolean,
-  //   required: true
-  // }
-
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -39,20 +32,10 @@ const principleSchema = new Schema({
   },
 });
 
-principleSchema.pre('save', async function () {
-  const principle = this;
-  // only hash the password if it has been modified (or is new)
-  //SALT_WORK_FACTOR = 8, auto-gen a salt and hash
-  if (principle.isModified('password')) {
-    principle.password = await bcrypt.hash(principle.password, 8);
-  }
-}
-);
-
 principleSchema.pre('save', async function (next) {
   const principle = this;
   // only hash the password if it has been modified (or is new)
-  //SALT_WORK_FACTOR = 8, auto-gen a salt and hash
+  // SALT_WORK_FACTOR = 8, auto-gen a salt and hash
   if (principle.isModified('password')) {
     principle.password = await bcrypt.hash(principle.password, 8);
   }
@@ -61,4 +44,5 @@ principleSchema.pre('save', async function (next) {
 
 // Apply the uniqueValidator plugin to principleSchema.
 principleSchema.plugin(uniqueValidator);
+
 module.exports = mongoose.model('Principle', principleSchema);

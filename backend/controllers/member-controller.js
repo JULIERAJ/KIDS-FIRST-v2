@@ -10,6 +10,7 @@ const memberRegistration = async (req, res) => {
       principleId,
       familyId
     );
+    
     if (!isMemberDuplicate) {
       const memberData = await memberService.memberRegistration(
         firstname,
