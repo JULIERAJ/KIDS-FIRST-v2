@@ -8,7 +8,9 @@ const familyRegistration = async (familyName, principleId) => {
   // 2) if there is no such family name, then create a
   // new family with that principle
   const family = new Family({ familyName, principle: principleId });
+
   await family.save();
+  
   return {
     familyName: family.familyName,
     principleId,

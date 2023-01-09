@@ -7,6 +7,7 @@ const invitation = async (invitor, family, inviteeEmail, invitationUrl) => {
     inviteeEmail,
     invitationUrl,
   });
+  
   await invitation.save();
 };
 

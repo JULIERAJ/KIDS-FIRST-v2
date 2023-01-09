@@ -1,8 +1,7 @@
 const familyService = require('../service/family-service');
 
 const familyRegistration = async (req, res) => {
-  const { familyName } = req.body;
-  const principleId = req.body.principleId;
+  const { familyName, principleId } = req.body;
 
   try {
     const isFamilyDuplicate = await familyService.isDuplicate(
