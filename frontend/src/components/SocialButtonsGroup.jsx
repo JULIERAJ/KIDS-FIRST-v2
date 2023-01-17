@@ -1,5 +1,5 @@
 
-import { signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
+import { signInWithPopup, FacebookAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -26,7 +26,6 @@ const signInWithFacebook = () => {
       console.log(result.user.displayName);
       console.log(result.user.email);
       //we need to save this user in our database and redirect to family
-
     })
     .catch((error) => {
       /* eslint-disable no-unused-vars */
@@ -37,6 +36,33 @@ const signInWithFacebook = () => {
       const email = error.customData.email;
       // The AuthCredential type that was used.
       const credential = FacebookAuthProvider.credentialFromError(error);
+    });
+};
+
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider();
+
+  signInWithPopup(authentication,provider)
+    .then((result) => {
+      console.log('I am registered using Google');
+      console.log(result.user);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const accessToken = credential.accessToken;
+      console.log(accessToken);
+      console.log(result.user.displayName);
+      console.log(result.user.email);
+      //we need to save this user in our database and redirect to family
+    })
+    .catch((error) => {
+      /* eslint-disable no-unused-vars */
+      // TODO: 
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.z
+      
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
     });
 };
 
@@ -57,7 +83,8 @@ const SocialButton = ({ icon, title, onClick }) => (
 const SocialButtonsGroup = () => (
   <Row className="py-5">
     <Col xs={12} md={6}>
-      <SocialButton icon={googleIcon} title="Google"/>
+      <SocialButton icon={googleIcon} title="Google" onClick=
+        {signInWithGoogle}/>
     </Col>
 
     <Col xs={12} md={6}>
