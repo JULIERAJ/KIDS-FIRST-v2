@@ -9,7 +9,8 @@ const invitationRoutes = require('./routes/invitation');
 const loginRoutes = require('./routes/login');
 const memberRoutes = require('./routes/member');
 const registerRoutes = require('./routes/register');
-
+const forgetPasswordRoutes = require('./routes/forget-password');
+const resetPasswordRoutes = require('./routes/reset-password');
 require('dotenv').config({ path: './.env.local' });
 
 const mongoDB = process.env.MONGODB_URI;
@@ -38,5 +39,7 @@ app.use('/api', invitationRoutes);
 app.use('/api', loginRoutes);
 app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);
+app.use('/api', forgetPasswordRoutes);
+app.use('/api', resetPasswordRoutes);
 
 app.listen(PORT, () => console.log(`server started on ${PORT}`));

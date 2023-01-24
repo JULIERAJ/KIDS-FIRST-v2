@@ -36,4 +36,27 @@ const sendActivationEmail = async (email, emailVerificationToken) => {
   }
 };
 
-module.exports = { sendActivationEmail };
+const sendResetPasswordEmail = async (email, resetPasswordToken) => {
+  const href = `${process.env.CLIENT_URL}/resetPassword/${email}/${resetPasswordToken}`;
+
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to: email,
+      subject: 'Your KidsFirst reset password link',
+      text: '',
+      html: `
+              <div>
+                  <h1>Reset your KidsFirst password</h1>
+                  <p>To reset your password, please click the link below:</p>
+                <a href='${href}'>click here</a>
+                <p>*Note: This link will be automatically expired in 1 hour.</p>
+              </div>
+      `,
+    });
+  } catch (e) {
+    return e;
+  }
+};
+
+module.exports = { sendActivationEmail, sendResetPasswordEmail };

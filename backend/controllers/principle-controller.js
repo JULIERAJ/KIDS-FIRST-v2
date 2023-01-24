@@ -2,12 +2,12 @@ const jwt = require('jsonwebtoken');
 
 const emailService = require('../service/email-service');
 const principleService = require('../service/principle-service');
-
 require('dotenv').config({ path: './.env.local' });
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+const passwordRegExp =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
 const registration = async (req, res) => {
@@ -16,27 +16,31 @@ const registration = async (req, res) => {
   try {
     let user = await principleService.findUser(email);
 
-    if(user) {
-      return res.status(409)
+    if (user) {
+      return res
+        .status(409)
         .json({ message: `The user with ${email} email already exists` });
     }
 
-    if(!passwordRegExp.test(password)) {
+    if (!passwordRegExp.test(password)) {
       // eslint-disable-next-line max-len
-      return res.status(400).json({ message: 'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number' });
-    } else if(!emailRegExp.test(email)) {
+      return res.status(400).json({
+        message:
+          'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number',
+      });
+    } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });
-    } else if(!user) {
+    } else if (!user) {
       user = await principleService.registration(email, password);
 
       const emailVerificationToken = await jwt.sign(
         { email },
         process.env.JWT_EMAIL_VERIFICATION_SECRET,
-        { expiresIn: '1h' }
+        { expiresIn: '1h' },
       );
 
       await emailService.sendActivationEmail(email, emailVerificationToken);
-            
+
       return res.status(201).json({
         message: `user ${user.email} registered, verification link sent`,
         email: user.email,
@@ -55,7 +59,7 @@ const accountActivation = async (req, res) => {
 
   try {
     const activationTokenVerified =
-            await principleService.emailTokenVerification(activationToken);
+      await principleService.emailTokenVerification(activationToken);
 
     if (!activationTokenVerified) {
       return res
@@ -79,17 +83,19 @@ const login = async (req, res) => {
 
   try {
     const user = await principleService.findUser(email);
-    
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    
+
     const correctPassword = await principleService.isPasswordCorrect(
       email,
-      password
+      password,
     );
     if (!correctPassword) {
-      return res.status(401).json({ error: 'Password or username is not correct' });
+      return res
+        .status(401)
+        .json({ error: 'Password or username is not correct' });
     }
     return res.status(200).json({ email: user.email, id: user._id });
   } catch (e) {
@@ -97,4 +103,91 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { registration, accountActivation, login };
+const requestResetPassword = async (req, res) => {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required' });
+  }
+  try {
+    const user = await principleService.findUser(email);
+    if (!user) {
+      return res.status(404).json({ error: 'Email not found' });
+    }
+    // Generate a reset password token
+    const passwordResetVerificationToken = await jwt.sign(
+      { email },
+      process.env.JWT_EMAIL_VERIFICATION_SECRET,
+      { expiresIn: '1h' },
+    );
+    // Send an email with the reset password link
+    await emailService.sendResetPasswordEmail(
+      email,
+      passwordResetVerificationToken,
+    );
+    return res.status(200).json({
+      message: `Reset password link sent to ${email}`,
+    });
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
+const resetPasswordActivation = async (req, res) => {
+  const { email, resetPasswordToken } = req.params;
+  try {
+    if (principleService.validateUserAndToken(email, resetPasswordToken)) {
+      return res.status(201).json({ status: 201 });
+    } else {
+      return res
+        .status(401)
+        .json({ status: 401, message: 'User does not exist' });
+    }
+  } catch (err) {
+    return res.status(401).json({ status: 401, error: err.message });
+  }
+};
+
+const resetPasswordUpdates = async (req, res) => {
+  const { email } = req.params;
+  console.log('HERE BACKEND', email);
+  const { password, confirmedPassword } = req.body;
+  console.log('Password', email);
+  // if (!passwordRegExp.test(password)) {
+  //   // eslint-disable-next-line max-len
+  //   return res.status(400).json({
+  //     message:
+  //       'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number',
+  //   });
+  // }
+  // if (password !== confirmedPassword) {
+  //   return res.status(400).json({ error: 'Passwords do not match' });
+  // }
+
+  try {
+    console.log('UNDER USER TRYING TO');
+    if (principleService.validateUserAndToken(email)) {
+      const updatedUserPassword =
+        await principleService.findOneAndUpdatePassword(email, {
+          $set: { password },
+        });
+        updatedUserPassword.resetPasswordToken = null;
+        await updatedUserPassword.save();
+      return res.status(201).json();
+    } else {
+      return res
+        .status(401)
+        .json({ status: 401, message: 'User does not exist' });
+    }
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
+module.exports = {
+  registration,
+  accountActivation,
+  login,
+  requestResetPassword,
+  resetPasswordActivation,
+  resetPasswordUpdates,
+};

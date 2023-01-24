@@ -17,19 +17,19 @@ const findUser = async (email) => {
   return user ? user : null;
 };
 
-// need to add logic when compare stored password with the password provided. 
+// need to add logic when compare stored password with the password provided.
 // Depends on what crypting module is used. For ex bcrypt
 const isPasswordCorrect = async (email, password) => {
   const principle = await Principle.findOne({ email });
   const isMatch = await bcrypt.compare(password, principle.password);
-    
+
   return isMatch;
 };
 
 const emailTokenVerification = async (activationToken) => {
   const tokenVerified = jwt.verify(
     activationToken,
-    process.env.JWT_EMAIL_VERIFICATION_SECRET
+    process.env.JWT_EMAIL_VERIFICATION_SECRET,
   );
 
   return tokenVerified ? true : false;
@@ -39,9 +39,22 @@ const activateAccount = async (email) => {
   const user = await Principle.findOneAndUpdate(
     { email: email },
     { emailIsActivated: true },
-    { new: true }
+    { new: true },
   );
   return user;
+};
+
+const validateUserAndToken = async (email, token) => {
+  const validUser = await findUser(email);
+  const resetPasswordTokenVerified = await jwt.verify(
+    token,
+    process.env.JWT_EMAIL_VERIFICATION_SECRET,
+  );
+  console.log("HEFRE ", validUser, resetPasswordTokenVerified)
+  if (validUser && resetPasswordTokenVerified) {
+    return true;
+  }
+  return false;
 };
 
 module.exports = {
@@ -50,4 +63,5 @@ module.exports = {
   isPasswordCorrect,
   emailTokenVerification,
   activateAccount,
+  validateUserAndToken,
 };
