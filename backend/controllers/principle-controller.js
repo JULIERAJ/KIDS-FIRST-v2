@@ -147,42 +147,6 @@ const resetPasswordActivation = async (req, res) => {
   }
 };
 
-// const resetPasswordUpdates = async (req, res) => {
-//   const { email } = req.params;
-//   console.log('HERE BACKEND', email);
-//   const { password, confirmedPassword } = req.body;
-//   console.log('Password', email);
-//   // if (!passwordRegExp.test(password)) {
-//   //   // eslint-disable-next-line max-len
-//   //   return res.status(400).json({
-//   //     message:
-//   //       'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number',
-//   //   });
-//   // }
-//   // if (password !== confirmedPassword) {
-//   //   return res.status(400).json({ error: 'Passwords do not match' });
-//   // }
-
-//   try {
-//     console.log('UNDER USER TRYING TO');
-//     if (principleService.validateUserAndToken(email)) {
-//       const updatedUserPassword =
-//         await principleService.findOneAndUpdatePassword(email, {
-//           $set: { password },
-//         });
-//         updatedUserPassword.resetPasswordToken = null;
-//         await updatedUserPassword.save();
-//       return res.status(201).json();
-//     } else {
-//       return res
-//         .status(401)
-//         .json({ status: 401, message: 'User does not exist' });
-//     }
-//   } catch (e) {
-//     return res.status(500).json({ message: e.message });
-//   }
-// };
-
 const resetPasswordUpdates = async (req, res) => {
   const { email, resetPasswordToken } = req.params;
   const { password } = req.body;
@@ -199,6 +163,8 @@ const resetPasswordUpdates = async (req, res) => {
 
     // update user
     let user = await principleService.resetPasswordUserAccount(email, password);
+    console.log('HEREIS THE USER', user);
+    // hash password using isPasswordCorrect
     await user.save();
     return res.status(200).json({ msg: 'Password updated successfully' });
   } catch (err) {

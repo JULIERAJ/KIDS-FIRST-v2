@@ -45,9 +45,10 @@ const activateAccount = async (email) => {
 };
 
 const resetPasswordUserAccount = async (email, password) => {
+  const hashedPassword = await bcrypt.hash(password, 8);
   const user = await Principle.findOneAndUpdate(
     { email: email },
-    { $set: { password} },
+    { $set: { password: hashedPassword } },
     { new: true },
   );
   return user;
