@@ -44,13 +44,20 @@ const activateAccount = async (email) => {
   return user;
 };
 
+const resetPasswordUserAccount = async (email, password) => {
+  const user = await Principle.findOneAndUpdate(
+    { email: email },
+    { $set: { password} },
+    { new: true },
+  );
+  return user;
+};
 const validateUserAndToken = async (email, token) => {
   const validUser = await findUser(email);
   const resetPasswordTokenVerified = await jwt.verify(
     token,
     process.env.JWT_EMAIL_VERIFICATION_SECRET,
   );
-  console.log("HEFRE ", validUser, resetPasswordTokenVerified)
   if (validUser && resetPasswordTokenVerified) {
     return true;
   }
@@ -64,4 +71,5 @@ module.exports = {
   emailTokenVerification,
   activateAccount,
   validateUserAndToken,
+  resetPasswordUserAccount,
 };

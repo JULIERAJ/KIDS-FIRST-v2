@@ -7,9 +7,13 @@ router.get(
   '/resetPassword/:email/:resetPasswordToken',
   principleController.resetPasswordActivation,
 );
+// router.post(
+//   '/resetPassword/:email/:resetPasswordToken',
+//   principleController.resetPasswordUpdates,
+// );
+
 router.post(
   '/resetPassword/:email/:resetPasswordToken',
   principleController.resetPasswordUpdates,
 );
-
 module.exports = router;
