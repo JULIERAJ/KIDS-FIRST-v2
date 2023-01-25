@@ -163,7 +163,6 @@ const resetPasswordUpdates = async (req, res) => {
 
     // update user
     let user = await principleService.resetPasswordUserAccount(email, password);
-    console.log('HEREIS THE USER', user);
     // hash password using isPasswordCorrect
     await user.save();
     return res.status(200).json({ msg: 'Password updated successfully' });
