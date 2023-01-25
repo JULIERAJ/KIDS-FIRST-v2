@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 
 import { useParams, Link } from 'react-router-dom';
@@ -16,8 +16,8 @@ import TextLink from '../../components/TextLink';
 import logoPswdChanged from '../../media/icons/pswd-changed.png';
 
 // eslint-disable-next-line max-len
-// const DEFAULT_ERROR_MESSAGE =
-//   'You are using symbols in your passwords or your passwords do not match.';
+const DEFAULT_ERROR_MESSAGE =
+  'You are using symbols in your passwords or your passwords do not match.';
 
 export default function ResetPassword() {
   const { email, resetPasswordToken } = useParams();
@@ -42,32 +42,36 @@ export default function ResetPassword() {
     checkValid(email, resetPasswordToken);
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  const handleChangePassword = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (password !== confirmPassword) {
+        setErrorMessage(DEFAULT_ERROR_MESSAGE);
+        return;
+      }
+      try {
+        resetPassword(email, password, resetPasswordToken).then(({ data }) => {
+          setUserValid(data);
+        });
+        setSuccess(true);
+        setSentEmail(true);
+      } catch (err) {
+        setErrorMessage(DEFAULT_ERROR_MESSAGE);
+      }
+    },
+    [email, password, confirmPassword, resetPasswordToken],
+  );
 
-  const handleChangePassword = async (e) => {
-    e.preventDefault();
-    //eslint-disable-next-line no-console
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
-      return;
-    }
-    try {
-      resetPassword(email, password).then(({ data }) => {
-        //eslint-disable-next-line no-console
-        console.log(data);
-        setUserValid(data);
-      });
-      setSuccess(true);
-      setSentEmail(true);
-    } catch (err) {
-      //eslint-disable-next-line no-console
-      console.error(err);
-      setErrorMessage('Passwords do not match');
-    }
-  };
-
-  useEffect(() => {
-    handleChangePassword();
-  }, [email, resetPasswordToken]);
+  // useEffect(() => {
+  //   handleChangePassword();
+  // }, [
+  //   email,
+  //   password,
+  //   confirmPassword,
+  //   resetPasswordToken,
+  //   handleChangePassword,
+  // ]);
 
   return (
     <>
@@ -79,8 +83,28 @@ export default function ResetPassword() {
       <Container className='content-layout py-4'>
         <FatherSonBlock>
           <h1 className={styles.title}>Change Password</h1>
+          {success && sentEmail ? (
+            <>
+              <div className={styles['success-password']}>
+                <img
+                  className={styles.loadingLogo}
+                  src={logoPswdChanged}
+                  alt='password-changed-successfully'
+                />
+                <span>Password has been changed!</span> <br />
+                <span>
+                  Your password has been changed successfully.
+                  <br /> Please login with the new password.
+                </span>
+                <br />
+                <Link to='/signin' className={`btn ${styles['back-login']}`}>
+                  Back to Log In
+                </Link>
+              </div>
+            </>
+          ) : null}
 
-          {userValid ? (
+          {userValid && !sentEmail ? (
             <Form className='py-4' onSubmit={handleChangePassword} noValidate>
               <FormPasswordInput
                 required
@@ -104,26 +128,8 @@ export default function ResetPassword() {
                 Change Password
               </Button>
             </Form>
-          ) : (
+          ) : !success && errorMessage ? (
             <MessageBar variant='error'>{errorMessage}</MessageBar>
-          )}
-          {success && sentEmail ? (
-            <div className={styles['success-password']}>
-              <img
-                className={styles.loadingLogo}
-                src={logoPswdChanged}
-                alt='password-changed-successfully'
-              />
-              <span>Password has been changed!</span> <br />
-              <span>
-                Your password has been changed successfully.
-                <br /> Please login with the new password.
-              </span>
-              <br />
-              <Link to='/signin' className={`btn ${styles['back-login']}`}>
-                Back to Log In
-              </Link>
-            </div>
           ) : null}
         </FatherSonBlock>
       </Container>

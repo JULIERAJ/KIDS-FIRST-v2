@@ -27,7 +27,9 @@ export const forgetPassword = (email) =>
 export const resetPasswordLink = (email, resetPasswordToken) =>
   axios.get(`${BASE_URL}resetPassword/${email}/${resetPasswordToken}`);
 
-export const resetPassword = (email, password) =>
-  axios.post(`${BASE_URL}resetPassword/${email}`, {
+export const resetPassword = (email, password, resetPasswordToken) =>
+  axios.post(`${BASE_URL}resetPassword/${email}/${resetPasswordToken}`, {
+    email,
     password,
+    resetPasswordToken,
   });

@@ -30,34 +30,8 @@ export default function ForgetPassword() {
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    try {
-      const res = await forgetPassword(email, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-      // const data = await res;
-
-      if (res.status === 200) {
-        setEmail('');
-        setSentEmail(true);
-        setSuccess(true);
-      } else {
-        setSuccess(false);
-        setErrMsg(res.message);
-      }
-    } catch (err) {
-      setSuccess(false);
-      setErrMsg(
-        'Email is not found. Please check if you have entered the correct email address.',
-      );
-    }
-  };
-
-  const handleResendEmail = async () => {
     setSuccess(false);
-    setSentEmail(false);
+    setErrMsg('');
     try {
       const res = await forgetPassword(email);
       if (res.status === 200) {
@@ -68,7 +42,31 @@ export default function ForgetPassword() {
         setErrMsg(res.message);
       }
     } catch (err) {
-      setErrMsg(err.message || 'Something went wrong');
+      //eslint-disable-next-line
+      console.error(err);
+      setErrMsg('There was an error with the request, please try again later.');
+    }
+  };
+
+  const handleResendEmail = async () => {
+    setSuccess(false);
+    setSentEmail(false);
+    setErrMsg('');
+    try {
+      const res = await forgetPassword(email);
+      if (res.status === 200) {
+        setEmail('');
+        setSentEmail(true);
+        setSuccess(true);
+      } else {
+        setErrMsg(res.message);
+      }
+    } catch (err) {
+      //eslint-disable-next-line
+      console.error(err);
+      setErrMsg(
+        'An error occurred while resending the email. Please try again later.',
+      );
     }
   };
 
@@ -77,7 +75,7 @@ export default function ForgetPassword() {
       <Header widget={HeaderLink} />
       <Container className='content-layout--psw py-4'>
         <FatherSonBlock>
-          <Form className='py-4' onSubmit={handleForgotPassword}>
+          <Form className='content-layout py-4' onSubmit={handleForgotPassword}>
             <h1 className={styles.title}>Forgot Password</h1>
             {success && sentEmail ? (
               <>
