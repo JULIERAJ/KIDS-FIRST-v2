@@ -11,38 +11,35 @@ export function Panels() {
     <>
       <section>
         <LazyLoad once>
-          <div className="progressbar">
+          <div className='progressbar'>
             <div
               className={
                 panelStage === 1
                   ? 'progress-step progress-step-active'
                   : 'progress-step'
               }
-              data-title="Parent"
-            ></div>
+              data-title='Parent'></div>
             <div
               className={
                 panelStage === 2
                   ? 'progress-step progress-step-active'
                   : 'progress-step'
               }
-              data-title="Co_Parent"
-            ></div>
+              data-title='Co_Parent'></div>
             <div
               className={
                 panelStage === 3
                   ? 'progress-step progress-step-active'
                   : 'progress-step'
               }
-              data-title="Kids"
-            ></div>
+              data-title='Kids'></div>
           </div>
         </LazyLoad>
-        <div className="page-wrapper">
+        <div className='page-wrapper'>
           {panelStage === 1 && (
             // parent Page
             <LazyLoad once>
-              <div className="wrap">
+              <div className='wrap'>
                 <Parent
                   pageTitle={'Parent Info:'} // Panel title
                   submitButtonText={'Next'} // submit next button display text
@@ -55,7 +52,7 @@ export function Panels() {
           {panelStage === 2 && (
             // Co-Parent Page
             <LazyLoad once>
-              <div className="wrap">
+              <div className='wrap'>
                 <Co_Parent
                   pageTitle={'Co_Parent Info:'} // Panel title
                   submitButtonText={'Next'} // submit next button display text
@@ -68,7 +65,7 @@ export function Panels() {
           {panelStage === 3 && (
             // Kids Page
             <LazyLoad once>
-              <div className="wrap">
+              <div className='wrap'>
                 <Kids
                   pageTitle={'Kids Info:'} //  Panel title
                   submitButtonText={'Submit'} // submit next button display text
