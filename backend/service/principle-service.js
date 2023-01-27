@@ -44,15 +44,6 @@ const activateAccount = async (email) => {
   return user;
 };
 
-const resetPasswordUserAccount = async (email, password) => {
-  const hashedPassword = await bcrypt.hash(password, 8);
-  const user = await Principle.findOneAndUpdate(
-    { email: email },
-    { $set: { password: hashedPassword } },
-    { new: true },
-  );
-  return user;
-};
 const validateUserAndToken = async (email, token) => {
   const validUser = await findUser(email);
   const resetPasswordTokenVerified = await jwt.verify(
@@ -64,6 +55,17 @@ const validateUserAndToken = async (email, token) => {
   }
   return false;
 };
+
+const resetPasswordUserAccount = async (email, password) => {
+  const hashedPassword = await bcrypt.hash(password, 8);
+  const user = await Principle.findOneAndUpdate(
+    { email: email },
+    { $set: { password: hashedPassword } },
+    { new: true },
+  );
+  return user;
+};
+
 
 module.exports = {
   registration,
