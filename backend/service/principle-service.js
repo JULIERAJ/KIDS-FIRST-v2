@@ -31,7 +31,6 @@ const emailTokenVerification = async (activationToken) => {
     activationToken,
     process.env.JWT_EMAIL_VERIFICATION_SECRET,
   );
-
   return tokenVerified ? true : false;
 };
 
@@ -45,27 +44,27 @@ const activateAccount = async (email) => {
 };
 
 const validateUserAndToken = async (email, token) => {
-  const validUser = await findUser(email);
-  const resetPasswordTokenVerified = await jwt.verify(
-    token,
-    process.env.JWT_EMAIL_VERIFICATION_SECRET,
-  );
-  if (validUser && resetPasswordTokenVerified) {
+  const user = await findUser(email);
+  const resetPasswordTokenVerified = await emailTokenVerification(token);
+  if (user && resetPasswordTokenVerified) {
     return true;
   }
   return false;
 };
 
-const resetPasswordUserAccount = async (email, password) => {
+const updateUserPassword = async (email, password) => {
+  const user = await findUser(email);
+  if (!user) {
+    throw new Error('User not found');
+  }
   const hashedPassword = await bcrypt.hash(password, 8);
-  const user = await Principle.findOneAndUpdate(
+  const updatedUser = await Principle.findOneAndUpdate(
     { email: email },
     { $set: { password: hashedPassword } },
     { new: true },
   );
-  return user;
+  return updatedUser;
 };
-
 
 module.exports = {
   registration,
@@ -74,5 +73,5 @@ module.exports = {
   emailTokenVerification,
   activateAccount,
   validateUserAndToken,
-  resetPasswordUserAccount,
+  updateUserPassword,
 };

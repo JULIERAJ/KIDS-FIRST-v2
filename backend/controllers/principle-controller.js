@@ -151,18 +151,21 @@ const resetPasswordUpdates = async (req, res) => {
   const { email, resetPasswordToken } = req.params;
   const { password } = req.body;
 
+  if (!passwordRegExp.test(password)) {
+    return res.status(400).json({
+      message:
+        'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number',
+    });
+  }
+
   try {
-    // Verify the token
-    const decoded = jwt.verify(
-      resetPasswordToken,
-      process.env.JWT_EMAIL_VERIFICATION_SECRET,
-    );
-    if (decoded.email !== email) {
+    const decoded = await principleService.emailTokenVerification(resetPasswordToken)
+
+    if (!decoded) {
       return res.status(401).json({ msg: 'Invalid token' });
     }
-
     // update user
-    let user = await principleService.resetPasswordUserAccount(email, password);
+    let user = await principleService.updateUserPassword(email, password);
     // hash password using isPasswordCorrect
     await user.save();
     return res.status(200).json({ msg: 'Password updated successfully' });
