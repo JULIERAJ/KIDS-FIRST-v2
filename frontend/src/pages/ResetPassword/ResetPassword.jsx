@@ -21,39 +21,54 @@ const DEFAULT_ERROR_MESSAGE =
 
 export default function ResetPassword() {
   const { email, resetPasswordToken } = useParams();
-  const [userValid, setUserValid] = useState({});
+  const [userValid, setUserValid] = useState(null);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [sentEmail, setSentEmail] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const checkValid = async (email, resetPasswordToken) => {
+  const checkValid = useCallback(async () => {
     try {
-      await resetPasswordLink(email, resetPasswordToken).then(({ data }) => {
-        setUserValid(data);
-      });
+      const { data } = await resetPasswordLink(email, resetPasswordToken);
+      // eslint-disable-next-line no-console
+      setUserValid(data);
+
     } catch (err) {
-      //eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console
       console.error(err);
     }
-  };
+  }, [email, resetPasswordToken]);
   useEffect(() => {
-    checkValid(email, resetPasswordToken);
+    checkValid();
+    return () => {
+      setErrorMessage('');
+      setSuccess(false);
+      setUserValid(null);
+      setSentEmail(false);
+    };
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  
+  }, [checkValid, email, resetPasswordToken]);
+
   const handleChangePassword = useCallback(
     async (e) => {
       e.preventDefault();
+      setErrorMessage('');
+      if (password === '' || confirmPassword === '') {
+        setErrorMessage('Please fill out both password fields.');
+        return;
+      }
       if (password !== confirmPassword) {
         setErrorMessage(DEFAULT_ERROR_MESSAGE);
         return;
       }
       try {
-        resetPassword(email, password, resetPasswordToken).then(({ data }) => {
-          setUserValid(data);
-        });
+        const { data } = await resetPassword(
+          email,
+          password,
+          resetPasswordToken,
+        );
+        setUserValid(data);
         setSuccess(true);
         setSentEmail(true);
       } catch (err) {
@@ -62,16 +77,6 @@ export default function ResetPassword() {
     },
     [email, password, confirmPassword, resetPasswordToken],
   );
-
-  // useEffect(() => {
-  //   handleChangePassword();
-  // }, [
-  //   email,
-  //   password,
-  //   confirmPassword,
-  //   resetPasswordToken,
-  //   handleChangePassword,
-  // ]);
 
   return (
     <>
@@ -83,7 +88,10 @@ export default function ResetPassword() {
       <Container className='content-layout py-4'>
         <FatherSonBlock>
           <h1 className={styles.title}>Change Password</h1>
-          {success && sentEmail ? (
+          {!success && errorMessage && (
+            <MessageBar variant='error'>{errorMessage}</MessageBar>
+          )}
+          {success && sentEmail && (
             <>
               <div className={styles['success-password']}>
                 <img
@@ -102,9 +110,9 @@ export default function ResetPassword() {
                 </Link>
               </div>
             </>
-          ) : null}
+          )}
 
-          {userValid && !sentEmail ? (
+          {userValid && !sentEmail && (
             <Form className='py-4' onSubmit={handleChangePassword} noValidate>
               <FormPasswordInput
                 required
@@ -128,9 +136,7 @@ export default function ResetPassword() {
                 Change Password
               </Button>
             </Form>
-          ) : !success && errorMessage ? (
-            <MessageBar variant='error'>{errorMessage}</MessageBar>
-          ) : null}
+          )}
         </FatherSonBlock>
       </Container>
     </>
