@@ -38,7 +38,7 @@ const registration = async (req, res) => {
       await emailService.sendActivationEmail(email, emailVerificationToken);
             
       return res.status(201).json({
-        message: `user ${user.email} registered, verification link sent`,
+        message: 'Verify your email.',
         email: user.email,
         emailIsActivated: user.emailIsActivated,
       });
@@ -54,6 +54,15 @@ const accountActivation = async (req, res) => {
   const email = req.params.email;
 
   try {
+    const user = await principleService.findUser(email);
+    
+    if (user.emailIsActivated === true) {
+      return res.status(200).json({
+        message: 'Email has been verified',
+        email: user.email,
+        emailIsActivated: user.emailIsActivated,
+      });
+    }
     const activationTokenVerified =
             await principleService.emailTokenVerification(activationToken);
 

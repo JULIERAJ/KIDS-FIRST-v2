@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+
+.verifyText {
+    margin-bottom: 50px;
+}
+
+.verifyText p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 0;
+    line-height: 21px;
+}
+
+.resendEmailLink {
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.resendEmailLink a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 0;
+    line-height: 21px;
+    color: #F08324;
+}
