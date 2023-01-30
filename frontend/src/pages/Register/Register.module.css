@@ -1,10 +1,11 @@
-.register-title {
+.registerTitle {
   font-weight: 500;
   font-size: 36px;
   line-height: 42px;
+  text-align: center;
 }
 
-.sign-up-text {
+.signUpText {
   font-size: 18px;
   line-height: 21px;
   text-align: center;

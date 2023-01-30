@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Activate from './pages/Activate';
+import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
 import ForgetPassword from './pages/ForgetPassword';
