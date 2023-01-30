@@ -42,6 +42,7 @@ export default function ResetPassword() {
   useEffect(() => {
     checkValid();
     return () => {
+      //review clean up functions in useEffect
       setErrorMessage('');
       setSuccess(false);
       setUserValid(null);
