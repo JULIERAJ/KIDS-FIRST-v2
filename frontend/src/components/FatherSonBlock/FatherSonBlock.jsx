@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -16,8 +15,10 @@ const FatherSonBlock = ({ children }) => (
 );
 
 FatherSonBlock.propTypes = {
-  children: PropTypes.oneOfType(
-    [PropTypes.element, PropTypes.elementType, PropTypes.arrayOf(PropTypes.element)])
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
 };
 
 export default FatherSonBlock;

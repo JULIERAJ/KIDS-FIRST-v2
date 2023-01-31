@@ -33,7 +33,6 @@ export default function ResetPassword() {
       const { data } = await resetPasswordLink(email, resetPasswordToken);
       // eslint-disable-next-line no-console
       setUserValid(data);
-
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);
@@ -41,14 +40,6 @@ export default function ResetPassword() {
   }, [email, resetPasswordToken]);
   useEffect(() => {
     checkValid();
-    return () => {
-      //review clean up functions in useEffect
-      setErrorMessage('');
-      setSuccess(false);
-      setUserValid(null);
-      setSentEmail(false);
-    };
-    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkValid, email, resetPasswordToken]);
 
   const handleChangePassword = useCallback(
