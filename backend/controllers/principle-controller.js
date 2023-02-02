@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const jwt = require('jsonwebtoken');
 
 const emailService = require('../service/email-service');
@@ -168,7 +169,7 @@ const resetPasswordUpdates = async (req, res) => {
   }
 
   try {
-    const decoded = await principleService.emailTokenVerification(resetPasswordToken)
+    const decoded = await principleService.emailTokenVerification(resetPasswordToken);
 
     if (!decoded) {
       return res.status(401).json({ msg: 'Invalid token' });
@@ -179,6 +180,7 @@ const resetPasswordUpdates = async (req, res) => {
     await user.save();
     return res.status(200).json({ msg: 'Password updated successfully' });
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err.message);
     return res.status(500).json({ msg: 'Server error' });
   }

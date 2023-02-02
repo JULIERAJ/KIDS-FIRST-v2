@@ -5,11 +5,11 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const familyRoutes = require('./routes/family');
+const forgetPasswordRoutes = require('./routes/forget-password');
 const invitationRoutes = require('./routes/invitation');
 const loginRoutes = require('./routes/login');
 const memberRoutes = require('./routes/member');
 const registerRoutes = require('./routes/register');
-const forgetPasswordRoutes = require('./routes/forget-password');
 const resetPasswordRoutes = require('./routes/reset-password');
 require('dotenv').config({ path: './.env.local' });
 
