@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LandingLayout from './components/LandingLayout';
+import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
 import Conversation from './pages/Chat/Conversation';
 import Dashboard from './pages/Dashboard';
