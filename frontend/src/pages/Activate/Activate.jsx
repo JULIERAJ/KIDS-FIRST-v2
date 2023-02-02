@@ -10,7 +10,7 @@ import FatherSonBlock from '../../components/FatherSonBlock';
 import FeedbackBlock from '../../components/Feedback/FeedbackBlock';
 import Header from '../../components/Header';
 import TextLink from '../../components/TextLink';
-import SuccessImg from '../../img/email-verified-pic.png';
+import SuccessImg from '../../media/icons/pswd-changed.png';
 
 const Activate = () => {
   const params = useParams();
