@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LandingLayout from './components/LandingLayout';
+import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
 // import Family from './pages/Family';
@@ -34,6 +35,7 @@ const App = () => (
           path='/resetPassword/:email/:resetPasswordToken'
           element={<ResetPassword />}
         />
+        <Route path='/sidebar' element={<Sidebar />} />
       </Route>
     </Routes>
   </BrowserRouter>
