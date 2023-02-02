@@ -36,7 +36,13 @@ const Form = () => {
     e.stopPropagation();
 
     try {
-      const { firstName, lastName, kidsList, inviteeEmail, inviteeInviteLater } = data;
+      const {
+        firstName,
+        lastName,
+        kidsList,
+        inviteeEmail,
+        inviteeInviteLater,
+      } = data;
 
       const storedUser = localStorage.getItem('storedUser');
       const parsedUser = JSON.parse(storedUser);
@@ -75,9 +81,8 @@ const Form = () => {
           type='button'
           onClick={handlePrev}
           disabled={disablePrev}
-          className={`secondary-btn ${prevHide} ${styles.prevBtn}`}
-        >
-                    Back
+          className={`secondary-btn ${prevHide} ${styles.prevBtn}`}>
+          Back
         </Button>
 
         {!isLastPage && (
@@ -85,9 +90,8 @@ const Form = () => {
             type='button'
             onClick={handleNext}
             disabled={disableNext}
-            className={`primary-btn ${nextHide} ${styles.nextBtn}`}
-          >
-                        Next
+            className={`primary-btn ${nextHide} ${styles.nextBtn}`}>
+            Next
           </Button>
         )}
 
@@ -95,9 +99,8 @@ const Form = () => {
           <Button
             type='submit'
             className={`primary-btn ${doneHide} ${styles.doneBtn}`}
-            disabled={!canSubmit}
-          >
-                        Done
+            disabled={!canSubmit}>
+            Done
           </Button>
         )}
       </form>

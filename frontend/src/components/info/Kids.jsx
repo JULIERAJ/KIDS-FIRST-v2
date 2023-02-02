@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, Form, Container } from 'react-bootstrap';
@@ -26,8 +27,7 @@ const Kids = () => {
                   className={styles.removeChild}
                   onClick={() => {
                     handleDeleteChild(index);
-                  }}
-                >
+                  }}>
                   <Image
                     type='button'
                     src={removeChild}
@@ -60,11 +60,10 @@ const Kids = () => {
               {/* when there are 5 kids  --->
                user should not be able to add the field any more */}
               {data.kidsList.length < 5 &&
-              index === data.kidsList.length - 1 && (
+                index === data.kidsList.length - 1 && (
                 <Container
                   className={styles.addMoreChild}
-                  onClick={handleAddChild}
-                >
+                  onClick={handleAddChild}>
                   <Image
                     type='button'
                     src={addChild}
