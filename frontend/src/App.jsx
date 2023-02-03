@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
+import FeaturesPage from './pages/FeaturesPage/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
 import Member from './pages/Member';
@@ -15,6 +16,7 @@ const App = () => (
     <Routes>
       <Route>
         <Route path='/' element={<Home />} />
+        <Route path='/features' element={<FeaturesPage />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/register' element={<Register />} />
         <Route
