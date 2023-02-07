@@ -1,12 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import LazyLoad from 'react-lazyload';
-import Parent from '../components/info/Parent.jsx';
+import { useSelector } from 'react-redux';
+
 import Co_Parent from '../components/info/Co_Parent.jsx';
 import Kids from '../components/info/Kids.jsx';
+import Parent from '../components/info/Parent.jsx';
 
 export function Panels() {
-  const panelStage = useSelector((state) => state.PanelSatge);
+  const panelStage = useSelector((state) => state.PanelStage);
   return (
     <>
       <section>
