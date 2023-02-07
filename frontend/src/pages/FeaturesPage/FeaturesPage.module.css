@@ -1,0 +1,42 @@
+.main_features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main_features__title {
+    font-size: 2.25rem;
+    line-height: 3.75rem;
+    text-transform: uppercase;
+    padding: 5.75rem 0 2rem 0;
+}
+
+.banner {
+    height: 20.625rem;
+    padding: 0.5rem 5rem 0 5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #F7F5EC;
+}
+
+.banner__content {
+    margin-right: 2.25rem;
+}
+
+.banner__title {
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.banner__title,
+.banner__text {
+    font-size: 2rem;
+    line-height: 3.125rem;
+    text-transform: uppercase;
+}
+
+.banner__wrapper {
+    width: 20.875rem;
+    height: 20.125rem;
+}
