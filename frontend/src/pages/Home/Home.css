@@ -197,8 +197,8 @@ body.home {
 }
 
 .banner-section#middle-banner {
-  /* background: #f8f8ee url('../../media/values/') no-repeat
-    left bottom;  */
+ background: #f8f8ee url('../../media/father-and-daughter.png') no-repeat
+    left bottom; 
   min-height: 450px;
   width: 100%;
   display: flex;
