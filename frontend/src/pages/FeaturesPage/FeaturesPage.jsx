@@ -8,7 +8,7 @@ import styles from './FeaturesPage.module.css';
 
 import CardFeature from '../../components/CardFeature/CardFeature';
 import HeaderPage from '../../components/HeaderPage/HeaderPage';
-import { cardContent } from '../../data/features.data';
+import { cardMainFeature, cardExtraFeature } from '../../data/features.data';
 import parentChild from '../../media/features/parent_child.png';
 
 const FeaturesPage = () => {
@@ -27,20 +27,36 @@ const FeaturesPage = () => {
            with child' src={parentChild} />
         </Col>
       </Container>
-      <Container as='section' fluid className={styles.main_features}>
+      <Container as='section' fluid className={styles.main__features}>
         <Row as='h1' className={styles.main_features__title}>Kids First Features</Row>
-        {cardContent.map((el, i) => {
+        {cardMainFeature.map((el, i) => {
           return <CardFeature
+            main
             key={i}
-            image={el.image}
+            image={el.imageUrl}
             title={el.title}
             content={el.content}
             bgcolor={el.color} />;
         })}
       </Container>
-      <section className='more-features'>
-
-      </section>
+      <Container as='div' fluid className={styles.more_features}>
+        <Row as='h2' className={styles.more_features__title}>
+          And many other features:
+        </Row>
+        <Row as='div' className={styles.more_features_wrapper}>
+          {cardExtraFeature.map((el, i) => {
+            return <CardFeature
+              key={i}
+              image={el.imageUrl}
+              title={el.title}
+              content={el.content}
+            />;
+          })}
+        </Row>
+        <Row as='p' className={styles.more_features__add}>
+          More...
+        </Row>
+      </Container>
     </>
   );
 };
