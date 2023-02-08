@@ -53,10 +53,10 @@ export default function Home() {
               </Dropdown.Menu>
             </Dropdown>
             <Button className="home-login-btn">
-              <NavLink to="/Signin">Sign in </NavLink>
+              <NavLink to="/Signin">Log in </NavLink>
             </Button>
             <Button className="home-signup-btn">
-              <NavLink to="/Register">Register </NavLink>
+              <NavLink to="/Register">Sign up </NavLink>
             </Button>
 
             {/* <Button classNameName="home-login-btn" href="/Signin">
@@ -69,14 +69,14 @@ export default function Home() {
         </div>
         <div className="left-blurb">
           <h1>A co-parenting app solution</h1>
-          <p>Maintain harmony in your kid’s lives with the help of one click</p>
+          <p>that maintain harmony in your kid’s lives with the help of one click</p>
           <Button className="home-signup-btn-2" href="/Register">
-            Register now
+            Sign up now
           </Button>
         </div>
       </header>
       <section className="site-section" >
-        <h1 className="value">Kids First Values</h1>
+        <h1 className="value">KIDS FIRST VALUES</h1>
         <div className="features-prev">
           <div className="feature-1">
             <p>
@@ -84,7 +84,7 @@ export default function Home() {
               conflicts that arise when divorced parents schedule who has the
               kids.
             </p>
-            <img src={value_1} alt=""></img>
+            <img src={value_4} alt=""></img>
           </div>
           <div className="feature-1">
             <p>
@@ -101,6 +101,7 @@ export default function Home() {
               accessible.
             </p>
             <img src={value_3} alt=""></img>
+      
           </div>
         </div>
       </section>
