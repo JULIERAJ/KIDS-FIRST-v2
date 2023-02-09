@@ -9,7 +9,7 @@ import feature_3 from '../../media/homePage/feature_3.png';
 // import value_1 from '../../media/homePage/value_1.png';
 import value_2 from '../../media/homePage/value_2.png';
 import value_3 from '../../media/homePage/value_3.png';
-import value_5 from '../../media/homePage/value_5.png';
+import value_4 from '../../media/homePage/value_4.png';
 import video from '../../media/homePage/video_placeholder.png';
 import logo from '../../media/kids_first_logo_beta.png';
 
@@ -85,7 +85,7 @@ export default function Home() {
               conflicts that arise when divorced parents schedule who has the
               kids.
             </p>
-            <img src={value_5} alt=""></img>
+            <img src={value_4} alt=""></img>
           </div>
           <div className="feature-1">
             <p>
