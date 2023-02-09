@@ -13,7 +13,7 @@ export const SidebarData = [
   {
     title: 'Dashboard',
     icon: Home,
-    path: '/dashboard',
+    path: '/sidebar',
     alt: 'dashboard-icon',
   },
   {
