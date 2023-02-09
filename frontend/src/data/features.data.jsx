@@ -47,3 +47,26 @@ export const cardExtraFeature = [
     content: 'The application has two locations where behaviour should be tracked; the calendar and the finance tracker. In the calendar itself, the creation of events and the chat interface both need to be tracked.',
   }
 ];
+
+export const footerLink = [
+  {
+    title: 'Terms of use',
+    url: '/'
+  },
+  {
+    title: 'Privacy Policy',
+    url: '/'
+  },
+  {
+    title: 'Contact us',
+    url: '/'
+  },
+  {
+    title: 'About us',
+    url: '/'
+  },
+  {
+    title: 'Our team',
+    url: '/'
+  }
+];

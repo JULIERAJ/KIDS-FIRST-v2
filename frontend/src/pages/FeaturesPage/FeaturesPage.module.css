@@ -43,7 +43,7 @@
 }
 
 .more_features {
-    padding: 1.5rem 5rem 5.5rem 5rem;
+    padding: 1.5rem 5rem 0rem 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;

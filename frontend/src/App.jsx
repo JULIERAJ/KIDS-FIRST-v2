@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
-import FeaturesPage from './pages/FeaturesPage/FeaturesPage';
+import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
 import Member from './pages/Member';

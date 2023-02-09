@@ -6,8 +6,10 @@ import Row from 'react-bootstrap/Row';
 
 import styles from './FeaturesPage.module.css';
 
-import CardFeature from '../../components/CardFeature/CardFeature';
+import CardFeature from '../../components/CardFeature';
+import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderPage/HeaderPage';
+
 import { cardMainFeature, cardExtraFeature } from '../../data/features.data';
 import parentChild from '../../media/features/parent_child.png';
 
@@ -57,6 +59,7 @@ const FeaturesPage = () => {
           More...
         </Row>
       </Container>
+      <Footer />
     </>
   );
 };
