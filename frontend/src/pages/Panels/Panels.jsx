@@ -2,11 +2,11 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { useSelector } from 'react-redux';
 
-import Co_Parent from '../components/info/Co_Parent.jsx';
-import Kids from '../components/info/Kids.jsx';
-import Parent from '../components/info/Parent.jsx';
+import Co_Parent from '../../components/info/Co_Parent';
+import Kids from '../../components/info/Kids';
+import Parent from '../../components/info/Parent';
 
-export function Panels() {
+const Panels = () => {
   const panelStage = useSelector((state) => state.PanelStage);
   return (
     <>
@@ -79,4 +79,6 @@ export function Panels() {
       </section>
     </>
   );
-}
+};
+
+export default Panels;

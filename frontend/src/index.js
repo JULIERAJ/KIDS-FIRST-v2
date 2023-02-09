@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './globalStyles.css';
-import { Provider } from "react-redux";
-import { store } from './pages/Panels';
+
+import { Provider } from 'react-redux';
 
 import App from './App';
+import { store } from './pages/Panels/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -14,5 +15,5 @@ root.render(
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
