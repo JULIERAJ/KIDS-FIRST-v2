@@ -37,9 +37,9 @@ const SidebarItemsCard = ({ title, icon, path, alt }) => {
 const Sidebar = () => {
   return (
     <Container as='div' className={`${styles.sidebar} no-gutter`}>
-      <div className={styles.sidebarHeader}>
+      <Container as='div' className={styles.sidebarHeader}>
         <Image src={kidsFirstLogo} alt='mainLogo' />
-      </div>
+      </Container>
       {SidebarData.map((item, key) => {
         return <SidebarItemsCard key={key} {...item} />;
       })}
