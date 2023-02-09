@@ -84,7 +84,7 @@ export default function Home() {
               conflicts that arise when divorced parents schedule who has the
               kids.
             </p>
-            <img src={value_4} alt=""></img>
+            <img src={value_1} alt=""></img>
           </div>
           <div className="feature-1">
             <p>
@@ -101,7 +101,6 @@ export default function Home() {
               accessible.
             </p>
             <img src={value_3} alt=""></img>
-      
           </div>
         </div>
       </section>
