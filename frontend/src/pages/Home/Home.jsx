@@ -7,9 +7,10 @@ import feature_1 from '../../media/homePage/feature_1.png';
 import feature_2 from '../../media/homePage/feature_2.png';
 import feature_3 from '../../media/homePage/feature_3.png';
 // import value_1 from '../../media/homePage/value_1.png';
-import value_2 from '../../media/homePage/value_2.png';
+// import value_2 from '../../media/homePage/value_2.png';
 import value_3 from '../../media/homePage/value_3.png';
 import value_4 from '../../media/homePage/value_4.png';
+import value_5 from '../../media/homePage/value_5.png';
 import video from '../../media/homePage/video_placeholder.png';
 import logo from '../../media/kids_first_logo_beta.png';
 
@@ -93,7 +94,7 @@ export default function Home() {
               chance for conflict and more time and focus on the children&#39;s
               well-being.
             </p>
-            <img src={value_2} alt=""></img>
+            <img src={value_5} alt=""></img>
           </div>
           <div className="feature-1">
             <p>
