@@ -1,14 +1,12 @@
 import React from 'react';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Image from 'react-bootstrap/Image';
-import Row from 'react-bootstrap/Row';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 
 import styles from './FeaturesPage.module.css';
 
 import CardFeature from '../../components/CardFeature';
 import Footer from '../../components/Footer';
-import HeaderPage from '../../components/HeaderPage/HeaderPage';
+import Header from '../../components/Header';
+import Navigation from '../../components/Navigation';
 
 import { cardMainFeature, cardExtraFeature } from '../../data/features.data';
 import parentChild from '../../media/features/parent_child.png';
@@ -16,7 +14,11 @@ import parentChild from '../../media/features/parent_child.png';
 const FeaturesPage = () => {
   return (
     <>
-      <HeaderPage />
+      <header className={styles.big__header}>
+        <Header widget={
+          <Navigation />
+        } />
+      </header>
       <Container as='section' fluid className={styles.banner}>
         <Col as='div' className={styles.banner__content}>
           <Row as='h2' className={styles.banner__title}>An application

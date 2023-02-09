@@ -70,3 +70,18 @@ export const footerLink = [
     url: '/'
   }
 ];
+
+export const navigationLink = [
+  {
+    title: 'Features',
+    url: '/'
+  },
+  {
+    title: 'About us',
+    url: '/'
+  },
+  {
+    title: 'Contact us',
+    url: '/'
+  }
+];
