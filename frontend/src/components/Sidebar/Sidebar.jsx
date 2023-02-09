@@ -24,7 +24,10 @@ const SidebarItemsCard = ({ title, icon, path, alt }) => {
           as='img'
           src={icon}
           alt={alt}
-          style={{ width: '20.63px', height: '19.25px' }}
+          style={{
+            width: '20.63px',
+            height: '19.25px',
+          }}
         />
         <Link as='a' to={path} className={styles.sidebarLink}>
           {title}
