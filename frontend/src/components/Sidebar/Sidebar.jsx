@@ -13,7 +13,13 @@ import kidsFirstLogo from '../../../src/img/kids_first_logo_beta.png';
 const SidebarItemsCard = ({ title, icon, path, alt }) => {
   return (
     <ListGroup as='ul' className={styles.sidebarMenu}>
-      <ListGroup.Item as='li' className={styles.sidebarMenuItem}>
+      <ListGroup.Item
+        onClick={() => {
+          window.location.pathname = path;
+        }}
+        as='li'
+        className={styles.sidebarMenuItem}
+        id={window.location.pathname === path ? 'active' : ''}>
         <Image
           as='img'
           src={icon}
@@ -34,7 +40,6 @@ const Sidebar = () => {
       <div className={styles.sidebarHeader}>
         <Image src={kidsFirstLogo} alt='mainLogo' />
       </div>
-
       {SidebarData.map((item, key) => {
         return <SidebarItemsCard key={key} {...item} />;
       })}
@@ -47,6 +52,7 @@ SidebarItemsCard.propTypes = {
   icon: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default Sidebar;
