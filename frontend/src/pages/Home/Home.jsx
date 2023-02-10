@@ -8,9 +8,10 @@ import feature_2 from '../../media/homePage/feature_2.png';
 import feature_3 from '../../media/homePage/feature_3.png';
 // import value_1 from '../../media/homePage/value_1.png';
 // import value_2 from '../../media/homePage/value_2.png';
-import value_3 from '../../media/homePage/value_3.png';
+// import value_3 from '../../media/homePage/value_3.png';
 import value_4 from '../../media/homePage/value_4.png';
 import value_5 from '../../media/homePage/value_5.png';
+import value_6 from '../../media/homePage/value_6.png';
 import video from '../../media/homePage/video_placeholder.png';
 import logo from '../../media/kids_first_logo_beta.png';
 
@@ -102,13 +103,13 @@ export default function Home() {
               helpful information on child health and Ontario law more
               accessible.
             </p>
-            <img src={value_3} alt=""></img>
+            <img src={value_6} alt=""></img>
           </div>
         </div>
       </section>
       <section className="banner-section" id="middle-banner">
         <div className="right-blurb">
-          <h1>Children happiness is our priority</h1>
+          <h1>KIDS HAPPINESS IS OUR PRIORTY</h1>
           <p>
             KIDS FIRST aspires to help families with simpler custody scheduling
             by providing an interactive shared calendar solution that reduces

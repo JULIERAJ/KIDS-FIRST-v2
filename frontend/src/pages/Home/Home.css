@@ -170,6 +170,11 @@ body.home {
 
 .value {
   margin-top: 60px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  size: 36px;
+  line-height: 60px;
+  letter-spacing: 5%;
 }
 
 /* ======================================
