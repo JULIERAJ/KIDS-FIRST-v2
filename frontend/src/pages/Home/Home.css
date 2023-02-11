@@ -170,11 +170,11 @@ body.home {
 
 .value {
   margin-top: 60px;
-  font-family: Roboto, sans-serif;
+  /* font-family: Roboto, sans-serif;
   font-weight: 500;
   size: 36px;
   line-height: 60px;
-  letter-spacing: 5%;
+  letter-spacing: 5%; */
 }
 
 /* ======================================
@@ -362,8 +362,8 @@ body.home {
   flex-basis: 0;
   gap: 40px;
   border-radius: 15px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  background: linear-gradient(to bottom, #fff, 60%, #b2bdbd);
+  background: linear-gradient( #f7f5ec , 0%,rgba(255, 255, 255, 0.45), 100%); 
+  background-color: #f7f5ec;
   height: 430px;
   margin: auto;
   padding: 0 10px 60px 10px;

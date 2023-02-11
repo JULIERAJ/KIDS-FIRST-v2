@@ -121,18 +121,22 @@ export default function Home() {
       <section className="site-section" id="features-prev">
         <h1 className="value">Kids First Features</h1>
         <div className="features-prev">
-          <div className="feature-2">
-            <img src={feature_1} alt=""></img>
-            <p>Interactive Calendar</p>
+          <div className="feature-2"> 
+          <p>Interactive Calendar</p>
+       <img src={feature_1} alt=""></img>
           </div>
           <div className="feature-2">
-            <img src={feature_2} alt=""></img>
-            <p>Child Information</p>
+          <p>Child Information</p>
+
+           <img src={feature_2} alt=""></img> 
           </div>
+
           <div className="feature-2">
-            <img src={feature_3} alt=""></img>
-            <p>Law Pop-Ups</p>
+          <p>Law Pop-Ups</p>
+
+           <img src={feature_3} alt=""></img> 
           </div>
+		  
         </div>
         <span className="more-link">
           <a href="#" alt="">
