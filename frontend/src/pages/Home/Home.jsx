@@ -6,12 +6,9 @@ import './Home.css';
 import feature_1 from '../../media/homePage/feature_1.png';
 import feature_2 from '../../media/homePage/feature_2.png';
 import feature_3 from '../../media/homePage/feature_3.png';
-// import value_1 from '../../media/homePage/value_1.png';
-// import value_2 from '../../media/homePage/value_2.png';
-// import value_3 from '../../media/homePage/value_3.png';
-import value_4 from '../../media/homePage/value_4.png';
-import value_5 from '../../media/homePage/value_5.png';
-import value_6 from '../../media/homePage/value_6.png';
+import value_1 from '../../media/homePage/value_1.png';
+import value_2 from '../../media/homePage/value_2.png';
+import value_3 from '../../media/homePage/value_3.png';
 import video from '../../media/homePage/video_placeholder.png';
 import logo from '../../media/kids_first_logo_beta.png';
 
@@ -87,7 +84,7 @@ export default function Home() {
               conflicts that arise when divorced parents schedule who has the
               kids.
             </p>
-            <img src={value_4} alt=""></img>
+            <img src={value_1} alt=""></img>
           </div>
           <div className="feature-1">
             <p>
@@ -95,7 +92,7 @@ export default function Home() {
               chance for conflict and more time and focus on the children&#39;s
               well-being.
             </p>
-            <img src={value_5} alt=""></img>
+            <img src={value_2} alt=""></img>
           </div>
           <div className="feature-1">
             <p>
@@ -103,7 +100,7 @@ export default function Home() {
               helpful information on child health and Ontario law more
               accessible.
             </p>
-            <img src={value_6} alt=""></img>
+            <img src={value_3} alt=""></img>
           </div>
         </div>
       </section>
@@ -121,22 +118,20 @@ export default function Home() {
       <section className="site-section" id="features-prev">
         <h1 className="value">Kids First Features</h1>
         <div className="features-prev">
-          <div className="feature-2"> 
-          <p>Interactive Calendar</p>
-       <img src={feature_1} alt=""></img>
+          <div className="feature-2">   
+            <p>Interactive Calendar</p>
+            <img src={feature_1} alt=""></img>
           </div>
           <div className="feature-2">
-          <p>Child Information</p>
-
-           <img src={feature_2} alt=""></img> 
+            <p>Child Info</p>
+            <img src={feature_2} alt=""></img> 
           </div>
 
           <div className="feature-2">
-          <p>Law Pop-Ups</p>
+            <p>Law Pop-Ups</p>
 
-           <img src={feature_3} alt=""></img> 
+            <img src={feature_3} alt=""></img>
           </div>
-		  
         </div>
         <span className="more-link">
           <a href="#" alt="">
