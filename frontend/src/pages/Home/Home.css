@@ -170,11 +170,6 @@ body.home {
 
 .value {
   margin-top: 60px;
-  /* font-family: Roboto, sans-serif;
-  font-weight: 500;
-  size: 36px;
-  line-height: 60px;
-  letter-spacing: 5%; */
 }
 
 /* ======================================
@@ -182,7 +177,7 @@ body.home {
    ====================================== */
 
 .banner-section#header-banner {
- background: #f8f8ee url('../../media/homePage/kidsfirst_intro-3.png') no-repeat
+ background: #f7f5ec url('../../media/homePage/kidsfirst_intro-3.png') no-repeat
     right bottom; 
   min-height: 730px;
   width: 100%;
