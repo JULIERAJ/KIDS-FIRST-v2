@@ -4,9 +4,6 @@ import { Col, Container, Image, Row } from 'react-bootstrap';
 import styles from './FeaturesPage.module.css';
 
 import CardFeature from '../../components/CardFeature';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import Navigation from '../../components/Navigation';
 
 import { cardMainFeature, cardExtraFeature } from '../../data/features.data';
 import parentChild from '../../media/features/parent_child.png';
@@ -14,11 +11,6 @@ import parentChild from '../../media/features/parent_child.png';
 const FeaturesPage = () => {
   return (
     <>
-      <header className={styles.big__header}>
-        <Header widget={
-          <Navigation />
-        } />
-      </header>
       <Container as='section' fluid className={styles.banner}>
         <Col as='div' className={styles.banner__content}>
           <Row as='h2' className={styles.banner__title}>An application
@@ -43,7 +35,7 @@ const FeaturesPage = () => {
             bgcolor={el.color} />;
         })}
       </Container>
-      <Container as='div' fluid className={styles.more_features}>
+      <Container as='section' fluid className={styles.more_features}>
         <Row as='h2' className={styles.more_features__title}>
           And many other features:
         </Row>
@@ -61,7 +53,6 @@ const FeaturesPage = () => {
           More...
         </Row>
       </Container>
-      <Footer />
     </>
   );
 };

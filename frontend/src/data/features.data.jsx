@@ -74,7 +74,7 @@ export const footerLink = [
 export const navigationLink = [
   {
     title: 'Features',
-    url: '/'
+    url: '/features'
   },
   {
     title: 'About us',

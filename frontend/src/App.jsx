@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import LandingLayout from './components/LandingLayota';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
@@ -15,8 +16,10 @@ const App = () => (
   <BrowserRouter>
     <Routes>
       <Route>
-        <Route path='/' element={<Home />} />
-        <Route path='/features' element={<FeaturesPage />} />
+        <Route path="/" element={<LandingLayout />}>
+          <Route index element={<Home />} />
+          <Route path='/features' element={<FeaturesPage />} />
+        </Route>
         <Route path='/signin' element={<Signin />} />
         <Route path='/register' element={<Register />} />
         <Route
