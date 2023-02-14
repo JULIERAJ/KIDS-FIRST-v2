@@ -9,7 +9,7 @@ import feature_3 from '../../media/homePage/feature_3.png';
 import value_1 from '../../media/homePage/value_1.png';
 import value_2 from '../../media/homePage/value_2.png';
 import value_3 from '../../media/homePage/value_3.png';
-import video from '../../media/homePage/video_placeholder.png';
+import video from '../../media/homePage/video.png';
 import logo from '../../media/kids_first_logo_beta.png';
 
 export default function Home() {
