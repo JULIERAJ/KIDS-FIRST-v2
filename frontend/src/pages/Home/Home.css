@@ -105,14 +105,14 @@ body.home {
   font-size: 15px !important;
   font-style: normal;
   font-weight: 500 !important;
-  color: #2b2b2b !important;
   line-height: 1 !important;
+  color: #000;
 }
 
 .home-signup-btn {
   box-sizing: border-box;
   border-radius: 7px !important;
-  background: #f08324 !important;
+  background: #fffefd !important;
   border: solid 2px #f08324 !important;
   color: #000 !important;
   width: 108px;
@@ -140,8 +140,8 @@ body.home {
   margin-right: 0px;
   font-family: Roboto, sans-serif;
   font-weight: 500 !important;
-  color: #2b2b2b;
 }
+
 .home-login-btn a {
   text-decoration: none;
   color: black;
@@ -151,8 +151,8 @@ body.home {
 .home-signup-btn-2 {
   box-sizing: border-box;
   border-radius: 7px !important;
-  border: solid 3px #f08324 !important;
-  background: #f08324 !important;
+  background: #fffefd !important;
+  border: solid 2px #f08324 !important;
   margin-top: 80px;
   padding: 14px;
   width: 202px;
@@ -161,13 +161,11 @@ body.home {
   color: #000 !important;
   font-size: 22px !important;
 }
-
-.home-signup-btn:hover,
-.home-login-btn:hover,
+.home-login-btn:hover,.home-signup-btn:hover,
 .home-signup-btn-2:hover {
-  background: #fff !important;
+	background: #fdffff !important;
+	border: solid 2px #ffe601 !important;
 }
-
 .value {
   margin-top: 60px;
 }
@@ -192,7 +190,6 @@ body.home {
   text-transform: uppercase;
   font-family: Roboto, sans-serif;
   font-size: 46px;
-  font-weight: bold;
   line-height: 1.45;
 }
 
@@ -237,18 +234,26 @@ body.home {
   height: calc(100% - 90px);
   width: 55%;
   padding-left: 5%;
-  font-size: 36px;
-  line-height: 1.39;
+  font-size: 46px;
+  line-height: 50px;
   margin-top: 100px;
   font-family: Roboto, sans-serif;
-  font-weight: normal;
+  font-weight: 400;
+  color: #000;
+}
+ h1 {
+	font-family: Roboto, sans-serif;
+	font-weight: 500;
+	color: #000;
+	line-height: 50px;
 }
 .left-blurbs p {
 font-size: 20px;
 line-height: 35px;
 font-weight: 400;
 text-align: left;
-margin-left: 20%;
+margin: 0 0 0 20%;
+color: #000;
 }
 
 .left-blurbs {
@@ -312,8 +317,12 @@ margin-left: 20%;
 	margin-bottom: 60px;
 	text-align: center;
 	font-size: 36px;
-	font-weight: bold;
-	line-height: 0.97;
+	font-family: Roboto, sans-serif;
+	font-weight: 500;
+	size: 36px;
+	line-height: 60px;
+	letter-spacing: 5%;
+	color: #000;
 }
 
 .site-section > h1 {
@@ -321,8 +330,9 @@ margin-left: 20%;
   margin-bottom: 60px;
   text-align: center;
   font-size: 36px;
-  font-weight: bold;
-  line-height: 0.97;
+  line-height: 60px;
+  letter-spacing: 5%;
+  color: #000;
 }
 
 .site-section > .more-link {
@@ -405,23 +415,6 @@ margin-left: 20%;
   font-weight: 500;
   line-height: 1.25;
 }
-/* .feature-3 {
-    display: flex; 
-	align-content: center;
-	justify-content: center;
-	align-items: center; 
-	flex-direction: column;
-	background: linear-gradient( #f7f5ec , 0%,rgba(255, 255, 255, 0.45), 100%); 
-	background-color: #f7f5ec; 
-	width: 100%;
-	height: auto;
-	margin: -10px auto 0 auto; 
-	padding-top: 50px;
-	padding-bottom: 60px;
-	text-align: center;
-  } 
-   */
-
    .features-3 {
 	display: flex;
 	align-items: center; 
@@ -430,16 +423,10 @@ margin-left: 20%;
 	background-color: #f7f5ec; 
 	width: 100%;
 	height: auto;
-	/* margin: -10px auto 0 auto;  */
 	padding-top: 50px;
 	padding-bottom: 60px;
 	text-align: center;
 }
-/* .features-3 p {
-	font-size: 20px;
-	line-height: 35px;
-	font-weight: 400;
-} */
 
 .feature-3 p {
 	font-size: 20px;
@@ -449,13 +436,18 @@ margin-left: 20%;
   max-width: 558px; 
   width: 80%;
   height: auto;
+  position: relative;
 }
 
 @media screen and (max-width: 1090px) {
-  .features-prev, .features-prev-1  {
+  .features-prev, .features-prev-1 {
     flex-direction: column;
     gap: 40px;
   }
+
+ .features-3 {
+	padding-right: 20px;	
+ } 
 
   .feature-1 {
     flex-direction: row;
@@ -471,6 +463,10 @@ margin-left: 20%;
     height: auto;
     width: 100%;
     padding: 32px 40px 30px 40px;
+  }
+  .left-blurbs p {
+	margin: 0;
+	font-size: 20px;
   }
 
   .feature-1:nth-of-type(2),

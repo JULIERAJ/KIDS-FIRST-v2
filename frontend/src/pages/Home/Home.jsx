@@ -116,7 +116,7 @@ export default function Home() {
         </div>
       </section>
       <section className="site-section" id="features-prev">
-        <h1 className="value">Kids First Features</h1>
+        <h1 className="value">KIDS FIRST FEATURES</h1>
         <div className="features-prev-1">
           <div className="feature-2">   
             <p>Interactive Calendar</p>
@@ -140,16 +140,22 @@ export default function Home() {
         </span>
       </section>
       <section className="site-sections">
-        <h1>Why Kids First</h1>
+        <h1>WHY KIDS FIRST</h1>
         <div className="features-3 video">
           <div className="left-blurbs">
             <p>KIDSFIRST Takes A Different Approach To Reduce Conflicts Revolving;</p>
+            <br />
             <p>We Understand Who The Users Are, A Diverse Group Of Co-Parnets</p>
             <p>With Different Backgrounds And Needs.</p>
+            <br />
             <p>Our Solutions Can Accommodate Parents’ Needs With A Simple And</p>
             <p>Parctical App Design And A Clever Tool For Peaceful Communication.</p> 
           </div>
-          <img src={video} alt=""></img>
+          <div className="video-section">
+            <img src={video} alt=""></img>
+            {/* <img className="img-logo" src={logo} alt="" />			 */}
+          </div>
+         
         </div>
       </section>
       <footer>
