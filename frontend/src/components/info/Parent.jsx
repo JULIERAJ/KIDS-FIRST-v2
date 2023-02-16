@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { Container, Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { parentPanel, panelStage } from '../../pages/Panels/rootSlice';
+import { parentPanel, panelStage } from '../../pages/Panels/panelSlice';
 
 const Parent = ({ pageTitle, submitButtonText, previousButton }) => {
   // redux
@@ -111,7 +111,7 @@ const Parent = ({ pageTitle, submitButtonText, previousButton }) => {
             id='lastName'
             name='lastLame'
             autoComplete='Last Name'
-            aria-label='last anme'
+            aria-label='last Name'
             aria-required='false'
             placeholder='Last name'
             value={parentData.lastName}

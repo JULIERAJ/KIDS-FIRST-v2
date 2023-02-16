@@ -6,7 +6,7 @@ import Family from './pages/Family';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
 import Member from './pages/Member';
-import Panels from './pages/Panels/Panels';
+import PanelsNewVs from './pages/Panels/PanelsNewVs';
 import Register from './pages/Register';
 import ResetPassword from './pages/ResetPassword';
 import Signin from './pages/Signin';
@@ -24,7 +24,7 @@ const App = () => (
         />
         <Route path='/family' element={<Family />} />
         <Route path='/member' element={<Member />} />
-        <Route path='/panels' element={<Panels />} />
+        <Route path='/panels' element={<PanelsNewVs />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/forgetPassword' element={<ForgetPassword />} />
         <Route
