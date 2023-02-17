@@ -30,7 +30,7 @@ CardFeature.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   content: PropTypes.string,
-  main: PropTypes.string,
+  main: PropTypes.bool,
 };
 
 export default CardFeature;
