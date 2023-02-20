@@ -7,91 +7,17 @@ html.home {
   padding: 0;
 }
 
-body.home {
+ body.home {
   display: flex;
   align-content: flex-start;
   flex-direction: column;
   gap: 90px;
-}
-
-.header-nav {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-  padding-left: 5%;
-  padding-right: 1%;
-  width: 95%;
-}
-
-.header-nav img {
-  height: 90px;
-  width: auto;
-}
-
-.nav-links {
-  display: inline-flex;
-  justify-content: center;
-  align-content: flex-start;
-  margin-left: 20px;
-  gap: 32px;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  color: #2b2b2b;
-}
-
-.nav-links li {
-  display: inline-block;
-  font-size: 0;
-}
-
-.nav-links li a {
-  display: inline-block;
-  color: #000;
-  text-align: center;
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 1.11;
-}
-
-.nav-links a:hover {
-  font-weight: bold;
-}
-
-.nav-links a::before {
-  display: block;
-  content: attr(data-text);
-  font-weight: bold;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-}
-
+} 
 /* =======================================
     LANGUAGE, LOGIN/SIGNUP MENU & BUTTONS
    ======================================= */
-
-.profile-nav {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
- justify-content: flex-end;  
-  gap: 7px;
-}
-
-.lang-menu {
-  background: transparent !important;
-  border-radius: 3px !important;
-  border: none !important;
-  width: 37px;
-  padding: 2px !important;
-  font-size: 15px !important;
-  font-family: Roboto, sans-serif;
-  font-style: normal;
-  font-weight: 500 !important;
-  color: #2b2b2b !important;
+.dropdown-toggle::after {
+  display: none;
 }
 
 .lang-option {
@@ -123,6 +49,7 @@ body.home {
   color: #2b2b2b;
   text-decoration: none;
 }
+
 .home-signup-btn a {
   text-decoration: none;
   color: black;
@@ -173,29 +100,28 @@ body.home {
 /* ======================================
             WIDE BANNER SECTIONS
    ====================================== */
-
-.banner-section#first-banner {
- background: #f7f5ec url('../../media/homePage/kidsfirst_intro-3.png') no-repeat
-    right bottom; 
+	.banner-section#first-banner {
+		  background: #f8f8ee url('../../media/homePage/kidsfirst_intro-3.png') no-repeat
+    right bottom;
   min-height: 730px;
   width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   padding: 10px 0 90px 0;
-}
-
-.banner-section#header-banner h1 {
-  margin-bottom: 68px;
+	}
+	.banner-section#first-banner h1 {
+		 margin-bottom: 68px;
   text-transform: uppercase;
   font-family: Roboto, sans-serif;
   font-size: 46px;
   line-height: 1.45;
-}
+	}
 
-.banner-section#middle-banner {
- background: #f8f8ee url('../../media/father-and-daughter.png') no-repeat
-    left bottom; 
+
+.banner-section#middle-banner-homepage{
+  background: #f8f8ee url('../../media/homePage/kidsfirst_intro_2.png') no-repeat
+    left bottom;
   min-height: 450px;
   width: 100%;
   display: flex;
@@ -205,7 +131,7 @@ body.home {
   padding: 10px 0 10px 0;
 }
 
-.banner-section#middle-banner h1 {
+.banner-section#middle-banner-homepage h1 {
   margin-bottom: 50px;
   text-transform: uppercase;
   font-family: Roboto, sans-serif;
@@ -238,10 +164,9 @@ body.home {
   line-height: 50px;
   margin-top: 100px;
   font-family: Roboto, sans-serif;
-  font-weight: 400;
   color: #000;
 }
- h1 {
+.left-blurb h1 {
 	font-family: Roboto, sans-serif;
 	font-weight: 500;
 	color: #000;
@@ -266,14 +191,17 @@ color: #000;
 	font-family: Roboto, sans-serif;
 	font-weight: normal;
 }
-.left-blurb a{
-    text-decoration: none;
+
+.left-blurb a {
+  text-decoration: none;
 }
+
 .left-blurb p {
   padding-right: 17%;
 }
 
 @media only screen and (max-width: 960px) {
+
   .banner-section#header-banner,
   .banner-section#middle-banner {
     background: #f8f8ee;
@@ -325,7 +253,7 @@ color: #000;
 	color: #000;
 }
 
-.site-section > h1 {
+.site-section>h1 {
   margin-top: 90px;
   margin-bottom: 60px;
   text-align: center;
@@ -335,7 +263,7 @@ color: #000;
   color: #000;
 }
 
-.site-section > .more-link {
+.site-section>.more-link {
   display: inline-block;
   width: 100%;
   text-align: center;
