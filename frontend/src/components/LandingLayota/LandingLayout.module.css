@@ -1,4 +1,11 @@
 .big__header {
+    padding: 0 5rem;
     width: 100%;
     background-color: #F7F5EC;
+}
+
+.big__header > nav > div{
+  margin: 0;
+  max-width: 1700px;
+  padding: 0;
 }
