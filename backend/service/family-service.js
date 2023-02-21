@@ -1,5 +1,11 @@
-const Family = require('../models/Family');
+const { uid } = require('uid');
+const {
+  uniqueNamesGenerator,
+  animals,
+  colors,
+} = require('unique-names-generator');
 
+const Family = require('../models/Family');
 const familyRegistration = async (familyName, principleId) => {
   // if cannot find the same email in the system then create the new user
   
@@ -27,4 +33,14 @@ const isDuplicate = async (familyName, principleId) => {
   return checkDuplicate ? true : false;
 };
 
-module.exports = { familyRegistration, isDuplicate };
+const generateFamilyName = () => {
+  const firstPart = uniqueNamesGenerator({
+    dictionaries: [colors, animals],
+    separator: '',
+    style: 'capital',
+  });
+  const secondPart = uid(10);
+
+  return `${firstPart}_${secondPart}`;
+};
+module.exports = { familyRegistration, isDuplicate, generateFamilyName };

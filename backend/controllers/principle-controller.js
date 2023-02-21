@@ -1,7 +1,7 @@
-/* eslint-disable max-len */
 const jwt = require('jsonwebtoken');
 
 const emailService = require('../service/email-service');
+const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
 require('dotenv').config({ path: './.env.local' });
 
@@ -27,7 +27,8 @@ const registration = async (req, res) => {
       // eslint-disable-next-line max-len
       return res.status(400).json({
         message:
-          'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number',
+          'Password must be at least 10 characters long and contain\
+           at least one uppercase letter, one lowercase letter, and one number',
       });
     } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });
@@ -77,10 +78,18 @@ const accountActivation = async (req, res) => {
         .json({ message: 'activation link is not correct' });
     } else {
       const principleData = await principleService.activateAccount(email);
+      
+      // autogenerate family name and save it in db
+      const familyName = familyService.generateFamilyName();
+
+      const familyNameRegistartion = 
+      await familyService.familyRegistration(familyName, principleData._id);
+
       return res.status(200).json({
         message: 'the account is successfully activated',
         email: principleData.email,
         emailIsActivated: principleData.emailIsActivated,
+        familyName: familyNameRegistartion.familyName
       });
     }
   } catch (e) {
@@ -164,7 +173,8 @@ const resetPasswordUpdates = async (req, res) => {
   if (!passwordRegExp.test(password)) {
     return res.status(400).json({
       message:
-        'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, and one number',
+        'Password must be at least 10 characters long\
+         and contain at least one uppercase letter, one lowercase letter, and one number',
     });
   }
 
