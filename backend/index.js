@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const cookieParser = require('cookie-parser')
-const jwt = require('./middleware/jwt');
+const jwtMiddleware = require('./middleware/jwt');
 
 
 const familyRoutes = require('./routes/family');
@@ -15,7 +15,6 @@ const invitationRoutes = require('./routes/invitation');
 const loginRoutes = require('./routes/login');
 const memberRoutes = require('./routes/member');
 const registerRoutes = require('./routes/register');
-//const auth = require('./routes/auth');
 const logout = require('./routes/logout');
 
 
@@ -38,7 +37,10 @@ morgan.token('body', req => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m 
 
 
 app.use(cookieParser());
-app.use(jwt());
+
+app.use(jwtMiddleware());
+
+
 
 // middlewares
 app.use(cors());
@@ -46,8 +48,8 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(morgan(':body'));
 
-//app.use('/api', auth);
 app.use('/api', logout);
+
 
 
 
@@ -56,5 +58,45 @@ app.use('/api', invitationRoutes);
 app.use('/api', loginRoutes);
 app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);
+
+
+
+
+
+app.get('/api/test', (req, res) => {
+    req.cookies.title = 'jwt';
+    console.log("token is:"+req.cookies.jwt);
+    console.log("my user info is:"+req.user);
+    res.status(200).json({ success: true }); 
+    //user is authenticated and authorized to access the protected route.
+});
+
+
+const jwt = require("jsonwebtoken");
+app.get('/api/test2', (req, res) => {
+    //recieve token from cookies and verify it
+    req.cookies.title = 'jwt';
+    const token = req.cookies.jwt;
+    console.log("token is:"+token);
+    if(token){
+        jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decodedToken) => {
+            if(err){
+                console.log(err.message);
+                res.status(401).json({ error: 'Invalid token in verify' });
+            }else{
+                console.log(decodedToken);
+                res.status(200).json({ success: true }); 
+            }
+        });
+    }else{
+        res.status(401).json({ error: 'Invalid token in else' });
+    }
+
+});
+//for testing
+app.get('/api/family', (req, res) => {
+    res.status(200).json({ success: true });
+});
+
 
 app.listen(PORT, () => console.log(`server started on ${PORT}`));
