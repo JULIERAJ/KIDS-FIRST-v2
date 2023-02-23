@@ -22,7 +22,7 @@
 }
 
 .banner__content {
-    margin-right: 2.25rem;
+    margin-right: 2rem;
 }
 
 .banner__title {
@@ -32,6 +32,7 @@
 
 .banner__title,
 .banner__text {
+    margin-left: 0;
     font-size: 2rem;
     line-height: 3.125rem;
     text-transform: uppercase;
@@ -53,6 +54,11 @@
     justify-content: space-between;
     gap: 2.75rem;
 }
+
+@media screen and (max-width: 1244px) {
+    .more_features_wrapper {
+      gap: 1rem;
+    }}
 
 .more_features__title {
     margin: 0 0 2.875rem 0;
