@@ -38,7 +38,7 @@ morgan.token('body', req => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m 
 
 app.use(cookieParser());
 
-app.use(jwtMiddleware());
+//app.use(jwtMiddleware());
 
 
 
@@ -64,35 +64,42 @@ app.use('/api', registerRoutes);
 
 
 app.get('/api/test', (req, res) => {
-    req.cookies.title = 'jwt';
+   // req.cookies.title = 'jwt';
+   console.log("===== in index.js ====="+req);
+
+   req.cookies.title="jwt";
+   console.log("!!!!this is the cookie " + req.cookies.jwt);
+
+
     console.log("token is:"+req.cookies.jwt);
-    console.log("my user info is:"+req.user);
+    console.log("my user info is:"+JSON.stringify(req.user));
     res.status(200).json({ success: true }); 
     //user is authenticated and authorized to access the protected route.
 });
 
 
-const jwt = require("jsonwebtoken");
-app.get('/api/test2', (req, res) => {
-    //recieve token from cookies and verify it
-    req.cookies.title = 'jwt';
-    const token = req.cookies.jwt;
-    console.log("token is:"+token);
-    if(token){
-        jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decodedToken) => {
-            if(err){
-                console.log(err.message);
-                res.status(401).json({ error: 'Invalid token in verify' });
-            }else{
-                console.log(decodedToken);
-                res.status(200).json({ success: true }); 
-            }
-        });
-    }else{
-        res.status(401).json({ error: 'Invalid token in else' });
-    }
+// const jwt = require("jsonwebtoken");
+// app.get('/api/test2', (req, res) => {
+//     //recieve token from cookies and verify it
+//     req.cookies.title = 'jwt';
+//     const token = req.cookies.jwt;
+//     console.log("token is:"+token);
+//     if(token){
+//         jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decodedToken) => {
+//             if(err){
+//                 console.log(err.message);
+//                 res.status(401).json({ error: 'Invalid token in verify' });
+//             }else{
+//                 console.log(decodedToken);
+//                 res.status(200).json({ success: true }); 
+//             }
+//         });
+//     }else{
+//         res.status(401).json({ error: 'Invalid token in else' });
+//     }
 
-});
+// });
+
 //for testing
 app.get('/api/family', (req, res) => {
     res.status(200).json({ success: true });

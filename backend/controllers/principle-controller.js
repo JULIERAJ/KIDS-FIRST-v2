@@ -134,7 +134,7 @@ const login = async (req, res) => {
         const token = jwt.sign({ _id: user._id,
             email: user.email,
             emailIsActivated: user.emailIsActivated, },
-            process.env.JWT_PRIVATE_KEY, { expiresIn: '60s' ,algorithm: 'HS256' } );
+            process.env.JWT_PRIVATE_KEY, { expiresIn: '20m' ,algorithm: 'HS256' } );
 
 
              
@@ -144,7 +144,7 @@ const login = async (req, res) => {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'strict',
-                maxAge: 60 * 1000 // set cookie expiration time in milliseconds
+                maxAge: 360 * 1000 // set cookie expiration time in milliseconds
               });
 
 
