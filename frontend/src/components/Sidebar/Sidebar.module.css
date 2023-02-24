@@ -7,7 +7,7 @@
   width: 150px;
   margin-left: 15px;
   top: 15px;
-  font-size: 14px;
+  font-size: 0.9rem;
 }
 
 .sidebarHeader {
@@ -41,8 +41,8 @@
 
 .sidebarLink {
   text-decoration: none;
-  color: black;
-  font-size: 14px;
+  color: black !important;
+  font-size: 0.9rem;
   line-height: 35px;
   font-weight: 500;
 }
@@ -62,10 +62,3 @@
   filter: invert(0.5) sepia(4) saturate(6) hue-rotate(0deg);
   border-right: 5px solid rgba(240, 148, 67, 0.724);
 }
-/* .sidebarMenuItem[id='active'] {
-  border-right: 5px solid rgba(240, 148, 67, 0.724);
-  filter: invert(0.5) sepia(4) saturate(6) hue-rotate(0deg);
-}
-.sidebarMenuItem[id='active'] .sidebarLink {
-  color: orange;
-} */

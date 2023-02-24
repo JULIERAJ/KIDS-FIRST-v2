@@ -10,16 +10,14 @@ import kidsFirstLogo from '../../../src/img/kids_first_logo_beta.png';
 
 const SidebarItemsCard = ({ title, icon, path, alt }) => {
   return (
-    <Tab.Container as='div'>
+    <Tab.Container>
       <Row className={styles.rowContainer}>
         <Col className={styles.sidebarMenu}>
-          <Nav as='ul'>
+          <Nav>
             <Nav.Item
-              as='li'
               className={styles.sidebarMenuItem}
               id={window.location.pathname === path ? 'active' : ''}>
               <Image
-                as='img'
                 src={icon}
                 alt={alt}
                 style={{
