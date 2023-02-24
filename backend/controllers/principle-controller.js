@@ -37,35 +37,7 @@ const registration = async (req, res) => {
         { expiresIn: '1h' }
             );
 
-
-
-
-
-
-
             await emailService.sendActivationEmail(email, emailVerificationToken);
-
-
-            // //raha
-            // const token = await principleService.createJWToken(user);
-
-            // console.log("my registration token is: "+token);
-
-            // res.cookie('token', token, {httpOnly: true});
-
-
-            const token = jwt.sign({ _id: user._id,
-                email: user.email,
-                emailIsActivated: user.emailIsActivated, },
-                process.env.JWT_PRIVATE_KEY, { expiresIn: '60s' ,algorithm: 'HS256' } );
-
-                res.cookie('jwt', token, {
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: 'strict',
-                    maxAge: 60 * 1000 // set cookie expiration time in milliseconds
-                  });
-
 
             return res.status(201).json({
                 message: `user ${user.email} registered, verification link sent`,
@@ -122,35 +94,21 @@ const login = async (req, res) => {
       return res.status(401).json({ error: 'Password or username is not correct' });
         }
 
-
-        // //raha
-        // const token = await principleService.createJWToken(user);
-
-        // console.log("my token is: "+token);
-
-        // res.cookie('token', token, {httpOnly: true});
-
-
+        //jwt
         const token = jwt.sign({ _id: user._id,
             email: user.email,
             emailIsActivated: user.emailIsActivated, },
-            process.env.JWT_PRIVATE_KEY, { expiresIn: '20m' ,algorithm: 'HS256' } );
-
-
-             
-            console.log("my token is: "+token);
+            process.env.JWT_PRIVATE_KEY, { expiresIn: '30m' ,algorithm: 'HS256' 
+            } );
               
-              res.cookie('jwt', token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'strict',
-                maxAge: 360 * 1000 // set cookie expiration time in milliseconds
-              });
-
-
+        res.cookie('jwt', token, {
+            httpOnly: true,
+            //secure: true,     // set to true if your using https
+            sameSite: 'strict',
+            maxAge: 1800 * 1000 // set cookie expiration time in milliseconds
+            });
 
        return res.status(200).json({email: user.email, id: user._id});
-       
 
     } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });

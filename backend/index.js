@@ -5,8 +5,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const jwtMiddleware = require('./middleware/jwt');
 
 
@@ -36,23 +35,17 @@ db.once('connected', () => console.log('Database Connected'));
 morgan.token('body', req => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m \n`);
 
 
-app.use(cookieParser());
-
-//app.use(jwtMiddleware());
-
-
 
 // middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(morgan(':body'));
+app.use(cookieParser());
+
+app.use(jwtMiddleware());
 
 app.use('/api', logout);
-
-
-
-
 app.use('/api', familyRoutes);
 app.use('/api', invitationRoutes);
 app.use('/api', loginRoutes);
@@ -60,47 +53,15 @@ app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);
 
 
-
-
-
+//for testing jwt middleware
 app.get('/api/test', (req, res) => {
-   // req.cookies.title = 'jwt';
-   console.log("===== in index.js ====="+req);
-
-   req.cookies.title="jwt";
-   console.log("!!!!this is the cookie " + req.cookies.jwt);
-
-
+    req.cookies.title = 'jwt';
     console.log("token is:"+req.cookies.jwt);
     console.log("my user info is:"+JSON.stringify(req.user));
     res.status(200).json({ success: true }); 
-    //user is authenticated and authorized to access the protected route.
 });
 
-
-// const jwt = require("jsonwebtoken");
-// app.get('/api/test2', (req, res) => {
-//     //recieve token from cookies and verify it
-//     req.cookies.title = 'jwt';
-//     const token = req.cookies.jwt;
-//     console.log("token is:"+token);
-//     if(token){
-//         jwt.verify(token, process.env.JWT_PRIVATE_KEY, (err, decodedToken) => {
-//             if(err){
-//                 console.log(err.message);
-//                 res.status(401).json({ error: 'Invalid token in verify' });
-//             }else{
-//                 console.log(decodedToken);
-//                 res.status(200).json({ success: true }); 
-//             }
-//         });
-//     }else{
-//         res.status(401).json({ error: 'Invalid token in else' });
-//     }
-
-// });
-
-//for testing
+//for testing unless part in jwt middleware
 app.get('/api/family', (req, res) => {
     res.status(200).json({ success: true });
 });
