@@ -31,10 +31,9 @@ export default function ResetPassword() {
   const checkValid = useCallback(async () => {
     try {
       const { data } = await resetPasswordLink(email, resetPasswordToken);
-      // eslint-disable-next-line no-console
       setUserValid(data);
     } catch (err) {
-      // eslint-disable-next-line no-console
+      //eslint-disable-next-line no-console
       console.error(err);
     }
   }, [email, resetPasswordToken]);
