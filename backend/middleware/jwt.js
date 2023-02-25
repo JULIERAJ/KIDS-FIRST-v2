@@ -17,7 +17,7 @@ function jwtMiddleware() {
   });
 
   
-  //havin this part will let us reach decoded token in req.user
+  //having this code will let us reach decoded token in req.user
   return (req, res, next) => {
     jwtEXFunction(req, res, (err) => {
       if (err) {
@@ -31,7 +31,7 @@ function jwtMiddleware() {
                   console.log(err.message);
                   req.user = null;
               }else{
-                  console.log(decodedToken);
+                  //console.log(decodedToken);
                   req.user = decodedToken;
                   }
           });

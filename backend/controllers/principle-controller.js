@@ -209,6 +209,12 @@ const resetPasswordUpdates = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  // Remove the JWT cookie
+  res.clearCookie('jwt');
+  res.status(200).json({ message: 'Logout successful' });
+};
+
 module.exports = {
   registration,
   accountActivation,
@@ -216,4 +222,5 @@ module.exports = {
   requestResetPassword,
   resetPasswordActivation,
   resetPasswordUpdates,
+  logout,
 };
