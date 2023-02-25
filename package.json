@@ -33,5 +33,9 @@
       "npm run lint:fix:api",
       "npm run lint:fix:client"
     ]
+  },
+  "dependencies": {
+    "uid": "^2.0.1",
+    "unique-names-generator": "^4.7.1"
   }
 }
