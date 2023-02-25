@@ -1,63 +1,36 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 
-import './styles.css';
+import EmailVerify from './EmailVerify';
+import styles from './Register.module.css';
+
+import RegisterForm from './RegisterForm';
 
 import { register } from '../../api';
 import FatherSonBlock from '../../components/FatherSonBlock';
-import FormEmailInput from '../../components/form/FormEmailInput';
-import FormPasswordInput from '../../components/form/FormPasswordInput';
 import Header from '../../components/Header';
-import MessageBar from '../../components/MessageBar';
-import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 import TextLink from '../../components/TextLink';
-// import IconText from "../../components/IconText";
-
-// eslint-disable-next-line max-len
-const DEFAULT_ERROR_MESSAGE = 'You are using symbols in your passwords or your passwords do not match.';
 
 const Register = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isTouched, setIsTouched] = useState(false);
-  const [validated, setIsValidated] = useState(false);
 
-  const handleEmailChange = ({ target: { value } }) => setEmail(value);
-  const handlePasswordChange = ({ target: { value } }) => setPassword(value);
-  const handlePasswordConfirmChange = ({ target: { value } }) => 
-    setPasswordConfirm(value);
+  const [userData, setUserData] = useState({});
+  const [activeComponent, setActiveComponent] = useState(true);
 
-  const hendleFromChange = () => !isTouched && setIsTouched(true);
+  const registerUserHandler = async (email, password) => {
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-
-    if (form.checkValidity()) {
-      register({ email, password }).then((res) => {
-        // need to store the user informatin in the session 
-        const user = JSON.stringify(res.data);
-        localStorage.setItem('storedUser', user); 
-  
-        // TODO: remove redirect. First we need to verify the account
-        window.location.href = '/family';
-      })
-        .catch((e) => {
-          setErrorMessage(e.response.data.message);
-        });
-    } else {
-      setErrorMessage(DEFAULT_ERROR_MESSAGE);
+    try {
+      const { data } = await register({ email, password });
+      setUserData(data);
+      localStorage.setItem('storedUser', data); 
+      setActiveComponent(false);
+    } catch (error) {
+      console.log(error);
     }
 
-    setIsValidated(true);
   };
-
+  
   return (
     <>
       <Header widget={
@@ -66,54 +39,12 @@ const Register = () => {
 
       <Container className="content-layout py-4" >
         <FatherSonBlock>
-          <h1 className="register-title">Sign up Kids First</h1>
-
-          <Form
-            className="py-4"
-            onChange={hendleFromChange}
-            onSubmit={handleSubmit}
-            noValidate
-            validated={validated}
-          >
-            {errorMessage && 
-              <MessageBar variant="error">
-                {errorMessage}
-              </MessageBar>
-            }
-
-            <FormEmailInput 
-              autoComplete="off"
-              required
-              onChange={handleEmailChange}
-            />
-            <FormPasswordInput onChange={handlePasswordChange} required/>
-            <FormPasswordInput 
-              id="confirmPassword"
-              label="Password Confirmation"
-              name="confirmPassword"
-              onChange={handlePasswordConfirmChange} 
-              required
-            />
-
-            {/* <MessageBar variant="success">
-              <IconText title="English uppercase/lowercase characters"/>
-              <IconText title="Numbers (0-9)"/>
-              <IconText title="Minimum eight characters"/>
-            </MessageBar> */}
-
-            <Button
-              className="primary-btn w-100 my-5"
-              type="submit"
-              size="lg"
-              variant="light"
-            >
-              Sign up
-            </Button>
-
-            <div className="sign-up-text">Or sign up with</div>
-          
-            <SocialButtonsGroup />
-          </Form>
+          <h1 className={styles.registerTitle}>Sign up Kids First</h1>
+          {
+            activeComponent ?  
+              <RegisterForm onSubmitData={registerUserHandler} /> :  
+              <EmailVerify userData={userData}/> 
+          } 
         </FatherSonBlock>
       </Container>
     </>

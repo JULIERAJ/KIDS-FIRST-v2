@@ -12,7 +12,7 @@ import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 import TextLink from '../../components/TextLink';
 
 const HeaderLink = (
-  <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />
+  <TextLink title='Not a member?' to='/register' linkTitle='Sign up' />
 );
 
 export default function Signin() {
@@ -37,7 +37,7 @@ export default function Signin() {
         setSuccess(false);
         setErrMsg(
           `Your email address or password is incorrect. 
-          Please try again, or click "Forgot your password"`
+          Please try again, or click "Forgot your password"`,
         );
       });
   }
@@ -45,12 +45,12 @@ export default function Signin() {
   return (
     <>
       <Header widget={HeaderLink} />
-      <Container className="content-layout py-4">
+      <Container className='content-layout py-4'>
         <FatherSonBlock>
-          <Form className="py-4" onSubmit={handleLogin}>
-            <h1 className="login-title">Log in Kids First</h1>
+          <Form className='py-4' onSubmit={handleLogin}>
+            <h1 className='login-title'>Log in Kids First</h1>
 
-            {!success && <MessageBar variant="error">{errMsg}</MessageBar>}
+            {!success && <MessageBar variant='error'>{errMsg}</MessageBar>}
 
             <FormEmailInput
               onChange={(e) => setEmail(e.target.value)}
@@ -64,22 +64,21 @@ export default function Signin() {
               required
             />
 
-            <div className="checkbox mb-3">
-              <a className="btn forget-password" href="/Forget">
+            <div className='checkbox mb-3'>
+              <a className='btn forget-password' href='/forgetPassword'>
                 Forgot your password?
               </a>
             </div>
 
             <Button
-              className="primary-btn w-100 my-5"
-              type="submit"
-              size="lg"
-              variant="light"
-            >
+              className='primary-btn w-100 my-5'
+              type='submit'
+              size='lg'
+              variant='light'>
               Log In
             </Button>
 
-            <div className="or-login-with">Or Log in with</div>
+            <div className='or-login-with'>Or Log in with</div>
             <SocialButtonsGroup />
           </Form>
         </FatherSonBlock>

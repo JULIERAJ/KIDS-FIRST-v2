@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import checkIcon from '../../media/icons/check.png';
+import checkIcon from '../media/icons/check.png';
 
 const IconText = ({ title }) => 
   <div>
