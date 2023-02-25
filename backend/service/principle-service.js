@@ -17,13 +17,12 @@ const findUser = async (email) => {
   return user ? user : null;
 };
 
-// need to add logic when compare stored password with the password provided.
-// Depends on what crypting module is used. For ex bcrypt
+// need to add logic when compare stored password with the password provided. 
+//  Depends on what crypting module is used. For ex bcrypt
 const isPasswordCorrect = async (email, password) => {
-  const principle = await Principle.findOne({ email });
-  const isMatch = await bcrypt.compare(password, principle.password);
-
-  return isMatch;
+  const passwordCorrect = await Principle.findOne({ email });
+  const isMatch = await bcrypt.compare(password, passwordCorrect.password);
+  return isMatch ? true : false;
 };
 
 const emailTokenVerification = async (activationToken) => {

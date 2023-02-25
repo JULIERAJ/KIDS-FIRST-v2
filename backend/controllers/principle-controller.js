@@ -116,6 +116,19 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
+    	       //jwt
+  	         const token = jwt.sign({ _id: user._id,
+  	            email: user.email,
+    	            emailIsActivated: user.emailIsActivated, },
+    	            process.env.JWT_PRIVATE_KEY, { expiresIn: '30m' ,algorithm: 'HS256' 
+    	            } );
+  	              
+    	        res.cookie('jwt', token, {
+    	            httpOnly: true,
+    	            //secure: true,     // set to true if your using https
+    	            sameSite: 'strict',
+    	            maxAge: 1800 * 1000 // set cookie expiration time in milliseconds
+                });
     return res.status(200).json({ email: user.email, id: user._id });
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
@@ -196,6 +209,12 @@ const resetPasswordUpdates = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  // Remove the JWT cookie
+  res.clearCookie('jwt');
+  res.status(200).json({ message: 'Logout successful' });
+};
+
 module.exports = {
   registration,
   accountActivation,
@@ -203,4 +222,5 @@ module.exports = {
   requestResetPassword,
   resetPasswordActivation,
   resetPasswordUpdates,
+  logout,
 };
