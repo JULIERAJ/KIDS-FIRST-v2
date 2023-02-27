@@ -1,4 +1,7 @@
+/* eslint-disable indent */
 import React, { useState } from 'react';
+
+import { Button, Row } from 'react-bootstrap';
 
 import styles from './PanelsNewVs.module.css';
 
@@ -7,66 +10,85 @@ import styles from './PanelsNewVs.module.css';
 // import { useSelector } from 'react-redux';
 
 // import KidsElena from '../../components/info/KidsElena';
-import CoParentNewVs from '../../components/info/CoParentNewVs';
-import KidsNewVs from '../../components/info/KidsNewVs';
-import ParentNewVs from '../../components/info/ParentNewVs';
+import CoParentNewVs from '../../components/info/CoParent';
+import KidsNewVs from '../../components/info/Kids';
+import ParentNewVs from '../../components/info/Parent';
 // import fatherSon from '../../media/father-and-son-sholders.png';
 // import ParentElena from '../../components/info/ParentElena';
 
 const PanelsNewVs = () => {
-  const [toggleState, setToggleState] = useState(1);
+  const [page, setPage] = useState(0);
+  const [firstName, setFirstName] = useState('');
+  const FormTitles = ['My Information', 'Invite Co-parent', 'Kid Information'];
 
-  const toggleTab = (index) => {
-    setToggleState(index);
+  function nextPage() {
+    setPage((i) => {
+      if (i >= FormTitles.length - 1) return i;
+      return i + 1;
+    });
+  }
+
+  function prevPage() {
+    setPage((i) => {
+      if (i <= 0) return i;
+      return i - 1;
+    });
+  }
+  const PageDisplay = () => {
+    switch (page) {
+      case 0:
+        return (
+          <ParentNewVs
+            firstName={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        );
+      case 1:
+        return <CoParentNewVs />;
+      case 2:
+        return <KidsNewVs />;
+      default:
+        return <ParentNewVs />;
+    }
   };
+
+  function onSubmit(e) {
+    e.preventDefault();
+    nextPage();
+  }
 
   return (
     <div className={styles.container}>
       <div className={styles.blocTabs}>
-        <div
-          className={`${styles.tabs} ${
-            toggleState === 1 ? styles.activeTabs : ''
-          }`}
-          data-title='Parent'
-          onClick={() => toggleTab(1)}>
-          My Information
-        </div>
-        <div
-          className={`${styles.tabs} ${
-            toggleState === 2 ? styles.activeTabs : ''
-          }`}
-          data-title='Co_Parent'
-          onClick={() => toggleTab(2)}>
-          Invite Co-parent
-        </div>
-        <div
-          className={`${styles.tabs} ${
-            toggleState === 3 ? styles.activeTabs : ''
-          }`}
-          onClick={() => toggleTab(3)}>
-          Kid Information
-        </div>
+        {FormTitles.map((title, i) => (
+          <div
+            key={i}
+            className={`${styles.tabs} ${
+              FormTitles[page] === i && styles.activeTabs
+            }`}
+            data-title={title}>
+            {title}
+          </div>
+        ))}
       </div>
 
-      <div className={styles.contentTabs}>
-        <div
-          className={`${styles.content}
-            ${toggleState === 1 ? styles.activeContent : ''}`}>
-          <ParentNewVs />
-        </div>
-
-        <div
-          className={`${styles.content}
-            ${toggleState === 2 ? styles.activeContent : ''}`}>
-          <CoParentNewVs />
-        </div>
-
-        <div
-          className={`${styles.content}
-            ${toggleState === 3 ? styles.activeContent : ''}`}>
-          <KidsNewVs />
-        </div>
-      </div>
+      <form onSubmit={onSubmit} className={styles.contentTabs}>
+        {PageDisplay()}
+        <Row className={styles.parentBtns}>
+          {page !== 0 && (
+            <Button onClick={prevPage} type='button' className={styles.backBtn}>
+              Back
+            </Button>
+          )}
+          <Button
+            disabled={!firstName}
+            onClick={nextPage}
+            type='button'
+            className={styles.nextBtn}>
+            {page === FormTitles.length - 1 ? 'Done' : 'Next'}
+          </Button>
+        </Row>
+      </form>
     </div>
   );
 };

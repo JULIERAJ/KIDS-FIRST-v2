@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Co_Parent from '../../components/info/Co_Parent';
 import Kids from '../../components/info/Kids';
-import Parent from '../../components/info/Parent';
+import Parent from '../../components/info/ParentOldVs';
 
 const Panels = () => {
   const panelStage = useSelector((state) => state.PanelStage);

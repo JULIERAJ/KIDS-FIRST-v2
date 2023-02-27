@@ -1,14 +1,29 @@
-/* .fatherSonContainer {
+.kidsContainer {
   display: flex;
-  position: relative;
-  bottom:80px;
-} */
+  align-items: center;
+  justify-content: center;
+}
 
-.parentBtns {
+.addMoreChild {
+  cursor: pointer;
+  padding-left: 0;
+  width: 14%;
+  margin: 0;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 335px;
+}
+.kidsBtns {
   display: flex;
   justify-content: space-between;
 }
-.parentBtns button {
+
+.kidsBtns button {
   width: 120px !important;
   height: 48px !important;
   border-radius: 8px !important;
@@ -23,19 +38,4 @@
   color: black !important;
   background-color: #f08324 !important;
   border: 1px solid #f08324 !important;
-}
-
-.formInput {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  margin-left: 50px;
-  width: 335px;
-}
-
-.fatherSonContainer img {
-  width: 690.95px;
-  top: 88px;
-  position: absolute;
-  margin-left: 450px;
 }
