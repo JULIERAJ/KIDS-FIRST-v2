@@ -24,7 +24,6 @@ export const FormProvider = ({ children }) => {
       },
     ],
   });
-  //eslint-disable-next-line
 
   const requiredInputs = {
     parentFirstName: data.parentFirstName,
@@ -32,15 +31,9 @@ export const FormProvider = ({ children }) => {
     kidName: data.kidsList[0].kidName,
   };
 
-  // eslint-disable-next-line
-  // console.log('IMGERE', requiredInputs);
   const canSubmit =
     [...Object.values(requiredInputs)].every(Boolean) &&
-    (page === Object.keys(formTitle).length - 1 ||
-      (data.coParentFirstName &&
-        data.coParentLastName &&
-        data.coParentEmail &&
-        data.kidsList.length > 1));
+    page === Object.keys(formTitle).length - 1;
 
   // eslint-disable-next-line
   console.log('canSubmit', canSubmit);
@@ -85,10 +78,14 @@ export const FormProvider = ({ children }) => {
     .map((key) => data[key])
     .every(Boolean);
 
-  const canNextPage2 = Object.keys(data)
-    .filter((key) => key.startsWith('coParent') && key !== 'kids')
-    .map((key) => data[key])
-    .some(Boolean);
+  const canNextPage2 =
+    data.coParentInviteLater ||
+    Object.keys(data)
+      .filter(
+        (key) => key.startsWith('coParent') && key !== 'coParentInviteLater',
+      )
+      .map((key) => data[key])
+      .every(Boolean);
 
   //eslint-disable-next-line
   console.log(canNextPage2);
