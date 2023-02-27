@@ -18,7 +18,6 @@
   padding: 15px;
   text-align: center;
   width: 50%;
-  cursor: pointer;
   position: relative;
   font-size: 25px;
   font-weight: 500;
@@ -48,41 +47,10 @@
   /* background-color: red; */
 }
 
-button {
-  border: none;
-}
 .contentTabs {
   flex-grow: 1;
-  border-radius: 20px 20px 20px 20px;
-  /* border: 5px solid rgba(1, 173, 180, 0.6); */
-}
-.content {
-  background: rgba(248, 246, 228, 1);
-  padding: 20px;
-  width: 100%;
-  height: 100%;
-  display: none;
-  border: 5px solid rgba(1, 173, 180, 0.6);
-  border-top: none;
-}
-.activeContent::after {
-  border-radius: 20px 0 0 0;
-  background-attachment: xx;
-}
-
-.activeContent {
-  display: block;
   border-radius: 0 0 20px 20px;
+  border-left: 5px solid rgba(1, 173, 180, 0.6);
+  border-bottom: 5px solid rgba(1, 173, 180, 0.6);
+  border-right: 5px solid rgba(1, 173, 180, 0.6);
 }
-
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.formInput {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-}
-

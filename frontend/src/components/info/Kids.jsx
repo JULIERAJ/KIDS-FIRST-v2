@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import { Image, Form, Container } from 'react-bootstrap';
 
@@ -70,6 +72,12 @@ const Kids = () => {
 };
 
 export default Kids;
+
+Kids.PropTypes = {
+  kidName: PropTypes.string,
+  onChange: PropTypes.func,
+};
+
 {
   /* <Container as='section' className={styles.kidsContainer}>
            <Container as='div' className={styles.addChildInput}>

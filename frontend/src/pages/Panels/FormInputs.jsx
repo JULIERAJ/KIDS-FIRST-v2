@@ -3,7 +3,7 @@ import React from 'react';
 
 // import { Button, Row } from 'react-bootstrap';
 
-import styles from './PanelsNewVs.module.css';
+import styles from './FormInputs.module.css';
 
 import CoParent from '../../components/info/CoParent';
 import Kids from '../../components/info/Kids';
@@ -13,7 +13,7 @@ import useFormContext from '../../hooks/useFormContext';
 // import fatherSon from '../../media/father-and-son-sholders.png';
 
 const FormInputs = () => {
-  const { page, formTitle, setPage } = useFormContext();
+  const { page, formTitle } = useFormContext();
 
   const display = {
     0: <Parent />,
@@ -26,7 +26,6 @@ const FormInputs = () => {
       <div className={styles.blocTabs}>
         {Object.keys(formTitle).map((key) => (
           <div
-            onClick={() => setPage(Number(key))}
             key={key}
             className={`${styles.tabs} ${
               page === Number(key) && styles.activeTabs
