@@ -1,5 +1,6 @@
-.parentBtns {
+.container {
   display: flex;
+  justify-content: space-between;
 }
 .parentBtns button {
   width: 120px;

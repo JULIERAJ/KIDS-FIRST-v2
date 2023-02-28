@@ -87,9 +87,6 @@ export const FormProvider = ({ children }) => {
       .map((key) => data[key])
       .every(Boolean);
 
-  //eslint-disable-next-line
-  console.log(canNextPage2);
-
   const disablePrev = page === 0;
   const disableNext =
     page === Object.keys(formTitle).length - 1 ||

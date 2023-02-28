@@ -18,62 +18,67 @@ const Kids = () => {
   console.log(data);
 
   return (
-    <>
-      {data.kidsList.map((kid, index) => (
-        <Form.Group key={index}>
-          <Form.Label htmlFor='kidName'>Kid&apos;s Name:</Form.Label>
+    <div className={styles.container}>
+      <div className={styles.inputForm}>
+        {data.kidsList.map((kid, index) => (
+          <Form.Group key={index}>
+            {data.kidsList.length !== 1 && (
+              <div
+                className={styles.removeChild}
+                onClick={() => {
+                  handleDeleteChild(index);
+                }}>
+                <Image
+                  type='button'
+                  src={removeChild}
+                  alt='add child'
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                    position: 'fixed',
+                  }}
+                />
+              </div>
+            )}
+            <Form.Label htmlFor='kidName'>Kid&apos;s Name:</Form.Label>
 
-          <Form.Control
-            className='mb-3'
-            type='text'
-            id='kidName'
-            name='kidName'
-            placeholder='name'
-            aria-required='true'
-            value={kid.kidName}
-            onChange={(e) => handleChange(e, index)}
-          />
-          {data.kidsList.length - 1 === index && data.kidsList.length < 5 && (
-            <Container className={styles.addMoreChild} onClick={handleAddChild}>
-              <Image
-                type='button'
-                src={addChild}
-                alt='add child'
-                style={{
-                  width: '24px',
-                  height: '24px',
-                }}
-              />
-              <span>Add another child</span>
-            </Container>
-          )}
-          {data.kidsList.length !== 1 && (
-            <Container
-              className={styles.removeChild}
-              onClick={() => {
-                handleDeleteChild(index);
-              }}>
-              <Image
-                type='button'
-                src={removeChild}
-                alt='add child'
-                style={{
-                  width: '24px',
-                  height: '24px',
-                }}
-              />
-            </Container>
-          )}
-        </Form.Group>
-      ))}
+            <Form.Control
+              className='mb-3'
+              type='text'
+              id='kidName'
+              name='kidName'
+              placeholder='name'
+              aria-required='true'
+              value={kid.kidName}
+              onChange={(e) => handleChange(e, index)}
+            />
+            {data.kidsList.length - 1 === index && data.kidsList.length < 5 && (
+              <Container
+                className={styles.addMoreChild}
+                onClick={handleAddChild}>
+                <Image
+                  type='button'
+                  src={addChild}
+                  alt='add child'
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                  }}
+                />
+                <span>Add another child</span>
+              </Container>
+            )}
+          </Form.Group>
+        ))}
+      </div>
       <Image src={kidInfo} />
-    </>
+    </div>
   );
 };
 
 export default Kids;
 
-Kids.PropTypes = {
+Kids.propTypes = {
   kidName: PropTypes.string,
   onChange: PropTypes.func,
 };

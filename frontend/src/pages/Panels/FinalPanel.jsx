@@ -1,3 +1,4 @@
+import styles from './FinalPanel.module.css';
 import Form from './Form';
 
 import { FormProvider } from '../../context/FormContext';
@@ -5,7 +6,9 @@ import { FormProvider } from '../../context/FormContext';
 function FinalPanel() {
   return (
     <FormProvider>
-      <Form />
+      <div className={styles.container}>
+        <Form />
+      </div>
     </FormProvider>
   );
 }

@@ -1,13 +1,4 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  margin: 100px auto 101px;
-  height: 660px;
-  width: 1222px;
-  border-radius: 20px 20px 20px 20px;
-}
+
 
 .blocTabs {
   display: flex;
@@ -29,7 +20,6 @@
   width: 60%;
   border-left: 5px solid rgba(2, 173, 180, 0.6);
   border-right: 5px solid rgba(2, 173, 180, 0.6);
-  /* border-bottom: none; */
   border-radius: 20px 20px 0 0;
 }
 
@@ -44,13 +34,15 @@
   height: 5px;
   background: rgba(1, 173, 180, 0.6);
   border-radius: 20px 20px 0 0;
-  /* background-color: red; */
 }
 
 .contentTabs {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
   border-radius: 0 0 20px 20px;
-  border-left: 5px solid rgba(1, 173, 180, 0.6);
-  border-bottom: 5px solid rgba(1, 173, 180, 0.6);
-  border-right: 5px solid rgba(1, 173, 180, 0.6);
+  height: 100%;
+  width: 100%;
 }

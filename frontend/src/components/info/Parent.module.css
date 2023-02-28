@@ -1,31 +1,8 @@
-/* .fatherSonContainer {
-  display: flex;
-  position: relative;
-  bottom:80px;
-} */
-
-/* .parentBtns {
+.container{
   display: flex;
   justify-content: space-between;
 }
-.parentBtns button {
-  width: 120px !important;
-  height: 48px !important;
-  border-radius: 8px !important;
-  margin-top: 273px !important;
-}
-.backBtn {
-  background-color: #f7f5ec !important;
-  color: black !important;
-  border: 1px solid #f08324 !important;
-}
-.nextBtn {
-  color: black !important;
-  background-color: #f08324 !important;
-  border: 1px solid #f08324 !important;
-} */
-
-.formInput {
+.inputForm {
   display: flex;
   flex-direction: column;
   margin-top: 50px;
@@ -33,9 +10,5 @@
   width: 335px;
 }
 
-.fatherSonContainer img {
-  width: 690.95px;
-  top: 88px;
-  position: absolute;
-  margin-left: 450px;
-}
+
+

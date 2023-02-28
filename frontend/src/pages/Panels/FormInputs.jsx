@@ -22,7 +22,7 @@ const FormInputs = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <div className={styles.blocTabs}>
         {Object.keys(formTitle).map((key) => (
           <div
@@ -35,7 +35,7 @@ const FormInputs = () => {
           </div>
         ))}
       </div>
-      <div className={styles.contentTabs}>{display[page]}</div>
+      <div>{display[page]}</div>
     </div>
   );
 };

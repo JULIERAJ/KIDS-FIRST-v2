@@ -1,31 +1,21 @@
-.coParentBtns {
+.container {
   display: flex;
   justify-content: space-between;
-  
 }
-.coParentBtns button {
-  width: 120px !important;
-  height: 48px !important;
-  border-radius: 8px !important;
-  margin-top: 68px !important;
-
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 335px;
 }
-.backBtn {
-  background-color: #f7f5ec !important;
-  color: black !important;
-  border: 1px solid #f08324 !important;
+.container img {
+  position: relative;
+  top: 40px;
 }
-.nextBtn {
-  color: black !important;
-  background-color: #f08324 !important;
-  border: 1px solid #f08324 !important;
-}
-
 .coParentCheckbox {
-  margin-top: 81px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
 }
 
 .coParentCheckbox :checked[type='checkbox'] {
@@ -38,19 +28,4 @@
   height: 32px;
   border-radius: 6px;
   border-color: black;
-}
-
-.formInput {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  margin-left: 50px;
-  width: 335px;
-}
-
-.fatherSonContainer img {
-  width: 690.95px;
-  top: 102px;
-  position: absolute;
-  margin-left: 450px;
 }

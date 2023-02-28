@@ -1,4 +1,4 @@
-import { Button, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import styles from './Form.module.css';
 import FormInputs from './FormInputs';
@@ -31,30 +31,30 @@ const Form = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <FormInputs />
-      <Row className={styles.parentBtns}>
+      <div>
+        <FormInputs />
+      </div>
+      <Button
+        type='button'
+        onClick={handlePrev}
+        disabled={disablePrev}
+        className={`${styles.backBtn} ${prevHide}`}>
+        Back
+      </Button>
+
+      {isLastPage ? (
+        <Button className={styles.nextBtn} disabled={!canSubmit}>
+          Done
+        </Button>
+      ) : (
         <Button
           type='button'
-          onClick={handlePrev}
-          disabled={disablePrev}
-          className={`${styles.backBtn} ${prevHide}`}>
-          Back
+          onClick={handleNext}
+          disabled={disableNext}
+          className={`${styles.nextBtn} ${nextHide}`}>
+          {buttonLabel}
         </Button>
-
-        {isLastPage ? (
-          <Button className={styles.nextBtn} disabled={!canSubmit}>
-            Done
-          </Button>
-        ) : (
-          <Button
-            type='button'
-            onClick={handleNext}
-            disabled={disableNext}
-            className={`${styles.nextBtn} ${nextHide}`}>
-            {buttonLabel}
-          </Button>
-        )}
-      </Row>
+      )}
     </form>
   );
 };
