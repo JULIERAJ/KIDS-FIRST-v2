@@ -12,8 +12,8 @@ export const FormProvider = ({ children }) => {
   };
   const [page, setPage] = useState(0);
   const [data, setData] = useState({
-    parentFirstName: '',
-    parentLastName: '',
+    firstName: '',
+    lastName: '',
     coParentFirstName: '',
     coParentLastName: '',
     coParentEmail: '',
@@ -26,8 +26,8 @@ export const FormProvider = ({ children }) => {
   });
 
   const requiredInputs = {
-    parentFirstName: data.parentFirstName,
-    parentLastName: data.parentLastName,
+    firstName: data.firstName,
+    lastName: data.lastName,
     kidName: data.kidsList[0].kidName,
   };
 
@@ -74,7 +74,7 @@ export const FormProvider = ({ children }) => {
   };
 
   const canNextPage1 = Object.keys(data)
-    .filter((key) => key.startsWith('parent') && key !== 'coParent')
+    .filter((key) => key.startsWith('first' && 'last') && key !== 'coParent')
     .map((key) => data[key])
     .every(Boolean);
 
@@ -93,9 +93,9 @@ export const FormProvider = ({ children }) => {
     (page === 0 && !canNextPage1) ||
     (page === 1 && !canNextPage2);
 
-  const prevHide = page === 0 && 'removeButton';
+  const prevHide = page === 0;
 
-  const nextHide = page === Object.keys(formTitle).length - 1 && 'removeButton';
+  const nextHide = page === Object.keys(formTitle).length - 1;
 
   const isLastPage = page === Object.keys(formTitle).length - 1;
   const buttonLabel = isLastPage ? 'Done' : 'Next';

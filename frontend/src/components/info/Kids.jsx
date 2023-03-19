@@ -49,6 +49,7 @@ const Kids = () => {
               name='kidName'
               placeholder='name'
               aria-required='true'
+              autoFocus
               value={kid.kidName}
               onChange={(e) => handleChange(e, index)}
             />
@@ -80,7 +81,9 @@ export default Kids;
 
 Kids.propTypes = {
   kidName: PropTypes.string,
-  onChange: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleAddChild: PropTypes.func,
+  handleDeleteChild: PropTypes.func,
 };
 
 {

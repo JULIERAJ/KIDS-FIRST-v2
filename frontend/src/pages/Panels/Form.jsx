@@ -1,10 +1,12 @@
+// import axios from 'axios';
 import { Button } from 'react-bootstrap';
 
 import styles from './Form.module.css';
+
 import FormInputs from './FormInputs';
 
+import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
-
 const Form = () => {
   const {
     setPage,
@@ -17,6 +19,7 @@ const Form = () => {
     isLastPage,
     buttonLabel,
   } = useFormContext();
+  // eslint-disable-next-line no-console
 
   const handlePrev = () => {
     setPage((prev) => prev - 1);
@@ -24,16 +27,27 @@ const Form = () => {
   const handleNext = () => {
     setPage((prev) => prev + 1);
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //eslint-disable-next-line
-    console.log(JSON.stringify(data));
+
+    try {
+      const { firstName, lastName, kidsList } = data;
+
+      await createMember({
+        firstName,
+        lastName,
+        kidsList,
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error submitting form:', error);
+    }
   };
+
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <FormInputs />
-      </div>
+      <FormInputs />
       <Button
         type='button'
         onClick={handlePrev}
@@ -43,7 +57,7 @@ const Form = () => {
       </Button>
 
       {isLastPage ? (
-        <Button className={styles.nextBtn} disabled={!canSubmit}>
+        <Button type='submit' className={styles.nextBtn} disabled={!canSubmit}>
           Done
         </Button>
       ) : (

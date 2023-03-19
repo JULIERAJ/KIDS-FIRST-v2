@@ -10,8 +10,6 @@ import Kids from '../../components/info/Kids';
 import Parent from '../../components/info/Parent';
 import useFormContext from '../../hooks/useFormContext';
 
-// import fatherSon from '../../media/father-and-son-sholders.png';
-
 const FormInputs = () => {
   const { page, formTitle } = useFormContext();
 
@@ -22,8 +20,8 @@ const FormInputs = () => {
   };
 
   return (
-    <div>
-      <div className={styles.blocTabs}>
+    <>
+      <div className={styles.blockTabs}>
         {Object.keys(formTitle).map((key) => (
           <div
             key={key}
@@ -36,7 +34,7 @@ const FormInputs = () => {
         ))}
       </div>
       <div>{display[page]}</div>
-    </div>
+    </>
   );
 };
 

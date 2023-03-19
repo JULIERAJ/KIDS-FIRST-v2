@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import { Form, Image } from 'react-bootstrap';
 
@@ -23,6 +25,7 @@ const CoParent = () => {
           autoComplete='First Name'
           aria-label='first name'
           aria-required='true'
+          autoFocus
           value={data.coParentFirstName}
           onChange={handleChange}
         />
@@ -64,6 +67,14 @@ const CoParent = () => {
       <Image src={coParents} alt='parent' />
     </div>
   );
+};
+
+CoParent.propTypes = {
+  data: PropTypes.shape({
+    parentFirstName: PropTypes.string.isRequired,
+    parentLastName: PropTypes.string.isRequired,
+  }),
+  handleChange: PropTypes.func,
 };
 
 export default CoParent;

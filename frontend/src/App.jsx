@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
-import Member from './pages/Member';
+// import Member from './pages/Member';
 import FinalPanel from './pages/Panels/FinalPanel';
 import Register from './pages/Register';
 import ResetPassword from './pages/ResetPassword';
@@ -23,8 +23,8 @@ const App = () => (
           element={<Activate />}
         />
         <Route path='/family' element={<Family />} />
-        <Route path='/member' element={<Member />} />
-        <Route path='/panels' element={<FinalPanel />} />
+        <Route path='/member' element={<FinalPanel />} />
+        {/* <Route path='/panels' element={<FinalPanel />} /> */}
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/forgetPassword' element={<ForgetPassword />} />
         <Route
