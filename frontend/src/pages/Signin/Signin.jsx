@@ -20,13 +20,63 @@ export default function Signin() {
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState();
+  const [EmailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const passwordRegExp =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+  const emailRegExp = /^\S+@\S+\.\S+$/;
+  
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   useEffect(() => {
     setSuccess(true);
   }, [email, password]);
 
+  function validateEmailAndPassword() {
+    let emailError = false;
+    let passwordError = false;
+	
+    if (!emailRegExp.test(email)) {
+      setErrMsg(`This account doesn't exist.
+	  Please enter a different email address or try "Sign-Up".`);
+      emailError = true;
+    }
+
+    if (!passwordRegExp.test(password)) {
+      setErrMsg(`The password you entered is incorrect.
+	  Please check the password terms:
+      English uppercase or lowercase letters
+      At leaset one number (0-9) or symboles
+      Maximum 8 charecters
+      and try again or use "Forget Password.`,);
+      passwordError = true;
+    }
+
+    if (emailError || passwordError) {
+      setEmailError(emailError);
+      setPasswordError(passwordError);
+      return false;
+    }
+
+    setEmailError(false);
+    setPasswordError(false);
+    return true;
+  }
+
   function handleLogin(e) {
     e.preventDefault();
+
+    const isEmailAndPasswordValid = validateEmailAndPassword();
+
+    if (!isEmailAndPasswordValid) {
+      return;
+    }
 
     login(email, password)
       .then(() => {
@@ -35,10 +85,6 @@ export default function Signin() {
       })
       .catch(() => {
         setSuccess(false);
-        setErrMsg(
-          `Your email address or password is incorrect. 
-          Please try again, or click "Forgot your password"`,
-        );
       });
   }
 
@@ -50,20 +96,18 @@ export default function Signin() {
           <Form className='py-4' onSubmit={handleLogin}>
             <h1 className='login-title'>Log in Kids First</h1>
 
-            {!success && <MessageBar variant='error'>{errMsg}</MessageBar>}
-
             <FormEmailInput
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={ handleEmailChange}
               value={email}
               required
             />
-
+    
             <FormPasswordInput
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               value={password}
               required
             />
-
+        
             <div className='checkbox mb-3'>
               <a className='btn forget-password' href='/forgetPassword'>
                 Forgot your password?
@@ -71,12 +115,17 @@ export default function Signin() {
             </div>
 
             <Button
-              className='primary-btn w-100 my-5'
+              className='primary-btn w-100 my-6'
               type='submit'
               size='lg'
               variant='light'>
               Log In
             </Button>
+
+            {!success && EmailError? <MessageBar variant='error'>
+              {errMsg}</MessageBar>: null}
+            {/* {!success && <MessageBar variant='error'>{errMsg}</MessageBar>} */}
+            {passwordError? <MessageBar variant='passerror'>{errMsg}</MessageBar> : null}
 
             <div className='or-login-with'>Or Log in with</div>
             <SocialButtonsGroup />

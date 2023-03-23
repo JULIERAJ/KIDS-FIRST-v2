@@ -1,12 +1,15 @@
+import React from 'react';
+
 import FromInput from './FormInput';
 
 const FormEmailInput = (props) => (
   <FromInput 
     id="email"
-    label="Email"
+    label="Email Address"
     name="email"
-    placeholder="example@email.com"
+    placeholder="name@mail.com"
     type="email"
+    value='email'
     {...props}
   />
 );

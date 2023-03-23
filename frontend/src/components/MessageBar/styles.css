@@ -5,8 +5,11 @@
 
 .message-bar-error {
   background-color: var(--main-red);
+  padding: 3px 0 5px 0;
+  line-height: 22px;
+  text-align: center;
 }
  
-.message-bar-success {
+ .message-bar-success {
   background-color: var(--main-green);
-}
+} 
