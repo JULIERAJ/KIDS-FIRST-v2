@@ -27,7 +27,7 @@ const memberRegistration = async (req, res) => {
       });
     }
   } catch (e) {
-    return res.status(500).json({ message: 'something went wrong' });
+    return res.status(500).json({ message: 'Something went wrong' });
   }
 };
 
@@ -38,7 +38,6 @@ const getMemberById = async (req, res) => {
   if (!specifiedMember) {
     return res.status(404).json({ message: 'User not found' });
   }
-
   return res.status(201).json(specifiedMember);
 }
 
@@ -65,7 +64,7 @@ const memberUpdateImage = async (req, res) => {
     res.status(201).json(memberUpdatedData);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: 'Something went wrong', error: error });
+    res.status(500).json({ message: 'Something went wrong' });
   }
 }
 

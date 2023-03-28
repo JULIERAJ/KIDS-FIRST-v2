@@ -67,6 +67,7 @@ const updateMemeberImage = async (memberId, image) => {
     const updatedMember = await Member.findOneAndUpdate(
       { _id: memberId },
       {
+
         avatar: {
           data: buffer,
           contentType: mimetype,
@@ -79,11 +80,12 @@ const updateMemeberImage = async (memberId, image) => {
     if (!updatedMember) {
       return { success: false, message: 'Member not found' };
     }
-
-    // delete previous image
-    const { data: prevImageData } = updatedMember.avatar || {};
-    if (prevImageData) {
-      await Member.updateOne({ _id: memberId }, { $unset: { avatar: 1 } });
+    // delete previous image if updatedMember.avatar exists
+    if (updatedMember.avatar) {
+      const { data: prevImageData } = updatedMember.avatar;
+      if (prevImageData) {
+        await Member.updateOne({ _id: memberId }, { $unset: { avatar: 1 } });
+      }
     }
 
     return { success: true, message: 'Image updated successfully', updatedMember };
