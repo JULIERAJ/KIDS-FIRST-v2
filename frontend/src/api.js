@@ -11,16 +11,30 @@ export const login = (email, password) =>
 
 export const register = (opts) => axios.post(`${BASE_URL}register`, opts);
 
-export const sendInvitation = (opts) =>
-  axios.post(`${BASE_URL}invitation`, opts);
+export const sendInvitation = ({ inviter, inviteeEmail, family }) =>
+  axios.post(`${BASE_URL}invitations`, {
+    inviter,
+    inviteeEmail,
+    family,
+  });
 
 export const createFamily = (opts) => axios.post(`${BASE_URL}family`, opts);
 
-export const createMember = ({ firstName, lastName, kidsList }) =>
+export const createMember = ({
+  firstName,
+  lastName,
+  kidsList,
+  inviteeEmail,
+  family,
+  principle,
+}) =>
   axios.post(`${BASE_URL}member`, {
     firstName,
     lastName,
     kidsList,
+    inviteeEmail,
+    family,
+    principle,
   });
 
 export const activate = (email, emailVerificationToken) =>

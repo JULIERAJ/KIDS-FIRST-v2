@@ -1,4 +1,4 @@
-.container{
+.container {
   display: flex;
   justify-content: space-between;
 }
@@ -9,6 +9,3 @@
   margin-left: 50px;
   width: 335px;
 }
-
-
-

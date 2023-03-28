@@ -14,10 +14,10 @@ export const FormProvider = ({ children }) => {
   const [data, setData] = useState({
     firstName: '',
     lastName: '',
-    coParentFirstName: '',
-    coParentLastName: '',
-    coParentEmail: '',
-    coParentInviteLater: false,
+    inviteeFirstName: '',
+    inviteeLastName: '',
+    inviteeEmail: '',
+    inviteeInviteLater: false,
     kidsList: [
       {
         kidName: '',
@@ -74,7 +74,7 @@ export const FormProvider = ({ children }) => {
   };
 
   const canNextPage1 = Object.keys(data)
-    .filter((key) => key.startsWith('first' && 'last') && key !== 'coParent')
+    .filter((key) => key.startsWith('first' && 'last') && key !== 'invitee')
     .map((key) => data[key])
     .every(Boolean);
 
@@ -82,7 +82,7 @@ export const FormProvider = ({ children }) => {
     data.coParentInviteLater ||
     Object.keys(data)
       .filter(
-        (key) => key.startsWith('coParent') && key !== 'coParentInviteLater',
+        (key) => key.startsWith('invitee') && key !== 'inviteeInviteLater',
       )
       .map((key) => data[key])
       .every(Boolean);

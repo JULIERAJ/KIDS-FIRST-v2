@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const enu = {
+  values: ['parent', 'kid'],
+  message: '{VALUE} is not supported',
+};
 const memberSchema = new Schema(
   {
     family: {
@@ -20,6 +24,12 @@ const memberSchema = new Schema(
       type: String,
       // required: true,
     },
+    role: {
+      type: String,
+      enum: enu,
+      trim: true,
+    },
+
     // kidsList: [
     //   {
     //     kidName: {

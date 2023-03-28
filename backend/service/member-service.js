@@ -1,11 +1,10 @@
 const Member = require('../models/Member');
 const mongoose = require('mongoose');
 
-// Using for testing purpose: replace with familyId and principleId from family-registration
-const familyId = new mongoose.Types.ObjectId();
-const principleId = new mongoose.Types.ObjectId();
+// Using for testing purpose: replace with familyId and
 // creating helper function for creating kids members
-const createMembers = async (kidsList, familyId) => {
+const createMembers = async (kidsList, family) => {
+  // console.log('HELP', family);
   // give us an array of names
   // validation: filter out any empty strings or strings with less than 3 characters
   try {
@@ -18,12 +17,12 @@ const createMembers = async (kidsList, familyId) => {
       if (kidNames.length !== kidsList.length) {
         console.error('Invalid kid name(s) detected');
       }
-
+      // after removing empty spaces and empty entries we save kids in db  
       const kidMembers = kidNames.map(
         (kid) =>
           new Member({
             firstName: kid,
-            family: familyId,
+            family,
           }),
       );
       await Member.insertMany(kidMembers);
@@ -33,19 +32,29 @@ const createMembers = async (kidsList, familyId) => {
   }
 };
 
-const memberRegistration = async ({ firstName, lastName, kidsList }) => {
+const memberRegistration = async ({
+  firstName,
+  lastName,
+  kidsList,
+  inviteeEmail,
+  principle,
+  family,
+}) => {
   // use helper function on array kidNames to create kid members
-  await createMembers(kidsList, familyId);
+  await createMembers(kidsList, family);
 
-  const m1 = new Member({
+  const principleMemberInfo = new Member({
     firstName,
     lastName,
-    family: familyId,
-    principle: principleId,
+    principle,
+    inviteeEmail,
+    family, // role is a parent
   });
-  await m1.save();
+  console.log('m1', principleMemberInfo);
+  await principleMemberInfo.save();
 };
 
+// check!!
 const isDuplicate = async (firstName, lastName, kidsList) => {
   const checkDuplicate = await Member.findOne({
     firstName,

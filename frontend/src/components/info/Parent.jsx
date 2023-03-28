@@ -57,6 +57,7 @@ const Parent = () => {
           onChange={handleChange}
           // isInvalid={isInvalidLastName}
         />
+
         {/* {(isInvalidFirstName || isInvalidLastName) && (<Alert type='invalid'>
           You entered an invalid name. Please try again
         </Alert>)} */}

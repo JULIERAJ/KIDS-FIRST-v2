@@ -15,51 +15,51 @@ const CoParent = () => {
   return (
     <div className={styles.container}>
       <div className={styles.inputForm}>
-        <Form.Label htmlFor='coParentFirstName'>First name:</Form.Label>
+        <Form.Label htmlFor='inviteeFirstName'>First name:</Form.Label>
         <Form.Control
           className='mb-3'
           type='text'
-          id='coParentFirstName'
-          name='coParentFirstName'
+          id='inviteeFirstName'
+          name='inviteeFirstName'
           placeholder='First name'
           autoComplete='First Name'
           aria-label='first name'
           aria-required='true'
           autoFocus
-          value={data.coParentFirstName}
+          value={data.inviteeFirstName}
           onChange={handleChange}
         />
-        <Form.Label htmlFor='coParentLastName'>Last name:</Form.Label>
+        <Form.Label htmlFor='inviteeLastName'>Last name:</Form.Label>
         <Form.Control
           className='mb-3'
           type='text'
-          id='coParentLastName'
-          name='coParentLastName'
+          id='inviteeLastName'
+          name='inviteeLastName'
           placeholder='Last name'
           autoComplete='Last Name'
           aria-label='last name'
           aria-required='true'
-          value={data.coParentLastName}
+          value={data.inviteeLastName}
           onChange={handleChange}
         />
-        <Form.Label htmlFor='coParentEmail'>Email Address:</Form.Label>
+        <Form.Label htmlFor='inviteeEmail'>Email Address:</Form.Label>
         <Form.Control
           className='mb-3'
           type='text'
-          id='coParentEmail'
-          name='coParentEmail'
+          id='inviteeEmail'
+          name='inviteeEmail'
           placeholder='name@email.com'
           autoComplete='email'
           aria-label='email'
-          value={data.coParentEmail}
+          value={data.inviteeEmail}
           onChange={handleChange}
         />
         <Form.Check
           className={styles.coParentCheckbox}
           type='checkbox'
-          checked={data.coParentInviteLater}
-          id='coParentInviteLater'
-          name='coParentInviteLater'
+          checked={data.inviteeInviteLater}
+          id='inviteeInviteLater'
+          name='inviteeInviteLater'
           label='Skip this step and invite co-parent later'
           onChange={handleChange}
         />
@@ -71,8 +71,8 @@ const CoParent = () => {
 
 CoParent.propTypes = {
   data: PropTypes.shape({
-    parentFirstName: PropTypes.string.isRequired,
-    parentLastName: PropTypes.string.isRequired,
+    inviteeFirstName: PropTypes.string.isRequired,
+    inviteeLastName: PropTypes.string.isRequired,
   }),
   handleChange: PropTypes.func,
 };
