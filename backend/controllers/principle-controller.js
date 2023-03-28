@@ -116,6 +116,13 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
+
+    if (!user.emailIsActivated) {
+      return res
+        .status(401)
+        .json({ error: 'Email address has not been verified' });
+    }
+
     return res.status(200).json({ email: user.email, id: user._id });
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
