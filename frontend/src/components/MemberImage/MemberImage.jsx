@@ -9,61 +9,95 @@ import styles from './MemberImage.module.css';
 const BASE_URL = 'http://localhost:8000/api/';
 
 const MemberImage = ({ memberId }) => {
+  const [responseRequest, setResponseRequest] = useState(null);
+  const [error, setIsError] = useState(null);
   const [imageData, setImageData] = useState(null);
   const [initialData, setInitialData] = useState(null);
 
+  const getMemberImage = async (responseRequest) => {
+    if (responseRequest.avatar) {
+      const binaryData = responseRequest.avatar.data.data;
+      const contentType = responseRequest.avatar.contentType;
+      const base64ImageData = Buffer.from(binaryData).toString('base64');
+      const dataUrl = `data:${contentType};base64,${base64ImageData}`;
+      setImageData(dataUrl);
+    } else {
+      let initials = '';
+      if (responseRequest.firstname) {
+        initials += responseRequest.firstname.charAt(0);
+      }
+      if (responseRequest.lastname) {
+        initials += responseRequest.lastname.charAt(0);
+      }
+      setInitialData(initials);
+    }
+  };
+
   useEffect(() => {
-    const getMemberImage = async () => {
-      // eslint-disable-next-line no-console
+    const getMemberData = async () => {
       try {
         const response = await axios.get(`${BASE_URL}member/${memberId}`);
-        // eslint-disable-next-line no-console
-        console.log(response);
-        if (response.data.avatar) {
-          const binaryData = response.data.avatar.data.data;
-          const contentType = response.data.avatar.contentType;
-          const base64ImageData = Buffer.from(binaryData).toString('base64');
-          const dataUrl = `data:${contentType};base64,${base64ImageData}`;
-          setImageData(dataUrl);
-        } else {
-          const initials =
-            response.data.firstname.charAt(0) +
-            response.data.lastname.charAt(0);
-          setInitialData(initials);
-        }
+        setResponseRequest(response.data);
       } catch (error) {
+        setIsError(error.message);
         // eslint-disable-next-line no-console
         console.error(error);
       }
     };
-    getMemberImage();
+    getMemberData();
   }, [memberId]);
 
+  useEffect(() => {
+    if (responseRequest) {
+      getMemberImage(responseRequest);
+    }
+  }, [responseRequest]);
+
   const handleImageUpload = async (event) => {
-    const file = event.target.files[0];
     const formData = new FormData();
-    formData.append('avatar', file);
+    const avatartFile = event.target.files[0];
+    formData.append('avatar', avatartFile);
 
     try {
       if (imageData) {
-        // Update image
-        await axios.put(`${BASE_URL}member/update/${memberId}`, formData);
+        try {
+          // Update image
+          const response = await axios.put(
+            `${BASE_URL}member/update/${memberId}`,
+            formData
+          );
+          if (!response.data.success) {
+            setIsError(response.data.message);
+          } else {
+            setResponseRequest(response.data.updatedMember);
+            setIsError(null);
+          }
+        } catch (error) {
+          setIsError(error.message);
+          // eslint-disable-next-line no-console
+          console.log(error);
+        }
       } else {
-        // Upload new image
-        await axios.post(`${BASE_URL}member/upload/${memberId}`, formData);
-      }
-
-      // Refresh image
-      const response = await axios.get(`${BASE_URL}member/${memberId}`);
-      if (response.data.avatar) {
-        const binaryData = response.data.avatar.data.data;
-        const contentType = response.data.avatar.contentType;
-        const base64ImageData = Buffer.from(binaryData).toString('base64');
-        const dataUrl = `data:${contentType};base64,${base64ImageData}`;
-        setImageData(dataUrl);
-        setInitialData(null);
+        try {
+          // Upload new image
+          const response = await axios.post(
+            `${BASE_URL}member/upload/${memberId}`,
+            formData
+          );
+          if (!response.data.success) {
+            setIsError(response.data.message);
+          } else {
+            setResponseRequest(response.data.specifiedMember);
+            setIsError(null);
+          }
+        } catch (error) {
+          setIsError(error.message);
+          // eslint-disable-next-line no-console
+          console.log(error);
+        }
       }
     } catch (error) {
+      setIsError(error.message);
       // eslint-disable-next-line no-console
       console.error(error);
     }
@@ -78,6 +112,7 @@ const MemberImage = ({ memberId }) => {
           style={{ maxWidth: '200px' }}
         />
       )}
+      {error && <p>{error}</p>}
       {!imageData && initialData && <div>{initialData}</div>}
       <input type="file" onChange={handleImageUpload} />
     </div>
