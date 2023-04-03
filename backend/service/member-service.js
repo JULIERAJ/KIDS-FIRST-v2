@@ -39,6 +39,7 @@ const memberRegistration = async ({
   inviteeEmail,
   principle,
   family,
+  role
 }) => {
   // use helper function on array kidNames to create kid members
   await createMembers(kidsList, family);
@@ -48,7 +49,8 @@ const memberRegistration = async ({
     lastName,
     principle,
     inviteeEmail,
-    family, // role is a parent
+    family,
+    role // role is a parent
   });
   console.log('m1', principleMemberInfo);
   await principleMemberInfo.save();

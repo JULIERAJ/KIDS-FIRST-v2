@@ -1,7 +1,7 @@
 const memberService = require('../service/member-service');
 
 const memberRegistration = async (req, res) => {
-  const { firstName, lastName, kidsList, inviteeEmail, family, principle } = req.body;
+  const { firstName, lastName, kidsList, inviteeEmail, family, principle, role } = req.body;
 
   console.log('REQBODY', req.body);
 
@@ -13,6 +13,7 @@ const memberRegistration = async (req, res) => {
       inviteeEmail,
       principle,
       family,
+      role
     );
     console.log({ isMemberDuplicate });
 
@@ -24,6 +25,7 @@ const memberRegistration = async (req, res) => {
         inviteeEmail,
         principle,
         family,
+        role
       });
 
       return res.status(201).json(memberData);

@@ -29,23 +29,6 @@ const memberSchema = new Schema(
       enum: enu,
       trim: true,
     },
-
-    // kidsList: [
-    //   {
-    //     kidName: {
-    //       type: String,
-    //       required: true,
-    //     },
-    //     _id: false,
-    //   },
-    // ],
-    // kidsList: [{
-    //   kidName: {
-    //     type: String,
-    //     required: true,
-    //   },
-    //   _id: false,
-    // }],
   },
 
   // avatar: {
