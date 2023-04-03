@@ -36,6 +36,10 @@ const uploadMemeberImage = async (memberId, image) => {
 
     if (!image) {
       return { success: false, message: 'No image uploaded' };
+    } else if (!image.mimetype.includes('image/png') && !image.mimetype.includes('image/jpeg') && !image.mimetype.includes('image/jpg')) {
+      return { success: false, message: 'Invalid image type. Please use .png, .jpeg, .jpg' };
+    } else if (image.size > 1000000) {
+      return { success: false, message: 'Invalid image size' };
     }
     // generate a unique filename for the image
     const { mimetype, buffer } = image;
@@ -57,36 +61,35 @@ const uploadMemeberImage = async (memberId, image) => {
 
 const updateMemeberImage = async (memberId, image) => {
   try {
+    const specifiedMember = await Member.findById(memberId);
+    if (!specifiedMember) {
+      return { success: false, message: 'Member not found' };
+    }
+
     if (!image) {
       return { success: false, message: 'No image uploaded' };
+    } else if (!image.mimetype.includes('image/png') && !image.mimetype.includes('image/jpeg') && !image.mimetype.includes('image/jpg')) {
+      return { success: false, message: 'Invalid image type. Please use .png, .jpeg, .jpg' };
+    } else if (image.size > 1000000) {
+      return { success: false, message: 'Invalid image size' };
     }
 
     const { mimetype, buffer } = image;
     const fileName = `${uid()}.${mimetype.split('/')[1]}`;
+    console.log(fileName)
 
     const updatedMember = await Member.findOneAndUpdate(
       { _id: memberId },
       {
 
         avatar: {
-          data: buffer,
+          name: fileName,
           contentType: mimetype,
-          fileName: fileName
+          data: buffer,
         }
       },
       { new: true }
     );
-
-    if (!updatedMember) {
-      return { success: false, message: 'Member not found' };
-    }
-    // delete previous image if updatedMember.avatar exists
-    if (updatedMember.avatar) {
-      const { data: prevImageData } = updatedMember.avatar;
-      if (prevImageData) {
-        await Member.updateOne({ _id: memberId }, { $unset: { avatar: 1 } });
-      }
-    }
 
     return { success: true, message: 'Image updated successfully', updatedMember };
   } catch (error) {
