@@ -94,6 +94,10 @@ body.home {
   color: #2b2b2b !important;
 }
 
+.dropdown-toggle::after {
+  display: none;
+}
+
 .lang-option {
   background: white !important;
   border: solid 0.5px #000 !important;
@@ -123,6 +127,7 @@ body.home {
   color: #2b2b2b;
   text-decoration: none;
 }
+
 .home-signup-btn a {
   text-decoration: none;
   color: black;
@@ -142,6 +147,7 @@ body.home {
   font-weight: 500 !important;
   color: #2b2b2b;
 }
+
 .home-login-btn a {
   text-decoration: none;
   color: black;
@@ -177,8 +183,7 @@ body.home {
    ====================================== */
 
 .banner-section#header-banner {
-  background: #f8f8ee url('../../media/homePage/kidsfirst_intro_1.png') no-repeat
-    right bottom;
+  background: #f8f8ee url('../../media/homePage/kidsfirst_intro_1.png') no-repeat right bottom;
   min-height: 730px;
   width: 100%;
   display: flex;
@@ -197,8 +202,7 @@ body.home {
 }
 
 .banner-section#middle-banner {
-  background: #f8f8ee url('../../media/homePage/kidsfirst_intro_2.png') no-repeat
-    left bottom;
+  background: #f8f8ee url('../../media/homePage/kidsfirst_intro_2.png') no-repeat left bottom;
   min-height: 450px;
   width: 100%;
   display: flex;
@@ -243,14 +247,17 @@ body.home {
   font-family: Roboto, sans-serif;
   font-weight: normal;
 }
-.left-blurb a{
-    text-decoration: none;
+
+.left-blurb a {
+  text-decoration: none;
 }
+
 .left-blurb p {
   padding-right: 17%;
 }
 
 @media only screen and (max-width: 960px) {
+
   .banner-section#header-banner,
   .banner-section#middle-banner {
     background: #f8f8ee;
@@ -285,7 +292,7 @@ body.home {
   font-family: Roboto, sans-serif;
 }
 
-.site-section > h1 {
+.site-section>h1 {
   margin-top: 90px;
   margin-bottom: 60px;
   text-align: center;
@@ -294,7 +301,7 @@ body.home {
   line-height: 0.97;
 }
 
-.site-section > .more-link {
+.site-section>.more-link {
   display: inline-block;
   width: 100%;
   text-align: center;

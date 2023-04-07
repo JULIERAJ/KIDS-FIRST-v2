@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import LandingLayout from './components/LandingLayout';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
+import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
 import Member from './pages/Member';
@@ -14,7 +16,10 @@ const App = () => (
   <BrowserRouter>
     <Routes>
       <Route>
-        <Route path='/' element={<Home />} />
+        <Route path="/" element={<LandingLayout />}>
+          <Route index element={<Home />} />
+          <Route path='/features' element={<FeaturesPage />} />
+        </Route>
         <Route path='/signin' element={<Signin />} />
         <Route path='/register' element={<Register />} />
         <Route
