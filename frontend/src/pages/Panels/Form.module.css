@@ -1,0 +1,11 @@
+.backBtn {
+  background-color: #f7f5ec !important;
+  color: black !important;
+  border: 1px solid #f08324 !important;
+}
+.nextBtn {
+  color: black !important;
+  background-color: #f08324 !important;
+  border: 1px solid #f08324 !important;
+}
+

@@ -14,7 +14,7 @@ const principleSchema = new Schema({
 
   password: {
     type: String,
-    requried: true,
+    required: true,
     trim: true,
   },
   createdAt: {

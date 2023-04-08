@@ -1,0 +1,34 @@
+.blockTabs {
+  display: flex;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.tabs {
+  padding: 15px;
+  text-align: center;
+  width: 50%;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 29px;
+}
+
+.activeTabs {
+  position: relative;
+  background: rgba(248, 246, 228, 1);
+  width: 60%;
+  border-radius: 20px 20px 0 0;
+}
+
+.activeTabs::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 5px solid rgba(2, 173, 180, 0.6);
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom: none;
+}
