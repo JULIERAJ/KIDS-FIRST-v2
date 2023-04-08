@@ -5,7 +5,7 @@
 
 .col-left {
   border-radius: 20px 0px 0px 20px;
-  background: url("../../media/father-and-son.png") no-repeat center bottom;
+  background: url("../../media/signup_and_login/father-and-son.png") no-repeat center bottom;
   background-size: 50%;
   background-color: var(--main-lightBlue);
 }

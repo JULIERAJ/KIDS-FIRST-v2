@@ -101,7 +101,7 @@ html.home {
             WIDE BANNER SECTIONS
    ====================================== */
 	.banner-section#first-banner {
-		  background: #f8f8ee url('../../media/homePage/kidsfirst_intro-3.png') no-repeat
+		  background: #f8f8ee url('../../media/homePage/mother_daughter_hug.png') no-repeat
     right bottom;
   min-height: 730px;
   width: 100%;
@@ -120,7 +120,7 @@ html.home {
 
 
 .banner-section#middle-banner-homepage{
-  background: #f8f8ee url('../../media/homePage/kidsfirst_intro_2.png') no-repeat
+  background: #f8f8ee url('../../media/homePage/father_son_reading.png') no-repeat
     left bottom;
   min-height: 450px;
   width: 100%;

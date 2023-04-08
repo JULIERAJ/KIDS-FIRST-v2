@@ -6,7 +6,7 @@ import styles from './FeaturesPage.module.css';
 import CardFeature from '../../components/CardFeature';
 
 import { cardMainFeature, cardExtraFeature } from '../../data/features.data';
-import parentChild from '../../media/features/parent_child.png';
+import parentChild from '../../media/features/mother_son_flying.png';
 
 const FeaturesPage = () => {
   return (
