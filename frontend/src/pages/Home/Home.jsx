@@ -1,82 +1,32 @@
-import { Button, Dropdown } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { Button } from 'react-bootstrap';
+// import { NavLink } from 'react-router-dom';
 
 import './Home.css';
 
-import feature_1 from '../../media/homePage/feature_1.png';
-import feature_2 from '../../media/homePage/feature_2.png';
-import feature_3 from '../../media/homePage/feature_3.png';
-import value_1 from '../../media/homePage/value_1.png';
-import value_2 from '../../media/homePage/value_2.png';
-import value_3 from '../../media/homePage/value_3.png';
+import feature_2 from '../../media/homePage/feature_child_info.png';
+import feature_1 from '../../media/homePage/feature_interactive_calendar.png';
+import feature_3 from '../../media/homePage/feature_law_popups.png';
+import value_2 from '../../media/homePage/value_co-parenting.png';
+import value_1 from '../../media/homePage/value_kid_harmony.png';
+import value_3 from '../../media/homePage/value_learning.png';
 import video from '../../media/homePage/video_placeholder.png';
-import logo from '../../media/kids_first_logo_beta.png';
 
 export default function Home() {
-  return (
-    <div className="home">
-      <header className="banner-section" id="header-banner">
-        <div className="header-nav">
-          <div className="site-nav">
-            <img src={logo} alt="" />
-            <div className="nav-links">
-              <li>
-                <a href="#features-prev" data-text="Features">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#" data-text="About us">
-                  About us
-                </a>
-              </li>
-              <li>
-                <a href="#" data-text="Contact us">
-                  Contact us
-                </a>
-              </li>
-            </div>
-          </div>
-          <div className="profile-nav">
-            <Dropdown>
-              <Dropdown.Toggle
-                className="lang-menu"
-                id="langDropdown"
-                size="sm"
-              >
-                EN
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="lang-menu">
-                <Button type="button" className="lang-option">
-                  FR
-                </Button>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Button className="home-login-btn">
-              <NavLink to="/Signin">Sign in </NavLink>
-            </Button>
-            <Button className="home-signup-btn">
-              <NavLink to="/Register">Register </NavLink>
-            </Button>
-
-            {/* <Button classNameName="home-login-btn" href="/Signin">
-              Sign in
-            </Button>
-            <Button classNameName="home-signup-btn" href="/Signup">
-              Register
-            </Button> */}
-          </div>
-        </div>
+  return ( 
+    <>
+      <div className="banner-section" id="first-banner" >
         <div className="left-blurb">
-          <h1>A co-parenting app solution</h1>
-          <p>Maintain harmony in your kid’s lives with the help of one click</p>
+          <h1>A CO-PARENTING APP SOLUTION</h1>
+          <p>that maintain harmony in your kid’s lives with the help of one click</p>
           <Button className="home-signup-btn-2" href="/Register">
-            Register now
+            Sign up now
           </Button>
         </div>
-      </header>
+      </div>
+      
       <section className="site-section" >
-        <h1 className="value">Kids First Values</h1>
+        <h1 className="value">KIDS FIRST VALUES</h1>
         <div className="features-prev">
           <div className="feature-1">
             <p>
@@ -104,30 +54,33 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="banner-section" id="middle-banner">
+      <section className="banner-section" id="middle-banner-homepage">
         <div className="right-blurb">
-          <h1>Children happiness is our priority</h1>
+          <h1>KIDS HAPPINESS IS OUR PRIORTY</h1>
           <p>
             KIDS FIRST aspires to help families with simpler custody scheduling
             by providing an interactive shared calendar solution that reduces
             misunderstandings and conflict.
+         
           </p>
         </div>
       </section>
       <section className="site-section" id="features-prev">
-        <h1 className="value">Kids First Features</h1>
-        <div className="features-prev">
-          <div className="feature-2">
-            <img src={feature_1} alt=""></img>
+        <h1 className="value">KIDS FIRST FEATURES</h1>
+        <div className="features-prev-1">
+          <div className="feature-2">   
             <p>Interactive Calendar</p>
+            <img src={feature_1} alt=""></img>
           </div>
           <div className="feature-2">
-            <img src={feature_2} alt=""></img>
-            <p>Child Information</p>
+            <p>Child Info</p>
+            <img src={feature_2} alt=""></img> 
           </div>
+
           <div className="feature-2">
-            <img src={feature_3} alt=""></img>
             <p>Law Pop-Ups</p>
+
+            <img src={feature_3} alt=""></img>
           </div>
         </div>
         <span className="more-link">
@@ -136,19 +89,32 @@ export default function Home() {
           </a>
         </span>
       </section>
-      <section className="site-section">
-        <h1>Why Kids First</h1>
-        <div className="feature-3 video">
-          <img src={video} alt=""></img>
+      <section className="site-sections">
+        <h1>WHY KIDS FIRST</h1>
+        <div className="features-3 video">
+          <div className="left-blurbs">
+            <p>KIDSFIRST Takes A Different Approach To Reduce Conflicts Revolving;</p>
+            <br />
+            <p>We Understand Who The Users Are, A Diverse Group Of Co-Parnets</p>
+            <p>With Different Backgrounds And Needs.</p>
+            <br />
+            <p>Our Solutions Can Accommodate Parents’ Needs With A Simple And</p>
+            <p>Parctical App Design And A Clever Tool For Peaceful Communication.</p> 
+          </div>
+          <div className="video-section">
+            <img src={video} alt=""></img>
+            {/* <img className="img-logo" src={logo} alt="" />			 */}
+          </div>
+         
         </div>
       </section>
-      <footer>
+      {/* <footer>
         <a href="#">Terms of use</a>
         <a href="#">Privacy Policy</a>
         <a href="#">Contact us</a>
         <a href="#">About us</a>
         <a href="#">Our team</a>
-      </footer>
-    </div>
+      </footer> */}
+    </>
   );
 }
