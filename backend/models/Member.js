@@ -29,12 +29,13 @@ const memberSchema = new Schema(
       enum: enu,
       trim: true,
     },
+    avatar: {
+      name: String,
+      data: Buffer,
+      contentType: String
+    },
   },
 
-  // avatar: {
-  //   data: Buffer,
-  //   contentType: String
-  // },
 
   // username?????
   // dateOfBirth: {
