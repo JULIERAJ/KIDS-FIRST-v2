@@ -35,7 +35,7 @@ app.use(morgan('dev'));
 app.use(morgan(':body'));
 
 app.use('/api', familyRoutes);
-app.use('/api', invitationRoutes);
+// app.use('/api', invitationRoutes);
 app.use('/api', loginRoutes);
 app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);

@@ -18,17 +18,16 @@ export const FormProvider = ({ children }) => {
     inviteeLastName: '',
     inviteeEmail: '',
     inviteeInviteLater: false,
-    kidsList: [
-      {
-        kidName: '',
-      },
-    ],
+    kidsList:[]
   });
+
+  console.log('form context', data.kidsList);
 
   const requiredInputs = {
     firstName: data.firstName,
     lastName: data.lastName,
-    kidName: data.kidsList[0].kidName,
+    // kidName: data.kidsList[0].kidName,
+    kidName: data.kidsList[0]
   };
 
   const canSubmit =
@@ -37,17 +36,21 @@ export const FormProvider = ({ children }) => {
 
   // eslint-disable-next-line
   console.log('canSubmit', canSubmit);
+
   const handleChange = (event, index) => {
+    console.log(index, event.target);
     const type = event.target.type;
     const name = event.target.name;
     const value =
       type === 'checkbox' ? event.target.checked : event.target.value;
 
     if (name === 'kidName') {
-      const kidsList = [...data.kidsList];
-      kidsList[index][name] = value;
+      const kidsListArray = [...data.kidsList];
+      console.log('value', value);
+      kidsListArray[index] = value;
+      console.log('kidsListArray', kidsListArray);
       setData((prevData) => {
-        return { ...prevData, kidsList };
+        return { ...prevData, 'kidsList': kidsListArray };
       });
     } else {
       setData((prevData) => {
@@ -60,16 +63,16 @@ export const FormProvider = ({ children }) => {
     setData((prevData) => {
       return {
         ...prevData,
-        kidsList: [...prevData.kidsList, { kidName: '' }],
+        kidsList: [...prevData.kidsList, '' ],
       };
     });
   };
 
   const handleDeleteChild = (index) => {
-    const kidsList = [...data.kidsList];
-    kidsList.splice(index, 1);
+    const kidsListArray = [...data.kidsList];
+    kidsListArray.splice(index, 1);
     setData((prevData) => {
-      return { ...prevData, kidsList };
+      return { ...prevData.kidsList, 'kidsList': kidsListArray };
     });
   };
 

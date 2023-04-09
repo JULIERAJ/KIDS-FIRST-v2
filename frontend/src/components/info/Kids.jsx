@@ -15,48 +15,31 @@ const Kids = () => {
   const { data, handleChange, handleAddChild, handleDeleteChild } =
     useFormContext();
   //eslint-disable-next-line
-  console.log(data);
 
   return (
     <div className={styles.container}>
       <div className={styles.inputForm}>
-        {data.kidsList.map((kid, index) => (
-          <Form.Group key={index}>
-            {data.kidsList.length !== 1 && (
-              <div
-                className={styles.removeChild}
-                onClick={() => {
-                  handleDeleteChild(index);
-                }}>
-                <Image
-                  type='button'
-                  src={removeChild}
-                  alt='add child'
-                  style={{
-                    width: '24px',
-                    height: '24px',
-                    position: 'fixed',
-                  }}
-                />
-              </div>
-            )}
-            <Form.Label htmlFor='kidName'>Kid&apos;s Name:</Form.Label>
+        <div> 
+          {data.kidsList.length === 0 ? (
+            <Form.Group> 
+              <Form.Label htmlFor='kidName'>Kid&apos;s Name</Form.Label>
 
-            <Form.Control
-              className='mb-3'
-              type='text'
-              id='kidName'
-              name='kidName'
-              placeholder='name'
-              aria-required='true'
-              autoFocus
-              value={kid.kidName}
-              onChange={(e) => handleChange(e, index)}
-            />
-            {data.kidsList.length - 1 === index && data.kidsList.length < 5 && (
+              <Form.Control
+                className='mb-3'
+                type='text'
+                id='kidName'
+                name='kidName'
+                placeholder='name'
+                aria-required='true'
+                autoFocus
+                value={data.kidsList[0]}
+                onChange={(e) => handleChange(e, 0)}
+              />
+                
               <Container
                 className={styles.addMoreChild}
-                onClick={handleAddChild}>
+                onClick={handleAddChild}
+              >
                 <Image
                   type='button'
                   src={addChild}
@@ -66,11 +49,66 @@ const Kids = () => {
                     height: '24px',
                   }}
                 />
-                <span>Add another child</span>
+
+                <span>Add another kid</span>
               </Container>
-            )}
-          </Form.Group>
-        ))}
+            </Form.Group>)  
+            : 
+            (
+              data.kidsList.map((kid, index) => (
+                <Form.Group key={index}>
+                  {data.kidsList.length !== 1 && (
+                    <div
+                      className={styles.removeChild}
+                      onClick={() => {
+                        handleDeleteChild(index);
+                      }}>
+                      <Image
+                        type='button'
+                        src={removeChild}
+                        alt='add child'
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          position: 'fixed',
+                        }}
+                      />
+                    </div>
+                  )}
+                  <Form.Label htmlFor='kidName'>Kid&apos;s Name:</Form.Label>
+      
+                  <Form.Control
+                    className='mb-3'
+                    type='text'
+                    id='kidName'
+                    name='kidName'
+                    placeholder='name'
+                    aria-required='true'
+                    autoFocus
+                    value={kid.kidName}
+                    onChange={(e) => handleChange(e, index)}
+                  />
+                  {data.kidsList.length - 1 === index && data.kidsList.length < 5 && (
+                    <Container
+                      className={styles.addMoreChild}
+                      onClick={handleAddChild}>
+                      <Image
+                        type='button'
+                        src={addChild}
+                        alt='add child'
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                        }}
+                      />
+                      <span>Add another kid</span>
+                    </Container>
+                  )}
+                </Form.Group>
+              ))
+            )
+          }
+        </div>
       </div>
       <Image src={kidInfo} />
     </div>
@@ -85,9 +123,3 @@ Kids.propTypes = {
   handleAddChild: PropTypes.func,
   handleDeleteChild: PropTypes.func,
 };
-
-{
-  /* <Container as='section' className={styles.kidsContainer}>
-           <Container as='div' className={styles.addChildInput}>
-             <Form className={styles.formInput}> */
-}

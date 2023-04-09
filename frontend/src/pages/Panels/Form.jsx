@@ -4,7 +4,7 @@ import styles from './Form.module.css';
 
 import FormInputs from './FormInputs';
 
-import { createMember, sendInvitation } from '../../api';
+import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
 const Form = () => {
   const {
@@ -27,8 +27,6 @@ const Form = () => {
     setPage((prev) => prev + 1);
   };
 
-  const principleId = '64174b9d7625a0568b349e5f';
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -38,7 +36,7 @@ const Form = () => {
       const storedUser = localStorage.getItem('storedUser');
       const parsedUser = JSON.parse(storedUser);
       //eslint-disable-next-line no-console
-      console.log(parsedUser);
+      console.log('>>>>>>parsed user',parsedUser);
 
       createMember({
         firstName,
@@ -46,24 +44,15 @@ const Form = () => {
         kidsList,
         inviteeEmail,
         family: parsedUser.familyId,
-        principle: principleId,
+        principle: parsedUser.id,
       }).then((res) => {
-        const user = JSON.stringify(res.data);
-        localStorage.setItem('storedUser', user);
-        sendInvitation({
-          inviter: principleId,
-          inviteeEmail,
-          family: parsedUser.familyId,
-        })
-          .then((res) => {
-            //eslint-disable-next-line no-console
-            console.log('RESDATA FRONTEND', res.data);
-          })
-          .catch((e) => {
-            //eslint-disable-next-line no-console
-            console.log(e);
-          });
-      });
+        //eslint-disable-next-line no-console
+        console.log('RESDATA FRONTEND', res.data);
+      })
+        .catch((e) => {
+          //eslint-disable-next-line no-console
+          console.log(e);
+        });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error submitting form:', error);

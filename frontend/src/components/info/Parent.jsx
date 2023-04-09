@@ -11,19 +11,6 @@ import fatherSon from '../../media/father-and-son-sholders.png';
 
 const Parent = () => {
   const { data, handleChange } = useFormContext();
-  // const [isInvalidFirstName, setIsInvalidFirstName] = useState(false);
-  // const [isInvalidLastName, setIsInvalidLastName] = useState(false);
-
-  // helper function to validate name
-  // const validateName = (name) => {
-  //   const regex = /^[a-zA-Z]+$/;
-  //   return regex.test(name);
-  // };
-
-  // useEffect(() => {
-  //   setIsInvalidFirstName(!validateName(data.parentFirstName));
-  //   setIsInvalidLastName(!validateName(data.parentLastName));
-  // }, [data.parentFirstName, data.parentLastName]);
 
   return (
     <div className={styles.container}>
