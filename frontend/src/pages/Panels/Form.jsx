@@ -48,7 +48,7 @@ const Form = () => {
       }).then((res) => {
         //eslint-disable-next-line no-console
         console.log('RESDATA FRONTEND', res.data);
-        // need to route to 'dashboard' route
+        window.location.href = '/dashboard';
       })
         .catch((e) => {
           //eslint-disable-next-line no-console
