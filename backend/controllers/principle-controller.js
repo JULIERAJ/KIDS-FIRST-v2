@@ -51,6 +51,7 @@ const registration = async (req, res) => {
       });
     }
   } catch (e) {
+    console.log('principle controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };

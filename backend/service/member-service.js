@@ -1,6 +1,6 @@
 const Member = require('../models/Member');
 const mongoose = require('mongoose');
-
+const Invitation = require('../models/Invitation');
 
 // check duplication: firstname, lastname, familyid are all the same
 const isDuplicate = async (firstName, lastName, family) => {
@@ -54,12 +54,16 @@ const savePrinciple = async (firstName, lastName, principle, family) => {
 };
 
 const saveInvitation = async (principle, family, inviteeEmail) => {
-  const invitationInfo = new Invitation({
-    principle, 
+  try {
+    const invitationInfo = new Invitation({
+    inviter : principle, 
     family, 
     inviteeEmail
   });
   await invitationInfo.save();
+ } catch (err ){
+  console.log('invitationInfo error ', err); 
+}
 };
 
 module.exports = { memberRegistration, isDuplicate };

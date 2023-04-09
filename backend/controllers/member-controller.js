@@ -29,7 +29,7 @@ const memberRegistration = async (req, res) => {
       });
     }
   } catch (e) {
-    console.log(e.message);
+    console.log('member controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
