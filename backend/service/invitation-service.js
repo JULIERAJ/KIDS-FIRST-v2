@@ -1,4 +1,4 @@
-const Invitation = require('../models/Invitation');
+// const Invitation = require('../models/Invitation');
 
 const createInvitation = async (
   invitor,
@@ -45,3 +45,4 @@ const acceptedInvitation = async (email) => {
 };
 
 module.exports = { createInvitation, findInviteeEmail, acceptedInvitation, findInviteeDuplcate };
+

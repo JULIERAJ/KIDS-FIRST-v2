@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 335px;
+}
+
+.addMoreChild {
+  cursor: pointer;
+}
+.removeChild {
+  cursor: pointer;
+  position: relative;
+  left: 90%;
+}

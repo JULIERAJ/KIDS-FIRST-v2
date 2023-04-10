@@ -1,30 +1,35 @@
 const memberService = require('../service/member-service');
 
 const memberRegistration = async (req, res) => {
-  const { firstname, lastname, principleId, familyId } = req.body;
+  const { firstName, lastName, kidsList, inviteeEmail, family, principle } = req.body;
 
+  console.log( req.body);
   try {
     const isMemberDuplicate = await memberService.isDuplicate(
-      firstname,
-      lastname,
-      principleId,
-      familyId
+      firstName,
+      lastName,
+      family
     );
-    
+    console.log({ isMemberDuplicate });
+
     if (!isMemberDuplicate) {
-      const memberData = await memberService.memberRegistration(
-        firstname,
-        lastname,
-        principleId,
-        familyId
-      );
+      const memberData = await memberService.memberRegistration({
+        family, 
+        firstName,
+        lastName,
+        principle,
+        kidsList,
+        inviteeEmail
+      });
+
       return res.status(201).json(memberData);
     } else {
       return res.status(409).json({
-        message: `the member ${firstname} ${lastname} already exists`,
+        message: `the member ${firstName} ${lastName} already exists`,
       });
     }
   } catch (e) {
+    console.log('member controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };

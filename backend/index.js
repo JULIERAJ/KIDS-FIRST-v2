@@ -6,7 +6,7 @@ const morgan = require('morgan');
 
 const familyRoutes = require('./routes/family');
 const forgetPasswordRoutes = require('./routes/forget-password');
-const invitationRoutes = require('./routes/invitation');
+// const invitationRoutes = require('./routes/invitation');
 const loginRoutes = require('./routes/login');
 const memberRoutes = require('./routes/member');
 const registerRoutes = require('./routes/register');
@@ -35,7 +35,7 @@ app.use(morgan('dev'));
 app.use(morgan(':body'));
 
 app.use('/api', familyRoutes);
-app.use('/api', invitationRoutes);
+// app.use('/api', invitationRoutes);
 app.use('/api', loginRoutes);
 app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);
