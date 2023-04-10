@@ -16,7 +16,8 @@ const App = () => (
       <Route>
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<Signin />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/register/' element={<Register />} />
+        <Route path='/register/:email/:family/:emailVerificationToken' element={<Register />} />
         <Route
           path='/activate/:email/:emailVerificationToken'
           element={<Activate />}

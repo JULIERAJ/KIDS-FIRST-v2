@@ -52,7 +52,6 @@ export default function Family() {
               onChange={(e) => setFamilyName(e.target.value)}
             />
           </Form.Group>
-
           {/* <br></br>
           <span>===========</span> */}
 

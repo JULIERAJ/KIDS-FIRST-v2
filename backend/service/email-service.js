@@ -58,5 +58,30 @@ const sendResetPasswordEmail = async (email, resetPasswordToken) => {
     return e;
   }
 };
+const sendInvitationEmail = async(email, family, emailVerificationToken) => {
+  const href = `${process.env.CLIENT_URL}/register/${email}/${family}/${emailVerificationToken}`;
 
-module.exports = { sendActivationEmail, sendResetPasswordEmail };
+  try {
+    // name of the Invitor in the email will be fetched from the form together 
+    //with the invitee email
+    await transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to: email,
+      subject:
+            'You have been invited by {InvitorName} to register in Kids First app',
+      text: '',
+      html: `
+              <div>
+                  <h1>You have been invited by {InvitorName} to register 
+                  in Kids First app</h1>
+                  <p>To register on Kids First app, please click the link below:</p>
+                <a href='${href}'>click here</a>
+              </div>
+      `,
+    });
+  } catch (e) {
+    return e;
+  }
+};
+
+module.exports = { sendActivationEmail, sendResetPasswordEmail, sendInvitationEmail };

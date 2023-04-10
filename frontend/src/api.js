@@ -21,6 +21,11 @@ export const createMember = (opts) => axios.post(`${BASE_URL}member`, opts);
 export const activate = (email, emailVerificationToken) =>
   axios.get(`${BASE_URL}activate/${email}/${emailVerificationToken}`);
 
+export const activateCoParent = (email, family, emailVerificationToken) =>
+  axios.get(
+    `${BASE_URL}register/${email}/${family}/${emailVerificationToken}`
+  );
+
 export const forgetPassword = (email) =>
   axios.post(`${BASE_URL}forgetPassword`, { email });
 

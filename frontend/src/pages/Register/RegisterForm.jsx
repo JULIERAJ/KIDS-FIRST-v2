@@ -67,6 +67,8 @@ export const RegisterForm = (props) => {
           autoComplete='off'
           required
           onChange={handleEmailChange}
+          defaultValue={props.email}
+          
         />
         <FormPasswordInput onChange={handlePasswordChange} required />
         <FormPasswordInput
@@ -103,4 +105,5 @@ export const RegisterForm = (props) => {
 export default RegisterForm;
 RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
+  email: PropTypes.string
 };

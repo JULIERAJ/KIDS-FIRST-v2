@@ -17,6 +17,10 @@ const invitationSchema = new Schema({
     default: Date.now(),
     immutable: true,
   },
+  invitationAccepted: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 module.exports = mongoose.model('Invitation', invitationSchema);
