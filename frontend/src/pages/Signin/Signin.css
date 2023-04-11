@@ -3,10 +3,11 @@
     font-weight: 500;
     font-size: 36px;
     line-height: 42px;
-    margin-bottom: 8%;
+	margin-bottom: 8%;
+    
 }
 
-.forget-password {
+.forget-password, .forget-account {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -20,14 +21,15 @@
   font-size: 18px;
   line-height: 21px;
   text-align: center;
-  margin-top: 10% ;
+  margin-top: 6rem;
 }
 
 .message-bar-error {
 	background-color: var(--main-red);
 	padding: 3px 0 5px 0;
 	line-height: 22px;
-	text-align: center;
+	padding-left: 20px;
+	
   }
   
   .message-bar-passerror {

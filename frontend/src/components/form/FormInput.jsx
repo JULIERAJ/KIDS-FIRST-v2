@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 
+import '../MessageBar/styles.css';
+
 const FromInput = ({ label, ...props }) => (
   <Form.Group className='py-2'>
     <Form.Label>{label}</Form.Label>

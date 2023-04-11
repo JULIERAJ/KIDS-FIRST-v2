@@ -101,6 +101,12 @@ export default function Signin() {
               value={email}
               required
             />
+
+            <div className='checkbox mb-3'>
+              <a className='btn forget-account' href='/forgetAccount'>
+                Forgot your Account?
+              </a>
+            </div>
     
             <FormPasswordInput
               onChange={handlePasswordChange}

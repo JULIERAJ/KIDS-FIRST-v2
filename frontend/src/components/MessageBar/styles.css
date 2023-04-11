@@ -4,12 +4,32 @@
 }
 
 .message-bar-error {
-  background-color: var(--main-red);
+ background-color: var(--main-red);
   padding: 3px 0 5px 0;
   line-height: 22px;
-  text-align: center;
+
 }
- 
+
  .message-bar-success {
   background-color: var(--main-green);
 } 
+
+.card-body div img {
+ margin-right: 10px;
+}
+
+.was-validated .form-control:valid, .form-control.is-valid {
+	background-image: none;
+	border-color: #011D26;
+}
+.was-validated .form-control:invalid, .form-control.is-invalid {
+	background-image: none;
+	border-color: #F05153;
+}
+
+.was-validated .form-label:invalid, .form-lable.is-invalid {
+	background-image: none;
+	border-color: #F05153;
+}
+
+

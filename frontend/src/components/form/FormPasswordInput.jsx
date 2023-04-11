@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
 import FromInput from './FormInput';
+// import checkIcon from '../IconText';
+// import fatimes from '../IconText';
 
 /**
   RegExp: at least one symbol, uppercase letter, lowercase letter, number,
@@ -31,6 +33,11 @@ const FormPasswordInput = ({
       onPaste={preventCopyPaste}
       {...rest}
     />
+  // 	{isValid ? (
+  // 		<checkIcon className={`${style.icon} ${style.valid}`}/>
+  // 	) : (
+  // 		<fatimes className={`${style.icon} ${style.inValid/>
+  // 	)}
   );
 };
 
