@@ -1,19 +1,21 @@
-const invitationService = require('../service/invitation-service');
+// const invitationService = require('../service/invitation-service');
 
-const invitation = async (req, res) => {
-  try {
-    const { invitor, family, inviteeEmail, invitationUrl } = req.body;
+// const invitation = async (req, res) => {
+//   try {
+//     const { inviter, family, inviteeEmail, invitationUrl } = req.body;
+//     console.log('REQBODYINVITE', req.body);
 
-    const i1 = await invitationService.invitation(
-      invitor,
-      family,
-      inviteeEmail,
-      invitationUrl
-    );
-    return res.status(201).send({ i1 });
-  } catch (e) {
-    return res.status(500).json('something went wrong');
-  }
-};
+//     const invite = await invitationService.invitation(
+//       inviter,
+//       family,
+//       inviteeEmail,
+//       invitationUrl,
+//     );
+//     console.log('invite', invite);
+//     return res.status(201).send({ invite });
+//   } catch (e) {
+//     return res.status(500).json('something went wrong');
+//   }
+// };
 
-module.exports = { invitation };
+// module.exports = { invitation };

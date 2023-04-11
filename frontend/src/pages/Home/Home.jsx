@@ -1,76 +1,23 @@
+import React from 'react';
 import { Button } from 'react-bootstrap';
 // import { NavLink } from 'react-router-dom';
 
 import './Home.css';
 
-import feature_1 from '../../media/homePage/feature_1.png';
-import feature_2 from '../../media/homePage/feature_2.png';
-import feature_3 from '../../media/homePage/feature_3.png';
-import value_1 from '../../media/homePage/value_1.png';
-import value_2 from '../../media/homePage/value_2.png';
-import value_3 from '../../media/homePage/value_3.png';
-import video from '../../media/homePage/video.png';
-// import logo from '../../media/kids_first_logo_beta.png';
+import feature_2 from '../../media/homePage/feature_child_info.png';
+import feature_1 from '../../media/homePage/feature_interactive_calendar.png';
+import feature_3 from '../../media/homePage/feature_law_popups.png';
+import value_2 from '../../media/homePage/value_co-parenting.png';
+import value_1 from '../../media/homePage/value_kid_harmony.png';
+import value_3 from '../../media/homePage/value_learning.png';
+import video from '../../media/homePage/video_placeholder.png';
 
 export default function Home() {
   return ( 
     <>
-      {/* {  <div className="home">
-     <header className="banner-section" id="header-banner">
-      <div className="header-nav">
-          <div className="site-nav">
-           <img src={logo} alt="" />
-           <div className="nav-links">
-              <li>
-                 <a href="#features-prev" data-text="Features">
-                 Features
-                 </a>
-              </li>
-               <li>
-                <a href="#" data-text="About us">
-                  About us
-               </a>
-              </li>
-              <li>
-                 <a href="#" data-text="Contact us">
-                   Contact us
-                </a>
-              </li>
-             </div>
-           </div>
-           <div className="profile-nav">
-            <Dropdown>
-              <Dropdown.Toggle
-            className="lang-menu"
-               id="langDropdown"
-               size="sm"
-              >
-            EN
-             </Dropdown.Toggle>
-              <Dropdown.Menu className="lang-menu">
-              <Button type="button" className="lang-option">
-                  FR
-               </Button>
-               </Dropdown.Menu>
-             </Dropdown>
-           <Button className="home-login-btn">
-               <NavLink to="/Signin">Log in </NavLink>
-            </Button>
-            <Button className="home-signup-btn">
-             <NavLink to="/Register">Sign up </NavLink>
-             </Button>
-
-             <Button classNameName="home-login-btn" href="/Signin">
-             Sign in
-            </Button>
-             <Button classNameName="home-signup-btn" href="/Signup">
-            Register
-           </Button> 
-         </div>
-        </div> */}
       <div className="banner-section" id="first-banner" >
         <div className="left-blurb">
-          <h1>A co-parenting app solution</h1>
+          <h1>A CO-PARENTING APP SOLUTION</h1>
           <p>that maintain harmony in your kid’s lives with the help of one click</p>
           <Button className="home-signup-btn-2" href="/Register">
             Sign up now
@@ -107,7 +54,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="banner-section" id="middle-banner">
+      <section className="banner-section" id="middle-banner-homepage">
         <div className="right-blurb">
           <h1>KIDS HAPPINESS IS OUR PRIORTY</h1>
           <p>

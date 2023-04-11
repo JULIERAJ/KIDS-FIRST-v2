@@ -23,6 +23,7 @@ const familyRegistration = async (req, res) => {
       });
     }
   } catch (e) {
+    console.log('family controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
