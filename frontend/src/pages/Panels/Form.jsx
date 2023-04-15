@@ -7,6 +7,7 @@ import FormInputs from './FormInputs';
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
 const Form = () => {
+  
   const {
     setPage,
     data,
@@ -21,14 +22,20 @@ const Form = () => {
   // eslint-disable-next-line no-console
 
   const handlePrev = () => {
+
     setPage((prev) => prev - 1);
   };
-  const handleNext = () => {
+  const handleNext = (e) => {
+ 
+    console.log('click next');
     setPage((prev) => prev + 1);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    console.log('you are trying to submit');
+
+    e.preventDefault();    
+    e.stopPropagation();
 
     try {
       const { firstName, lastName, kidsList, inviteeEmail } = data;
@@ -48,7 +55,7 @@ const Form = () => {
       }).then((res) => {
         //eslint-disable-next-line no-console
         console.log('RESDATA FRONTEND', res.data);
-        window.location.href = '/dashboard';
+        //window.location.href = '/dashboard';
       })
         .catch((e) => {
           //eslint-disable-next-line no-console
@@ -59,9 +66,56 @@ const Form = () => {
       console.error('Error submitting form:', error);
     }
   };
+  console.log('inviteeInviteLater:::::', data.inviteeInviteLater);
+
+  // condition of submit: all fields are filled up 
+  // const cannotSubmit = Object.values(data).filter((d) => { (d == "undefinied"  || d === true || d === false )? d.length : 0 ; d.length; console.log(d.length)})  ;
+  // console.log('cannot submit ? ', cannotSubmit);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+
+    {isLastPage && canSubmit ? 
+    
+    (<form onSubmit={handleSubmit}>
+      <FormInputs />
+      <Button
+        type='button'
+        onClick={handlePrev}
+        disabled={disablePrev}
+        className={`${styles.backBtn} ${prevHide}`}>
+        Back
+      </Button>
+
+        <Button type='submit' className={styles.nextBtn}  >
+          Done
+        </Button>
+    </form>) : 
+    
+    ( <form >
+      <FormInputs />
+      <Button
+        type='button'
+        onClick={handlePrev}
+        disabled={disablePrev}
+        className={`${styles.backBtn} ${prevHide}`}>
+        Back
+      </Button>
+
+        <Button
+          type='button'
+          onClick={handleNext}
+          disabled={disableNext}
+          className={`${styles.nextBtn} ${nextHide}`}>
+          {buttonLabel}
+        </Button>
+    </form>)
+    }
+
+    </div>
+
+
+   /* <form onSubmit={handleSubmit}>
       <FormInputs />
       <Button
         type='button'
@@ -85,6 +139,10 @@ const Form = () => {
         </Button>
       )}
     </form>
+
+    */ 
+
+
   );
 };
 

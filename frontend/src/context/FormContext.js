@@ -22,6 +22,8 @@ export const FormProvider = ({ children }) => {
   });
 
   console.log('form context', data.kidsList);
+  console.log('page', page);
+  console.log('inviteeInviteLater:::::', data.inviteeInviteLater);
 
   const requiredInputs = {
     firstName: data.firstName,
@@ -30,12 +32,15 @@ export const FormProvider = ({ children }) => {
     kidName: data.kidsList[0]
   };
 
-  const canSubmit =
-    [...Object.values(requiredInputs)].every(Boolean) &&
-    page === Object.keys(formTitle).length - 1;
+  // const canSubmit = 
+  //   [...Object.values(requiredInputs)].every(Boolean) &&
+  //   page === Object.keys(formTitle).length - 1;
+
+  
 
   // eslint-disable-next-line
-  console.log('canSubmit', canSubmit);
+  // console.log('canSubmit?????? ', canSubmit);
+
 
   const handleChange = (event, index) => {
     console.log(index, event.target);
@@ -81,6 +86,8 @@ export const FormProvider = ({ children }) => {
     .map((key) => data[key])
     .every(Boolean);
 
+    console.log('>>>>>>>>>>canNextPage1', canNextPage1 ); 
+
   const canNextPage2 =
     data.coParentInviteLater ||
     Object.keys(data)
@@ -90,7 +97,11 @@ export const FormProvider = ({ children }) => {
       .map((key) => data[key])
       .every(Boolean);
 
+      console.log('>>>>>>>>>>canNextPage2', canNextPage2 ); 
+
+
   const disablePrev = page === 0;
+  console.log('disablePre', disablePrev);
   const disableNext =
     page === Object.keys(formTitle).length - 1 ||
     (page === 0 && !canNextPage1) ||
@@ -102,6 +113,20 @@ export const FormProvider = ({ children }) => {
 
   const isLastPage = page === Object.keys(formTitle).length - 1;
   const buttonLabel = isLastPage ? 'Done' : 'Next';
+
+  console.log('what is kid list: ', data.kidsList);
+  const checkKidList = (data.kidsList.length == 0  || data.kidsList[0].length ==0 ) ? false : true; 
+  console.log('checkKidList ', checkKidList);
+  const canSubmit = data.firstName.length > 0 && 
+                      data.lastName.length > 0 && 
+                      data.inviteeFirstName.length > 0 && 
+                      data.inviteeLastName.length > 0 && 
+                      data.inviteeEmail.length > 0 && 
+                      checkKidList 
+
+
+  console.log('can submit ? ', canSubmit);
+
 
   return (
     <FormContext.Provider

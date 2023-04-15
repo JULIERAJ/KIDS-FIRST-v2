@@ -74,7 +74,7 @@ const Kids = () => {
                         }}
                       />
                     </div>
-                  )}
+                   )} 
                   <Form.Label htmlFor='kidName'>Kid&apos;s Name:</Form.Label>
       
                   <Form.Control
