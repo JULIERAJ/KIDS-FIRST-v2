@@ -29,9 +29,19 @@ const isDuplicate = async (familyName, principleId) => {
     familyName,
     principle: principleId,
   });
-
+  console.log('isDuplicate family name? ', checkDuplicate);
   return checkDuplicate ? true : false;
 };
+
+const findPrincipleFamilyName = async (principleId) => {
+  const foundFamily = await Family.find({
+    principle: principleId,
+  });
+  return foundFamily ;
+};
+
+
+
 
 const generateFamilyName = () => {
   const firstPart = uniqueNamesGenerator({
@@ -43,4 +53,4 @@ const generateFamilyName = () => {
 
   return `${firstPart}_${secondPart}`;
 };
-module.exports = { familyRegistration, isDuplicate, generateFamilyName };
+module.exports = { familyRegistration, isDuplicate, generateFamilyName, findPrincipleFamilyName };

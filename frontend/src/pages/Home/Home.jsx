@@ -4,13 +4,13 @@ import { Button } from 'react-bootstrap';
 
 import './Home.css';
 
-import feature_1 from '../../media/homePage/feature_1.png';
-import feature_2 from '../../media/homePage/feature_2.png';
-import feature_3 from '../../media/homePage/feature_3.png';
-import value_1 from '../../media/homePage/value_1.png';
-import value_2 from '../../media/homePage/value_2.png';
-import value_3 from '../../media/homePage/value_3.png';
-import video from '../../media/homePage/video.png';
+import feature_2 from '../../media/homePage/feature_child_info.png';
+import feature_1 from '../../media/homePage/feature_interactive_calendar.png';
+import feature_3 from '../../media/homePage/feature_law_popups.png';
+import value_2 from '../../media/homePage/value_co-parenting.png';
+import value_1 from '../../media/homePage/value_kid_harmony.png';
+import value_3 from '../../media/homePage/value_learning.png';
+import video from '../../media/homePage/video_placeholder.png';
 
 export default function Home() {
   return ( 

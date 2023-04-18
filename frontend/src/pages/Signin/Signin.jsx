@@ -79,9 +79,11 @@ export default function Signin() {
     }
 
     login(email, password)
-      .then(() => {
+      .then((res) => {
         setSuccess(true);
-        window.location.href = '/dashboard';
+        const user = JSON.stringify(res.data);
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/member';
       })
       .catch(() => {
         setSuccess(false);

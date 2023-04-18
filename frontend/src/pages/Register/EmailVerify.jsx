@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './EmailVerify.module.css';
 
 import FeedbackBlock from '../../components/Feedback/FeedbackBlock';
-import envelopeImg from '../../media/icons/vector.png';
+import envelopeImg from '../../media/icons/email_sent.png';
 
 const EmailVerify = ({ userData }) => {
   const email = userData.email;

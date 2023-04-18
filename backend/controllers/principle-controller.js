@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
+const { default: mongoose } = require('mongoose');
 require('dotenv').config({ path: './.env.local' });
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
@@ -50,6 +51,7 @@ const registration = async (req, res) => {
       });
     }
   } catch (e) {
+    console.log('principle controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
@@ -116,7 +118,9 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-    return res.status(200).json({ email: user.email, id: user._id });
+    // when the user login, the find that user's family(s), then push the info  to the front 
+    const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
+    return res.status(200).json({ email: user.email, id: user._id, familyId : principleFamily[0].id , familyName: principleFamily[0].familyName});
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
   }

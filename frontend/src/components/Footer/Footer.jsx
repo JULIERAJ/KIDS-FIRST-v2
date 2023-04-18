@@ -11,13 +11,13 @@ import { footerLink } from '../../data/features.data';
 const Footer = () => {
   return (
     <footer>
-      <ListGroup as='ul' className={styles.footer__list}>
+      <ListGroup className={styles.footer__list}>
         {footerLink.map((link, i) => {
-          return <ListGroup.Item as='li' key={i} className={styles.footer__link}>
-            <Link to={link.url}>
-              {link.title}
-            </Link>
-          </ListGroup.Item>;
+          return (
+            <ListGroup.Item key={i} className={styles.footer__link}>
+              <Link to={link.url}>{link.title}</Link>
+            </ListGroup.Item>
+          );
         })}
       </ListGroup>
     </footer>

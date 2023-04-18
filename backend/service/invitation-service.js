@@ -1,14 +1,15 @@
-const Invitation = require('../models/Invitation');
+// const Invitation = require('../models/Invitation');
 
-const invitation = async (invitor, family, inviteeEmail, invitationUrl) => {
-  const invitation = await new Invitation({
-    invitor,
-    family,
-    inviteeEmail,
-    invitationUrl,
-  });
+// const invitation = async (inviter, family, inviteeEmail, invitationUrl) => {
+//   const invitation = await new Invitation({
+//     inviter,
+//     family,
+//     inviteeEmail,
+//     invitationUrl,
+//   });
   
-  await invitation.save();
-};
+//   await invitation.save();
+//   return invitation;
+// };
 
-module.exports = { invitation };
+// module.exports = { invitation };

@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 335px;
+}
+.container img {
+  position: relative;
+  top: 40px;
+}
+.coParentCheckbox {
+  display: flex;
+  align-items: center;
+}
+
+.coParentCheckbox :checked[type='checkbox'] {
+  background-color: orange;
+  background-image: none;
+  border: orange;
+}
+.coParentCheckbox input[type='checkbox'] {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border-color: black;
+}
