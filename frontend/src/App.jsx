@@ -36,6 +36,7 @@ const App = () => (
           path='/resetPassword/:email/:resetPasswordToken'
           element={<ResetPassword />}
         />
+        {/* <Route path='/sidebar' element={<Sidebar />} /> */}
       </Route>
     </Routes>
   </BrowserRouter>

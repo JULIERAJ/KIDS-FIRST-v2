@@ -18,16 +18,14 @@ export const FormProvider = ({ children }) => {
     inviteeLastName: '',
     inviteeEmail: '',
     inviteeInviteLater: false,
-    kidsList:[]
+    kidsList: [],
   });
-
-  console.log('form context', data.kidsList);
 
   const requiredInputs = {
     firstName: data.firstName,
     lastName: data.lastName,
     // kidName: data.kidsList[0].kidName,
-    kidName: data.kidsList[0]
+    kidName: data.kidsList[0],
   };
 
   const canSubmit =
@@ -38,7 +36,6 @@ export const FormProvider = ({ children }) => {
   console.log('canSubmit', canSubmit);
 
   const handleChange = (event, index) => {
-    console.log(index, event.target);
     const type = event.target.type;
     const name = event.target.name;
     const value =
@@ -46,11 +43,9 @@ export const FormProvider = ({ children }) => {
 
     if (name === 'kidName') {
       const kidsListArray = [...data.kidsList];
-      console.log('value', value);
       kidsListArray[index] = value;
-      console.log('kidsListArray', kidsListArray);
       setData((prevData) => {
-        return { ...prevData, 'kidsList': kidsListArray };
+        return { ...prevData, kidsList: kidsListArray };
       });
     } else {
       setData((prevData) => {
@@ -63,7 +58,7 @@ export const FormProvider = ({ children }) => {
     setData((prevData) => {
       return {
         ...prevData,
-        kidsList: [...prevData.kidsList, '' ],
+        kidsList: [...prevData.kidsList, ''],
       };
     });
   };
@@ -72,7 +67,7 @@ export const FormProvider = ({ children }) => {
     const kidsListArray = [...data.kidsList];
     kidsListArray.splice(index, 1);
     setData((prevData) => {
-      return { ...prevData.kidsList, 'kidsList': kidsListArray };
+      return { ...prevData.kidsList, kidsList: kidsListArray };
     });
   };
 
@@ -85,7 +80,7 @@ export const FormProvider = ({ children }) => {
     data.coParentInviteLater ||
     Object.keys(data)
       .filter(
-        (key) => key.startsWith('invitee') && key !== 'inviteeInviteLater',
+        (key) => key.startsWith('invitee') && key !== 'inviteeInviteLater'
       )
       .map((key) => data[key])
       .every(Boolean);
