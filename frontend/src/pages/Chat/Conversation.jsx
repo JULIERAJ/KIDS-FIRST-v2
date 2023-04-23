@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Image, Form } from 'react-bootstrap';
 // import { io } from 'socket.io-client';
@@ -42,7 +43,7 @@ const Conversation = () => {
     };
     getMemberInfo();
   }, [userId]);
-  
+
   useEffect(() => {
     const getAllConversations = async () => {
       try {
@@ -135,3 +136,12 @@ const Conversation = () => {
 };
 
 export default Conversation;
+
+Conversation.propTypes = {
+  messages: PropTypes.array,
+  firstSenderName: PropTypes.string,
+  lastSenderName: PropTypes.string,
+  conversations: PropTypes.array,
+  socket: PropTypes.object,
+  userId: PropTypes.string,
+};

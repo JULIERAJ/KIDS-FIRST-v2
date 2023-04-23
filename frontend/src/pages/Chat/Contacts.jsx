@@ -12,10 +12,13 @@ function Contacts({
   lastSenderName,
 }) {
   // const [user, setUser] = useState(null);
+  // eslint-disable-next-line no-console
+  console.log(currentUser);
 
+  // WORK IN HERE
   useEffect(() => {
-    const personTalkToId = conversation.userIds.find(
-      (userId) => userId !== currentUser._id
+    const personTalkToId = conversation?.userIds?.find(
+      (userId) => userId !== currentUser?.id
     );
     // eslint-disable-next-line
     console.log(personTalkToId);
@@ -46,7 +49,7 @@ export default Contacts;
 
 Contacts.propTypes = {
   conversation: PropTypes.object,
-  currentUser: PropTypes.object,
+  currentUser: PropTypes.string,
   firstSenderName: PropTypes.string,
   lastSenderName: PropTypes.string,
 };
