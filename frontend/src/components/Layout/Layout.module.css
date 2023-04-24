@@ -1,0 +1,19 @@
+.layout{
+  width: 100vw;
+  height: 100vh;
+  background-color: #F7F5EC;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5625rem;
+}
+
+.layout__sidebar{
+  width: 12%;
+}
+
+.layout__section{
+  width: 86.5%;
+  margin: 0 !important;
+}
+
