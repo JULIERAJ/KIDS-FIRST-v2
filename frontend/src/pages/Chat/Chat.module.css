@@ -84,11 +84,13 @@ body {
   resize: none;
   padding: 17px 0 0 25px;
 }
-.writeMessage label {
+.writeMessage > label > img {
   position: absolute;
   right: 10.35px;
   bottom: 15.27px;
 }
+
+
 .messageInput::placeholder {
   color: rgba(147, 160, 170, 1);
   font-size: 1rem;

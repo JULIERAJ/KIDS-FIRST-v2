@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Col, Row, Image } from 'react-bootstrap';
 
 import styles from './Chat.module.css';
 
@@ -8,8 +9,8 @@ import Search from '../../media/icons/search.png';
 
 const Chat = () => {
   return (
-    <>
-      <section className={styles.navbar}>
+    <Container>
+      <div className={styles.navbar}>
         <div className={styles.main}>
           <div className={styles.recipient}>
             <span className={styles.letterOfFirstName}>M</span>
@@ -19,24 +20,24 @@ const Chat = () => {
             </div>
           </div>
 
-          <img src={Search} />
+          <Image src={Search} />
         </div>
-      </section>
+      </div>
       <figure className={styles.bodyForMsg}>
-        <img src={StartMessaging} alt='start-messaging' />
+        <Image src={StartMessaging} alt='start-messaging' />
         <figcaption>Start Messaging</figcaption>
       </figure>
 
-      <section className={styles.messageBox}>
-        <div className={styles.sendMessage}>
-          <div className={styles.writeMessage}>
+      <Container className={styles.messageBox}>
+        <Col className={styles.sendMessage}>
+          <Row className={styles.writeMessage}>
             <textarea
               className={styles.messageInput}
               rows='8'
               cols='100'
               placeholder='Write Message...'></textarea>
             <label htmlFor='photo-input'>
-              <img src={Clip} alt='clip' />
+              <Image src={Clip} alt='clip' />
             </label>
             <input
               type='file'
@@ -44,11 +45,11 @@ const Chat = () => {
               accept='image/*'
               style={{ display: 'none' }}
             />
-          </div>
+          </Row>
           <button>Send</button>
-        </div>
-      </section>
-    </>
+        </Col>
+      </Container>
+    </Container>
   );
 };
 
