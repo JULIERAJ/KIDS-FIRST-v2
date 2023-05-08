@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LandingLayout from './components/LandingLayout';
 import Activate from './pages/Activate/Activate';
-import Chat from './pages/Chat';
+import Conversation from './pages/Chat/Conversation';
 import Dashboard from './pages/Dashboard';
 import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
@@ -38,7 +38,7 @@ const App = () => (
           element={<ResetPassword />}
         />
         {/* <Route path='/sidebar' element={<Sidebar />} /> */}
-        <Route path='/chat' element={<Chat />} />
+        <Route path='/chat' element={<Conversation />} />
       </Route>
     </Routes>
   </BrowserRouter>
