@@ -45,8 +45,17 @@ body {
 .userOnline span {
   position: absolute;
   align-self: center;
-
   color: #01adb4;
+}
+
+.searchInput {
+  background: #f7f5ec;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 15px 5px 15px;
+}
+.searchInput::placeholder {
+  color: rgba(147, 160, 170, 1);
 }
 .bodyForMsg {
   display: flex;
