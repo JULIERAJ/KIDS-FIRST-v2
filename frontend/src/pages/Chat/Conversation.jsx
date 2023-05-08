@@ -58,6 +58,12 @@ const Conversation = () => {
             <Message own={false} />
             <Message own={true} />
             <Message own={false} />
+            <Message own={false} />
+            <Message own={false} />
+            <Message own={true} />
+            <Message own={false} />
+            <Message own={true} />
+            <Message own={false} />
           </div>
         ) : (
           <figure className={styles.bodyForMsg}>
