@@ -12,7 +12,7 @@ function Message({ own }) {
         <div className={styles.messageTop}>
           <span
             className={`${styles.letterOfFirstName} ${
-              own ? styles.orange : ''
+              own ? styles.own : ''
             }`}>
             {own ? 'E' : 'M'}
           </span>

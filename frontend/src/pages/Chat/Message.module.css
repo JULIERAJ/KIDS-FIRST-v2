@@ -6,12 +6,21 @@
   justify-content: center;
   margin: 65.24px 59px;
 }
+.messageTop {
+  position: relative;
+  padding: 0 40px 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .letterOfFirstName {
   background-color: #01adb4;
   padding: 5px 10px 5px 10px;
   height: 32px;
   width: 32px;
+  display: flex;
+  justify-content: center;
   border-radius: 50%;
   color: white;
 }
@@ -37,10 +46,18 @@
 .message.own .messageText {
   border-radius: 15px 15px 0 15px;
 }
-.message.own .orange {
+.letterOfFirstName.own {
   background-color: orange;
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
 }
-
+.letterOfFirstName:not(.own) {
+  background-color: #01adb4;
+  position: absolute;
+  left: 0;
+  bottom: 1rem;
+}
 .messageBox {
   display: flex;
   justify-content: space-around;

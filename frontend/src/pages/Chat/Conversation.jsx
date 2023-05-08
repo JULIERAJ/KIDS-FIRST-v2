@@ -49,42 +49,45 @@ const Conversation = () => {
           )}
         </div>
       </div>
-      {messages.length > 0 ? (
-        <div className={styles.msgContainer}>
-          <Message own={false} />
-          <Message own={false} />
-          <Message own={true} />
-          <Message own={false} />
-          <Message own={true} />
-          <Message own={false} />
-        </div>
-      ) : (
-        <figure className={styles.bodyForMsg}>
-          <Image src={StartMessaging} alt='start-messaging' />
-          <figcaption>Start Messaging</figcaption>
-        </figure>
-      )}
-      <Container className={styles.messageBox}>
-        <Col className={styles.sendMessage}>
-          <Row className={styles.writeMessage}>
-            <textarea
-              className={styles.messageInput}
-              rows='8'
-              cols='100'
-              placeholder='Write Message...'></textarea>
-            <label htmlFor='photo-input'>
-              <Image src={Clip} alt='clip' />
-            </label>
-            <input
-              type='file'
-              id='photo-input'
-              accept='image/*'
-              style={{ display: 'none' }}
-            />
-          </Row>
-          <button>Send</button>
-        </Col>
-      </Container>
+      <div className={styles.chatBox}>
+        {messages.length > 0 ? (
+          <div className={styles.chatBoxWrapper}>
+            <Message own={false} />
+            <Message own={false} />
+            <Message own={true} />
+            <Message own={false} />
+            <Message own={true} />
+            <Message own={false} />
+          </div>
+        ) : (
+          <figure className={styles.bodyForMsg}>
+            <Image src={StartMessaging} alt='start-messaging' />
+            <figcaption>Start Messaging</figcaption>
+          </figure>
+        )}
+        <hr />
+        <Container className={styles.messageBox}>
+          <Col className={styles.sendMessage}>
+            <Row className={styles.writeMessage}>
+              <textarea
+                className={styles.messageInput}
+                rows='8'
+                cols='100'
+                placeholder='Write Message...'></textarea>
+              <label htmlFor='photo-input'>
+                <Image src={Clip} alt='clip' />
+              </label>
+              <input
+                type='file'
+                id='photo-input'
+                accept='image/*'
+                style={{ display: 'none' }}
+              />
+            </Row>
+            <button>Send</button>
+          </Col>
+        </Container>
+      </div>
     </>
   );
 };
