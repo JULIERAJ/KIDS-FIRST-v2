@@ -1,17 +1,20 @@
+// here is where 3 panels submit 
 import { Button } from 'react-bootstrap';
-
 import styles from './Form.module.css';
 
 import FormInputs from './FormInputs';
-
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
+
 const Form = () => {
   
   const {
+    page,
     setPage,
     data,
+    formTitle, 
     canSubmit,
+
     disablePrev,
     disableNext,
     prevHide,
@@ -22,11 +25,9 @@ const Form = () => {
   // eslint-disable-next-line no-console
 
   const handlePrev = () => {
-
     setPage((prev) => prev - 1);
   };
-  const handleNext = (e) => {
- 
+  const handleNext = () => {
     console.log('click next');
     setPage((prev) => prev + 1);
   };
@@ -75,6 +76,10 @@ const Form = () => {
   return (
     <div>
 
+      {/* <header> 
+        <h2> {formTitle[page]}</h2>
+      </header> */}
+
     {isLastPage && canSubmit ? 
     
     (<form onSubmit={handleSubmit}>
@@ -87,10 +92,12 @@ const Form = () => {
         Back
       </Button>
 
-        <Button type='submit' className={styles.nextBtn}  >
+        <Button type='submit' className={styles.nextBtn} disabled={!canSubmit} >
           Done
         </Button>
-    </form>) : 
+    </form>) 
+    
+    : 
     
     ( <form >
       <FormInputs />

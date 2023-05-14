@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types';
-
 import React from 'react';
 import { Image, Form, Container } from 'react-bootstrap';
-
 import styles from './Kids.module.css';
-
 import useFormContext from '../../hooks/useFormContext';
 import addChild from '../../media/icons/addChild.png';
 import removeChild from '../../media/icons/removeChild.png';
-
 import kidInfo from '../../media/kid_info.png';
 
 const Kids = () => {

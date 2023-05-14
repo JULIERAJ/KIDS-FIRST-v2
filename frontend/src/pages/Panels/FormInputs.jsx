@@ -19,6 +19,12 @@ const FormInputs = () => {
     2: <Kids />,
   };
 
+  // const content = (
+  //   <div> 
+  //     {display[page]}
+  //   </div>
+  // ); 
+
   return (
     <>
       <div className={styles.blockTabs}>

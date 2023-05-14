@@ -8,8 +8,9 @@ export const FormProvider = ({ children }) => {
   const formTitle = {
     0: 'My Information',
     1: 'Invite Co-parent',
-    2: 'Kid Information',
+    2: 'Kid Information'
   };
+
   const [page, setPage] = useState(0);
   const [data, setData] = useState({
     firstName: '',
@@ -25,12 +26,12 @@ export const FormProvider = ({ children }) => {
   console.log('page', page);
   console.log('inviteeInviteLater:::::', data.inviteeInviteLater);
 
-  const requiredInputs = {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    // kidName: data.kidsList[0].kidName,
-    kidName: data.kidsList[0]
-  };
+  // const requiredInputs = {
+  //   firstName: data.firstName,
+  //   lastName: data.lastName,
+  //   // kidName: data.kidsList[0].kidName,
+  //   kidName: data.kidsList[0]
+  // };
 
   // const canSubmit = 
   //   [...Object.values(requiredInputs)].every(Boolean) &&
@@ -101,6 +102,7 @@ export const FormProvider = ({ children }) => {
 
 
   const disablePrev = page === 0;
+
   console.log('disablePre', disablePrev);
   const disableNext =
     page === Object.keys(formTitle).length - 1 ||
@@ -112,17 +114,21 @@ export const FormProvider = ({ children }) => {
   const nextHide = page === Object.keys(formTitle).length - 1;
 
   const isLastPage = page === Object.keys(formTitle).length - 1;
+  
   const buttonLabel = isLastPage ? 'Done' : 'Next';
 
   console.log('what is kid list: ', data.kidsList);
   const checkKidList = (data.kidsList.length == 0  || data.kidsList[0].length ==0 ) ? false : true; 
   console.log('checkKidList ', checkKidList);
+  // need to consider inviteeInviteLater 
   const canSubmit = data.firstName.length > 0 && 
                       data.lastName.length > 0 && 
                       data.inviteeFirstName.length > 0 && 
                       data.inviteeLastName.length > 0 && 
                       data.inviteeEmail.length > 0 && 
-                      checkKidList 
+                      checkKidList && isLastPage
+                      // the page needs to be in the last page 
+                      
 
 
   console.log('can submit ? ', canSubmit);

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingLayout from './components/LandingLayout';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
-import Family from './pages/Family';
+// import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
@@ -27,7 +27,7 @@ const App = () => (
           path='/activate/:email/:emailVerificationToken'
           element={<Activate />}
         />
-        <Route path='/family' element={<Family />} />
+        {/* <Route path='/family' element={<Family />} /> */}
         <Route path='/member' element={<FinalPanel />} />
         {/* <Route path='/panels' element={<FinalPanel />} /> */}
         <Route path='/dashboard' element={<Dashboard />} />
