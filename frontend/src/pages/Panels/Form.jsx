@@ -18,7 +18,8 @@ const Form = () => {
     disableNext,
     prevHide,
     nextHide,
-    doneHide
+    doneHide,
+    isLastPage
   } = useFormContext();
 
   const handlePrev = () => {
@@ -70,20 +71,24 @@ const Form = () => {
           Back
         </Button>
 
+        {!isLastPage && 
         <Button
-          type='button'
-          onClick={handleNext}
-          disabled={disableNext}
-          className={`${styles.nextBtn} ${nextHide}`}>
-          Next
-        </Button>
+        type='button'
+        onClick={handleNext}
+        disabled={disableNext}
+        className={`${styles.nextBtn} ${nextHide}`}>
+        Next Step
+      </Button>
+      }
 
+      {isLastPage &&
         <Button 
           type='submit'
           disabled={!canSubmit} 
           className={`${styles.submitbtn} ${doneHide}`}>
           Done
         </Button>
+      }
 
       </form> 
     </div>

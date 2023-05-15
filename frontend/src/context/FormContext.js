@@ -78,7 +78,6 @@ export const FormProvider = ({ children }) => {
     (page === 1 && !canNextPage2);
 
   const prevHide = page === 0;
-
   const nextHide = page === Object.keys(formTitle).length - 1 && 'remove-button';
   const doneHide = page === Object.keys(formTitle).length - 1 && 'remove-button'; 
 
