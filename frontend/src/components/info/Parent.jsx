@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Form, Image } from 'react-bootstrap';
+
 import styles from './Parent.module.css';
+
 import useFormContext from '../../hooks/useFormContext';
 import fatherSon from '../../media/father-and-son-sholders.png';
 

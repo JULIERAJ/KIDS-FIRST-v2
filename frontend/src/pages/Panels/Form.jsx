@@ -1,40 +1,34 @@
 // here is where 3 panels submit 
 import { Button } from 'react-bootstrap';
+
 import styles from './Form.module.css';
 
 import FormInputs from './FormInputs';
+
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
 
 const Form = () => {
   
   const {
-    page,
     setPage,
-    data,
-    formTitle, 
+    data, 
     canSubmit,
-
     disablePrev,
     disableNext,
     prevHide,
     nextHide,
-    isLastPage,
-    buttonLabel,
+    doneHide
   } = useFormContext();
-  // eslint-disable-next-line no-console
 
   const handlePrev = () => {
     setPage((prev) => prev - 1);
   };
   const handleNext = () => {
-    console.log('click next');
     setPage((prev) => prev + 1);
   };
 
   const handleSubmit = (e) => {
-    console.log('you are trying to submit');
-
     e.preventDefault();    
     e.stopPropagation();
 
@@ -43,8 +37,6 @@ const Form = () => {
 
       const storedUser = localStorage.getItem('storedUser');
       const parsedUser = JSON.parse(storedUser);
-      //eslint-disable-next-line no-console
-      console.log('>>>>>>parsed user',parsedUser);
 
       createMember({
         firstName,
@@ -54,9 +46,7 @@ const Form = () => {
         family: parsedUser.familyId,
         principle: parsedUser.id,
       }).then((res) => {
-        //eslint-disable-next-line no-console
-        console.log('RESDATA FRONTEND', res.data);
-        //window.location.href = '/dashboard';
+        window.location.href = '/dashboard';
       })
         .catch((e) => {
           //eslint-disable-next-line no-console
@@ -67,89 +57,36 @@ const Form = () => {
       console.error('Error submitting form:', error);
     }
   };
-  console.log('inviteeInviteLater:::::', data.inviteeInviteLater);
-
-  // condition of submit: all fields are filled up 
-  // const cannotSubmit = Object.values(data).filter((d) => { (d == "undefinied"  || d === true || d === false )? d.length : 0 ; d.length; console.log(d.length)})  ;
-  // console.log('cannot submit ? ', cannotSubmit);
 
   return (
     <div>
-
-      {/* <header> 
-        <h2> {formTitle[page]}</h2>
-      </header> */}
-
-    {isLastPage && canSubmit ? 
-    
-    (<form onSubmit={handleSubmit}>
-      <FormInputs />
-      <Button
-        type='button'
-        onClick={handlePrev}
-        disabled={disablePrev}
-        className={`${styles.backBtn} ${prevHide}`}>
-        Back
-      </Button>
-
-        <Button type='submit' className={styles.nextBtn} disabled={!canSubmit} >
-          Done
+      <form onSubmit={handleSubmit}>
+        <FormInputs />
+        <Button
+          type='button'
+          onClick={handlePrev}
+          disabled={disablePrev}
+          className={`${styles.backBtn} ${prevHide}`}>
+          Back
         </Button>
-    </form>) 
-    
-    : 
-    
-    ( <form >
-      <FormInputs />
-      <Button
-        type='button'
-        onClick={handlePrev}
-        disabled={disablePrev}
-        className={`${styles.backBtn} ${prevHide}`}>
-        Back
-      </Button>
 
         <Button
           type='button'
           onClick={handleNext}
           disabled={disableNext}
           className={`${styles.nextBtn} ${nextHide}`}>
-          {buttonLabel}
+          Next
         </Button>
-    </form>)
-    }
 
+        <Button 
+          type='submit'
+          disabled={!canSubmit} 
+          className={`${styles.submitbtn} ${doneHide}`}>
+          Done
+        </Button>
+
+      </form> 
     </div>
-
-
-   /* <form onSubmit={handleSubmit}>
-      <FormInputs />
-      <Button
-        type='button'
-        onClick={handlePrev}
-        disabled={disablePrev}
-        className={`${styles.backBtn} ${prevHide}`}>
-        Back
-      </Button>
-
-      {isLastPage ? (
-        <Button type='submit' className={styles.nextBtn} disabled={!canSubmit}>
-          Done
-        </Button>
-      ) : (
-        <Button
-          type='button'
-          onClick={handleNext}
-          disabled={disableNext}
-          className={`${styles.nextBtn} ${nextHide}`}>
-          {buttonLabel}
-        </Button>
-      )}
-    </form>
-
-    */ 
-
-
   );
 };
 

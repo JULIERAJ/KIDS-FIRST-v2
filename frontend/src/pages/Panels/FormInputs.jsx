@@ -1,7 +1,4 @@
-/* eslint-disable indent */
 import React from 'react';
-
-// import { Button, Row } from 'react-bootstrap';
 
 import styles from './FormInputs.module.css';
 
@@ -18,12 +15,6 @@ const FormInputs = () => {
     1: <CoParent />,
     2: <Kids />,
   };
-
-  // const content = (
-  //   <div> 
-  //     {display[page]}
-  //   </div>
-  // ); 
 
   return (
     <>
