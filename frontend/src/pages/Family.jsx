@@ -41,20 +41,19 @@
 //       <br></br>
 //       <span>===========</span>
 
-//       <div>
-//         for principle to create a new family: create a new family
-//         <Form onSubmit={handleCreateFamily}>
-//           <Form.Group className="mb-3" controlId="formBasicEmail">
-//             <Form.Label>Create Family Name</Form.Label>
-//             <Form.Control
-//               type="text"
-//               placeholder="Enter new family name"
-//               onChange={(e) => setFamilyName(e.target.value)}
-//             />
-//           </Form.Group>
-
-//           {/* <br></br>
-//           <span>===========</span> */}
+      <div>
+        for principle to create a new family: create a new family
+        <Form onSubmit={handleCreateFamily}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Create Family Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter new family name"
+              onChange={(e) => setFamilyName(e.target.value)}
+            />
+          </Form.Group>
+          {/* <br></br>
+          <span>===========</span> */}
 
 //           {/* <Form.Group className="mb-3" controlId="formBasicEmail">
 //             <Form.Label> your first name</Form.Label>
