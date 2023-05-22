@@ -57,7 +57,11 @@ const server = app.listen(PORT, () => console.log(`server started on ${PORT}`));
 
 const io = new Server(server, {
   cors: {
+<<<<<<< HEAD
     origin: process.env.CLIENT_URL || 'http://localhost:3000',
+=======
+    origin: 'http://localhost:3000',
+>>>>>>> 17a7ae8 (work on msg feature)
     methods: ['GET', 'POST'],
   },
 });
