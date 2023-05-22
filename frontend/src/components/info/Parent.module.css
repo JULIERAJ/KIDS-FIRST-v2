@@ -1,6 +1,8 @@
 .container {
   display: flex;
   justify-content: space-between;
+  margin: 0;
+  padding: 0;
 }
 .inputForm {
   display: flex;
@@ -10,5 +12,5 @@
   width: 335px;
 }
 .container > img {
-  margin: 50px 86px 0 0;
+  margin: 50px 0 0 0;
 }

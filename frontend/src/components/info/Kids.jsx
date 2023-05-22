@@ -15,9 +15,9 @@ const Kids = () => {
     useFormContext();
 
   return (
-    <div className={styles.container}>
-      <div className={styles.inputForm}>
-        <div>
+    <Container className={styles.container}>
+      <Container className={styles.inputForm}>
+        <>
           {data.kidsList.map((kid, index) => (
             <Form.Group key={index}>
               {/* { when there is more than 1 kid available ---> should display the remove button } */}
@@ -75,10 +75,10 @@ const Kids = () => {
               )}
             </Form.Group>
           ))}
-        </div>
-      </div>
+        </>
+      </Container>
       <Image src={kidInfo} />
-    </div>
+    </Container>
   );
 };
 

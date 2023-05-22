@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Form, Image } from 'react-bootstrap';
+import { Form, Image, Container } from 'react-bootstrap';
 
 import styles from './Parent.module.css';
 
@@ -11,7 +11,7 @@ const Parent = () => {
   const { data, handleChange } = useFormContext();
 
   return (
-    <div className={styles.container}>
+    <Container className={styles.container}>
       <div className={styles.inputForm}>
         <Form.Label htmlFor='firstName'>First name:</Form.Label>
         <Form.Control
@@ -48,7 +48,7 @@ const Parent = () => {
         </Alert>)} */}
       </div>
       <Image src={fatherSon} alt='parent' />
-    </div>
+    </Container>
   );
 };
 
