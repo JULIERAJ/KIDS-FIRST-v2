@@ -6,7 +6,7 @@ import styles from './Sidebar.module.css';
 
 import { SidebarData } from './SidebarData';
 
-import kidsFirstLogo from '../../../src/img/kids_first_logo_beta.png';
+import kidsFirstLogo from '../../media/logo/kids_first_logo_beta.png';
 
 const SidebarItemsCard = ({ title, icon, path, alt }) => {
   return (
