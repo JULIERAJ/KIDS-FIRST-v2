@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Form, Image } from 'react-bootstrap';
+import { Form, Image, Container } from 'react-bootstrap';
 
 import styles from './CoParent.module.css';
 
@@ -11,8 +11,8 @@ const CoParent = () => {
   const { data, handleChange } = useFormContext();
 
   return (
-    <div className={styles.container}>
-      <div className={styles.inputForm}>
+    <Container className={styles.container}>
+      <Container className={styles.inputForm}>
         <Form.Label htmlFor='inviteeFirstName'>First name:</Form.Label>
         <Form.Control
           className='mb-3'
@@ -61,9 +61,9 @@ const CoParent = () => {
           label='Skip this step and invite co-parent later'
           onChange={handleChange}
         />
-      </div>
+      </Container>
       <Image src={coParents} alt='parent' />
-    </div>
+    </Container>
   );
 };
 
