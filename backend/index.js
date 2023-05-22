@@ -3,6 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const { Server } = require('socket.io');
 
 const familyRoutes = require('./routes/family');
 const forgetPasswordRoutes = require('./routes/forget-password');
@@ -18,6 +19,8 @@ const PORT = process.env.PORT;
 
 const app = express();
 
+mongoose.set('strictQuery', true);
+
 mongoose.connect(mongoDB);
 
 const db = mongoose.connection;
@@ -26,7 +29,10 @@ db.on('error', (error) => console.log('MongoDB connection error:', error));
 
 db.once('connected', () => console.log('Database Connected'));
 
-morgan.token('body', req => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m \n`);
+morgan.token(
+  'body',
+  (req) => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m \n`
+);
 
 // middlewares
 app.use(cors());
@@ -42,4 +48,27 @@ app.use('/api', registerRoutes);
 app.use('/api', forgetPasswordRoutes);
 app.use('/api', resetPasswordRoutes);
 
-app.listen(PORT, () => console.log(`server started on ${PORT}`));
+const server = app.listen(PORT, () => console.log(`server started on ${PORT}`));
+
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log(`User connected ${socket.id}`);
+
+  socket.on('sendMessage', (message) => {
+    // Handle the received message
+    console.log('Received message:', message);
+
+    // Broadcast the message to all connected clients except the sender
+    socket.broadcast.emit('newMessage', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected', socket.id);
+  });
+});

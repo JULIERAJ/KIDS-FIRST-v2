@@ -9,7 +9,8 @@ const familySchema = new Schema (
     
     familyName: {
       type: String, 
-      required: true 
+      required: true, 
+      trim: true,
     }, 
     createdAt: {
       type: Date, 
