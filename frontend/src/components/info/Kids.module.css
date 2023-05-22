@@ -10,6 +10,9 @@
   width: 335px;
 }
 
+.container > img {
+  margin: 50px 86px 39px 0;
+}
 .addMoreChild {
   cursor: pointer;
 }

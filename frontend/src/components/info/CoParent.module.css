@@ -9,13 +9,17 @@
   margin-left: 50px;
   width: 335px;
 }
-.container img {
-  position: relative;
-  top: 40px;
+
+.container > img {
+  margin: 50px 86px 0 0;
 }
 .coParentCheckbox {
   display: flex;
   align-items: center;
+  margin-top: 79px;
+}
+.coParentCheckbox label {
+  margin-left: 20px;
 }
 
 .coParentCheckbox :checked[type='checkbox'] {

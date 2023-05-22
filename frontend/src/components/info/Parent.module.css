@@ -9,3 +9,6 @@
   margin-left: 50px;
   width: 335px;
 }
+.container > img {
+  margin: 50px 86px 0 0;
+}

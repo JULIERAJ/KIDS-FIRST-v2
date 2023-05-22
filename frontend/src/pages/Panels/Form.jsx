@@ -62,7 +62,7 @@ const Form = () => {
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <FormInputs />
         <Button
@@ -87,12 +87,12 @@ const Form = () => {
           <Button
             type='submit'
             disabled={!canSubmit}
-            className={`${styles.submitbtn} ${doneHide}`}>
+            className={`${styles.submitBtn} ${doneHide}`}>
             Done
           </Button>
         )}
       </form>
-    </div>
+    </>
   );
 };
 
