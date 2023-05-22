@@ -3,13 +3,16 @@ const Schema = mongoose.Schema;
 
 const invitationSchema = new Schema({
   inviter: { type: Schema.Types.ObjectId, ref: 'Principle' },
-  family: { type: Schema.Types.ObjectId, ref:'Family' },
+  family: { type: Schema.Types.ObjectId, ref: 'Family' },
   inviteeEmail: {
     type: String,
     required: true,
+    trim: true,
+    // unique: true,
+    match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],
   },
   invitationUrl: {
-    type: String, 
+    type: String,
     // required: true
   },
   createdAt: {

@@ -19,9 +19,11 @@ const memberSchema = new Schema(
     firstName: {
       type: String,
       required: true,
+      trim: true,
     },
     lastName: {
       type: String,
+      trim: true,
       // required: true,
     },
     role: {
