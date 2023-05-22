@@ -1,7 +1,4 @@
-/* eslint-disable indent */
 import React from 'react';
-
-// import { Button, Row } from 'react-bootstrap';
 
 import styles from './FormInputs.module.css';
 

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const panelSlice = createSlice({
-  name: 'panel',
+const rootSlice = createSlice({
+  name: 'root',
   initialState: {
     PanelStage: 1, // default page Panel to show on page load
     ParentPanel: '',
@@ -25,5 +25,5 @@ export const panelSlice = createSlice({
 });
 
 export const { panelStage, parentPanel, coParentPanel, kidPanel } =
-  panelSlice.actions;
-export default panelSlice.reducer;
+  rootSlice.actions;
+export const reducer = rootSlice.reducer;

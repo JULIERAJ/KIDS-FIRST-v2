@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import LandingLayout from './components/LandingLayout';
+import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
 import Conversation from './pages/Chat/Conversation';
 import Dashboard from './pages/Dashboard';
-import Family from './pages/Family';
+// import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
-// import Member from './pages/Member';
 import FinalPanel from './pages/Panels/FinalPanel';
 import Register from './pages/Register';
 import ResetPassword from './pages/ResetPassword';
@@ -28,9 +28,8 @@ const App = () => (
           path='/activate/:email/:emailVerificationToken'
           element={<Activate />}
         />
-        <Route path='/family' element={<Family />} />
-        <Route path='/member' element={<FinalPanel />} />
-        {/* <Route path='/panels' element={<FinalPanel />} /> */}
+        {/* <Route path='/family' element={<Family />} /> */}
+        <Route path='/member' element={<FinalPanel />} /> 
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/forgetPassword' element={<ForgetPassword />} />
         <Route
@@ -39,6 +38,7 @@ const App = () => (
         />
         {/* <Route path='/sidebar' element={<Sidebar />} /> */}
         <Route path='/chat' element={<Conversation />} />
+        <Route path='/sidebar' element={<Sidebar />} />
       </Route>
     </Routes>
   </BrowserRouter>

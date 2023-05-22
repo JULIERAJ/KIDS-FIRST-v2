@@ -8,8 +8,9 @@ export const FormProvider = ({ children }) => {
   const formTitle = {
     0: 'My Information',
     1: 'Invite Co-parent',
-    2: 'Kid Information',
+    2: 'Kid Information'
   };
+
   const [page, setPage] = useState(0);
   const [data, setData] = useState({
     firstName: '',
@@ -18,22 +19,8 @@ export const FormProvider = ({ children }) => {
     inviteeLastName: '',
     inviteeEmail: '',
     inviteeInviteLater: false,
-    kidsList: [],
+    kidsList:['']
   });
-
-  const requiredInputs = {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    // kidName: data.kidsList[0].kidName,
-    kidName: data.kidsList[0],
-  };
-
-  const canSubmit =
-    [...Object.values(requiredInputs)].every(Boolean) &&
-    page === Object.keys(formTitle).length - 1;
-
-  // eslint-disable-next-line
-  console.log('canSubmit', canSubmit);
 
   const handleChange = (event, index) => {
     const type = event.target.type;
@@ -67,36 +54,43 @@ export const FormProvider = ({ children }) => {
     const kidsListArray = [...data.kidsList];
     kidsListArray.splice(index, 1);
     setData((prevData) => {
-      return { ...prevData.kidsList, kidsList: kidsListArray };
+      return { ...prevData, 'kidsList': kidsListArray };
     });
   };
 
   const canNextPage1 = Object.keys(data)
-    .filter((key) => key.startsWith('first' && 'last') && key !== 'invitee')
+    .filter((key) => key.startsWith('first' && 'last'))
     .map((key) => data[key])
     .every(Boolean);
 
   const canNextPage2 =
     data.coParentInviteLater ||
     Object.keys(data)
-      .filter(
-        (key) => key.startsWith('invitee') && key !== 'inviteeInviteLater'
-      )
+      .filter( (key) => key.startsWith('invitee') && key !== 'inviteeInviteLater')
       .map((key) => data[key])
       .every(Boolean);
 
   const disablePrev = page === 0;
+
   const disableNext =
-    page === Object.keys(formTitle).length - 1 ||
+    page === (Object.keys(formTitle).length - 1 ) ||
     (page === 0 && !canNextPage1) ||
     (page === 1 && !canNextPage2);
 
   const prevHide = page === 0;
-
-  const nextHide = page === Object.keys(formTitle).length - 1;
+  const nextHide = page === Object.keys(formTitle).length - 1 && 'remove-button';
+  const doneHide = page === Object.keys(formTitle).length - 1 && 'remove-button'; 
 
   const isLastPage = page === Object.keys(formTitle).length - 1;
-  const buttonLabel = isLastPage ? 'Done' : 'Next';
+
+  const checkKidList = data.kidsList[0].trim().length === 0 ? false : true; 
+  // need to consider inviteeInviteLater 
+  const canSubmit = data.firstName.length > 0 && 
+                      data.lastName.length > 0 && 
+                      data.inviteeFirstName.length > 0 && 
+                      data.inviteeLastName.length > 0 && 
+                      data.inviteeEmail.length > 0 && 
+                      checkKidList && isLastPage;
 
   return (
     <FormContext.Provider
@@ -114,8 +108,8 @@ export const FormProvider = ({ children }) => {
         disableNext,
         prevHide,
         nextHide,
-        isLastPage,
-        buttonLabel,
+        doneHide,
+        isLastPage
       }}>
       {children}
     </FormContext.Provider>

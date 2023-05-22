@@ -1,3 +1,4 @@
+// here is where 3 panels submit
 import { Button } from 'react-bootstrap';
 
 import styles from './Form.module.css';
@@ -6,6 +7,7 @@ import FormInputs from './FormInputs';
 
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
+
 const Form = () => {
   const {
     setPage,
@@ -15,10 +17,9 @@ const Form = () => {
     disableNext,
     prevHide,
     nextHide,
+    doneHide,
     isLastPage,
-    buttonLabel,
   } = useFormContext();
-  // eslint-disable-next-line no-console
 
   const handlePrev = () => {
     setPage((prev) => prev - 1);
@@ -29,14 +30,13 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     try {
       const { firstName, lastName, kidsList, inviteeEmail } = data;
 
       const storedUser = localStorage.getItem('storedUser');
       const parsedUser = JSON.parse(storedUser);
-      //eslint-disable-next-line no-console
-      console.log('>>>>>>parsed user',parsedUser);
 
       createMember({
         firstName,
@@ -45,11 +45,12 @@ const Form = () => {
         inviteeEmail,
         family: parsedUser.familyId,
         principle: parsedUser.id,
-      }).then((res) => {
-        //eslint-disable-next-line no-console
-        console.log('RESDATA FRONTEND', res.data);
-        window.location.href = '/dashboard';
       })
+        .then((res) => {
+          window.location.href = '/dashboard';
+          //eslint-disable-next-line no-console
+          console.log(res);
+        })
         .catch((e) => {
           //eslint-disable-next-line no-console
           console.log(e);
@@ -61,30 +62,37 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormInputs />
-      <Button
-        type='button'
-        onClick={handlePrev}
-        disabled={disablePrev}
-        className={`${styles.backBtn} ${prevHide}`}>
-        Back
-      </Button>
-
-      {isLastPage ? (
-        <Button type='submit' className={styles.nextBtn} disabled={!canSubmit}>
-          Done
-        </Button>
-      ) : (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <FormInputs />
         <Button
           type='button'
-          onClick={handleNext}
-          disabled={disableNext}
-          className={`${styles.nextBtn} ${nextHide}`}>
-          {buttonLabel}
+          onClick={handlePrev}
+          disabled={disablePrev}
+          className={`${styles.backBtn} ${prevHide}`}>
+          Back
         </Button>
-      )}
-    </form>
+
+        {!isLastPage && (
+          <Button
+            type='button'
+            onClick={handleNext}
+            disabled={disableNext}
+            className={`${styles.nextBtn} ${nextHide}`}>
+            Next Step
+          </Button>
+        )}
+
+        {isLastPage && (
+          <Button
+            type='submit'
+            disabled={!canSubmit}
+            className={`${styles.submitbtn} ${doneHide}`}>
+            Done
+          </Button>
+        )}
+      </form>
+    </div>
   );
 };
 
