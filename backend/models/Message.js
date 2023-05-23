@@ -2,18 +2,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const messageSchema = new Schema({
+  conversationId: {
+    type: Schema.Types.ObjectId,
+    ref: 'ConversationUser',
+  },
   sender: {
     type: Schema.Types.ObjectId,
     ref: 'Member',
+    required: true,
   },
-  conversation: {
-    type: Schema.Types.ObjectId,
-    ref: 'Conversation',
-  },
-  messageInformation: {
+  message: {
     type: String,
     required: true,
-    maxlenght: 5000,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now(),
   },
 });
 
