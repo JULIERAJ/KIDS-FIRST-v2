@@ -5,17 +5,20 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const { Server } = require('socket.io');
 
+const conversationRoutes = require('./routes/conversations');
 const familyRoutes = require('./routes/family');
 const forgetPasswordRoutes = require('./routes/forget-password');
 // const invitationRoutes = require('./routes/invitation');
 const loginRoutes = require('./routes/login');
 const memberRoutes = require('./routes/member');
+const messagesRoutes = require('./routes/messages');
 const registerRoutes = require('./routes/register');
 const resetPasswordRoutes = require('./routes/reset-password');
+
 require('dotenv').config({ path: './.env.local' });
 
 const mongoDB = process.env.MONGODB_URI;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -47,12 +50,14 @@ app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);
 app.use('/api', forgetPasswordRoutes);
 app.use('/api', resetPasswordRoutes);
+app.use('/api/conversations', conversationRoutes);
+app.use('/api', messagesRoutes);
 
 const server = app.listen(PORT, () => console.log(`server started on ${PORT}`));
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
     methods: ['GET', 'POST'],
   },
 });
