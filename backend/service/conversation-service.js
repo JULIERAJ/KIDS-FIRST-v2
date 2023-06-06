@@ -2,7 +2,7 @@ const ConversationUser = require('../models/ConversationUser');
 
 const newConversation = async (userIds) => {
   // eslint-disable-next-line no-console
-  console.log(userIds);
+  console.log(userIds); //included senderId and receiverId
   try {
     const newConversation = new ConversationUser({
       userId: userIds,
@@ -13,4 +13,17 @@ const newConversation = async (userIds) => {
   }
 };
 
-module.exports = { newConversation };
+const getConversation = async (userId) => {
+  try {
+    const conversation = await ConversationUser.find({
+      userIds: { $in: userId }
+    });
+    // eslint-disable-next-line no-console
+    console.log('I M HERE', conversation);
+    return conversation;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+module.exports = { newConversation, getConversation };
