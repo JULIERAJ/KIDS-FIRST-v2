@@ -50,7 +50,7 @@ app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);
 app.use('/api', forgetPasswordRoutes);
 app.use('/api', resetPasswordRoutes);
-app.use('/api/conversations', conversationRoutes);
+app.use('/api', conversationRoutes);
 app.use('/api', messagesRoutes);
 
 const server = app.listen(PORT, () => console.log(`server started on ${PORT}`));

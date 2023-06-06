@@ -1,13 +1,15 @@
 const Message = require('../models/Message');
 
-const newMessage = async (conversationId, messageSender, message) => {
+const newMessage = async (messageData) => {
+  const { conversationId, sender, message } = messageData;
+
   try {
-    const newConversation = new Message({
+    const newMessage = new Message({
       conversationId,
-      sender: messageSender,
+      sender,
       message,
     });
-    return await newConversation.save();
+    return await newMessage.save();
   } catch (err) {
     throw new Error(err);
   }
