@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8000/api/';
+const BASE_URL = 'http://localhost:3001/api/';
 
 /*
 if signed in successfully, go to the 'families' page to select family 
