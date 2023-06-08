@@ -36,7 +36,7 @@ const Form = () => {
       const storedUser = localStorage.getItem('storedUser');
       const parsedUser = JSON.parse(storedUser);
       //eslint-disable-next-line no-console
-      console.log('>>>>>>parsed user',parsedUser);
+      console.log('>>>>>>parsed user', parsedUser);
 
       createMember({
         firstName,
@@ -45,11 +45,12 @@ const Form = () => {
         inviteeEmail,
         family: parsedUser.familyId,
         principle: parsedUser.id,
-      }).then((res) => {
-        //eslint-disable-next-line no-console
-        console.log('RESDATA FRONTEND', res.data);
-        window.location.href = '/dashboard';
       })
+        .then((res) => {
+          //eslint-disable-next-line no-console
+          console.log('RESDATA FRONTEND', res.data);
+          window.location.href = '/dashboard';
+        })
         .catch((e) => {
           //eslint-disable-next-line no-console
           console.log(e);
@@ -67,7 +68,8 @@ const Form = () => {
         type='button'
         onClick={handlePrev}
         disabled={disablePrev}
-        className={`${styles.backBtn} ${prevHide}`}>
+        className={`${styles.backBtn} ${prevHide}`}
+      >
         Back
       </Button>
 
@@ -80,7 +82,8 @@ const Form = () => {
           type='button'
           onClick={handleNext}
           disabled={disableNext}
-          className={`${styles.nextBtn} ${nextHide}`}>
+          className={`${styles.nextBtn} ${nextHide}`}
+        >
           {buttonLabel}
         </Button>
       )}
