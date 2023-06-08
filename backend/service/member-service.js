@@ -1,25 +1,25 @@
-const Member = require('../models/Member');
-const mongoose = require('mongoose');
 const Invitation = require('../models/Invitation');
+const Member = require('../models/Member');
+//const mongoose = require('mongoose');
 
 // check duplication: firstname, lastname, familyid are all the same
 const isDuplicate = async (firstName, lastName, family) => {
   const checkDuplicate = await Member.findOne({
     firstName,
     lastName,
-    family
+    family,
   });
   console.log('isDuplicate', checkDuplicate);
   return checkDuplicate ? true : false;
 };
 
 const memberRegistration = async ({
-  family, 
+  family,
   firstName,
   lastName,
   principle,
   kidsList,
-  inviteeEmail
+  inviteeEmail,
 }) => {
   // use helper function on array kidNames to create kid members
   await saveKids(kidsList, family);
@@ -32,10 +32,10 @@ const saveKids = async (kidsList, family) => {
     if (kidsList) {
       await Member.insertMany(
         kidsList
-        .map((kid) => kid.trim())
-        .filter((kid) => kid.length > 0)
-        .map((kid) => new Member({ firstName: kid, family, role: 'kid' })
-      ));
+          .map((kid) => kid.trim())
+          .filter((kid) => kid.length > 0)
+          .map((kid) => new Member({ firstName: kid, family, role: 'kid' }))
+      );
     }
   } catch (err) {
     console.log(err);
@@ -48,7 +48,7 @@ const savePrinciple = async (firstName, lastName, principle, family) => {
     lastName,
     principle,
     family,
-    role: 'parent' 
+    role: 'parent',
   });
   await principleMemberInfo.save();
 };
@@ -56,14 +56,14 @@ const savePrinciple = async (firstName, lastName, principle, family) => {
 const saveInvitation = async (principle, family, inviteeEmail) => {
   try {
     const invitationInfo = new Invitation({
-    inviter : principle, 
-    family, 
-    inviteeEmail
-  });
-  await invitationInfo.save();
- } catch (err ){
-  console.log('invitationInfo error ', err); 
-}
+      inviter: principle,
+      family,
+      inviteeEmail,
+    });
+    await invitationInfo.save();
+  } catch (err) {
+    console.log('invitationInfo error ', err);
+  }
 };
 
 module.exports = { memberRegistration, isDuplicate };

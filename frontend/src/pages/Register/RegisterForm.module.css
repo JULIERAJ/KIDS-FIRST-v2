@@ -1,5 +1,28 @@
 .error {
 	border-color: #F05153;
+}
+.error::placeholder {
 	color: #F05153;
 }
+
+/* label.error  {
+	color: #F05153;
+} */
+
+
+/* & label.error {
+	color: #F05153;
+} */
+
+.signUpText {
+	font-size: 18px;
+	line-height: 21px;
+	text-align: center;
+	margin-top: 20px;
+} 
+
+/* .signUpText.error {
+		position: fixed;
+		margin-top: 10px;
+} */
 

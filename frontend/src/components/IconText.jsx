@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 
 import checkIcon from '../media/icons/check.png';
-import fatimes from '../media/icons/fatime.png';
+import crossMark from '../media/icons/crossMark.png';
 
 const IconText = ({ title, status }) => {
   const icon =
     status === 'success' ? (
       <img src={checkIcon} width='12' alt='checkIcon' />
     ) : (
-      <img src={fatimes} width='12' alt='fatimeIcon' />
+      <img src={crossMark} width='12' alt='crossMarkIcon' />
     );
 
   return (
     <div>
-      {icon}
-      {' '}
-      {title} 
+      {icon} 
+      {''}
+      {title}
     </div>
   );
 };

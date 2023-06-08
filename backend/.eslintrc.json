@@ -2,5 +2,11 @@
   "env": {
     "commonjs": true
   },
+  
+  "rules": {
+    "no-console": "off"
+  },
+
   "extends": ["../.eslintrc.json"]
+  
 }
