@@ -9,6 +9,6 @@ router.get(
   '/activate/:email/:emailVerificationToken',
   principleController.accountActivation
 );
-router.get('/register/:email/:emailVerificationToken',
+router.get('/register/:email/:family/:emailVerificationToken',
   invitationController.invitationAccepted);
 module.exports = router;

@@ -1,6 +1,7 @@
 const Member = require('../models/Member');
 const mongoose = require('mongoose');
 const Invitation = require('../models/Invitation');
+const invitationController = require('../controllers/invitation-controller');
 
 // check duplication: firstname, lastname, familyid are all the same
 const isDuplicate = async (firstName, lastName, family) => {
@@ -24,7 +25,8 @@ const memberRegistration = async ({
   // use helper function on array kidNames to create kid members
   await saveKids(kidsList, family);
   await savePrinciple(firstName, lastName, principle, family);
-  await saveInvitation(principle, family, inviteeEmail);
+  // await saveInvitation(principle, family, inviteeEmail);
+  await invitationController.invitation(principle, family, inviteeEmail, firstName ); 
 };
 
 const saveKids = async (kidsList, family) => {
@@ -53,17 +55,17 @@ const savePrinciple = async (firstName, lastName, principle, family) => {
   await principleMemberInfo.save();
 };
 
-const saveInvitation = async (principle, family, inviteeEmail) => {
-  try {
-    const invitationInfo = new Invitation({
-    inviter : principle, 
-    family, 
-    inviteeEmail
-  });
-  await invitationInfo.save();
- } catch (err ){
-  console.log('invitationInfo error ', err); 
-}
-};
+// const saveInvitation = async (principle, family, inviteeEmail) => {
+//   try {
+//     const invitationInfo = new Invitation({
+//     inviter : principle, 
+//     family, 
+//     inviteeEmail
+//   });
+//   await invitationInfo.save();
+//  } catch (err ){
+//   console.log('invitationInfo error ', err); 
+// }
+// };
 
 module.exports = { memberRegistration, isDuplicate };

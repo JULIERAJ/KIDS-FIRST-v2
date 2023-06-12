@@ -58,9 +58,10 @@ const sendResetPasswordEmail = async (email, resetPasswordToken) => {
     return e;
   }
 };
-const sendInvitationEmail = async(email, family, emailVerificationToken) => {
+const sendInvitationEmail = async(email, family, emailVerificationToken,firstName) => {
+  console.log('==== here is the email service sendInvitationEmail');
   const href = `${process.env.CLIENT_URL}/register/${email}/${family}/${emailVerificationToken}`;
-
+  console.log('href????',href);
   try {
     // name of the Invitor in the email will be fetched from the form together 
     //with the invitee email
@@ -68,18 +69,20 @@ const sendInvitationEmail = async(email, family, emailVerificationToken) => {
       from: process.env.SMTP_USER,
       to: email,
       subject:
-            'You have been invited by {InvitorName} to register in Kids First app',
+            `You have been invited by ${firstName} to register in Kids First app`,
       text: '',
       html: `
               <div>
-                  <h1>You have been invited by {InvitorName} to register 
+                  <h1>You have been invited by ${firstName} to register 
                   in Kids First app</h1>
                   <p>To register on Kids First app, please click the link below:</p>
                 <a href='${href}'>click here</a>
               </div>
       `,
     });
+    return href; 
   } catch (e) {
+    console.log('===== this is the error in the sendInvitationEmail');
     return e;
   }
 };

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import Form from 'react-bootstrap/Form';
@@ -19,6 +19,7 @@ const DEFAULT_ERROR_MESSAGE =
 
 export const RegisterForm = (props) => {
 
+  console.log(props);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -26,6 +27,12 @@ export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isTouched, setIsTouched] = useState(false);
   const [validated, setIsValidated] = useState(false);
+
+  useEffect(() => {
+    if (props.paramEmail) {
+      setEmail(props.paramEmail);
+    }
+  }, [props.paramEmail]);
 
   const handleEmailChange = ({ target: { value } }) => setEmail(value);
   const handlePasswordChange = ({ target: { value } }) => setPassword(value);
@@ -67,7 +74,7 @@ export const RegisterForm = (props) => {
           autoComplete='off'
           required
           onChange={handleEmailChange}
-          defaultValue={props.email}
+          defaultValue={email}
           
         />
         <FormPasswordInput onChange={handlePasswordChange} required />
@@ -105,5 +112,6 @@ export const RegisterForm = (props) => {
 export default RegisterForm;
 RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
-  email: PropTypes.string
+  email: PropTypes.string,
+  paramEmail: PropTypes.string
 };

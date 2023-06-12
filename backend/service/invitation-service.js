@@ -1,13 +1,13 @@
-// const Invitation = require('../models/Invitation');
+const Invitation = require('../models/Invitation');
 
 const createInvitation = async (
-  invitor,
+  inviter,
   family,
   inviteeEmail,
   invitationUrl
 ) => {
   const invitation = await new Invitation({
-    invitor,
+    inviter,
     family,
     inviteeEmail,
     invitationUrl,
@@ -16,28 +16,29 @@ const createInvitation = async (
   await invitation.save();
   return {
     inviteeEmail: invitation.inviteeEmail,
-    invitor: invitation.invitor,
+    inviter: invitation.inviter,
     family: invitation.family,
   };
 };
 
-const findInviteeEmail = async (email) => {
-  const InviteeEmail = await Invitation.findOne({ email }).exec();
+const findInviteeEmail = async (inviteeEmail) => {
+  const InviteeEmail = await Invitation.findOne({ inviteeEmail }).exec();
   return InviteeEmail ? InviteeEmail : null;
 };
 
-const findInviteeDuplcate = async (email, family) => {
+const findInviteeDuplcate = async (inviteeEmail, family) => {
+  console.log('=====try to find duplication', inviteeEmail, family);
   const inviteeDuplicate = await Invitation.find({
-    email: email,
-    family: family,
+    inviteeEmail,
+    family
   }).exec();
-
-  return inviteeDuplicate.length > 0 ? inviteeDuplicate : null;
+  console.log('???', inviteeDuplicate); 
+  return inviteeDuplicate.length > 0 ? true : false;
 };
 
-const acceptedInvitation = async (email) => {
+const acceptedInvitation = async (inviteeEmail) => {
   const invitation = await Invitation.findOneAndUpdate(
-    { email: email },
+    { inviteeEmail },
     { invitationAccepted: true },
     { new: true }
   );

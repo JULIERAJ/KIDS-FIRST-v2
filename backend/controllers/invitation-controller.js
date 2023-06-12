@@ -6,12 +6,15 @@ const emailService = require('../service/email-service');
 const invitationService = require('../service/invitation-service');
 const principleService = require('../service/principle-service');
 
-const invitation = async (req, res) => {
-  const { invitor, family, inviteeEmail, invitationUrl } = req.body;
+const invitation = async (inviter, family, inviteeEmail, firstName) => {
+  // const { inviter, family, inviteeEmail, invitationUrl } = req.body;
+  // const { inviter, family, inviteeEmail } = req.body;
+  console.log('welcome to invitation controller');
 
+  console.log(inviter, family, inviteeEmail);
   try {
     let duplicate = await invitationService.findInviteeDuplcate(inviteeEmail, family);
-    console.log('duplicate,', duplicate);
+    console.log('????duplicate', duplicate);
     if (duplicate) {
       const emailVerificationToken = await jwt.sign(
         { inviteeEmail },
@@ -21,46 +24,68 @@ const invitation = async (req, res) => {
       await emailService.sendInvitationEmail(
         inviteeEmail,
         family,
-        emailVerificationToken
+        emailVerificationToken,
+        firstName
       );
-      return res
+      /* return res
         .status(200)
         .json({
           message: `Invitation email to ${inviteeEmail} is sent`,
         });
-    }
+        */ 
+       console.log('the invitation email has been sent again'); 
+    } 
+    
     if (!duplicate) {
-      const invitee = await invitationService.createInvitation(
-        invitor,
-        family,
-        inviteeEmail,
-        invitationUrl
-      );
-
-      console.log('invitee:', invitee);
+      console.log('not duplicate');
+      
 
       const emailVerificationToken = await jwt.sign(
         { inviteeEmail },
         process.env.JWT_EMAIL_VERIFICATION_SECRET,
         { expiresIn: '24h' }
       );
-      await emailService.sendInvitationEmail(
+      console.log('emailVerificationToken', emailVerificationToken);
+
+
+
+
+      const invitationURL = await emailService.sendInvitationEmail(
         inviteeEmail,
         family,
-        emailVerificationToken
+        emailVerificationToken,
+        firstName
       );
-      return res.status(201).json({
+      /*return res.status(201).json({
         message: 'Invitation email is sent',
         inviteeEmail: inviteeEmail,
-      });
+      });*/ 
+      console.log('invitation email is sent'); 
+
+      const invitee = await invitationService.createInvitation(
+        inviter,
+        family,
+        inviteeEmail, 
+        invitationURL
+      );
+  
+      console.log('invitee:', invitee);
+
     }
- 
+
+   
+
+
+
   } catch (e) {
-    return res.status(500).json('something went wrong');
+    // return res.status(500).json('something went wrong');
+    console.log('something went wrong');
   }
+  
 };
 
 const invitationAccepted = async (req, res) => {
+  console.log('backend req', req);
   const emailToken = req.params.emailVerificationToken;
   const email = req.params.email;
   try {

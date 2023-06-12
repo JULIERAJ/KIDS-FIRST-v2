@@ -21,7 +21,7 @@ const memberRegistration = async (req, res) => {
         kidsList,
         inviteeEmail
       });
-
+      console.log('firstname, lastname', firstName, lastName);
       return res.status(201).json(memberData);
     } else {
       return res.status(409).json({
