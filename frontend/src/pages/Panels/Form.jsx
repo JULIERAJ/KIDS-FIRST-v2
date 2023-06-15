@@ -1,26 +1,28 @@
-// here is where 3 panels submit 
+/* eslint-disable no-console */
+// here is where 3 panels submit
 import { Button } from 'react-bootstrap';
 
 import styles from './Form.module.css';
 
 import FormInputs from './FormInputs';
 
+import Header from '../.././components/Header';
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
-
 const Form = () => {
-  
   const {
     setPage,
-    data, 
+    data,
     canSubmit,
     disablePrev,
     disableNext,
     prevHide,
     nextHide,
     doneHide,
-    isLastPage
+    isLastPage,
   } = useFormContext();
+
+  const widget = <h3>Welcome!</h3>;
 
   const handlePrev = () => {
     setPage((prev) => prev - 1);
@@ -30,7 +32,7 @@ const Form = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     e.stopPropagation();
 
     try {
@@ -46,52 +48,59 @@ const Form = () => {
         inviteeEmail,
         family: parsedUser.familyId,
         principle: parsedUser.id,
-      }).then((res) => {
-        window.location.href = '/dashboard';
       })
+        .then(() => {
+          window.location.href = '/dashboard';
+        })
         .catch((e) => {
-          //eslint-disable-next-line no-console
           console.log(e);
         });
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error submitting form:', error);
     }
   };
 
   return (
-    <div>
+    <>
+      <Header
+        widget={widget}
+        bg={'white'}
+        containerFlexOptions={'justify-content-start'}
+      />
+
       <form onSubmit={handleSubmit}>
         <FormInputs />
         <Button
           type='button'
           onClick={handlePrev}
           disabled={disablePrev}
-          className={`${styles.backBtn} ${prevHide}`}>
-          Back
+          className={`secondary-btn ${prevHide} ${styles.prevBtn}`}
+        >
+                    Back
         </Button>
 
-        {!isLastPage && 
-        <Button
-        type='button'
-        onClick={handleNext}
-        disabled={disableNext}
-        className={`${styles.nextBtn} ${nextHide}`}>
-        Next Step
-      </Button>
-      }
+        {!isLastPage && (
+          <Button
+            type='button'
+            onClick={handleNext}
+            disabled={disableNext}
+            className={`primary-btn ${nextHide} ${styles.nextBtn}`}
+          >
+                        Next
+          </Button>
+        )}
 
-      {isLastPage &&
-        <Button 
-          type='submit'
-          disabled={!canSubmit} 
-          className={`${styles.submitbtn} ${doneHide}`}>
-          Done
-        </Button>
-      }
-
-      </form> 
-    </div>
+        {isLastPage && (
+          <Button
+            type='submit'
+            className={`primary-btn ${doneHide} ${styles.doneBtn}`}
+            disabled={!canSubmit}
+          >
+                        Done
+          </Button>
+        )}
+      </form>
+    </>
   );
 };
 

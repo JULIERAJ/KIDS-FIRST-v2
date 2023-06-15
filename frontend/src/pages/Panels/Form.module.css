@@ -1,16 +1,22 @@
-.backBtn {
-  background-color: #f7f5ec !important;
-  color: black !important;
-  border: 1px solid #f08324 !important;
-}
-.nextBtn {
-  color: black !important;
-  background-color: #f08324 !important;
-  border: 1px solid #f08324 !important;
-}
-.submitBtn {
-  color: black !important;
-  background-color: #f08324 !important;
-  border: 1px solid #f08324 !important;
+.prevBtn,
+.nextBtn,
+.doneBtn {
+  position: absolute;
+  width: 120px;
+  height: 48px;
 }
 
+.prevBtn {
+  bottom: 2.5rem;
+  left: 4rem;
+}
+
+.nextBtn {
+  bottom: 2.5rem;
+  left: 15.62rem;
+}
+
+.doneBtn {
+  bottom: 2.5rem;
+  left: 15.62rem;
+}

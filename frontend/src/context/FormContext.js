@@ -8,7 +8,7 @@ export const FormProvider = ({ children }) => {
   const formTitle = {
     0: 'My Information',
     1: 'Invite Co-parent',
-    2: 'Kid Information'
+    2: 'Kid Information',
   };
 
   const [page, setPage] = useState(0);
@@ -19,20 +19,20 @@ export const FormProvider = ({ children }) => {
     inviteeLastName: '',
     inviteeEmail: '',
     inviteeInviteLater: false,
-    kidsList:['']
+    kidsList: [''],
   });
 
   const handleChange = (event, index) => {
     const type = event.target.type;
     const name = event.target.name;
     const value =
-      type === 'checkbox' ? event.target.checked : event.target.value;
+            type === 'checkbox' ? event.target.checked : event.target.value;
 
     if (name === 'kidName') {
       const kidsListArray = [...data.kidsList];
       kidsListArray[index] = value;
       setData((prevData) => {
-        return { ...prevData, 'kidsList': kidsListArray };
+        return { ...prevData, kidsList: kidsListArray };
       });
     } else {
       setData((prevData) => {
@@ -45,7 +45,7 @@ export const FormProvider = ({ children }) => {
     setData((prevData) => {
       return {
         ...prevData,
-        kidsList: [...prevData.kidsList, '' ],
+        kidsList: [...prevData.kidsList, ''],
       };
     });
   };
@@ -54,7 +54,7 @@ export const FormProvider = ({ children }) => {
     const kidsListArray = [...data.kidsList];
     kidsListArray.splice(index, 1);
     setData((prevData) => {
-      return { ...prevData, 'kidsList': kidsListArray };
+      return { ...prevData, kidsList: kidsListArray };
     });
   };
 
@@ -64,33 +64,41 @@ export const FormProvider = ({ children }) => {
     .every(Boolean);
 
   const canNextPage2 =
-    data.coParentInviteLater ||
-    Object.keys(data)
-      .filter( (key) => key.startsWith('invitee') && key !== 'inviteeInviteLater')
-      .map((key) => data[key])
-      .every(Boolean);
+        data.inviteeInviteLater ||
+        Object.keys(data)
+          .filter(
+            (key) =>
+              key.startsWith('invitee') && key !== 'inviteeInviteLater'
+          )
+          .map((key) => data[key])
+          .every(Boolean);
 
   const disablePrev = page === 0;
 
   const disableNext =
-    page === (Object.keys(formTitle).length - 1 ) ||
-    (page === 0 && !canNextPage1) ||
-    (page === 1 && !canNextPage2);
+        page === Object.keys(formTitle).length - 1 ||
+        (page === 0 && !canNextPage1) ||
+        (page === 1 && !canNextPage2);
 
   const prevHide = page === 0;
-  const nextHide = page === Object.keys(formTitle).length - 1 && 'remove-button';
-  const doneHide = page === Object.keys(formTitle).length - 1 && 'remove-button'; 
+  const nextHide =
+        page === Object.keys(formTitle).length - 1 && 'remove-button';
+  const doneHide =
+        page === Object.keys(formTitle).length - 1 && 'remove-button';
 
   const isLastPage = page === Object.keys(formTitle).length - 1;
 
-  const checkKidList = data.kidsList[0].trim().length === 0 ? false : true; 
-  // need to consider inviteeInviteLater 
-  const canSubmit = data.firstName.length > 0 && 
-                      data.lastName.length > 0 && 
-                      data.inviteeFirstName.length > 0 && 
-                      data.inviteeLastName.length > 0 && 
-                      data.inviteeEmail.length > 0 && 
-                      checkKidList && isLastPage;
+  const checkKidList = data.kidsList[0].trim().length === 0 ? false : true;
+  // need to consider inviteeInviteLater
+  const canSubmit =
+        data.firstName.length > 0 &&
+        data.lastName.length > 0 &&
+        ((data.inviteeFirstName.length > 0 &&
+            data.inviteeLastName.length > 0 &&
+            data.inviteeEmail.length > 0) ||
+            data.inviteeInviteLater) &&
+        checkKidList &&
+        isLastPage;
 
   return (
     <FormContext.Provider
@@ -109,8 +117,9 @@ export const FormProvider = ({ children }) => {
         prevHide,
         nextHide,
         doneHide,
-        isLastPage
-      }}>
+        isLastPage,
+      }}
+    >
       {children}
     </FormContext.Provider>
   );

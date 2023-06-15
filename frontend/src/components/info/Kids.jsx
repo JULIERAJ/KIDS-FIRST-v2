@@ -19,7 +19,8 @@ const Kids = () => {
         <div>
           {data.kidsList.map((kid, index) => (
             <Form.Group key={index}>
-              {/* { when there is more than 1 kid available ---> should display the remove button } */}
+              {/* { when there is more than 1 kid available ---> 
+                should display the remove button } */}
               {data.kidsList.length > 1 && (
                 <div
                   className={styles.removeChild}
@@ -54,8 +55,10 @@ const Kids = () => {
                 onChange={(e) => handleChange(e, index)}
               />
 
-              {/* when there is only one kid available  ---> user should not be able to delete the field any more */}
-              {/* when there are 5 kids  ---> user should not be able to add the field any more */}
+              {/* when there is only one kid available  --->
+               user should not be able to delete the field any more */}
+              {/* when there are 5 kids  --->
+               user should not be able to add the field any more */}
               {data.kidsList.length < 5 &&
               index === data.kidsList.length - 1 && (
                 <Container
