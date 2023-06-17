@@ -18,6 +18,7 @@ export const createMember = ({
   lastName,
   kidsList,
   inviteeEmail,
+  inviteeInviteLater,
   family,
   principle,
 }) =>
@@ -26,6 +27,7 @@ export const createMember = ({
     lastName,
     kidsList,
     inviteeEmail,
+    inviteeInviteLater,
     family,
     principle,
   });

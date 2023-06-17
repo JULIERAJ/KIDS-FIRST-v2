@@ -20,13 +20,14 @@ const memberRegistration = async ({
   lastName,
   principle,
   kidsList,
-  inviteeEmail
+  inviteeEmail,
+  inviteeInviteLater
 }) => {
   // use helper function on array kidNames to create kid members
   await saveKids(kidsList, family);
   await savePrinciple(firstName, lastName, principle, family);
   // await saveInvitation(principle, family, inviteeEmail);
-  await invitationController.invitation(principle, family, inviteeEmail, firstName ); 
+  await invitationController.invitation(principle, family, inviteeEmail, firstName, inviteeInviteLater ); 
 };
 
 const saveKids = async (kidsList, family) => {

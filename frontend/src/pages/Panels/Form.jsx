@@ -36,7 +36,7 @@ const Form = () => {
     e.stopPropagation();
 
     try {
-      const { firstName, lastName, kidsList, inviteeEmail } = data;
+      const { firstName, lastName, kidsList, inviteeEmail, inviteeInviteLater } = data;
 
       const storedUser = localStorage.getItem('storedUser');
       const parsedUser = JSON.parse(storedUser);
@@ -46,6 +46,7 @@ const Form = () => {
         lastName,
         kidsList,
         inviteeEmail,
+        inviteeInviteLater,
         family: parsedUser.familyId,
         principle: parsedUser.id,
       })
