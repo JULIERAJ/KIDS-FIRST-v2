@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
+import { useParams } from 'react-router-dom';
 
 import EmailVerify from './EmailVerify';
 import styles from './Register.module.css';
@@ -15,11 +16,16 @@ import TextLink from '../../components/TextLink';
 
 const Register = () => {
 
+  const params = useParams();
+  let paramEmail = params.email; 
+  let paramEmailVerificationToken = params.emailVerificationToken; 
+  let paramFamily = params.family; 
+
   const [userData, setUserData] = useState({});
   const [activeComponent, setActiveComponent] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const registerUserHandler = async (email, password) => {
-
     try {
       const { data } = await register({ email, password });
       setUserData(data);
@@ -28,7 +34,6 @@ const Register = () => {
     } catch (error) {
       console.log(error);
     }
-
   };
   
   return (
@@ -42,7 +47,7 @@ const Register = () => {
           <h1 className={styles.registerTitle}>Sign up Kids First</h1>
           {
             activeComponent ?  
-              <RegisterForm onSubmitData={registerUserHandler} /> :  
+              <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail}/> :  
               <EmailVerify userData={userData}/> 
           } 
         </FatherSonBlock>

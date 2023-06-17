@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import Form from 'react-bootstrap/Form';
@@ -377,4 +377,6 @@ export const RegisterForm = (props) => {
 export default RegisterForm;
 RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
+  email: PropTypes.string,
+  paramEmail: PropTypes.string
 };

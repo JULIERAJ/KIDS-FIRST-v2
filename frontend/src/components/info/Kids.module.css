@@ -1,7 +1,10 @@
 .container {
   display: flex;
   justify-content: space-between;
+  margin: 0;
+  padding: 0;
 }
+
 .inputForm {
   display: flex;
   flex-direction: column;
@@ -10,9 +13,14 @@
   width: 335px;
 }
 
+.container>img {
+  margin: 50px 86px 39px 0;
+}
+
 .addMoreChild {
   cursor: pointer;
 }
+
 .removeChild {
   cursor: pointer;
   position: relative;

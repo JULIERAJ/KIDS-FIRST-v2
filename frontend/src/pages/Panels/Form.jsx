@@ -1,9 +1,12 @@
+/* eslint-disable no-console */
+// here is where 3 panels submit
 import { Button } from 'react-bootstrap';
 
 import styles from './Form.module.css';
 
 import FormInputs from './FormInputs';
 
+import Header from '../.././components/Header';
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
 const Form = () => {
@@ -15,10 +18,11 @@ const Form = () => {
     disableNext,
     prevHide,
     nextHide,
+    doneHide,
     isLastPage,
-    buttonLabel,
   } = useFormContext();
-  // eslint-disable-next-line no-console
+
+  const widget = <h3>Welcome!</h3>;
 
   const handlePrev = () => {
     setPage((prev) => prev - 1);
@@ -29,65 +33,75 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     try {
-      const { firstName, lastName, kidsList, inviteeEmail } = data;
+      const { firstName, lastName, kidsList, inviteeEmail, inviteeInviteLater } = data;
 
       const storedUser = localStorage.getItem('storedUser');
       const parsedUser = JSON.parse(storedUser);
-      //eslint-disable-next-line no-console
-      console.log('>>>>>>parsed user', parsedUser);
 
       createMember({
         firstName,
         lastName,
         kidsList,
         inviteeEmail,
+        inviteeInviteLater,
         family: parsedUser.familyId,
         principle: parsedUser.id,
       })
-        .then((res) => {
-          //eslint-disable-next-line no-console
-          console.log('RESDATA FRONTEND', res.data);
+        .then(() => {
           window.location.href = '/dashboard';
         })
         .catch((e) => {
-          //eslint-disable-next-line no-console
           console.log(e);
         });
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error submitting form:', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormInputs />
-      <Button
-        type='button'
-        onClick={handlePrev}
-        disabled={disablePrev}
-        className={`${styles.backBtn} ${prevHide}`}
-      >
-        Back
-      </Button>
+    <>
+      <Header
+        widget={widget}
+        bg={'white'}
+        containerFlexOptions={'justify-content-start'}
+      />
 
-      {isLastPage ? (
-        <Button type='submit' className={styles.nextBtn} disabled={!canSubmit}>
-          Done
-        </Button>
-      ) : (
+      <form onSubmit={handleSubmit}>
+        <FormInputs />
         <Button
           type='button'
-          onClick={handleNext}
-          disabled={disableNext}
-          className={`${styles.nextBtn} ${nextHide}`}
+          onClick={handlePrev}
+          disabled={disablePrev}
+          className={`secondary-btn ${prevHide} ${styles.prevBtn}`}
         >
-          {buttonLabel}
+                    Back
         </Button>
-      )}
-    </form>
+
+        {!isLastPage && (
+          <Button
+            type='button'
+            onClick={handleNext}
+            disabled={disableNext}
+            className={`primary-btn ${nextHide} ${styles.nextBtn}`}
+          >
+                        Next
+          </Button>
+        )}
+
+        {isLastPage && (
+          <Button
+            type='submit'
+            className={`primary-btn ${doneHide} ${styles.doneBtn}`}
+            disabled={!canSubmit}
+          >
+                        Done
+          </Button>
+        )}
+      </form>
+    </>
   );
 };
 

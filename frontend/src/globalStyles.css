@@ -12,7 +12,7 @@
   --main-lightBlue: #BFEBEC;
   --main-green: #5BA056;
   --main-orange: #F08324;
-  --main-red: #F05153;  
+  --main-red: #F05153;
   --main-yellow: #F4DD61;
 }
 
@@ -45,6 +45,7 @@
    ======================================= */
 
 .primary-btn {
+  color: var(--main-black);
   background-color: var(--main-orange);
   border: 3px solid var(--main-orange) !important;
   border-radius: 7px;
@@ -55,9 +56,32 @@
 .primary-btn:hover,
 .primary-btn:focus {
   background-color: var(--main-white) !important;
+  color: var(--main-black)
 }
 
-.secondary-btn {}
+.primary-btn:disabled {
+  color: var(--main-black);
+  background-color: var(--main-orange);
+  opacity: 0.7;
+}
+
+.secondary-btn {
+  background-color: var(--main-sand);
+  color: var(--main-black);
+  border: 3px solid var(--main-orange) !important;
+}
+
+.secondary-btn:hover {
+    background-color: var(--main-white);
+    color: var(--main-black);
+    border: 3px solid var(--main-orange);
+}
+
+.secondary-btn:disabled {
+  color: var(--main-black);
+  background-color: var(--main-white);
+  opacity: 0.7;
+} 
 
 .tertiary-btn {
   font-size: 14px;

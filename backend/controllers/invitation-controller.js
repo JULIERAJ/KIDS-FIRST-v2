@@ -1,21 +1,115 @@
-// const invitationService = require('../service/invitation-service');
 
-// const invitation = async (req, res) => {
-//   try {
-//     const { inviter, family, inviteeEmail, invitationUrl } = req.body;
-//     console.log('REQBODYINVITE', req.body);
+/* eslint-disable no-console */
+const jwt = require('jsonwebtoken');
 
-//     const invite = await invitationService.invitation(
-//       inviter,
-//       family,
-//       inviteeEmail,
-//       invitationUrl,
-//     );
-//     console.log('invite', invite);
-//     return res.status(201).send({ invite });
-//   } catch (e) {
-//     return res.status(500).json('something went wrong');
-//   }
-// };
+const emailService = require('../service/email-service');
+const invitationService = require('../service/invitation-service');
+const principleService = require('../service/principle-service');
 
-// module.exports = { invitation };
+const invitation = async (inviter, family, inviteeEmail, firstName, inviteeInviteLater) => {
+  console.log('welcome to invitation controller');
+  console.log(inviter, family, inviteeEmail, inviteeInviteLater);
+
+  if (!inviteeInviteLater) {
+    try {
+      let duplicate = await invitationService.findInviteeDuplcate(inviteeEmail, family);
+      console.log('????duplicate', duplicate);
+      if (duplicate) {
+        const emailVerificationToken = await jwt.sign(
+          { inviteeEmail },
+          process.env.JWT_EMAIL_VERIFICATION_SECRET,
+          { expiresIn: '24h' }
+        );
+        await emailService.sendInvitationEmail(
+          inviteeEmail,
+          family,
+          emailVerificationToken,
+          firstName
+        );
+        /* return res
+          .status(200)
+          .json({
+            message: `Invitation email to ${inviteeEmail} is sent`,
+          });
+          */ 
+        console.log('the invitation email has been sent again'); 
+      } 
+      
+      if (!duplicate) {
+        console.log('not duplicate');
+        
+
+        const emailVerificationToken = await jwt.sign(
+          { inviteeEmail },
+          process.env.JWT_EMAIL_VERIFICATION_SECRET,
+          { expiresIn: '24h' }
+        );
+        console.log('emailVerificationToken', emailVerificationToken);
+
+        const invitationURL = await emailService.sendInvitationEmail(
+          inviteeEmail,
+          family,
+          emailVerificationToken,
+          firstName
+        );
+        /*return res.status(201).json({
+          message: 'Invitation email is sent',
+          inviteeEmail: inviteeEmail,
+        });*/ 
+        console.log('invitation email is sent'); 
+
+        const invitee = await invitationService.createInvitation(
+          inviter,
+          family,
+          inviteeEmail, 
+          invitationURL
+        );
+    
+        console.log('invitee:', invitee);
+
+      }
+    } catch (e) {
+      // return res.status(500).json('something went wrong');
+      console.log('something went wrong');
+    }
+  }
+};
+
+const invitationAccepted = async (req, res) => {
+  console.log('backend req', req);
+  const emailToken = req.params.emailVerificationToken;
+  const email = req.params.email;
+  try {
+    const invitation = await invitationService.findInviteeEmail(email);
+
+    if (invitation.invitationAccepted === true) {
+      return res.status(200).json({
+        message:
+                    'Invitation has been accepted, proceed to registration',
+        email: invitation.inviteeEmail,
+        invitationAccepted: invitation.invitationAccepted,
+      });
+    }
+    const activationTokenVerified =
+            await principleService.emailTokenVerification(emailToken);
+
+    if (!activationTokenVerified) {
+      return res
+        .status(400)
+        .json({ message: 'invitation link is not correct' });
+    } else {
+      const invitationData = await invitationService.acceptedInvitation(
+        email
+      );
+      return res.status(200).json({
+        message: 'the invitation is successfully accepted',
+        email: invitationData.inviteeEmail,
+        invitationAccepted: invitationData.invitationAccepted,
+      });
+    }
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
+  }
+};
+
+module.exports = { invitation, invitationAccepted };
