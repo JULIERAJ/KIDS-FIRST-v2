@@ -30,8 +30,8 @@ const registration = async (req, res) => {
       // eslint-disable-next-line max-len
       return res.status(400).json({
         message:
-          'Password must be at least 10 characters long and contain\
-           at least one uppercase letter, one lowercase letter, and one number',
+          'Password must be at least 8 characters long and contain\
+           at least one uppercase letter, one lowercase letter, and one number or special character',
       });
     } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });

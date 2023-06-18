@@ -32,7 +32,8 @@ const Register = () => {
       localStorage.setItem('storedUser', data); 
       setActiveComponent(false);
     } catch (error) {
-      console.log(error);
+      console.log('error at the parent', error);
+      return error.response.data.message;
     }
   };
   
