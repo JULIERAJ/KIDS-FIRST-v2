@@ -37,7 +37,7 @@ const App = () => (
           element={<ResetPassword />}
         />
         {/* <Route path='/sidebar' element={<Sidebar />} /> */}
-        <Route path='/chat' element={<Conversation />} />
+        <Route path='/conversations' element={<Conversation />} />
         <Route path='/sidebar' element={<Sidebar />} />
       </Route>
     </Routes>

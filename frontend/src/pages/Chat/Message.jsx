@@ -5,15 +5,13 @@ import React from 'react';
 
 import styles from './Message.module.css';
 
-function Message({ own }) {
+const Message = ({ own }) => {
   return (
     <>
       <div className={`${styles.message} ${own ? styles.own : ''}`}>
         <div className={styles.messageTop}>
           <span
-            className={`${styles.letterOfFirstName} ${
-              own ? styles.own : ''
-            }`}>
+            className={`${styles.letterOfFirstName} ${own ? styles.own : ''}`}>
             {own ? 'E' : 'M'}
           </span>
           <p className={styles.messageText}>
@@ -28,7 +26,7 @@ function Message({ own }) {
       </div>
     </>
   );
-}
+};
 
 export default Message;
 
