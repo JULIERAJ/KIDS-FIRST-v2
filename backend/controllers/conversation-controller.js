@@ -17,7 +17,7 @@ const newConversation = async (req, res) => {
 const getAllConversationForParticularUser = async (req, res) => {
   const { userId } = req.params;
   // eslint-disable-next-line no-console
-  // console.log(userId);
+  console.log(userId);
   try {
     const conversation = await conversationService.getConversation(userId);
     return res.status(200).json(conversation);

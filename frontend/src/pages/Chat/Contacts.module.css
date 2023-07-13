@@ -1,0 +1,12 @@
+.contact {
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.contact:hover {
+  color: green;
+}
+
+.contactName {
+  font-weight: 500;
+}

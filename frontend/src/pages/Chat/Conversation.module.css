@@ -1,10 +1,31 @@
+.messenger {
+  height: calc(100vh - 70px);
+  display: flex;
+}
+
+.conversationMenu > h1 {
+  padding-top: 25px;
+}
+.conversationMenu {
+  background-color: rgba(230, 225, 225, 0.335);
+  border-radius: 50px;
+  text-align: center;
+  flex: 2;
+}
+.conversationBox {
+  flex: 5.5;
+}
+
+.conversationOnline {
+  flex: 3;
+}
+
 body {
   background-color: rgba(255, 254, 249, 1);
   border-radius: 20px;
 }
 .navbar {
   background-color: rgba(100, 202, 199, 0.3);
-
   border: 1px solid #f7f5ec;
   border-radius: 20px 20px 0px 0px;
 }
@@ -13,8 +34,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 34px;
-  margin: 31px 0 60.76px 0;
+  padding: 0 20px 0 20px;
+  margin: 20px 0 25px 0;
 }
 .recipient .letterOfFirstName {
   background-color: #01adb4;
@@ -78,7 +99,7 @@ body {
 
 .writeMessage {
   position: relative;
-  margin: 42px 33px 20px 20px;
+  margin: 10px 33px 20px 20px;
 }
 
 .writeMessage > textarea {
@@ -86,7 +107,9 @@ body {
   border-radius: 20px;
   border: none;
   padding: 17px 0 0 25px;
+  width: 500px;
 }
+
 .writeMessage > label > img {
   position: absolute;
   right: 10.35px;

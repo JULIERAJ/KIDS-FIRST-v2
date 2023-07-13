@@ -1,92 +1,110 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Col, Row, Image } from 'react-bootstrap';
-import { io } from 'socket.io-client';
+import { Container, Row, Image, Form } from 'react-bootstrap';
+// import { io } from 'socket.io-client';
 
+import Contacts from './Contacts';
 import styles from './Conversation.module.css';
 
 import Message from './Message';
 
+import { getConversations } from '../../api';
+
 import StartMessaging from '../../media/features/messaging_pic.png';
 import Clip from '../../media/icons/clip.png';
-import Search from '../../media/icons/search.png';
+// import Search from '../../media/icons/search.png';
 
 const Conversation = () => {
   // eslint-disable-next-line
-  const [messages, setMessages] = useState(['hello']);
+  const [messages, setMessages] = useState([]);
+  const [conversations, setConversations] = useState([]);
+  // eslint-disable-next-line
+  console.log(conversations);
   // eslint-disable-next-line
   const [socket, setSocket] = useState(null);
-  // const [newMessage, setNewMessage] = useState('');
-  const [showSearch, setShowSearch] = useState(false);
-
-  const showInput = () => {
-    setShowSearch((prev) => !prev);
-  };
+  // user who is logged in (principle OR family member ?)
+  const user = { _id: '646c01d9eeccbfdc9f01b200' };
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3001');
-    setSocket(newSocket);
-  }, []);
+    const getAllConversations = async () => {
+      try {
+        const res = await getConversations(user._id);
+        setConversations(res.data);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+    };
+    getAllConversations();
+  }, [user._id]);
+
+  // useEffect(() => {
+  //   const newSocket = io('http://localhost:3001');
+  //   setSocket(newSocket);
+  // }, []);
 
   return (
-    <>
-      <div className={styles.navbar}>
-        <div className={styles.main}>
-          <div className={styles.recipient}>
-            <span className={styles.letterOfFirstName}>M</span>
-            <div className={styles.userOnline}>
-              <h1>Michael Daniel</h1>
-              <span>Online</span>
+    <Container className={styles.messenger}>
+      <Container className={styles.conversationMenu}>
+        <h1>Contacts</h1>
+        <hr />
+        {conversations.map((c) => (
+          <Contacts key={c._id} conversation={c} currentUser={user} />
+        ))}
+      </Container>
+      <Container className={styles.conversationBox}>
+        <Container className={styles.navbar}>
+          <div className={styles.main}>
+            <div className={styles.recipient}>
+              <span className={styles.letterOfFirstName}>M</span>
+              <div className={styles.userOnline}>
+                <h1>Michael Daniel</h1>
+                <span>Online</span>
+              </div>
             </div>
           </div>
-
-          {!showSearch && <Image src={Search} onClick={showInput} />}
-          {showSearch && (
-            <input
-              type='text'
-              className={styles.searchInput}
-              placeholder='Search...'
-            />
-          )}
-        </div>
-      </div>
-      <div className={styles.chatBox}>
-        {messages.length > 0 ? (
-          <div className={styles.chatBoxWrapper}>
-            <Message own={false} />
-            <Message own={false} />
-            <Message own={true} />
-            <Message own={false} />
-          </div>
-        ) : (
-          <figure className={styles.bodyForMsg}>
-            <Image src={StartMessaging} alt='start-messaging' />
-            <figcaption>Start Messaging</figcaption>
-          </figure>
-        )}
-        <hr />
-        <Container className={styles.messageBox}>
-          <Col className={styles.sendMessage}>
-            <Row className={styles.writeMessage}>
-              <textarea
-                className={styles.messageInput}
-                rows='8'
-                cols='100'
-                placeholder='Write Message...'></textarea>
-              <label htmlFor='photo-input'>
-                <Image src={Clip} alt='clip' />
-              </label>
-              <input
-                type='file'
-                id='photo-input'
-                accept='image/*'
-                style={{ display: 'none' }}
-              />
-            </Row>
-            <button>Send</button>
-          </Col>
         </Container>
-      </div>
-    </>
+        <Container className={styles.chatBox}>
+          {messages.length > 0 ? (
+            <div className={styles.chatBoxWrapper}>
+              <Message own={false} />
+              <Message own={true} />
+              <Message own={false} />
+            </div>
+          ) : (
+            <figure className={styles.bodyForMsg}>
+              <Image src={StartMessaging} alt='start-messaging' />
+              <figcaption>Start Messaging</figcaption>
+            </figure>
+          )}
+          <hr />
+          <Container className={styles.messageBox}>
+            <div className={styles.sendMessage}>
+              <Row className={styles.writeMessage}>
+                <Form.Control
+                  as='textarea'
+                  className={styles.messageInput}
+                  style={{ height: '100px' }}
+                  placeholder='Write Message...'
+                />
+                <label htmlFor='photo-input'>
+                  <Image src={Clip} alt='clip' />
+                </label>
+                <input
+                  type='file'
+                  id='photo-input'
+                  accept='image/*'
+                  style={{ display: 'none' }}
+                />
+              </Row>
+              <button>Send</button>
+            </div>
+          </Container>
+        </Container>
+      </Container>
+      <Container className={styles.conversationOnline}>
+        <h1>Emma Clark</h1>
+      </Container>
+    </Container>
   );
 };
 

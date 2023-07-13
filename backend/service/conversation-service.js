@@ -5,7 +5,7 @@ const newConversation = async (userIds) => {
   console.log(userIds); //included senderId and receiverId
   try {
     const newConversation = new ConversationUser({
-      userId: userIds,
+      userIds
     });
     return await newConversation.save();
   } catch (err) {

@@ -1,4 +1,3 @@
-
 import { signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -14,11 +13,11 @@ import googleIcon from '../media/icons/google.png';
 const signInWithFacebook = () => {
   const provider = new FacebookAuthProvider();
 
-  signInWithPopup(authentication,provider)
+  signInWithPopup(authentication, provider)
     .then((result) => {
       /* eslint-disable no-console */
-      // TODO: 
-      console.log('I am registered using Facebook');
+      // TODO:
+      // console.log('I am registered using Facebook');
       console.log(result.user);
       const credential = FacebookAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
@@ -26,11 +25,10 @@ const signInWithFacebook = () => {
       console.log(result.user.displayName);
       console.log(result.user.email);
       //we need to save this user in our database and redirect to family
-
     })
     .catch((error) => {
       /* eslint-disable no-unused-vars */
-      // TODO: 
+      // TODO:
       const errorCode = error.code;
       const errorMessage = error.message;
       // The email of the user's account used.
@@ -41,27 +39,28 @@ const signInWithFacebook = () => {
 };
 
 const SocialButton = ({ icon, title, onClick }) => (
-  <Button 
-    className="tertiary-btn w-100"
-    type="button"
-    variant="outline-secondary"
-    size="lg"
-    onClick={onClick}
-  >
-    <img src={icon} width="25" height="25" alt=""/>
-    {' '}
-    {title}
+  <Button
+    className='tertiary-btn w-100'
+    type='button'
+    variant='outline-secondary'
+    size='lg'
+    onClick={onClick}>
+    <img src={icon} width='25' height='25' alt='' /> {title}
   </Button>
 );
 
 const SocialButtonsGroup = () => (
-  <Row className="py-5">
+  <Row className='py-5'>
     <Col xs={12} md={6}>
-      <SocialButton icon={googleIcon} title="Google"/>
+      <SocialButton icon={googleIcon} title='Google' />
     </Col>
 
     <Col xs={12} md={6}>
-      <SocialButton icon={facebookIcon} title="Facebook" onClick={signInWithFacebook}/>
+      <SocialButton
+        icon={facebookIcon}
+        title='Facebook'
+        onClick={signInWithFacebook}
+      />
     </Col>
   </Row>
 );

@@ -50,3 +50,6 @@ export const resetPassword = (email, password, resetPasswordToken) =>
     password,
     resetPasswordToken,
   });
+
+export const getConversations = (userId) =>
+  axios.get(`${BASE_URL}conversations/${userId}`);
