@@ -15,10 +15,10 @@ function Contacts({
   // eslint-disable-next-line no-console
   console.log(currentUser);
 
-  // WORK IN HERE
+  // WORK ON IT 
   useEffect(() => {
     const personTalkToId = conversation?.userIds?.find(
-      (userId) => userId !== currentUser?.id
+      (userId) => userId !== currentUser?._id
     );
     // eslint-disable-next-line
     console.log(personTalkToId);

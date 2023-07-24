@@ -60,3 +60,6 @@ export const getAllConversationForParticularUser = (userId) => {
 };
 export const getMember = (principle) =>
   axios.get(`${BASE_URL}member/${principle}`);
+
+export const getConversations = (userId) =>
+  axios.get(`${BASE_URL}conversations/${userId}`);

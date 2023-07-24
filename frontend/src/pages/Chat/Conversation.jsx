@@ -23,7 +23,7 @@ const Conversation = () => {
   // eslint-disable-next-line
   const [conversations, setConversations] = useState(['hello', 'hi']);
   // eslint-disable-next-line
-  // const [socket, setSocket] = useState(null);
+  const [socket, setSocket] = useState(null);
   // user who is logged in (principle OR family member ?)
   const userId = '64b5b57804639d47fa598271';
 
@@ -43,7 +43,7 @@ const Conversation = () => {
     };
     getMemberInfo();
   }, [userId]);
-
+  
   useEffect(() => {
     const getAllConversations = async () => {
       try {
@@ -144,4 +144,5 @@ Conversation.propTypes = {
   conversations: PropTypes.array,
   socket: PropTypes.object,
   userId: PropTypes.string,
+  currentUser: PropTypes.string,
 };
