@@ -18,7 +18,7 @@ function Contacts({
   // WORK ON IT 
   useEffect(() => {
     const personTalkToId = conversation?.userIds?.find(
-      (userId) => userId !== currentUser?._id
+      (userId) => userId !== currentUser
     );
     // eslint-disable-next-line
     console.log(personTalkToId);
