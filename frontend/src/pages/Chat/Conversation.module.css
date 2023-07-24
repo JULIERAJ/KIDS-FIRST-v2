@@ -1,0 +1,151 @@
+.messenger {
+  height: calc(100vh - 70px);
+  display: flex;
+}
+
+.conversationMenu > h1 {
+  padding-top: 25px;
+}
+.conversationMenu {
+  background-color: rgba(230, 225, 225, 0.335);
+  border-radius: 50px;
+  text-align: center;
+  flex: 2;
+}
+.conversationBox {
+  flex: 5.5;
+}
+
+.conversationOnline {
+  flex: 3;
+}
+
+body {
+  background-color: rgba(255, 254, 249, 1);
+  border-radius: 20px;
+}
+.navbar {
+  background-color: rgba(100, 202, 199, 0.3);
+  border: 1px solid #f7f5ec;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 20px;
+  margin: 20px 0 25px 0;
+}
+.recipient .letterOfFirstName {
+  background-color: #01adb4;
+  padding: 10px;
+  border-radius: 50%;
+  color: white;
+}
+
+.main .recipient {
+  display: flex;
+  align-items: center;
+}
+
+.recipient > div {
+  margin-left: 6px;
+}
+
+.userOnline {
+  position: relative;
+}
+.userOnline h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 18.75px;
+  font-family: 'Roboto', sans-serif;
+  color: rgba(1, 29, 38, 1);
+}
+.userOnline span {
+  position: absolute;
+  align-self: center;
+  color: #01adb4;
+}
+
+.searchInput {
+  background: #f7f5ec;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 15px 5px 15px;
+}
+.searchInput::placeholder {
+  color: rgba(147, 160, 170, 1);
+}
+.bodyForMsg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.bodyForMsg > figcaption {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 16px;
+  font-weight: 200;
+  color: rgba(147, 160, 170, 1);
+  font-family: 'Roboto', sans-serif;
+  position: absolute;
+  top: 95%;
+}
+
+.writeMessage {
+  position: relative;
+  margin: 10px 33px 20px 20px;
+}
+
+.writeMessage > textarea {
+  background: #f7f5ec;
+  border-radius: 20px;
+  border: none;
+  padding: 17px 0 0 25px;
+  width: 500px;
+}
+
+.writeMessage > label > img {
+  position: absolute;
+  right: 10.35px;
+  bottom: 15.27px;
+}
+
+.messageInput::placeholder {
+  color: rgba(147, 160, 170, 1);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 18.75px;
+}
+
+.sendMessage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sendMessage > button {
+  width: 120px;
+  height: 48px;
+  background: rgba(240, 131, 36, 0.3);
+  border-radius: 8px;
+  border: none;
+  color: rgba(147, 160, 170, 1);
+}
+.chatBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hr {
+  border: 1px solid #f7f5ec;
+}
+
+.chatBoxWrapper {
+  overflow-y: scroll;
+  height: 60vh;
+}

@@ -34,7 +34,7 @@ function Contacts({
       }
     };
     getUser();
-  }, [conversation.userIds, currentUser._id]);
+  }, [conversation?.userIds, currentUser._id, currentUser?.id]);
 
   return (
     <div className={styles.contact}>
