@@ -51,5 +51,12 @@ export const resetPassword = (email, password, resetPasswordToken) =>
     resetPasswordToken,
   });
 
-export const getConversations = (userId) =>
-  axios.get(`${BASE_URL}conversations/${userId}`);
+export const newConversation = (userId) => {
+  // console.log(userId);
+  return axios.post(`${BASE_URL}conversations`, { userId });
+};
+export const getAllConversationForParticularUser = (userId) => {
+  return axios.get(`${BASE_URL}conversations/${userId}`);
+};
+export const getMember = (principle) =>
+  axios.get(`${BASE_URL}member/${principle}`);

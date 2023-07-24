@@ -1,12 +1,17 @@
-import axios from 'axios';
 import PropTypes from 'prop-types';
-
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import styles from './Contacts.module.css';
 
-function Contacts({ conversation, currentUser }) {
-  const [user, setUser] = useState(null);
+import { getMember } from '../../api';
+
+function Contacts({
+  conversation,
+  currentUser,
+  firstSenderName,
+  lastSenderName,
+}) {
+  // const [user, setUser] = useState(null);
 
   useEffect(() => {
     const personTalkToId = conversation.userIds.find(
@@ -17,7 +22,7 @@ function Contacts({ conversation, currentUser }) {
     const getUser = async () => {
       try {
         // should it be a family member after activation
-        const res = await axios(`/members/${personTalkToId}`);
+        const res = await getMember(personTalkToId);
         // eslint-disable-next-line
         console.log('PersonTalkToId', res);
       } catch (err) {
@@ -30,7 +35,9 @@ function Contacts({ conversation, currentUser }) {
 
   return (
     <div className={styles.contact}>
-      <span className={styles.contactName}>Michael Daniel</span>
+      <span className={styles.contactName}>
+        {firstSenderName} {lastSenderName}
+      </span>
     </div>
   );
 }
@@ -40,4 +47,6 @@ export default Contacts;
 Contacts.propTypes = {
   conversation: PropTypes.object,
   currentUser: PropTypes.object,
+  firstSenderName: PropTypes.string,
+  lastSenderName: PropTypes.string,
 };

@@ -7,7 +7,7 @@ import styles from './Conversation.module.css';
 
 import Message from './Message';
 
-import { getConversations } from '../../api';
+import { getMember, getAllConversationForParticularUser } from '../../api';
 
 import StartMessaging from '../../media/features/messaging_pic.png';
 import Clip from '../../media/icons/clip.png';
@@ -16,26 +16,46 @@ import Clip from '../../media/icons/clip.png';
 const Conversation = () => {
   // eslint-disable-next-line
   const [messages, setMessages] = useState([]);
-  const [conversations, setConversations] = useState([]);
   // eslint-disable-next-line
-  console.log(conversations);
+  const [firstSenderName, setFirstSenderName] = useState('');
+  const [lastSenderName, setSenderLastName] = useState('');
+  // eslint-disable-next-line
+  const [conversations, setConversations] = useState(['hello', 'hi']);
   // eslint-disable-next-line
   const [socket, setSocket] = useState(null);
   // user who is logged in (principle OR family member ?)
-  const user = { _id: '646c01d9eeccbfdc9f01b200' };
+  const userId = '64b5b57804639d47fa598271';
 
+  useEffect(() => {
+    const getMemberInfo = async () => {
+      try {
+        const res = await getMember(userId);
+        // eslint-disable-next-line
+        console.log(res.data);
+        const { firstName, lastName } = res.data;
+        setFirstSenderName(firstName);
+        setSenderLastName(lastName);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
+    };
+    getMemberInfo();
+  }, [userId]);
+  
   useEffect(() => {
     const getAllConversations = async () => {
       try {
-        const res = await getConversations(user._id);
-        setConversations(res.data);
+        const res = await getAllConversationForParticularUser(userId);
+        // eslint-disable-next-line
+        console.log('RES', res.data);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.log(err);
       }
     };
     getAllConversations();
-  }, [user._id]);
+  }, [userId]);
 
   // useEffect(() => {
   //   const newSocket = io('http://localhost:3001');
@@ -48,14 +68,20 @@ const Conversation = () => {
         <h1>Contacts</h1>
         <hr />
         {conversations.map((c) => (
-          <Contacts key={c._id} conversation={c} currentUser={user} />
+          <Contacts
+            key={c._id}
+            conversation={c}
+            currentUser={userId}
+            firstSenderName={firstSenderName}
+            lastSenderName={lastSenderName}
+          />
         ))}
       </Container>
       <Container className={styles.conversationBox}>
         <Container className={styles.navbar}>
           <div className={styles.main}>
             <div className={styles.recipient}>
-              <span className={styles.letterOfFirstName}>M</span>
+              <span className={styles.letterOfFirstName}>X</span>
               <div className={styles.userOnline}>
                 <h1>Michael Daniel</h1>
                 <span>Online</span>

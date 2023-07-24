@@ -18,27 +18,30 @@ const App = () => (
   <BrowserRouter>
     <Routes>
       <Route>
-        <Route path="/" element={<LandingLayout />}>
+        <Route path='/' element={<LandingLayout />}>
           <Route index element={<Home />} />
           <Route path='/features' element={<FeaturesPage />} />
         </Route>
         <Route path='/signin' element={<Signin />} />
         <Route path='/register/' element={<Register />} />
-        <Route path='/register/:email/:family/:emailVerificationToken' element={<Register />} />
+        <Route
+          path='/register/:email/:family/:emailVerificationToken'
+          element={<Register />}
+        />
         <Route
           path='/activate/:email/:emailVerificationToken'
           element={<Activate />}
         />
         {/* <Route path='/family' element={<Family />} /> */}
-        <Route path='/member' element={<FinalPanel />} /> 
+        <Route path='/member' element={<FinalPanel />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/forgetPassword' element={<ForgetPassword />} />
         <Route
           path='/resetPassword/:email/:resetPasswordToken'
           element={<ResetPassword />}
         />
-        {/* <Route path='/sidebar' element={<Sidebar />} /> */}
-        <Route path='/chat' element={<Conversation />} />
+        <Route path='/conversations' element={<Conversation />} />
+        <Route path='/sidebar' element={<Sidebar />} />
       </Route>
     </Routes>
   </BrowserRouter>
