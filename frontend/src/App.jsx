@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingLayout from './components/LandingLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
-import Conversation from './pages/Chat/Conversation';
 import Dashboard from './pages/Dashboard';
 // import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
@@ -40,7 +39,6 @@ const App = () => (
           path='/resetPassword/:email/:resetPasswordToken'
           element={<ResetPassword />}
         />
-        <Route path='/conversations' element={<Conversation />} />
         <Route path='/sidebar' element={<Sidebar />} />
       </Route>
     </Routes>
