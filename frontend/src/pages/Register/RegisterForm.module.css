@@ -1,0 +1,29 @@
+.error {
+	border-color: #F05153;	
+}
+.error::placeholder {
+	color: #F05153;
+}
+.error:focus {
+	border-color: #F05153;	
+	box-shadow: none;
+}
+
+input {
+	border-color: black;
+}
+.border {
+	border: 1px solid #000000;
+	box-shadow: none;
+}
+ .border:focus {
+	border: 1px solid #000000;
+	box-shadow: none;
+} 
+.signUpText {
+	font-size: 18px;
+	line-height: 21px;
+	text-align: center;	
+	margin-top: 40px;
+} 
+

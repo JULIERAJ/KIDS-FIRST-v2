@@ -28,6 +28,8 @@
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "import/no-unresolved": "off",
+		"no-console": "off",
+		//"eslint import/namespace": "[allowcomputed: 2 }",
         "react/react-in-jsx-scope": "off",
         "max-len": ["error", { "ignoreComments": true, "code": 120 }]
     }

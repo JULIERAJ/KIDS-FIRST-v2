@@ -25,3 +25,26 @@
   text-align: center;
 }
 
+.message-bar-error {
+	background-color: var(--main-red);
+	padding: 3px 0 5px 0;
+	line-height: 22px;
+	padding-left: 20px;
+	
+  }
+  
+  .message-bar-passerror {
+	background-color: var(--main-red);
+	padding: 5px 0 5px 0;
+	line-height: 22px;
+	line-height: 134%;
+	text-align: left;
+	letter-spacing: 0.5%;
+	margin-top: 5px;
+  }
+
+  .my-6 {
+	margin-bottom: 5px;
+	margin-top: 10px
+  }
+

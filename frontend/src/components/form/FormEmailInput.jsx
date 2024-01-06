@@ -5,7 +5,7 @@ const FormEmailInput = (props) => (
     id="email"
     label="Email"
     name="email"
-    placeholder="example@email.com"
+    placeholder="name@email.com"
     type="email"
     // eslint-disable-next-line react/prop-types
     defaultValue={props.defaultValue}

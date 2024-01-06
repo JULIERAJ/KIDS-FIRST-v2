@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 // import Button from 'react-bootstrap/Button';
-// import Form from 'react-bootstrap/Form';
+//import Form from 'react-bootstrap/Form';
 
 // import { createFamily } from '../api';
 
@@ -41,43 +41,39 @@
 //       <br></br>
 //       <span>===========</span>
 
-      <div>
+{/* <div>
         for principle to create a new family: create a new family
-        <Form onSubmit={handleCreateFamily}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Create Family Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter new family name"
-              onChange={(e) => setFamilyName(e.target.value)}
-            />
-          </Form.Group>
-          {/* <br></br>
+  <Form onSubmit={handleCreateFamily}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Label>Create Family Name</Form.Label>
+      <Form.Control
+        type="text"
+        placeholder="Enter new family name"
+        onChange={(e) => setFamilyName(e.target.value)}
+      />
+    </Form.Group> */}
+{/* <br></br>
           <span>===========</span> */}
-
-//           {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+//     <Form.Group className="mb-3" controlId="formBasicEmail">
 //             <Form.Label> your first name</Form.Label>
 //             <Form.Control
-//               type="text"
-//               placeholder="Enter new family name"
-//               onChange={(e) => setFirstName(e.target.value)}
-//             />
-//           </Form.Group>
+//                 type="text"
+//                placeholder="Enter new family name"
+//                onChange={(e) => setFirstName(e.target.value)}
+//              />
+//     </Form.Group>
 
-//           <Form.Group className="mb-3" controlId="formBasicEmail">
-//             <Form.Label>your last name </Form.Label>
-//             <Form.Control
-//               type="text"
-//               placeholder="Enter new family name"
-//               onChange={(e) => setLastName(e.target.value)}
-//             />
-//           </Form.Group> */}
+//     <Form.Group className="mb-3" controlId="formBasicEmail">
+//              <Form.Label>your last name </Form.Label>
+//              <Form.Control 
+//                type="text"
+//                placeholder="Enter new family name"
+//                onChange={(e) => setLastName(e.target.value)}
+//              />
+//     </Form.Group> */
 
-//           <Button variant="primary" type="submit">
-//             create family
-//           </Button>
-//         </Form>
-//       </div>
-//     </div>
-//   );
-// }
+//     <Button variant="primary" type="submit">
+//              create family
+//     </Button>
+//   </Form>
+// </div>;
