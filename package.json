@@ -35,6 +35,7 @@
     ]
   },
   "dependencies": {
-    "firebase": "^9.17.0"
+    "firebase": "^9.17.0",
+    "validator": "^13.9.0"
   }
 }

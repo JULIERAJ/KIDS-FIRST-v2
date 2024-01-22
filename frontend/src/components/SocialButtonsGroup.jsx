@@ -55,7 +55,7 @@ const SocialButton = ({ icon, title, onClick }) => (
 );
 
 const SocialButtonsGroup = () => (
-  <Row className="py-5">
+  <Row className="py-3">
     <Col xs={12} md={6}>
       <SocialButton icon={googleIcon} title="Google"/>
     </Col>

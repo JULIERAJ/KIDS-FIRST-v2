@@ -1,14 +1,17 @@
+import React from 'react';
+
 import FromInput from './FormInput';
 
+import '../MessageBar/styles.css';
+
 const FormEmailInput = (props) => (
-  <FromInput 
-    id="email"
-    label="Email"
-    name="email"
-    placeholder="example@email.com"
-    type="email"
-    // eslint-disable-next-line react/prop-types
-    defaultValue={props.defaultValue}
+
+  <FromInput
+    id='email'
+    label='Email Address' 
+    name='email'
+    placeholder='name@mail.com'
+    type='email'
     {...props}
   />
 );

@@ -2,7 +2,13 @@ import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 
-const FromInput = ({ label, ...props }) => (
+//import style from '../../pages/Register/RegisterForm.module.css';
+
+import '../MessageBar/styles.css';
+
+//let email = '';
+
+const FromInput = ({ label,...props }) => (
   <Form.Group className='py-2'>
     <Form.Label>{label}</Form.Label>
     <Form.Control {...props} />
@@ -12,5 +18,4 @@ const FromInput = ({ label, ...props }) => (
 FromInput.propTypes = {
   label: PropTypes.string,
 };
-
 export default FromInput;
