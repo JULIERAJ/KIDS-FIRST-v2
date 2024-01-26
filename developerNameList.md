@@ -1,4 +1,5 @@
-# Here is a list of developers that contributed in developing this application.
+# Here is a list of developers involved in the development of this application.
+
 YanBin Yuan
 
 Ehsan Elgendi
