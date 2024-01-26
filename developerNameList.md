@@ -11,3 +11,5 @@ Negar Lashgari
 Iryna Iurchuk
 
 Elena Cherpakova
+
+Iza Zamorska-Wasielak
