@@ -41,43 +41,43 @@
 //       <br></br>
 //       <span>===========</span>
 
-      <div>
-        for principle to create a new family: create a new family
-        <Form onSubmit={handleCreateFamily}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Create Family Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter new family name"
-              onChange={(e) => setFamilyName(e.target.value)}
-            />
-          </Form.Group>
-          {/* <br></br>
-          <span>===========</span> */}
-
-//           {/* <Form.Group className="mb-3" controlId="formBasicEmail">
-//             <Form.Label> your first name</Form.Label>
+//       <div>
+//         for principle to create a new family: create a new family
+//         <Form onSubmit={handleCreateFamily}>
+//           <Form.Group className="mb-3" controlId="formBasicEmail">
+//             <Form.Label>Create Family Name</Form.Label>
 //             <Form.Control
 //               type="text"
 //               placeholder="Enter new family name"
-//               onChange={(e) => setFirstName(e.target.value)}
+//               onChange={(e) => setFamilyName(e.target.value)}
 //             />
 //           </Form.Group>
+//           {/* <br></br>
+//           <span>===========</span> */}
 
-//           <Form.Group className="mb-3" controlId="formBasicEmail">
-//             <Form.Label>your last name </Form.Label>
-//             <Form.Control
-//               type="text"
-//               placeholder="Enter new family name"
-//               onChange={(e) => setLastName(e.target.value)}
-//             />
-//           </Form.Group> */}
+// //           {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+// //             <Form.Label> your first name</Form.Label>
+// //             <Form.Control
+// //               type="text"
+// //               placeholder="Enter new family name"
+// //               onChange={(e) => setFirstName(e.target.value)}
+// //             />
+// //           </Form.Group>
 
-//           <Button variant="primary" type="submit">
-//             create family
-//           </Button>
-//         </Form>
-//       </div>
-//     </div>
-//   );
-// }
+// //           <Form.Group className="mb-3" controlId="formBasicEmail">
+// //             <Form.Label>your last name </Form.Label>
+// //             <Form.Control
+// //               type="text"
+// //               placeholder="Enter new family name"
+// //               onChange={(e) => setLastName(e.target.value)}
+// //             />
+// //           </Form.Group> */}
+
+// //           <Button variant="primary" type="submit">
+// //             create family
+// //           </Button>
+// //         </Form>
+// //       </div>
+// //     </div>
+// //   );
+// // }

@@ -9,7 +9,7 @@ import Message from '../../media/icons/message.png';
 import Setting from '../../media/icons/setting.png';
 // import Wallet from '../../media/icons/wallet.png';
 
-export const SidebarData = [
+export const SIDEBAR_DATA = [
   {
     title: 'Dashboard',
     icon: Home,
