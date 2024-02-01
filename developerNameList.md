@@ -17,3 +17,5 @@ Iza Zamorska-Wasielak
 Zainab Al-mateen
 
 Vrushali Haldankar
+
+Inna Lavrova
