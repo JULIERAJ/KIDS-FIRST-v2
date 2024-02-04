@@ -19,7 +19,7 @@ export default function Home() {
         <div className="left-blurb">
           <h1>A CO-PARENTING APP SOLUTION</h1>
           <p>that maintain harmony in your kid’s lives with the help of one click</p>
-          <Button className="home-signup-btn-2" href="/Register">
+          <Button className="home-signup-btn-2" href="/register">
             Sign up now
           </Button>
         </div>

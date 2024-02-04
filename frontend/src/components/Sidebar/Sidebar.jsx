@@ -4,7 +4,7 @@ import { Image, Container, Col, Nav, Row, Tab } from 'react-bootstrap';
 
 import styles from './Sidebar.module.css';
 
-import { SidebarData } from './SidebarData';
+import { SIDEBAR_DATA } from './sidebarData';
 
 import kidsFirstLogo from '../../media/logo/kids_first_logo_beta.png';
 
@@ -45,7 +45,7 @@ const Sidebar = () => {
       <Container as='div' className={styles.sidebarHeader}>
         <Image src={kidsFirstLogo} alt='mainLogo' />
       </Container>
-      {SidebarData.map((item, key) => (
+      {SIDEBAR_DATA.map((item, key) => (
         <SidebarItemsCard key={key} {...item} />
       ))}
     </Container>
