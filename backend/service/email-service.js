@@ -37,7 +37,7 @@ const sendActivationEmail = async (email, emailVerificationToken) => {
 };
 
 const sendResetPasswordEmail = async (email, resetPasswordToken) => {
-  const href = `${process.env.CLIENT_URL}/resetPassword/${email}/${resetPasswordToken}`;
+  const href = `${process.env.CLIENT_URL}/reset-password/${email}/${resetPasswordToken}`;
 
   try {
     await transporter.sendMail({

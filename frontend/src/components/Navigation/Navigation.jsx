@@ -44,10 +44,10 @@ const Navigation = () => {
           </Dropdown.Menu>
         </Dropdown>
         <Button className={styles.navigation__login_button}>
-          <NavLink to="/Signin">Log in</NavLink>
+          <NavLink to="/signin">Log in</NavLink>
         </Button>
         <Button className={styles.navigation__signup_button}>
-          <NavLink to="/Register">Sign up</NavLink>
+          <NavLink to="/register">Sign up</NavLink>
         </Button>
       </Container>
     </>

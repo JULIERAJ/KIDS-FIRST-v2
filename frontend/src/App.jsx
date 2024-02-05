@@ -22,7 +22,7 @@ const App = () => (
           <Route path='/features' element={<FeaturesPage />} />
         </Route>
         <Route path='/signin' element={<Signin />} />
-        <Route path='/register/' element={<Register />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/register/:email/:family/:emailVerificationToken' element={<Register />} />
         <Route
           path='/activate/:email/:emailVerificationToken'
@@ -31,9 +31,9 @@ const App = () => (
         {/* <Route path='/family' element={<Family />} /> */}
         <Route path='/member' element={<FinalPanel />} /> 
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/forgetPassword' element={<ForgetPassword />} />
+        <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route
-          path='/resetPassword/:email/:resetPasswordToken'
+          path='/reset-password/:email/:resetPasswordToken'
           element={<ResetPassword />}
         />
         <Route path='/sidebar' element={<Sidebar />} />

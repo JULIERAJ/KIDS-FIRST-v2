@@ -7,7 +7,6 @@ import Card from 'react-bootstrap/Card';
 import styles from './CardFeature.module.css';
 
 const CardFeature = ({ image, title, content, bgcolor, main }) => {
-  //eslint-disable-next-line
 
   return (
     <Card
