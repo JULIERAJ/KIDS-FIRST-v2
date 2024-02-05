@@ -17,25 +17,27 @@ import TextLink from '../../components/TextLink';
 const Register = () => {
 
   const params = useParams();
-  let paramEmail = params.email; 
-  let paramEmailVerificationToken = params.emailVerificationToken; 
-  let paramFamily = params.family; 
+  let paramEmail = params.email;
+  let paramEmailVerificationToken = params.emailVerificationToken;
+  let paramFamily = params.family;
 
   const [userData, setUserData] = useState({});
   const [activeComponent, setActiveComponent] = useState(true);
   const [loading, setLoading] = useState(true);
+  // const [errorMessage, setErrorMessage] = useState('');
 
   const registerUserHandler = async (email, password) => {
     try {
       const { data } = await register({ email, password });
       setUserData(data);
-      localStorage.setItem('storedUser', data); 
+      localStorage.setItem('storedUser', data);
       setActiveComponent(false);
     } catch (error) {
       console.log(error);
+      // setErrorMessage(error.response.data.message);
     }
   };
-  
+
   return (
     <>
       <Header widget={
@@ -46,10 +48,11 @@ const Register = () => {
         <FatherSonBlock>
           <h1 className={styles.registerTitle}>Sign up Kids First</h1>
           {
-            activeComponent ?  
-              <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail}/> :  
-              <EmailVerify userData={userData}/> 
-          } 
+            activeComponent ?
+            //set error message in registerForm errorMessage={errorMessage}- 
+              <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail} /> :
+              <EmailVerify userData={userData}/>
+          }
         </FatherSonBlock>
       </Container>
     </>

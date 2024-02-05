@@ -18,7 +18,6 @@ const DEFAULT_ERROR_MESSAGE =
     'You are using symbols in your passwords or your passwords do not match.';
 
 export const RegisterForm = (props) => {
-
   console.log(props);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,12 +43,27 @@ export const RegisterForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const form = event.currentTarget;
+    //added for checking passwords match
+    // if (password !== passwordConfirm) {
+    //   setErrorMessage('Passwords do not match');
+    //   return;
+    // }
+    //error message from backend
+    // if (props.errorMessage) {
+    //   setErrorMessage(props.errorMessage);
+    //   return;
+    // }
 
+    const form = event.currentTarget;
     if (form.checkValidity()) {
-      props.onSubmitData(email, password).catch((e) => {
-        setErrorMessage(e.response.data.message);
-      });
+      props.onSubmitData(email, password)
+        // .then(() => {
+        //   console.log('success');
+        //   setErrorMessage('');
+        // })
+        .catch((e) => {
+          setErrorMessage(e.response.data.message);
+        });
     } else {
       setErrorMessage(DEFAULT_ERROR_MESSAGE);
     }
@@ -75,7 +89,7 @@ export const RegisterForm = (props) => {
           required
           onChange={handleEmailChange}
           defaultValue={email}
-          
+
         />
         <FormPasswordInput onChange={handlePasswordChange} required />
         <FormPasswordInput
@@ -113,5 +127,6 @@ export default RegisterForm;
 RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
   email: PropTypes.string,
-  paramEmail: PropTypes.string
+  paramEmail: PropTypes.string,
+  // errorMessage: PropTypes.string
 };
