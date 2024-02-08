@@ -44,15 +44,18 @@ export const RegisterForm = (props) => {
     event.preventDefault();
 
     //added for checking passwords match
-    // if (password !== passwordConfirm) {
-    //   setErrorMessage('Passwords do not match');
-    //   return;
-    // }
+    //tested
+    if (password !== passwordConfirm) {
+      setErrorMessage('Passwords do not match');
+      return;
+    }
+    //tested
     //error message from backend
-    // if (props.errorMessage) {
-    //   setErrorMessage(props.errorMessage);
-    //   return;
-    // }
+    if (props.errorMessage) {
+      setErrorMessage(props.errorMessage);
+      
+      return;
+    }
 
     const form = event.currentTarget;
     if (form.checkValidity()) {
@@ -128,5 +131,5 @@ RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
   email: PropTypes.string,
   paramEmail: PropTypes.string,
-  // errorMessage: PropTypes.string
+  errorMessage: PropTypes.string
 };
