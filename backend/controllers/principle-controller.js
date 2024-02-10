@@ -134,7 +134,7 @@ const requestResetPassword = async (req, res) => {
   try {
     const user = await principleService.findUser(email);
     if (!user) {
-      return res.status(404).json({ error: 'Email not found' });
+      return res.status(404).json({ error: 'No user found with this email address' });
     }
     // Generate a reset password token
     const passwordResetVerificationToken = await jwt.sign(

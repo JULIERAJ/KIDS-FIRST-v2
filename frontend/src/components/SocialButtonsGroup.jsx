@@ -8,7 +8,6 @@ import Row from 'react-bootstrap/Row';
 import { authentication } from '../config/firebase-config';
 import facebookIcon from '../media/icons/facebook.png';
 import googleIcon from '../media/icons/google.png';
-//firebase
 
 //for facebook sign in
 const signInWithFacebook = () => {

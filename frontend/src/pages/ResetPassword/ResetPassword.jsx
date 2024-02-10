@@ -15,9 +15,7 @@ import MessageBar from '../../components/MessageBar';
 import TextLink from '../../components/TextLink';
 import logoPswdChanged from '../../media/icons/pswd-changed.png';
 
-// eslint-disable-next-line max-len
-const DEFAULT_ERROR_MESSAGE =
-  'You are using symbols in your passwords or your passwords do not match.';
+const DEFAULT_ERROR_MESSAGE = 'You are using symbols in your passwords or your passwords do not match.';
 
 export default function ResetPassword() {
   const { email, resetPasswordToken } = useParams();

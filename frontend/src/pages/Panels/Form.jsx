@@ -8,6 +8,9 @@ import FormInputs from './FormInputs';
 import Header from '../.././components/Header';
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
+
+const widget = <h3>Welcome!</h3>;
+
 const Form = () => {
   const {
     setPage,
@@ -20,8 +23,6 @@ const Form = () => {
     doneHide,
     isLastPage,
   } = useFormContext();
-
-  const widget = <h3>Welcome!</h3>;
 
   const handlePrev = () => {
     setPage((prev) => prev - 1);
@@ -52,9 +53,11 @@ const Form = () => {
           window.location.href = '/dashboard';
         })
         .catch((e) => {
+          // eslint-disable-next-line no-console
           console.log(e);
         });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error submitting form:', error);
     }
   };

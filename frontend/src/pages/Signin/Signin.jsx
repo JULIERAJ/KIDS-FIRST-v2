@@ -67,7 +67,7 @@ export default function Signin() {
             />
 
             <div className='checkbox mb-3'>
-              <a className='btn forget-password' href='/forgetPassword'>
+              <a className='btn forget-password' href='/forgot-password'>
                 Forgot your password?
               </a>
             </div>
