@@ -10,12 +10,9 @@ import FormEmailInput from '../../components/form/FormEmailInput';
 import Header from '../../components/Header/Header';
 import MessageBar from '../../components/MessageBar';
 import TextLink from '../../components/TextLink';
-
 import logoEmailSent from '../../media/icons/email_sent.png';
 
-const HeaderLink = (
-  <TextLink title='Not a member?' to='/register' linkTitle='Sign up' />
-);
+const HeaderLink = <TextLink title='Not a member?' to='/register' linkTitle='Sign up' />;
 
 export default function ForgetPassword() {
   const emailDisplay = useRef('');

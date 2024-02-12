@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import Form from 'react-bootstrap/Form';
 
 const FromInput = ({ label, ...props }) => (

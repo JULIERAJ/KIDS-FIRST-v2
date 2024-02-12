@@ -3,13 +3,12 @@ const jwt = require('jsonwebtoken');
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
-const { default: mongoose } = require('mongoose');
+
 require('dotenv').config({ path: './.env.local' });
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
-const passwordRegExp =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
 const registration = async (req, res) => {
@@ -25,7 +24,6 @@ const registration = async (req, res) => {
     }
 
     if (!passwordRegExp.test(password)) {
-      // eslint-disable-next-line max-len
       return res.status(400).json({
         message:
           'Password must be at least 10 characters long and contain\
@@ -51,7 +49,6 @@ const registration = async (req, res) => {
       });
     }
   } catch (e) {
-    console.log('principle controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
@@ -71,8 +68,8 @@ const accountActivation = async (req, res) => {
         emailIsActivated: user.emailIsActivated,
       });
     }
-    const activationTokenVerified =
-      await principleService.emailTokenVerification(activationToken);
+
+    const activationTokenVerified = await principleService.emailTokenVerification(activationToken);
 
     if (!activationTokenVerified) {
       return res
@@ -84,8 +81,7 @@ const accountActivation = async (req, res) => {
       // autogenerate family name and save it in db
       const familyName = familyService.generateFamilyName();
 
-      const familyNameRegistartion = 
-      await familyService.familyRegistration(familyName, principleData._id);
+      const familyNameRegistartion = await familyService.familyRegistration(familyName, principleData._id);
 
       return res.status(200).json({
         message: 'the account is successfully activated',
@@ -109,18 +105,22 @@ const login = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const correctPassword = await principleService.isPasswordCorrect(
-      email,
-      password,
-    );
+    const correctPassword = await principleService.isPasswordCorrect(email, password );
     if (!correctPassword) {
       return res
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
+    
     // when the user login, the find that user's family(s), then push the info  to the front 
     const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
-    return res.status(200).json({ email: user.email, id: user._id, familyId : principleFamily[0].id , familyName: principleFamily[0].familyName});
+
+    return res.status(200).json({ 
+      email: user.email,
+      id: user._id,
+      familyId: principleFamily[0].id,
+      familyName: principleFamily[0].familyName
+    });
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
   }

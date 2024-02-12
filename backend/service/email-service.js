@@ -59,9 +59,7 @@ const sendResetPasswordEmail = async (email, resetPasswordToken) => {
   }
 };
 const sendInvitationEmail = async(email, family, emailVerificationToken,firstName) => {
-  console.log('==== here is the email service sendInvitationEmail');
   const href = `${process.env.CLIENT_URL}/register/${email}/${family}/${emailVerificationToken}`;
-  console.log('href????',href);
   try {
     // name of the Invitor in the email will be fetched from the form together 
     //with the invitee email
@@ -82,7 +80,6 @@ const sendInvitationEmail = async(email, family, emailVerificationToken,firstNam
     });
     return href; 
   } catch (e) {
-    console.log('===== this is the error in the sendInvitationEmail');
     return e;
   }
 };

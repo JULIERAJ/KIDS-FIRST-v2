@@ -4,7 +4,6 @@ import { Col, Container, Image, Row } from 'react-bootstrap';
 import styles from './FeaturesPage.module.css';
 
 import CardFeature from '../../components/CardFeature';
-
 import { cardMainFeature, cardExtraFeature } from '../../data/features.data';
 import parentChild from '../../media/features/mother_son_flying.png';
 

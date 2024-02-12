@@ -25,7 +25,7 @@
    "indent": ["error", 2],
     // "linebreak-style":  ["error", "windows"],
     "linebreak-style": ["error", "unix"],
-    "max-len": ["error", {"code": 90, "ignoreUrls": true}],
+    "max-len": ["error", {"code": 120, "ignoreUrls": true}],
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
     "no-console": "error",

@@ -1,7 +1,5 @@
-const Member = require('../models/Member');
-const mongoose = require('mongoose');
-const Invitation = require('../models/Invitation');
 const invitationController = require('../controllers/invitation-controller');
+const Member = require('../models/Member');
 
 // check duplication: firstname, lastname, familyid are all the same
 const isDuplicate = async (firstName, lastName, family) => {
@@ -10,7 +8,6 @@ const isDuplicate = async (firstName, lastName, family) => {
     lastName,
     family
   });
-  console.log('isDuplicate', checkDuplicate);
   return checkDuplicate ? true : false;
 };
 
@@ -35,13 +32,13 @@ const saveKids = async (kidsList, family) => {
     if (kidsList) {
       await Member.insertMany(
         kidsList
-        .map((kid) => kid.trim())
-        .filter((kid) => kid.length > 0)
-        .map((kid) => new Member({ firstName: kid, family, role: 'kid' })
-      ));
+          .map((kid) => kid.trim())
+          .filter((kid) => kid.length > 0)
+          .map((kid) => new Member({ firstName: kid, family, role: 'kid' }))
+      );
     }
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
 
