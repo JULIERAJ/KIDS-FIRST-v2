@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
-import FromInput from './FormInput';
+import { useState } from 'react';
+
+import FormInput from './FormInput';
 
 /**
   RegExp: at least one symbol, uppercase letter, lowercase letter, number,
@@ -16,21 +18,32 @@ const FormPasswordInput = ({
   ...rest
 }) => {
   const preventCopyPaste = (e) => e.preventDefault();
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(showPassword => !showPassword);
+  };
 
   return (
-    <FromInput 
-      id={id}
-      label={label}
-      name={name}
-      minLength="8"
-      maxLength="20"
-      pattern={passwordRegExp}
-      placeholder="********"
-      type="password" 
-      onCopy={preventCopyPaste}
-      onPaste={preventCopyPaste}
-      {...rest}
-    />
+    <div style={{ position: 'relative' }}>
+      <FormInput 
+        id={id}
+        label={label}
+        name={name}
+        minLength="8"
+        maxLength="20"
+        pattern={passwordRegExp}
+        placeholder="********"
+        type={showPassword ? 'text' : 'password'}
+        onCopy={preventCopyPaste}
+        onPaste={preventCopyPaste}
+        {...rest}
+      />
+      
+      <i 
+        onClick={toggleShowPassword} 
+        className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}
+      ></i>
+    </div>
   );
 };
 

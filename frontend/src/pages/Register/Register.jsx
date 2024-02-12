@@ -24,6 +24,8 @@ const Register = () => {
   const [userData, setUserData] = useState({});
   const [activeComponent, setActiveComponent] = useState(true);
   const [loading, setLoading] = useState(true);
+  //added password error message
+  const [errorMessage, setErrorMessage] = useState('');
 
   const registerUserHandler = async (email, password) => {
     try {
@@ -46,10 +48,11 @@ const Register = () => {
         <FatherSonBlock>
           <h1 className={styles.registerTitle}>Sign up Kids First</h1>
           {
-            activeComponent ?  
-              <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail}/> :  
-              <EmailVerify userData={userData}/> 
-          } 
+            activeComponent ?
+            //set error message in registerForm errorMessage={errorMessage}-
+              <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail} errorMessage={errorMessage}/> :
+              <EmailVerify userData={userData}/>
+          }
         </FatherSonBlock>
       </Container>
     </>

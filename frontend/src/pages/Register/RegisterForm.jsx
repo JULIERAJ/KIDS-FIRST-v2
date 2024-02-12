@@ -10,7 +10,7 @@ import styles from './Register.module.css';
 import FormEmailInput from '../../components/form/FormEmailInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
 
-// import IconText from '../../components/IconText';
+import IconText from '../../components/IconText';
 import MessageBar from '../../components/MessageBar';
 import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
@@ -28,6 +28,25 @@ export const RegisterForm = (props) => {
   const [isTouched, setIsTouched] = useState(false);
   const [validated, setIsValidated] = useState(false);
 
+  // check password requirements
+  const [requirementsMet, setRequirementsMet] = useState({
+    length: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false,
+    match: false
+  });
+
+  const passwordRequirements = {
+    length: /^(.){8,25}$/,
+    uppercase: /[A-Z]/,
+    lowercase: /[a-z]/,
+    number: /[0-9]/,
+    special: /[@$!%*?^&]/,
+    match: /./ // checked separately without regex
+  };
+
   useEffect(() => {
     if (props.paramEmail) {
       setEmail(props.paramEmail);
@@ -35,9 +54,27 @@ export const RegisterForm = (props) => {
   }, [props.paramEmail]);
 
   const handleEmailChange = ({ target: { value } }) => setEmail(value);
-  const handlePasswordChange = ({ target: { value } }) => setPassword(value);
-  const handlePasswordConfirmChange = ({ target: { value } }) =>
+
+  // check password requirements
+  const handlePasswordChange = ({ target: { value } }) => {
+    setPassword(value);
+
+    const newRequirementsMet = { ...requirementsMet };
+    for (const [requirement, regex] of Object.entries(passwordRequirements)) {
+      newRequirementsMet[requirement] = regex.test(value);
+    }
+    newRequirementsMet.match = value === passwordConfirm;
+    setRequirementsMet(newRequirementsMet);
+  };
+  const allRequirementsMet = Object.values(requirementsMet).every(Boolean);
+
+  const handlePasswordConfirmChange = ({ target: { value } }) => {
     setPasswordConfirm(value);
+
+    const newRequirementsMet = { ...requirementsMet };
+    newRequirementsMet.match = password === value;
+    setRequirementsMet(newRequirementsMet);
+  };
 
   const handleFormChange = () => !isTouched && setIsTouched(true);
 
@@ -86,11 +123,30 @@ export const RegisterForm = (props) => {
           required
         />
 
-        {/* <MessageBar variant='success'>
-          <IconText title='English uppercase/lowercase characters' />
-          <IconText title='Numbers (0-9)' />
-          <IconText title='Minimum eight characters' />
-        </MessageBar> */}
+        <Form.Check 
+          type="checkbox" 
+          label="Show Password" 
+          onClick={(event) => {
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirmPassword');
+            if (event.target.checked) {
+              passwordField.type = 'text';
+              confirmPasswordField.type = 'text';
+            } else {
+              passwordField.type = 'password';
+              confirmPasswordField.type = 'password';
+            }
+          }}
+        />
+
+        <MessageBar variant={allRequirementsMet ? 'success' : 'error'}>
+          <IconText title='At least 1 uppercase character' clear={requirementsMet.uppercase} />
+          <IconText title='At least 1 lowercase character' clear={requirementsMet.lowercase} />
+          <IconText title='At least 1 number' clear={requirementsMet.number} />
+          <IconText title='At least 1 special character ()' clear={requirementsMet.special} />
+          <IconText title='Between 8-25 characters' clear={requirementsMet.length} />
+          <IconText title='Passwords must match' clear={requirementsMet.match} />
+        </MessageBar>
 
         <Button
           className='primary-btn w-100 my-5'
