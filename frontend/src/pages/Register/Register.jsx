@@ -15,12 +15,15 @@ const Register = () => {
 
   const params = useParams();
   let paramEmail = params.email; 
-  // let paramEmailVerificationToken = params.emailVerificationToken; 
-  // let paramFamily = params.family; 
+  /* eslint-disable no-unused-vars */
+  let paramEmailVerificationToken = params.emailVerificationToken; 
+  /* eslint-disable no-unused-vars */
+  let paramFamily = params.family; 
 
   const [userData, setUserData] = useState({});
   const [activeComponent, setActiveComponent] = useState(true);
-  // const [loading, setLoading] = useState(true);
+  /* eslint-disable no-unused-vars */
+  const [loading, setLoading] = useState(true);
 
   const registerUserHandler = async (email, password) => {
     try {

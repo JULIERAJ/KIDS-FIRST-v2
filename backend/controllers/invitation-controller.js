@@ -31,29 +31,30 @@ const invitation = async (inviter, family, inviteeEmail, firstName, inviteeInvit
       } 
       
       if (!duplicate) {
-        // const emailVerificationToken = await jwt.sign(
-        //   { inviteeEmail },
-        //   process.env.JWT_EMAIL_VERIFICATION_SECRET,
-        //   { expiresIn: '24h' }
-        // );
+        const emailVerificationToken = await jwt.sign(
+          { inviteeEmail },
+          process.env.JWT_EMAIL_VERIFICATION_SECRET,
+          { expiresIn: '24h' }
+        );
 
-        // const invitationURL = await emailService.sendInvitationEmail(
-        //   inviteeEmail,
-        //   family,
-        //   emailVerificationToken,
-        //   firstName
-        // );
+        const invitationURL = await emailService.sendInvitationEmail(
+          inviteeEmail,
+          family,
+          emailVerificationToken,
+          firstName
+        );
         /*return res.status(201).json({
           message: 'Invitation email is sent',
           inviteeEmail: inviteeEmail,
         });*/ 
 
-        // const invitee = await invitationService.createInvitation(
-        //   inviter,
-        //   family,
-        //   inviteeEmail, 
-        //   invitationURL
-        // );
+        /* eslint-disable no-unused-vars */
+        const invitee = await invitationService.createInvitation(
+          inviter,
+          family,
+          inviteeEmail, 
+          invitationURL
+        );
       }
     } catch (e) {
       // return res.status(500).json('something went wrong');

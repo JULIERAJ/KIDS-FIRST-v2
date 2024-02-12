@@ -13,9 +13,10 @@ const signInWithFacebook = () => {
   const provider = new FacebookAuthProvider();
 
   signInWithPopup(authentication,provider)
-    .then(() => {
-      // const credential = FacebookAuthProvider.credentialFromResult(result);
-      // const accessToken = credential.accessToken;
+    .then((result) => {
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      /* eslint-disable no-unused-vars */
+      const accessToken = credential.accessToken;
 
       //we need to save this user in our database and redirect to family
 
