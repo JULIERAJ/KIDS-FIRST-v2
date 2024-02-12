@@ -21,11 +21,11 @@ const registration = async (req, res) => {
     if (user) {
       return res
         .status(409)
-        .json({ message: `The user with ${email} email already exists` });
+        .json({ message: `The email address you entered has already been registered
+        with Kids First. Please try with ‘Log In’.` });
     }
 
-    if (!passwordRegExp.test(password)) {
-      // eslint-disable-next-line max-len
+    else if (!passwordRegExp.test(password)) {
       return res.status(400).json({
         message:
           'Password must be at least 10 characters long and contain\
@@ -33,7 +33,8 @@ const registration = async (req, res) => {
       });
     } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });
-    } else if (!user) {
+    }
+    else if (!user) {
       user = await principleService.registration(email, password);
 
       const emailVerificationToken = await jwt.sign(
@@ -51,7 +52,6 @@ const registration = async (req, res) => {
       });
     }
   } catch (e) {
-    console.log('principle controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
@@ -63,7 +63,7 @@ const accountActivation = async (req, res) => {
 
   try {
     const user = await principleService.findUser(email);
-    
+
     if (user.emailIsActivated === true) {
       return res.status(200).json({
         message: 'Email has been verified',
@@ -80,11 +80,11 @@ const accountActivation = async (req, res) => {
         .json({ message: 'activation link is not correct' });
     } else {
       const principleData = await principleService.activateAccount(email);
-      
+
       // autogenerate family name and save it in db
       const familyName = familyService.generateFamilyName();
 
-      const familyNameRegistartion = 
+      const familyNameRegistartion =
       await familyService.familyRegistration(familyName, principleData._id);
 
       return res.status(200).json({
@@ -118,9 +118,11 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-    // when the user login, the find that user's family(s), then push the info  to the front 
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
-    return res.status(200).json({ email: user.email, id: user._id, familyId : principleFamily[0].id , familyName: principleFamily[0].familyName});
+    // when the user login, the find that user's family(s), then push the info  to the front
+    const principleFamily = await familyService.findPrincipleFamilyName(user._id);
+    return res.status(200).json(
+      { email: user.email, id: user._id, familyId : principleFamily[0].id ,
+        familyName: principleFamily[0].familyName});
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
   }

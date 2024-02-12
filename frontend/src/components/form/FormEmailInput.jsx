@@ -1,7 +1,7 @@
 import FromInput from './FormInput';
 
 const FormEmailInput = (props) => (
-  <FromInput 
+  <FromInput
     id="email"
     label="Email"
     name="email"

@@ -24,6 +24,7 @@ const Register = () => {
   const [userData, setUserData] = useState({});
   const [activeComponent, setActiveComponent] = useState(true);
   const [loading, setLoading] = useState(true);
+  //added password error message
   const [errorMessage, setErrorMessage] = useState('');
 
   const registerUserHandler = async (email, password) => {
