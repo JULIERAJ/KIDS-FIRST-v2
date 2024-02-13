@@ -7,6 +7,7 @@ const FormEmailInput = (props) => (
     name="email"
     placeholder="example@email.com"
     type="email"
+    autoComplete="email"
     // eslint-disable-next-line react/prop-types
     defaultValue={props.defaultValue}
     {...props}

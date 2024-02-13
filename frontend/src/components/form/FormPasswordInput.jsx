@@ -27,6 +27,7 @@ const FormPasswordInput = ({
       pattern={passwordRegExp}
       placeholder="********"
       type="password" 
+      autoComplete="password"
       onCopy={preventCopyPaste}
       onPaste={preventCopyPaste}
       {...rest}
