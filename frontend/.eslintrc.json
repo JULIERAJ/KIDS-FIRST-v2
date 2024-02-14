@@ -35,6 +35,7 @@
         "react-hooks/exhaustive-deps": "warn",
         "import/no-unresolved": "off",
         "react/react-in-jsx-scope": "off",
-        "max-len": ["error", { "ignoreComments": true, "code": 120 }]
+        "max-len": ["error", { "ignoreComments": true, "code": 120 }],
+        "quotes": [2, "single", { "avoidEscape": true }]
     }
 }

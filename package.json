@@ -29,10 +29,7 @@
     "lint-staged": "^13.1.0"
   },
   "lint-staged": {
-    "**/*.{js,jsx}": [
-      "npm run lint:fix:api",
-      "npm run lint:fix:client"
-    ]
+ 
   },
   "dependencies": {
     "firebase": "^9.17.0"

@@ -1,28 +1,27 @@
 /* eslint-disable no-console */
-import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
+import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
 
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 
-import styles from './Register.module.css';
+import styles from "./Register.module.css";
 
-import FormEmailInput from '../../components/form/FormEmailInput';
-import FormPasswordInput from '../../components/form/FormPasswordInput';
+import FormEmailInput from "../../components/form/FormEmailInput";
+import FormPasswordInput from "../../components/form/FormPasswordInput";
 
-import IconText from '../../components/IconText';
-import MessageBar from '../../components/MessageBar';
-import SocialButtonsGroup from '../../components/SocialButtonsGroup';
+import IconText from "../../components/IconText";
+import MessageBar from "../../components/MessageBar";
+import SocialButtonsGroup from "../../components/SocialButtonsGroup";
 
 // const DEFAULT_ERROR_MESSAGE =
 //     'You are using symbols in your passwords or your passwords do not match.';
 
 export const RegisterForm = (props) => {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isTouched, setIsTouched] = useState(false);
   const [validated, setIsValidated] = useState(false);
   const [emailValidation, setEmailValidation] = useState(null);
@@ -42,7 +41,7 @@ export const RegisterForm = (props) => {
     lowercase: /[a-z]/,
     number: /[0-9]/,
     special: /[@$!%*?^&]/,
-    match: /./ // checked separately without regex
+    match: /./, // checked separately without regex
   };
 
   useEffect(() => {
@@ -81,16 +80,8 @@ export const RegisterForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // email check
-    if (emailValidation !== 'valid') {
-      setErrorMessage(
-        <div>
-        Email address format is not correct. <br />
-        Please enter the valid email address format
-        </div>
-      );
-      return;
-    }
-    if(allRequirementsMet) {
+
+    if (allRequirementsMet) {
       props.onSubmitData(email, password);
     }
 
@@ -115,7 +106,20 @@ export const RegisterForm = (props) => {
   const handleEmailValidation = (emailValue) => {
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
 
-    setEmailValidation(isValidEmail ? 'valid' : 'invalid');
+    setEmailValidation(isValidEmail ? "valid" : "invalid");
+    if (emailValidation !== "valid") {
+      setErrorMessage(
+        <div>
+          Email address format is not correct. <br />
+          Please enter the valid email address format
+
+        </div>
+      );
+      return;
+    } else {
+      setErrorMessage();
+      return;
+    }
   };
   const handleInputChange = (event) => {
     const emailValue = event.target.value;
@@ -127,27 +131,25 @@ export const RegisterForm = (props) => {
   return (
     <>
       <Form
-        className='py-4'
-        onChange={handleFormChange}
+        className="py-4"
+        onBlur={handleFormChange}
         onSubmit={handleSubmit}
         noValidate
         validated={validated}
       >
         <FormEmailInput
-          autoComplete='off'
+          autoComplete="off"
           required
           onChange={handleInputChange}
           defaultValue={email}
-          isInvalid={emailValidation === 'invalid'}
-          isValid={emailValidation === 'valid'}
+          isInvalid={emailValidation === "invalid"}
+          isValid={emailValidation === "valid"}
         />
-        <FormPasswordInput onChange={handlePasswordChange}
-          required
-        />
+        <FormPasswordInput onChange={handlePasswordChange} required />
         <FormPasswordInput
-          id='confirmPassword'
-          label='Password Confirmation'
-          name='confirmPassword'
+          id="confirmPassword"
+          label="Password Confirmation"
+          name="confirmPassword"
           onChange={handlePasswordConfirmChange}
           required
         />
@@ -155,28 +157,44 @@ export const RegisterForm = (props) => {
           type="checkbox"
           label="Show Password"
           onClick={(event) => {
-            const passwordField = document.getElementById('password');
-            const confirmPasswordField = document.getElementById('confirmPassword');
+            const passwordField = document.getElementById("password");
+            const confirmPasswordField =
+              document.getElementById("confirmPassword");
             if (event.target.checked) {
-              passwordField.type = 'text';
-              confirmPasswordField.type = 'text';
+              passwordField.type = "text";
+              confirmPasswordField.type = "text";
             } else {
-              passwordField.type = 'password';
-              confirmPasswordField.type = 'password';
+              passwordField.type = "password";
+              confirmPasswordField.type = "password";
             }
           }}
         />
-        <MessageBar variant={allRequirementsMet ? 'success' : 'error'}>
-          <IconText title='At least 1 uppercase character' clear={requirementsMet.uppercase} />
-          <IconText title='At least 1 lowercase character' clear={requirementsMet.lowercase} />
-          <IconText title='At least 1 number' clear={requirementsMet.number} />
-          <IconText title='At least 1 special character ()' clear={requirementsMet.special} />
-          <IconText title='Between 8-25 characters' clear={requirementsMet.length} />
-          <IconText title='Passwords must match' clear={requirementsMet.match} />
+        <MessageBar variant={allRequirementsMet ? "success" : "error"}>
+          <IconText
+            title="At least 1 uppercase character"
+            clear={requirementsMet.uppercase}
+          />
+          <IconText
+            title="At least 1 lowercase character"
+            clear={requirementsMet.lowercase}
+          />
+          <IconText title="At least 1 number" clear={requirementsMet.number} />
+          <IconText
+            title="At least 1 special character ()"
+            clear={requirementsMet.special}
+          />
+          <IconText
+            title="Between 8-25 characters"
+            clear={requirementsMet.length}
+          />
+          <IconText
+            title="Passwords must match"
+            clear={requirementsMet.match}
+          />
         </MessageBar>
 
         {errorMessage && (
-          <MessageBar variant='error'>{errorMessage}</MessageBar>
+          <MessageBar variant="error">{errorMessage}</MessageBar>
         )}
         {/* {!errorMessage &&(
           <MessageBar variant='success'>
@@ -187,12 +205,12 @@ export const RegisterForm = (props) => {
           </MessageBar>
         )} */}
         <Button
-          className='primary-btn w-100 my-5'
-          type='submit'
-          size='lg'
-          variant='light'
+          className="primary-btn w-100 my-5"
+          type="submit"
+          size="lg"
+          variant="light"
         >
-                    Sign up
+          Sign up
         </Button>
 
         <div className={styles.signUpText}>Or sign up with</div>
@@ -208,5 +226,5 @@ RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
   email: PropTypes.string,
   paramEmail: PropTypes.string,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
 };
