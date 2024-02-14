@@ -12,6 +12,14 @@ const passwordRegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
+let fetch;
+
+async function loadFetch() {
+  if (!fetch) {
+    fetch = (await import('node-fetch')).default;
+  }
+}
+
 const registration = async (req, res) => {
   const { email, password } = req.body;
 
@@ -39,7 +47,7 @@ const registration = async (req, res) => {
       const emailVerificationToken = await jwt.sign(
         { email },
         process.env.JWT_EMAIL_VERIFICATION_SECRET,
-        { expiresIn: '1h' },
+        { expiresIn: '1h' }
       );
 
       await emailService.sendActivationEmail(email, emailVerificationToken);
@@ -51,7 +59,7 @@ const registration = async (req, res) => {
       });
     }
   } catch (e) {
-    console.log('principle controller' ,e.message);
+    console.log('principle controller', e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
@@ -63,7 +71,7 @@ const accountActivation = async (req, res) => {
 
   try {
     const user = await principleService.findUser(email);
-    
+
     if (user.emailIsActivated === true) {
       return res.status(200).json({
         message: 'Email has been verified',
@@ -80,18 +88,20 @@ const accountActivation = async (req, res) => {
         .json({ message: 'activation link is not correct' });
     } else {
       const principleData = await principleService.activateAccount(email);
-      
+
       // autogenerate family name and save it in db
       const familyName = familyService.generateFamilyName();
 
-      const familyNameRegistartion = 
-      await familyService.familyRegistration(familyName, principleData._id);
+      const familyNameRegistartion = await familyService.familyRegistration(
+        familyName,
+        principleData._id
+      );
 
       return res.status(200).json({
         message: 'the account is successfully activated',
         email: principleData.email,
         emailIsActivated: principleData.emailIsActivated,
-        familyName: familyNameRegistartion.familyName
+        familyName: familyNameRegistartion.familyName,
       });
     }
   } catch (e) {
@@ -111,19 +121,81 @@ const login = async (req, res) => {
 
     const correctPassword = await principleService.isPasswordCorrect(
       email,
-      password,
+      password
     );
     if (!correctPassword) {
       return res
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-    // when the user login, the find that user's family(s), then push the info  to the front 
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
-    return res.status(200).json({ email: user.email, id: user._id, familyId : principleFamily[0].id , familyName: principleFamily[0].familyName});
+    // when the user login, the find that user's family(s), then push the info  to the front
+    const principleFamily = await familyService.findPrincipleFamilyName(
+      user._id
+    );
+    return res.status(200).json({
+      email: user.email,
+      id: user._id,
+      familyId: principleFamily[0].id,
+      familyName: principleFamily[0].familyName,
+    });
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
   }
+};
+
+const loginFacebook = async (req, res) => {
+  await loadFetch(); // Ensure fetch is loaded
+
+  const { accessToken, userID } = req.body;
+
+  const urlGraphFacebook = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`;
+
+  fetch(urlGraphFacebook, {
+    method: 'GET',
+  })
+    .then((fetchResponse) => fetchResponse.json()) // Renamed 'res' to 'fetchResponse'
+    .then(async (data) => {
+      const { email } = data;
+      const user = await principleService.findUser(email); // Added 'await' here if 'findUser' is async
+
+      if (!user) {
+        const password = data.email + process.env.JWT_EMAIL_VERIFICATION_SECRET;
+        const emailIsActivated = true;
+        await principleService.registration(
+          data.email,
+          password,
+          emailIsActivated
+        );
+
+        const token = jwt.sign(
+          { email: data.email },
+          process.env.JWT_EMAIL_VERIFICATION_SECRET,
+          { expiresIn: '1h' }
+        );
+
+        res.json({
+          token,
+          email: data.email,
+        });
+      }
+
+      if (user) {
+        const token = jwt.sign(
+          { email: data.email },
+          process.env.JWT_EMAIL_VERIFICATION_SECRET,
+          { expiresIn: '1h' }
+        );
+
+        res.json({
+          token,
+          email: data.email,
+        });
+      }
+    })
+    .catch((error) => {
+      console.error('Fetch error:', error);
+      res.status(500).json({ error: 'Error fetching data from Facebook' });
+    });
 };
 
 const requestResetPassword = async (req, res) => {
@@ -134,18 +206,20 @@ const requestResetPassword = async (req, res) => {
   try {
     const user = await principleService.findUser(email);
     if (!user) {
-      return res.status(404).json({ error: 'No user found with this email address' });
+      return res
+        .status(404)
+        .json({ error: 'No user found with this email address' });
     }
     // Generate a reset password token
     const passwordResetVerificationToken = await jwt.sign(
       { email },
       process.env.JWT_EMAIL_VERIFICATION_SECRET,
-      { expiresIn: '1h' },
+      { expiresIn: '1h' }
     );
     // Send an email with the reset password link
     await emailService.sendResetPasswordEmail(
       email,
-      passwordResetVerificationToken,
+      passwordResetVerificationToken
     );
     return res.status(200).json({
       message: `Reset password link sent to ${email}`,
@@ -183,7 +257,9 @@ const resetPasswordUpdates = async (req, res) => {
   }
 
   try {
-    const decoded = await principleService.emailTokenVerification(resetPasswordToken);
+    const decoded = await principleService.emailTokenVerification(
+      resetPasswordToken
+    );
 
     if (!decoded) {
       return res.status(401).json({ msg: 'Invalid token' });
@@ -204,6 +280,7 @@ module.exports = {
   registration,
   accountActivation,
   login,
+  loginFacebook,
   requestResetPassword,
   resetPasswordActivation,
   resetPasswordUpdates,

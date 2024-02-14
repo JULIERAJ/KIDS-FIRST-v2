@@ -5,8 +5,8 @@ require('dotenv').config({ path: './.env.local' });
 
 const Principle = require('../models/Principle');
 
-const registration = async (email, password) => {
-  const principle = new Principle({ email, password });
+const registration = async (email, password, emailIsActivated) => {
+  const principle = new Principle({ email, password, emailIsActivated });
   await principle.save();
 
   return { id: principle._id, email: principle.email };
@@ -29,7 +29,7 @@ const isPasswordCorrect = async (email, password) => {
 const emailTokenVerification = async (activationToken) => {
   const tokenVerified = jwt.verify(
     activationToken,
-    process.env.JWT_EMAIL_VERIFICATION_SECRET,
+    process.env.JWT_EMAIL_VERIFICATION_SECRET
   );
   return tokenVerified ? true : false;
 };
@@ -38,7 +38,7 @@ const activateAccount = async (email) => {
   const user = await Principle.findOneAndUpdate(
     { email: email },
     { emailIsActivated: true },
-    { new: true },
+    { new: true }
   );
   return user;
 };
@@ -61,7 +61,7 @@ const updateUserPassword = async (email, password) => {
   const updatedUser = await Principle.findOneAndUpdate(
     { email: email },
     { $set: { password: hashedPassword } },
-    { new: true },
+    { new: true }
   );
   return updatedUser;
 };
