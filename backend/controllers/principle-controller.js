@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const fetch = require('node-fetch');
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
@@ -12,13 +12,9 @@ const passwordRegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
-let fetch;
-
-async function loadFetch() {
-  if (!fetch) {
-    fetch = (await import('node-fetch')).default;
-  }
-}
+const jwtOptions = {
+  expiresIn: '1h',
+};
 
 const registration = async (req, res) => {
   const { email, password } = req.body;
@@ -47,7 +43,7 @@ const registration = async (req, res) => {
       const emailVerificationToken = await jwt.sign(
         { email },
         process.env.JWT_EMAIL_VERIFICATION_SECRET,
-        { expiresIn: '1h' }
+        jwtOptions
       );
 
       await emailService.sendActivationEmail(email, emailVerificationToken);
@@ -144,60 +140,55 @@ const login = async (req, res) => {
 };
 
 const loginFacebook = async (req, res) => {
-  await loadFetch(); // Ensure fetch is loaded
-
   const { accessToken, userID } = req.body;
 
   const urlGraphFacebook = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`;
 
-  fetch(urlGraphFacebook, {
-    method: 'GET',
-  })
-    .then((fetchResponse) => fetchResponse.json()) // Renamed 'res' to 'fetchResponse'
-    .then(async (data) => {
-      const { email } = data;
-      const user = await principleService.findUser(email); // Added 'await' here if 'findUser' is async
+  try {
+    const fetchResponse = await fetch(urlGraphFacebook, { method: 'GET' });
+    const data = await fetchResponse.json();
 
-      if (!user) {
-        const password = data.email + process.env.JWT_EMAIL_VERIFICATION_SECRET;
-        const emailIsActivated = true;
-        await principleService.registration(
-          data.email,
-          password,
-          emailIsActivated
-        );
+    const { email } = data;
+    const user = await principleService.findUser(email);
 
-        const token = jwt.sign(
-          { email: data.email },
-          process.env.JWT_EMAIL_VERIFICATION_SECRET,
-          { expiresIn: '1h' }
-        );
+    if (!user) {
+      const password = data.email + process.env.JWT_EMAIL_VERIFICATION_SECRET;
+      const emailIsActivated = true;
+      await principleService.registration(
+        data.email,
+        password,
+        emailIsActivated
+      );
 
-        res.json({
-          token,
-          email: data.email,
-        });
-      }
+      const token = jwt.sign(
+        { email: data.email },
+        process.env.JWT_EMAIL_VERIFICATION_SECRET,
+        jwtOptions
+      );
 
-      if (user) {
-        const token = jwt.sign(
-          { email: data.email },
-          process.env.JWT_EMAIL_VERIFICATION_SECRET,
-          { expiresIn: '1h' }
-        );
+      res.json({
+        token,
+        email: data.email,
+      });
+    }
 
-        res.json({
-          token,
-          email: data.email,
-        });
-      }
-    })
-    .catch((error) => {
-      console.error('Fetch error:', error);
-      res.status(500).json({ error: 'Error fetching data from Facebook' });
-    });
+    if (user) {
+      const token = jwt.sign(
+        { email: data.email },
+        process.env.JWT_EMAIL_VERIFICATION_SECRET,
+        jwtOptions
+      );
+
+      res.json({
+        token,
+        email: data.email,
+      });
+    }
+  } catch (error) {
+    console.error('Fetch error:', error);
+    res.status(500).json({ error: 'Error fetching data from Facebook' });
+  }
 };
-
 const requestResetPassword = async (req, res) => {
   const { email } = req.body;
   if (!email) {
@@ -214,7 +205,7 @@ const requestResetPassword = async (req, res) => {
     const passwordResetVerificationToken = await jwt.sign(
       { email },
       process.env.JWT_EMAIL_VERIFICATION_SECRET,
-      { expiresIn: '1h' }
+      jwtOptions
     );
     // Send an email with the reset password link
     await emailService.sendResetPasswordEmail(
