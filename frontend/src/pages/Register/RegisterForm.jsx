@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -19,7 +18,6 @@ const DEFAULT_ERROR_MESSAGE =
 
 export const RegisterForm = (props) => {
 
-  console.log(props);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // eslint-disable-next-line no-unused-vars

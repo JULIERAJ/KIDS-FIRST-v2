@@ -1,12 +1,12 @@
 .footer__list {
-    width: 100%;
-    border-radius: 0;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 100%;
+  border-radius: 0;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .footer__link {
-    padding: 0;
-    border: none;
-    background-color: transparent;
+  padding: 0;
+  border: none;
+  background-color: transparent;
 }

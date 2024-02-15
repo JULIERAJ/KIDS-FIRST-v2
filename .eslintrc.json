@@ -22,13 +22,15 @@
   "rules": {
     "arrow-spacing": "error",
     "eol-last": ["error", "always"],
-   "indent": ["error", 2],
-    // "linebreak-style":  ["error", "windows"],
-    "linebreak-style": ["error", "unix"],
-    "max-len": ["error", {"code": 90, "ignoreUrls": true}],
+    "indent": ["error", 2],
+    "linebreak-style": 0,
+    "max-len": ["error", { "code": 120, "ignoreUrls": true }],
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
-    "no-console": "error",
+    "no-console": [
+      "warn", 
+      { "allow": ["warn", "error"] }
+    ],
     "object-curly-spacing": ["error", "always"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],

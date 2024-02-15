@@ -9,7 +9,6 @@ const memberRegistration = async (req, res) => {
       lastName,
       family
     );
-    console.log({ isMemberDuplicate });
     
     if (!isMemberDuplicate ) {
       const memberData = await memberService.memberRegistration({
@@ -21,7 +20,6 @@ const memberRegistration = async (req, res) => {
         inviteeEmail,
         inviteeInviteLater
       });
-      console.log('firstname, lastname', firstName, lastName);
       return res.status(201).json(memberData);
     } else {
       return res.status(409).json({
@@ -29,7 +27,6 @@ const memberRegistration = async (req, res) => {
       });
     }
   } catch (e) {
-    console.log('member controller' ,e.message);
     return res.status(500).json({ message: 'something went wrong' });
   }
 };

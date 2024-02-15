@@ -66,7 +66,7 @@ const Activate = () => {
                   variant='light'
                   onClick={handleClick}
                 >
-          Log In
+                  Log In
                 </Button>
               </div>
             </>
