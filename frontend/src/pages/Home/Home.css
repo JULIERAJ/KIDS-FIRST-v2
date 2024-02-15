@@ -7,7 +7,7 @@ html.home {
   padding: 0;
 }
 
- body.home {
+body.home {
   display: flex;
   align-content: flex-start;
   flex-direction: column;
@@ -88,11 +88,13 @@ html.home {
   color: #000 !important;
   font-size: 22px !important;
 }
+
 .home-login-btn:hover,.home-signup-btn:hover,
 .home-signup-btn-2:hover {
 	background: #ffffff !important;
 	border: solid 2px #f08324 !important;
 }
+
 .value {
   margin-top: 60px;
 }
@@ -100,28 +102,26 @@ html.home {
 /* ======================================
             WIDE BANNER SECTIONS
    ====================================== */
-	.banner-section#first-banner {
-		  background: #f8f8ee url('../../media/homePage/mother_daughter_hug.png') no-repeat
-    right bottom;
+.banner-section#first-banner {
+  background: #f8f8ee url('../../media/homePage/mother_daughter_hug.png') no-repeat right bottom;
   min-height: 730px;
   width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   padding: 10px 0 90px 0;
-	}
-	.banner-section#first-banner h1 {
-		 margin-bottom: 68px;
+}
+
+.banner-section#first-banner h1 {
+  margin-bottom: 68px;
   text-transform: uppercase;
   font-family: Roboto, sans-serif;
   font-size: 46px;
   line-height: 1.45;
-	}
-
+}
 
 .banner-section#middle-banner-homepage{
-  background: #f8f8ee url('../../media/homePage/father_son_reading.png') no-repeat
-    left bottom;
+  background: #f8f8ee url('../../media/homePage/father_son_reading.png') no-repeat left bottom;
   min-height: 450px;
   width: 100%;
   display: flex;
@@ -166,19 +166,21 @@ html.home {
   font-family: Roboto, sans-serif;
   color: #000;
 }
+
 .left-blurb h1 {
 	font-family: Roboto, sans-serif;
 	font-weight: 500;
 	color: #000;
 	line-height: 50px;
 }
+
 .left-blurbs p {
-font-size: 20px;
-line-height: 35px;
-font-weight: 400;
-text-align: left;
-margin: 0 0 0 20%;
-color: #000;
+  font-size: 20px;
+  line-height: 35px;
+  font-weight: 400;
+  text-align: left;
+  margin: 0 0 0 20%;
+  color: #000;
 }
 
 .left-blurbs {
@@ -201,7 +203,6 @@ color: #000;
 }
 
 @media only screen and (max-width: 960px) {
-
   .banner-section#header-banner,
   .banner-section#middle-banner {
     background: #f8f8ee;
@@ -344,12 +345,12 @@ color: #000;
   font-weight: 500;
   line-height: 1.25;
 }
-   .features-3 {
+.features-3 {
 	display: flex;
 	align-items: center; 
 	flex-direction: row;
 	background: linear-gradient( #f7f5ec , 0%,rgba(255, 255, 255, 0.45), 100%); 
-    background-color: #f7f5ec;  
+  background-color: #f7f5ec;  
 	width: 100%;
 	height: auto;
 	padding-top: 50px;
@@ -375,7 +376,7 @@ color: #000;
   }
 
  .features-3 {
-	padding-right: 20px;	
+	  padding-right: 20px;	
  } 
 
   .feature-1 {
@@ -394,8 +395,8 @@ color: #000;
     padding: 32px 40px 30px 40px;
   }
   .left-blurbs p {
-	margin: 0;
-	font-size: 20px;
+    margin: 0;
+    font-size: 20px;
   }
 
   .feature-1:nth-of-type(2),

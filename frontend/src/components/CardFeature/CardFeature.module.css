@@ -1,54 +1,54 @@
 .card {
-    padding: 0.625rem 5rem 5.875rem 5rem;
-    width: 100%;
-    border: none;
-    border-radius: 0;
-    align-items: center;
+  padding: 0.625rem 5rem 5.875rem 5rem;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  align-items: center;
 }
 
 .card__title {
-    width: 100%;
-    margin-bottom: 2.94rem;
-    font-size: 1.75rem;
-    font-weight: 400;
-    text-align: center;
-    line-height: 2.1875;
+  width: 100%;
+  margin-bottom: 2.94rem;
+  font-size: 1.75rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 2.1875;
 }
 
 .card__text {
-    width: 100%;
-    font-size: 1.25rem;
-    font-weight: normal;
-    text-align: center;
-    line-height: 2.1875;
-    text-transform: capitalize;
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: normal;
+  text-align: center;
+  line-height: 2.1875;
+  text-transform: capitalize;
 }
 
 .card__more {
-    padding: 0;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 48%;
-    border: none;
-    border-radius: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 48%;
+  border: none;
+  border-radius: 0;
 }
 
 .card__title_more {
-    width: 70%;
-    font-size: 1.75rem;
-    font-weight: 400;
-    line-height: 2.1875;
-    align-self: flex-end;
+  width: 70%;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 2.1875;
+  align-self: flex-end;
 }
 
 .card__text_more {
-    width: 100%;
-    margin-top: 3.125rem;
-    padding-left: 5.25rem;
-    font-size: 1.25rem;
-    font-weight: normal;
-    text-align: center;
-    line-height: 2.1875;
-    text-transform: capitalize;
+  width: 100%;
+  margin-top: 3.125rem;
+  padding-left: 5.25rem;
+  font-size: 1.25rem;
+  font-weight: normal;
+  text-align: center;
+  line-height: 2.1875;
+  text-transform: capitalize;
 }

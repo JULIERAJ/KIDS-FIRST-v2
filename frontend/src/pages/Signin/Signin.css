@@ -1,9 +1,8 @@
-
 .login-title {
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 42px;
-    margin-bottom: 8%;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  margin-bottom: 8%;
 }
 
 .forget-password {
@@ -17,11 +16,8 @@
   padding-left: 0;
 }
 
-
-
 .or-login-with {
   font-size: 18px;
   line-height: 21px;
   text-align: center;
 }
-

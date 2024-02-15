@@ -1,8 +1,6 @@
-// here is where 3 panels submit
 import { Button } from 'react-bootstrap';
 
 import styles from './Form.module.css';
-
 import FormInputs from './FormInputs';
 
 import Header from '../.././components/Header';
@@ -78,7 +76,7 @@ const Form = () => {
           disabled={disablePrev}
           className={`secondary-btn ${prevHide} ${styles.prevBtn}`}
         >
-                    Back
+          Back
         </Button>
 
         {!isLastPage && (
@@ -88,7 +86,7 @@ const Form = () => {
             disabled={disableNext}
             className={`primary-btn ${nextHide} ${styles.nextBtn}`}
           >
-                        Next
+            Next
           </Button>
         )}
 
@@ -98,7 +96,7 @@ const Form = () => {
             className={`primary-btn ${doneHide} ${styles.doneBtn}`}
             disabled={!canSubmit}
           >
-                        Done
+            Done
           </Button>
         )}
       </form>

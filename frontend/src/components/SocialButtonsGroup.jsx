@@ -1,4 +1,3 @@
-
 import { signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
@@ -15,15 +14,10 @@ const signInWithFacebook = () => {
 
   signInWithPopup(authentication,provider)
     .then((result) => {
-      /* eslint-disable no-console */
-      // TODO: 
-      console.log('I am registered using Facebook');
-      console.log(result.user);
       const credential = FacebookAuthProvider.credentialFromResult(result);
+      /* eslint-disable no-unused-vars */
       const accessToken = credential.accessToken;
-      console.log(accessToken);
-      console.log(result.user.displayName);
-      console.log(result.user.email);
+
       //we need to save this user in our database and redirect to family
 
     })

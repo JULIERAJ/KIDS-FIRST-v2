@@ -1,12 +1,12 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-require('dotenv').config({ path: './.env.local' });
-
 const Principle = require('../models/Principle');
 
-const registration = async (email, password, emailIsActivated) => {
-  const principle = new Principle({ email, password, emailIsActivated });
+require('dotenv').config({ path: './.env.local' });
+
+const registration = async (email, password) => {
+  const principle = new Principle({ email, password });
   await principle.save();
 
   return { id: principle._id, email: principle.email };
