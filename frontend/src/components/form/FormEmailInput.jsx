@@ -1,18 +1,21 @@
+import PropTypes from 'prop-types';
+
 import FromInput from './FormInput';
 
 const FormEmailInput = (props) => (
-  <FromInput
+  < FromInput
     id="email"
     label="Email"
     name="email"
     placeholder="example@email.com"
     type="email"
-    // eslint-disable-next-line react/prop-types
     defaultValue={props.defaultValue}
     {...props}
   />
 );
 
-FormEmailInput.propTypes = {};
+FormEmailInput.propTypes = {
+  defaultValue: PropTypes.string,
+};
 
 export default FormEmailInput;

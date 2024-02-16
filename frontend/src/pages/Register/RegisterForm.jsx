@@ -1,209 +1,159 @@
 /* eslint-disable no-console */
-import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
 
-import Form from "react-bootstrap/Form";
+import Form from 'react-bootstrap/Form';
 
-import styles from "./Register.module.css";
+import styles from './Register.module.css';
 
-import FormEmailInput from "../../components/form/FormEmailInput";
-import FormPasswordInput from "../../components/form/FormPasswordInput";
+import FormEmailInput from '../../components/form/FormEmailInput';
+import FormPasswordInput from '../../components/form/FormPasswordInput';
 
-import IconText from "../../components/IconText";
-import MessageBar from "../../components/MessageBar";
-import SocialButtonsGroup from "../../components/SocialButtonsGroup";
-
-// const DEFAULT_ERROR_MESSAGE =
-//     'You are using symbols in your passwords or your passwords do not match.';
+import IconText from '../../components/IconText';
+import MessageBar from '../../components/MessageBar';
+import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
 export const RegisterForm = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isTouched, setIsTouched] = useState(false);
-  const [validated, setIsValidated] = useState(false);
-  const [emailValidation, setEmailValidation] = useState(null);
-  // check password requirements
-  const [requirementsMet, setRequirementsMet] = useState({
-    length: false,
-    uppercase: false,
-    lowercase: false,
-    number: false,
-    special: false,
-    match: false,
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State to toggle password visibility
+
+  const [passwordErrors, setPasswordErrors] = useState({
+    uppercase: true,
+    lowercase: true,
+    number: true,
+    special: true,
+    length: true,
   });
 
-  const passwordRequirements = {
-    length: /^(.){8,25}$/,
-    uppercase: /[A-Z]/,
-    lowercase: /[a-z]/,
-    number: /[0-9]/,
-    special: /[@$!%*?^&]/,
-    match: /./, // checked separately without regex
-  };
+  const [passwordMatchError, setPasswordMatchError] = useState('');
+  const [passwordListVisible, setPasswordListVisible] = useState(false);
 
+  //error from backend
   useEffect(() => {
-    if (props.paramEmail) {
-      setEmail(props.paramEmail);
-    }
-
     if (props.errorMessage) {
       setErrorMessage(props.errorMessage);
     }
-  }, [props.paramEmail, props.errorMessage]);
+  },[props.errorMessage]);
 
-  const handleEmailChange = ({ target: { value } }) => setEmail(value);
-  // check password requirements
-  const handlePasswordChange = ({ target: { value } }) => {
-    setPassword(value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
-    const newRequirementsMet = { ...requirementsMet };
-    for (const [requirement, regex] of Object.entries(passwordRequirements)) {
-      newRequirementsMet[requirement] = regex.test(value);
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    validatePassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    validateConfirmPassword(e.target.value);
+  };
+
+  const handlePasswordFocus = () => {
+    setPasswordListVisible(true);
+    setPasswordMatchError('');
+  };
+
+  const handleConfirmPasswordFocus = () => {
+    setPasswordListVisible(false);
+    setPasswordMatchError('');
+  };
+
+  const handleEmailBlur = () => {
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address.');
+    } else {
+      setEmailError('');
     }
-    newRequirementsMet.match = value === passwordConfirm;
-    setRequirementsMet(newRequirementsMet);
   };
-  const allRequirementsMet = Object.values(requirementsMet).every(Boolean);
-  const handlePasswordConfirmChange = ({ target: { value } }) => {
-    setPasswordConfirm(value);
+  const allPasswordErrorsChecked = Object.values(passwordErrors).every((error) => !error);
 
-    const newRequirementsMet = { ...requirementsMet };
-    newRequirementsMet.match = password === value;
-    setRequirementsMet(newRequirementsMet);
+  const validatePassword = (passwordValue) => {
+    const regexUpperCase = /[A-Z]/;
+    const regexLowerCase = /[a-z]/;
+    const regexNumber = /\d/;
+    const regexSpecialChar = /[!@#$%^&*()_+=[\]{};':"\\|,.<>?-]/;
+    const regexLength = /^.{8,25}$/;
+
+    const errors = {
+      uppercase: !regexUpperCase.test(passwordValue),
+      lowercase: !regexLowerCase.test(passwordValue),
+      number: !regexNumber.test(passwordValue),
+      special: !regexSpecialChar.test(passwordValue),
+      length: !regexLength.test(passwordValue),
+    };
+    setPasswordErrors(errors);
+
   };
 
-  const handleFormChange = () => !isTouched && setIsTouched(true);
+  const validateConfirmPassword = (confirmPasswordValue) => {
+    setPasswordMatchError(confirmPasswordValue !== password ? 'Passwords do not match.' : '');
+  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // email check
-
-    if (allRequirementsMet) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform form submission if all validations pass
+    if (
+      !emailError &&
+      allPasswordErrorsChecked &&
+      !passwordMatchError
+    ) {
+      // alert('Form submitted successfully!');
       props.onSubmitData(email, password);
     }
-
-    // const form = event.currentTarget;
-
-    // if (form.checkValidity()) {
-    //   props.onSubmitData(email, password)
-    //     // .then(() => {
-    //     //   console.log('success');
-    //     //   setErrorMessage('');
-    //     // })
-    //     .catch((e) => {
-    //       setErrorMessage(e.response.data.message);
-    //       console.log(errorMessage);
-    //     });
-    // } else {
-    //   setErrorMessage(DEFAULT_ERROR_MESSAGE);
-    // }
-
-    setIsValidated(true);
   };
-  const handleEmailValidation = (emailValue) => {
-    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
 
-    setEmailValidation(isValidEmail ? "valid" : "invalid");
-    if (emailValidation !== "valid") {
-      setErrorMessage(
-        <div>
-          Email address format is not correct. <br />
-          Please enter the valid email address format
-
-        </div>
-      );
-      return;
-    } else {
-      setErrorMessage();
-      return;
-    }
-  };
-  const handleInputChange = (event) => {
-    const emailValue = event.target.value;
-    // onChange(event);
-    handleEmailChange(event);
-    handleEmailValidation(emailValue);
+  const validateEmail = (emailValue) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
   };
 
   return (
     <>
       <Form
         className="py-4"
-        onBlur={handleFormChange}
         onSubmit={handleSubmit}
         noValidate
-        validated={validated}
+        // validated={validated}
       >
         <FormEmailInput
           autoComplete="off"
           required
-          onChange={handleInputChange}
+          onChange={handleEmailChange}
+          onBlur={handleEmailBlur}
           defaultValue={email}
-          isInvalid={emailValidation === "invalid"}
-          isValid={emailValidation === "valid"}
         />
-        <FormPasswordInput onChange={handlePasswordChange} required />
         <FormPasswordInput
-          id="confirmPassword"
-          label="Password Confirmation"
-          name="confirmPassword"
-          onChange={handlePasswordConfirmChange}
+          id="password"
+          label="Password"
+          name="password"
           required
+          type={showPassword ? 'text' : 'password'} // Toggle password visibility
+          value={password}
+          onChange={handlePasswordChange}
+          onFocus={handlePasswordFocus}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
         />
-        <Form.Check
-          type="checkbox"
-          label="Show Password"
-          onClick={(event) => {
-            const passwordField = document.getElementById("password");
-            const confirmPasswordField =
-              document.getElementById("confirmPassword");
-            if (event.target.checked) {
-              passwordField.type = "text";
-              confirmPasswordField.type = "text";
-            } else {
-              passwordField.type = "password";
-              confirmPasswordField.type = "password";
-            }
-          }}
+        <FormPasswordInput
+          id='confirmPassword'
+          label='Password Confirmation'
+          name='confirmPassword'
+          required
+          type={showConfirmPassword ? 'text' : 'password'} // Toggle password visibility
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          onFocus={handleConfirmPasswordFocus}
+          showPassword={showConfirmPassword}
+          setShowPassword={setShowConfirmPassword}
         />
-        <MessageBar variant={allRequirementsMet ? "success" : "error"}>
-          <IconText
-            title="At least 1 uppercase character"
-            clear={requirementsMet.uppercase}
-          />
-          <IconText
-            title="At least 1 lowercase character"
-            clear={requirementsMet.lowercase}
-          />
-          <IconText title="At least 1 number" clear={requirementsMet.number} />
-          <IconText
-            title="At least 1 special character ()"
-            clear={requirementsMet.special}
-          />
-          <IconText
-            title="Between 8-25 characters"
-            clear={requirementsMet.length}
-          />
-          <IconText
-            title="Passwords must match"
-            clear={requirementsMet.match}
-          />
-        </MessageBar>
-
-        {errorMessage && (
-          <MessageBar variant="error">{errorMessage}</MessageBar>
-        )}
-        {/* {!errorMessage &&(
-          <MessageBar variant='success'>
-            <IconText title='English uppercase letters' />
-            <IconText title='English lowercase letters'/>
-            <IconText title='At least one number (0-9) or symbols' />
-            <IconText title='Minimum 8 characters' />
-          </MessageBar>
-        )} */}
         <Button
           className="primary-btn w-100 my-5"
           type="submit"
@@ -212,6 +162,36 @@ export const RegisterForm = (props) => {
         >
           Sign up
         </Button>
+        {passwordListVisible && (
+          <MessageBar variant={allPasswordErrorsChecked ? 'success' : 'error'}>
+            <IconText
+              title="At least 1 uppercase character"
+              clear={passwordErrors.uppercase}
+            />
+            <IconText
+              title="At least 1 lowercase character"
+              clear={passwordErrors.lowercase}
+            />
+            <IconText title="At least 1 number" clear={passwordErrors.number} />
+            <IconText
+              title="At least 1 special character ()"
+              clear={passwordErrors.special}
+            />
+            <IconText
+              title="Between 8-25 characters"
+              clear={passwordErrors.length}
+            />
+          </MessageBar>
+        )}
+        {errorMessage && (
+          <MessageBar variant="error">{errorMessage}</MessageBar>
+        )}
+        {emailError && (
+          <MessageBar variant="error">{emailError}</MessageBar>
+        )}
+        {passwordMatchError && (
+          <MessageBar variant="error">{passwordMatchError}</MessageBar>
+        )}
 
         <div className={styles.signUpText}>Or sign up with</div>
 
