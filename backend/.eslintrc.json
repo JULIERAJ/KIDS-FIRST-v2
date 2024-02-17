@@ -1,10 +1,9 @@
 {
-    "env": {
-        "commonjs": true
-    },
-    "extends": ["../.eslintrc.json"],
-    "rules": {
-        "eol-last": ["error", "always"],
-        "max-len": ["error", { "ignoreComments": true, "code": 100 }]
-    }
+  "env": {
+    "commonjs": true
+  },
+  "extends": ["../.eslintrc.json"],
+  "rules": {
+    "eol-last": ["error", "always"]
+  }
 }

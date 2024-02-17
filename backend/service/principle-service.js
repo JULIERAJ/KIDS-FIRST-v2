@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-require('dotenv').config({ path: './.env.local' });
-
 const Principle = require('../models/Principle');
+
+require('dotenv').config({ path: './.env.local' });
 
 const registration = async (email, password) => {
   const principle = new Principle({ email, password });
