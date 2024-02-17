@@ -1,4 +1,7 @@
-/* eslint-disable no-console */
+/*
+  This component represents a registration form. It allows users to sign up by providing their email, password, and confirming the password.
+  It includes form fields for email, password, and password confirmation, along with validation checks for each field.
+*/
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -36,46 +39,59 @@ export const RegisterForm = (props) => {
   const [passwordMatchError, setPasswordMatchError] = useState('');
   const [passwordListVisible, setPasswordListVisible] = useState(false);
 
-  //error from backend
+  // State variable to manage the disabled state
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  // Function to toggle the disabled state
+  const toggleDisabled = () => {
+    setIsDisabled(!isDisabled);
+  };
+  // Effect hook to handle errors received from the backend
   useEffect(() => {
     if (props.errorMessage) {
       setErrorMessage(props.errorMessage);
     }
   },[props.errorMessage]);
-
+  // Event handler for email change
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
+  // Event handler for password change
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     validatePassword(e.target.value);
   };
-
+  // Event handler for confirming password change
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     validateConfirmPassword(e.target.value);
   };
-
+  // Event handler for focusing on the password field
   const handlePasswordFocus = () => {
     setPasswordListVisible(true);
     setPasswordMatchError('');
   };
-
+  // Event handler for focusing on the confirm password field
   const handleConfirmPasswordFocus = () => {
     setPasswordListVisible(false);
     setPasswordMatchError('');
   };
-
+  // Event handler for handling email blur
   const handleEmailBlur = () => {
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email address.');
     } else {
       setEmailError('');
+      toggleDisabled();
     }
   };
+    // Function to validate email format
+  const validateEmail = (emailValue) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+  };
+    // Function to validate all password errors
   const allPasswordErrorsChecked = Object.values(passwordErrors).every((error) => !error);
-
+  // Function to validate password format
   const validatePassword = (passwordValue) => {
     const regexUpperCase = /[A-Z]/;
     const regexLowerCase = /[a-z]/;
@@ -93,11 +109,11 @@ export const RegisterForm = (props) => {
     setPasswordErrors(errors);
 
   };
-
+  // Function to validate password confirmation
   const validateConfirmPassword = (confirmPasswordValue) => {
     setPasswordMatchError(confirmPasswordValue !== password ? 'Passwords do not match.' : '');
   };
-
+  // Event handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform form submission if all validations pass
@@ -106,13 +122,8 @@ export const RegisterForm = (props) => {
       allPasswordErrorsChecked &&
       !passwordMatchError
     ) {
-      // alert('Form submitted successfully!');
       props.onSubmitData(email, password);
     }
-  };
-
-  const validateEmail = (emailValue) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
   };
 
   return (
@@ -141,6 +152,7 @@ export const RegisterForm = (props) => {
           onFocus={handlePasswordFocus}
           showPassword={showPassword}
           setShowPassword={setShowPassword}
+          disabled={isDisabled}
         />
         <FormPasswordInput
           id='confirmPassword'
@@ -153,6 +165,7 @@ export const RegisterForm = (props) => {
           onFocus={handleConfirmPasswordFocus}
           showPassword={showConfirmPassword}
           setShowPassword={setShowConfirmPassword}
+          disabled={isDisabled}
         />
         <Button
           className="primary-btn w-100 my-5"
@@ -162,6 +175,7 @@ export const RegisterForm = (props) => {
         >
           Sign up
         </Button>
+        {/* Display error messages */}
         {passwordListVisible && (
           <MessageBar variant={allPasswordErrorsChecked ? 'success' : 'error'}>
             <IconText
@@ -183,6 +197,7 @@ export const RegisterForm = (props) => {
             />
           </MessageBar>
         )}
+
         {errorMessage && (
           <MessageBar variant="error">{errorMessage}</MessageBar>
         )}

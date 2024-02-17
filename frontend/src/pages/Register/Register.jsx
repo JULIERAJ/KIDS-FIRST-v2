@@ -50,7 +50,7 @@ const Register = () => {
           <h1 className={styles.registerTitle}>Sign up Kids First</h1>
           {
             activeComponent ?
-            //set error message in registerForm errorMessage={errorMessage}-
+            //set props for RegisterForm component with errorMessage
               <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail} errorMessage={errorMessage}/> :
               <EmailVerify userData={userData}/>
           }
