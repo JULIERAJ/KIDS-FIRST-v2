@@ -82,8 +82,6 @@ const accountActivation = async (req, res) => {
       // autogenerate family name and save it in db
       const familyName = familyService.generateFamilyName();
 
-      const familyNameRegistartion =
-      await familyService.familyRegistration(familyName, principleData._id);
       const familyNameRegistartion = await familyService.familyRegistration(familyName, principleData._id);
 
       return res.status(200).json({
@@ -116,7 +114,13 @@ const login = async (req, res) => {
     }
     // when the user login, the find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
-    return res.status(200).json({ email: user.email, id: user._id, familyId : principleFamily[0].id , familyName: principleFamily[0].familyName});
+
+    return res.status(200).json({
+      email: user.email,
+      id: user._id,
+      familyId : principleFamily[0].id ,
+      familyName: principleFamily[0].familyName
+    });
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
   }

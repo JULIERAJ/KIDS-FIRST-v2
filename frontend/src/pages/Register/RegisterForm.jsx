@@ -1,5 +1,6 @@
 /*
-  This component represents a registration form. It allows users to sign up by providing their email, password, and confirming the password.
+  This component represents a registration form. It allows users to sign up by providing their email,
+   password, and confirming the password.
   It includes form fields for email, password, and password confirmation, along with validation checks for each field.
 */
 import PropTypes from 'prop-types';

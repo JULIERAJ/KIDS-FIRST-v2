@@ -15,7 +15,9 @@ const Register = () => {
 
   const params = useParams();
   let paramEmail = params.email;
+  /* eslint-disable no-unused-vars */
   let paramEmailVerificationToken = params.emailVerificationToken;
+  /* eslint-disable no-unused-vars */
   let paramFamily = params.family;
 
   const [userData, setUserData] = useState({});
@@ -51,8 +53,8 @@ const Register = () => {
           <h1 className={styles.registerTitle}>Sign up Kids First</h1>
           {
             activeComponent ?
-             //set props for RegisterForm component with errorMessage
-             <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail} errorMessage={errorMessage}/> :
+              //set props for RegisterForm component with errorMessage
+              <RegisterForm onSubmitData={registerUserHandler} paramEmail={paramEmail} errorMessage={errorMessage}/> :
               <EmailVerify userData={userData}/>
           }
         </FatherSonBlock>
