@@ -18,6 +18,13 @@ import IconText from '../../components/IconText';
 import MessageBar from '../../components/MessageBar';
 import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
+const regexUpperCase = /[A-Z]/;
+const regexLowerCase = /[a-z]/;
+const regexNumber = /\d/;
+const regexSpecialChar = /[!@#$%^&*()_+=[\]{};':"\\|,.<>?-]/;
+const regexLength = /^.{8,25}$/;
+const regexEmail =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export const RegisterForm = (props) => {
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -88,18 +95,12 @@ export const RegisterForm = (props) => {
   };
     // Function to validate email format
   const validateEmail = (emailValue) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+    return regexEmail.test(emailValue);
   };
     // Function to validate all password errors
   const allPasswordErrorsChecked = Object.values(passwordErrors).every((error) => !error);
   // Function to validate password format
   const validatePassword = (passwordValue) => {
-    const regexUpperCase = /[A-Z]/;
-    const regexLowerCase = /[a-z]/;
-    const regexNumber = /\d/;
-    const regexSpecialChar = /[!@#$%^&*()_+=[\]{};':"\\|,.<>?-]/;
-    const regexLength = /^.{8,25}$/;
-
     const errors = {
       uppercase: !regexUpperCase.test(passwordValue),
       lowercase: !regexLowerCase.test(passwordValue),
@@ -108,7 +109,6 @@ export const RegisterForm = (props) => {
       length: !regexLength.test(passwordValue),
     };
     setPasswordErrors(errors);
-
   };
   // Function to validate password confirmation
   const validateConfirmPassword = (confirmPasswordValue) => {
@@ -143,9 +143,6 @@ export const RegisterForm = (props) => {
           defaultValue={email}
         />
         <FormPasswordInput
-          id="password"
-          label="Password"
-          name="password"
           required
           type={showPassword ? 'text' : 'password'} // Toggle password visibility
           value={password}
@@ -208,9 +205,7 @@ export const RegisterForm = (props) => {
         {passwordMatchError && (
           <MessageBar variant="error">{passwordMatchError}</MessageBar>
         )}
-
         <div className={styles.signUpText}>Or sign up with</div>
-
         <SocialButtonsGroup />
       </Form>
     </>

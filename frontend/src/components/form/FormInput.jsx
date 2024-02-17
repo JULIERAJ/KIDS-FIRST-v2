@@ -15,13 +15,14 @@ const FromInput = ({ label, showPassword, setShowPassword, ...props }) => (
           className='primary-btn'
           onClick={(event) =>
           {
-            event.preventDefault();// Prevent the default button action
-            setShowPassword(!showPassword);// Toggle password visibility
+            event.preventDefault();
+            setShowPassword(!showPassword);
           }}
         >
-          {showPassword ? <FaEyeSlash />: <FaEye />}{/* Toggle icon based on password visibility */}
+          {showPassword ? <FaEyeSlash />: <FaEye />}
         </Button>
       )}
+      {/* {buttonRight} */}
       {/* Show password button for the 'Password Confirmation' field */}
       {label === 'Password Confirmation' && (
         <Button
@@ -45,6 +46,7 @@ FromInput.propTypes = {
   showPassword: PropTypes.bool,
   setShowPassword: PropTypes.func,
   type: PropTypes.string,
+  buttonRight: PropTypes.node,
 };
 
 export default FromInput;
