@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Form, Image , Button } from 'react-bootstrap';
+import { Form, Image } from 'react-bootstrap';
 
 import styles from './Parent.module.css';
 
@@ -63,4 +62,5 @@ Parent.propTypes = {
   }),
   handleChange: PropTypes.func,
 };
+
 export default Parent;

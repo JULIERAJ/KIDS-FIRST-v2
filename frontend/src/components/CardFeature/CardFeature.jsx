@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-
 import React from 'react';
-
 import Card from 'react-bootstrap/Card';
 
 import styles from './CardFeature.module.css';
