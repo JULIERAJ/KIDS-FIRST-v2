@@ -22,7 +22,6 @@ const FromInput = ({ label, showPassword, setShowPassword, ...props }) => (
           {showPassword ? <FaEyeSlash />: <FaEye />}
         </Button>
       )}
-      {/* {buttonRight} */}
       {/* Show password button for the 'Password Confirmation' field */}
       {label === 'Password Confirmation' && (
         <Button
@@ -46,7 +45,6 @@ FromInput.propTypes = {
   showPassword: PropTypes.bool,
   setShowPassword: PropTypes.func,
   type: PropTypes.string,
-  buttonRight: PropTypes.node,
 };
 
 export default FromInput;
