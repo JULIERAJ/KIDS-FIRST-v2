@@ -3,10 +3,10 @@ import './Signin.css';
 import { useState, useEffect } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 
-import { FacebookLoginButton } from 'react-social-login-buttons';
-import { LoginSocialFacebook } from 'reactjs-social-login';
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
+import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 
-import { login, loginFacebook } from '../../api';
+import { login, loginFacebook, loginSocial } from '../../api';
 import FatherSonBlock from '../../components/FatherSonBlock';
 import FormEmailInput from '../../components/form/FormEmailInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
@@ -65,6 +65,24 @@ export default function Signin() {
       });
   };
 
+  const loginfromGoogle = (response) => {
+    loginSocial(response.data.access_token, response.data.email)
+      .then((res) => {
+        
+        setSuccess(true);
+        const user = JSON.stringify(res.data);
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/member';
+      })
+      .catch(() => {
+        setSuccess(false);
+        setErrMsg(
+          `Your don't have an account with us. 
+           Please sign up first`
+        );
+      });
+  };
+
   return (
     <>
       <Header widget={HeaderLink} />
@@ -117,6 +135,20 @@ export default function Signin() {
               <FacebookLoginButton />
               {/* <FacebookLoginButton onClick={() => alert('Hello')} /> */}
             </LoginSocialFacebook>
+            <div> &nbsp; </div>
+            <LoginSocialGoogle
+              client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
+              onResolve={loginfromGoogle}
+              onReject={err => {
+                setErrMsg(
+                  `You are not able to login with Google.
+                   Please try again later`
+                );
+                console.log(err);
+              }}
+            >
+              <GoogleLoginButton />
+            </LoginSocialGoogle>
             {/* <SocialButtonsGroup /> */}
           </Form>
         </FatherSonBlock>

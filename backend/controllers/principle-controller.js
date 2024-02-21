@@ -181,6 +181,28 @@ const loginFacebook = async (req, res) => {
     res.status(500).json({ error: 'Error fetching data from Facebook' });
   }
 };
+const loginSocial = async (req, res) => {
+  const { accessToken, userID } = req.body;
+    // save new user or not
+   console.log("user  "+userID);
+  const user = await principleService.findUser(userID);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (user) {
+    const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
+
+    return res.status(200).json({ 
+      email: user.email,
+      id: user._id,
+      familyId: principleFamily[0].id,
+      familyName: principleFamily[0].familyName
+    });
+    }
+  
+};
 const requestResetPassword = async (req, res) => {
   const { email } = req.body;
   if (!email) {
@@ -264,6 +286,7 @@ module.exports = {
   accountActivation,
   login,
   loginFacebook,
+  loginSocial,
   requestResetPassword,
   resetPasswordActivation,
   resetPasswordUpdates,
