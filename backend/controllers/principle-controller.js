@@ -24,18 +24,19 @@ const registration = async (req, res) => {
     if (user) {
       return res
         .status(409)
-        .json({ message: `The user with ${email} email already exists` });
+        .json({ message: 'This email address is already in use.' });
     }
 
     if (!passwordRegExp.test(password)) {
       return res.status(400).json({
         message:
-          'Password must be at least 10 characters long and contain\
+          'Password must be at least 8 characters long and contain\
            at least one uppercase letter, one lowercase letter, and one number',
       });
     } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });
-    } else if (!user) {
+    }
+    else if (!user) {
       user = await principleService.registration(email, password);
 
       const emailVerificationToken = await jwt.sign(
@@ -116,14 +117,13 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-    
-    // when the user login, the find that user's family(s), then push the info  to the front 
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
+    // when the user login, the find that user's family(s), then push the info  to the front
+    const principleFamily = await familyService.findPrincipleFamilyName(user._id);
 
-    return res.status(200).json({ 
+    return res.status(200).json({
       email: user.email,
       id: user._id,
-      familyId: principleFamily[0].id,
+      familyId : principleFamily[0].id ,
       familyName: principleFamily[0].familyName
     });
   } catch (e) {
