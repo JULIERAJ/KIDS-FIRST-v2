@@ -28,7 +28,7 @@
     "no-multi-spaces": "error",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
     "no-console": [
-      "warn", 
+      "warn",
       { "allow": ["warn", "error"] }
     ],
     "object-curly-spacing": ["error", "always"],

@@ -8,11 +8,12 @@ const familyRoutes = require('./routes/family');
 const forgetPasswordRoutes = require('./routes/forget-password');
 // const invitationRoutes = require('./routes/invitation');
 const loginRoutes = require('./routes/login');
+const loginFacebookRoutes = require('./routes/loginFacebook');
 const memberRoutes = require('./routes/member');
 const registerRoutes = require('./routes/register');
 const resetPasswordRoutes = require('./routes/reset-password');
 require('dotenv').config({ path: './.env.local' });
-
+mongoose.set('strictQuery', true);
 const mongoDB = process.env.MONGODB_URI;
 const PORT = process.env.PORT;
 
@@ -26,7 +27,10 @@ db.on('error', (error) => console.log('MongoDB connection error:', error));
 
 db.once('connected', () => console.log('Database Connected'));
 
-morgan.token('body', req => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m \n`);
+morgan.token(
+  'body',
+  (req) => `\x1b[36m"body": ${JSON.stringify(req.body)}\x1b[0m \n`
+);
 
 // middlewares
 app.use(cors());
@@ -41,5 +45,6 @@ app.use('/api', memberRoutes);
 app.use('/api', registerRoutes);
 app.use('/api', forgetPasswordRoutes);
 app.use('/api', resetPasswordRoutes);
+app.use('/api', loginFacebookRoutes);
 
 app.listen(PORT, () => console.log(`server started on ${PORT}`));
