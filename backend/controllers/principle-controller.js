@@ -95,6 +95,35 @@ const accountActivation = async (req, res) => {
   }
 };
 
+const resendActivationEmail = async (req, res) => {
+  // Extract the email from the request body
+  const { email } = req.body;
+
+  try {
+    // Find the user associated with the provided email
+    const user = await principleService.findUser(email);
+
+    if (!user) {
+      // If user is not found, return a 404 status with a corresponding message
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate an email verification token using JWT
+    const emailVerificationToken = await jwt.sign(
+      { email },
+      process.env.JWT_EMAIL_VERIFICATION_SECRET,
+      { expiresIn: '1h' },
+    );
+
+    // Send the activation email with the generated token
+    await emailService.sendActivationEmail(email, emailVerificationToken);
+
+    return res.status(200).json({ message: 'Activation email resent successfully' });
+  } catch (e) {
+    return res.status(500).json({ message: 'Internal server error. Please try again later.' });
+  }
+};
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -207,4 +236,5 @@ module.exports = {
   requestResetPassword,
   resetPasswordActivation,
   resetPasswordUpdates,
+  resendActivationEmail,
 };
