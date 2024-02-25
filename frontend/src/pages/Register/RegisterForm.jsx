@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-
 import Form from 'react-bootstrap/Form';
 
+import { GoogleLoginButton } from 'react-social-login-buttons';
+import { LoginSocialGoogle } from 'reactjs-social-login';
+
+import { login,loginSocial } from '../../api';
 import styles from './Register.module.css';
 
 import FormEmailInput from '../../components/form/FormEmailInput';
@@ -11,10 +14,10 @@ import FormPasswordInput from '../../components/form/FormPasswordInput';
 
 // import IconText from '../../components/IconText';
 import MessageBar from '../../components/MessageBar';
-import SocialButtonsGroup from '../../components/SocialButtonsGroup';
+//import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
 const DEFAULT_ERROR_MESSAGE =
-    'You are using symbols in your passwords or your passwords do not match.';
+  'You are using symbols in your passwords or your passwords do not match.';
 
 export const RegisterForm = (props) => {
 
@@ -25,6 +28,8 @@ export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isTouched, setIsTouched] = useState(false);
   const [validated, setIsValidated] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
+  const [success, setSuccess] = useState();
 
   useEffect(() => {
     if (props.paramEmail) {
@@ -54,6 +59,24 @@ export const RegisterForm = (props) => {
 
     setIsValidated(true);
   };
+  const loginfromGoogle = (response) => {
+    loginSocial(response.data.access_token, response.data.email)
+      .then((res) => {
+
+        setSuccess(true);
+        const user = JSON.stringify(res.data);
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/member';
+        console.groupCollapsed(response.data);
+      })
+      .catch(() => {
+        setSuccess(false);
+        setErrMsg(
+          `Your don't have an account with us. 
+           Please sign up first`
+        );
+      });
+  };
 
   return (
     <>
@@ -73,7 +96,7 @@ export const RegisterForm = (props) => {
           required
           onChange={handleEmailChange}
           defaultValue={email}
-          
+
         />
         <FormPasswordInput onChange={handlePasswordChange} required />
         <FormPasswordInput
@@ -96,12 +119,24 @@ export const RegisterForm = (props) => {
           size='lg'
           variant='light'
         >
-                    Sign up
+          Sign up
         </Button>
 
         <div className={styles.signUpText}>Or sign up with</div>
-
-        <SocialButtonsGroup />
+        <LoginSocialGoogle
+          client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
+          onResolve={loginfromGoogle}
+          onReject={err => {
+            setErrMsg(
+              `You are not able to login with Google.
+                   Please try again later`
+            );
+            console.log(err);
+          }}
+        >
+          <GoogleLoginButton />
+        </LoginSocialGoogle>
+        {/*<SocialButtonsGroup />*/}
       </Form>
     </>
   );

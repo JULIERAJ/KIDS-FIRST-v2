@@ -73,13 +73,11 @@ export default function Signin() {
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
         window.location.href = '/member';
+        console.groupCollapsed(response.data);
       })
       .catch(() => {
         setSuccess(false);
-        setErrMsg(
-          `Your don't have an account with us. 
-           Please sign up first`
-        );
+        
       });
   };
 

@@ -1,3 +1,4 @@
+
 const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
 const emailService = require('../service/email-service');
@@ -56,6 +57,15 @@ const registration = async (req, res) => {
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
+/////
+const generatePassword = () => {
+  newPassword = "A";
+  let charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for (let i = 0; i < 10; i++) {
+    newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
+  } return newPassword
+};
+///////
 
 const accountActivation = async (req, res) => {
   const activationToken = req.params.emailVerificationToken;
@@ -110,17 +120,17 @@ const login = async (req, res) => {
     }
 
 
-    const correctPassword = await principleService.isPasswordCorrect(email, password );
+    const correctPassword = await principleService.isPasswordCorrect(email, password);
     if (!correctPassword) {
       return res
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-    
-    // when the user login, the find that user's family(s), then push the info  to the front 
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
 
-    return res.status(200).json({ 
+    // when the user login, the find that user's family(s), then push the info  to the front 
+    const principleFamily = await familyService.findPrincipleFamilyName(user._id);
+
+    return res.status(200).json({
       email: user.email,
       id: user._id,
       familyId: principleFamily[0].id,
@@ -183,25 +193,29 @@ const loginFacebook = async (req, res) => {
 };
 const loginSocial = async (req, res) => {
   const { accessToken, userID } = req.body;
-    // save new user or not
-   console.log("user  "+userID);
-  const user = await principleService.findUser(userID);
+  console.log("user  " + userID);
 
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+  user = await principleService.findUser(userID);
 
-    if (user) {
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id); 
+  if (!user) {
+            let password = generatePassword.newPassword +"Azert1234*";
+    user = await principleService.registration(
+      userID,
+      password
+    );
+    console.log(user.email + " " + password);
+    ///  await familyService.familyRegistration('bababaal',user._id); 
+  }
 
-    return res.status(200).json({ 
-      email: user.email,
-      id: user._id,
-      familyId: principleFamily[0].id,
-      familyName: principleFamily[0].familyName
-    });
-    }
-  
+
+  const principleFamily = await familyService.findPrincipleFamilyName(user._id);
+  console.log(principleFamily);
+  return res.status(200).json({
+    email: user.email,
+    id: user._id,
+    familyId: principleFamily.id,
+    familyName: principleFamily.familyName
+  });
 };
 const requestResetPassword = async (req, res) => {
   const { email } = req.body;
