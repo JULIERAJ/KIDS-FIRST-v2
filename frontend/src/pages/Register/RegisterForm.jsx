@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import { GoogleLoginButton } from 'react-social-login-buttons';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 
-import { login,loginSocial } from '../../api';
 import styles from './Register.module.css';
+import { loginSocial } from '../../api';
 
 import FormEmailInput from '../../components/form/FormEmailInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
@@ -71,10 +71,7 @@ export const RegisterForm = (props) => {
       })
       .catch(() => {
         setSuccess(false);
-        setErrMsg(
-          `Your don't have an account with us. 
-           Please sign up first`
-        );
+
       });
   };
 

@@ -57,15 +57,6 @@ const registration = async (req, res) => {
     return res.status(500).json({ message: 'something went wrong' });
   }
 };
-/////
-const generatePassword = () => {
-  newPassword = "A";
-  let charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (let i = 0; i < 10; i++) {
-    newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
-  } return newPassword
-};
-///////
 
 const accountActivation = async (req, res) => {
   const activationToken = req.params.emailVerificationToken;
@@ -192,13 +183,21 @@ const loginFacebook = async (req, res) => {
   }
 };
 const loginSocial = async (req, res) => {
-  const { accessToken, userID } = req.body;
-  console.log("user  " + userID);
+  const { userID } = req.body;
+  // console.log("user  " + userID);
 
   user = await principleService.findUser(userID);
 
   if (!user) {
-            let password = generatePassword.newPassword +"Azert1234*";
+    function generatePassword() {
+      charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      newPassword = "";
+      for (let i = 0; i < 10; i++) {
+        newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
+      }
+      return newPassword;
+    };
+    let password = generatePassword(); 
     user = await principleService.registration(
       userID,
       password
@@ -209,7 +208,7 @@ const loginSocial = async (req, res) => {
 
 
   const principleFamily = await familyService.findPrincipleFamilyName(user._id);
-  console.log(principleFamily);
+  //console.log(principleFamily);
   return res.status(200).json({
     email: user.email,
     id: user._id,
