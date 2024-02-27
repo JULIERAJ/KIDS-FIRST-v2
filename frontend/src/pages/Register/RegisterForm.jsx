@@ -1,13 +1,18 @@
+/* eslint-disable no-console */
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import { GoogleLoginButton } from 'react-social-login-buttons';
-import { LoginSocialGoogle } from 'reactjs-social-login';
+import {
+  GoogleLoginButton,
+  FacebookLoginButton,
+} from 'react-social-login-buttons';
+import { LoginSocialGoogle, LoginSocialFacebook } from 'reactjs-social-login';
 
 import styles from './Register.module.css';
-import { loginSocial } from '../../api';
+
+import { loginSocial, loginFacebook } from '../../api';
 
 import FormEmailInput from '../../components/form/FormEmailInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
@@ -20,7 +25,6 @@ const DEFAULT_ERROR_MESSAGE =
   'You are using symbols in your passwords or your passwords do not match.';
 
 export const RegisterForm = (props) => {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -28,8 +32,10 @@ export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [isTouched, setIsTouched] = useState(false);
   const [validated, setIsValidated] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState();
+  // eslint-disable-next-line no-unused-vars
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     if (props.paramEmail) {
@@ -62,44 +68,57 @@ export const RegisterForm = (props) => {
   const loginfromGoogle = (response) => {
     loginSocial(response.data.access_token, response.data.email)
       .then((res) => {
-
         setSuccess(true);
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
         window.location.href = '/member';
-        console.groupCollapsed(response.data);
       })
       .catch(() => {
         setSuccess(false);
+      });
+  };
 
+  const handleFacebookLoginSuccess = (response) => {
+    loginFacebook(response.data.accessToken, response.data.userID)
+      .then((res) => {
+        setSuccess(true);
+        const user = JSON.stringify(res.data);
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/member';
+      })
+      .catch(() => {
+        setSuccess(false);
+        setErrMsg(
+          `Your email address or password is incorrect. 
+        Please try again, or click "Forgot your password"`
+        );
       });
   };
 
   return (
     <>
       <Form
-        className='py-4'
+        className="py-4"
         onChange={handleFormChange}
         onSubmit={handleSubmit}
         noValidate
         validated={validated}
       >
         {errorMessage && (
-          <MessageBar variant='error'>{errorMessage}</MessageBar>
+          <MessageBar variant="error">{errorMessage}</MessageBar>
         )}
 
         <FormEmailInput
-          autoComplete='off'
+          autoComplete="off"
           required
           onChange={handleEmailChange}
           defaultValue={email}
-
         />
         <FormPasswordInput onChange={handlePasswordChange} required />
         <FormPasswordInput
-          id='confirmPassword'
-          label='Password Confirmation'
-          name='confirmPassword'
+          id="confirmPassword"
+          label="Password Confirmation"
+          name="confirmPassword"
           onChange={handlePasswordConfirmChange}
           required
         />
@@ -111,19 +130,34 @@ export const RegisterForm = (props) => {
         </MessageBar> */}
 
         <Button
-          className='primary-btn w-100 my-5'
-          type='submit'
-          size='lg'
-          variant='light'
+          className="primary-btn w-100 my-5"
+          type="submit"
+          size="lg"
+          variant="light"
         >
           Sign up
         </Button>
 
         <div className={styles.signUpText}>Or sign up with</div>
+        <LoginSocialFacebook
+          appId={process.env.APP_ID}
+          onResolve={(response) => {
+            handleFacebookLoginSuccess(response);
+            console.log(response);
+          }}
+          onReject={(error) => {
+            // handleFacebookLoginFailure(error);
+            console.log(error);
+          }}
+        >
+          <FacebookLoginButton />
+          {/* <FacebookLoginButton onClick={() => alert('Hello')} /> */}
+        </LoginSocialFacebook>
+        <div> &nbsp; </div>
         <LoginSocialGoogle
           client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
           onResolve={loginfromGoogle}
-          onReject={err => {
+          onReject={(err) => {
             setErrMsg(
               `You are not able to login with Google.
                    Please try again later`
@@ -143,5 +177,5 @@ export default RegisterForm;
 RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
   email: PropTypes.string,
-  paramEmail: PropTypes.string
+  paramEmail: PropTypes.string,
 };
