@@ -7,6 +7,7 @@ import { GoogleLoginButton } from 'react-social-login-buttons';
 import { LoginSocialGoogle } from 'reactjs-social-login';
 
 import styles from './Register.module.css';
+
 import { loginSocial } from '../../api';
 
 import FormEmailInput from '../../components/form/FormEmailInput';
