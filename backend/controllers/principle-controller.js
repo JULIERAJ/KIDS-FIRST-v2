@@ -117,11 +117,11 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-
-    // when the user login, the find that user's family(s), then push the info  to the front 
+    
+    // when the user login, then find that user's family(s), then push the info  to the front 
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
 
-    return res.status(200).json({
+      return res.status(200).json({
       email: user.email,
       id: user._id,
       familyId: principleFamily[0].id,
