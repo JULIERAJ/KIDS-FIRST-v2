@@ -14,6 +14,9 @@ export const login = (email, password) => axios.post(`${API_URL}login`, { email,
 export const loginFacebook = (accessToken, userID) =>
   axios.post(`${API_URL}loginFacebook`, { accessToken, userID });
 
+export const loginSocial = (accessToken, userID) =>
+  axios.post(`${API_URL}loginSocial`, { accessToken, userID });
+
 export const register = (opts) => axios.post(`${API_URL}register`, opts);
 
 export const createFamily = (opts) => axios.post(`${API_URL}family`, opts);
