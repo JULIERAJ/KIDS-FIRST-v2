@@ -21,15 +21,35 @@ const sendActivationEmail = async (email, emailVerificationToken) => {
     await transporter.sendMail({
       from: process.env.SMTP_USER,
       to: email,
-      subject: 'Your KidsFirst verification link',
+      subject: 'KIDS FIRST Account Verification',
       text: '',
       html: `
-              <div>
-                  <h1>Welcome to the KidsFirst community</h1>
-                  <p>To approve your account, please verify your email now:</p>
-                <a href='${href}'>click here</a>
-              </div>
+              <div style="text-align: center;">
+                  <img src="cid:logo"
+                   alt="Logo" style="width: 62px;" />
+                <br>
+                  <p style="margin-bottom: 25px">Hello and welcome to KIDS FIRST!</p>
+                  <p>To continue the registration process, please click Verify My Account.</p>
+                  <br>
+                  <div style="margin-top: 20px;">
+                    <a href="${href}" style="padding: 10px 38px; 
+                    background-color: #5BA056; color: black; text-decoration: none; 
+                    border-radius: 5px; font-weight: 400;">Verify My Account</a>
+
+                    <hr style="border-top: 1px solid lightgray; width: 350px;
+                     margin-top: 25px;">
+                  </div>
+                  <p style="color: #938B8B;">
+                  Do not reply to this automated email.</p>
+                </div>
       `,
+      attachments: [
+        {
+          filename: 'kids_first_logo_beta.png',
+          path: '../frontend/src/media/logo/kids_first_logo_beta.png',
+          cid: 'logo',
+        },
+      ],
     });
   } catch (e) {
     return e;
@@ -61,7 +81,7 @@ const sendResetPasswordEmail = async (email, resetPasswordToken) => {
 const sendInvitationEmail = async(email, family, emailVerificationToken,firstName) => {
   const href = `${process.env.CLIENT_URL}/register/${email}/${family}/${emailVerificationToken}`;
   try {
-    // name of the Invitor in the email will be fetched from the form together 
+    // name of the Invitor in the email will be fetched from the form together
     //with the invitee email
     await transporter.sendMail({
       from: process.env.SMTP_USER,
@@ -78,7 +98,7 @@ const sendInvitationEmail = async(email, family, emailVerificationToken,firstNam
               </div>
       `,
     });
-    return href; 
+    return href;
   } catch (e) {
     return e;
   }
