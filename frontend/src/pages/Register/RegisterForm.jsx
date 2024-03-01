@@ -6,27 +6,33 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-
 import Form from 'react-bootstrap/Form';
 
+import {
+  GoogleLoginButton,
+  FacebookLoginButton,
+} from 'react-social-login-buttons';
+import { LoginSocialGoogle, LoginSocialFacebook } from 'reactjs-social-login';
+
 import styles from './Register.module.css';
+
+import { loginSocial, loginFacebook } from '../../api';
 
 import FormEmailInput from '../../components/form/FormEmailInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
 
 import IconText from '../../components/IconText';
 import MessageBar from '../../components/MessageBar';
-import SocialButtonsGroup from '../../components/SocialButtonsGroup';
+//import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
 const regexUpperCase = /[A-Z]/;
 const regexLowerCase = /[a-z]/;
 const regexNumber = /\d/;
 const regexSpecialChar = /[!@#$%^&*()_+=[\]{};':"\\|,.<>?-]/;
 const regexLength = /^.{8,25}$/;
-const regexEmail =/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
-
   const [errorMessage, setErrorMessage] = useState('');
 
   const [email, setEmail] = useState('');
@@ -35,6 +41,10 @@ export const RegisterForm = (props) => {
   const [emailError, setEmailError] = useState('');
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State to toggle password visibility
+  // eslint-disable-next-line no-unused-vars
+  const [errMsg, setErrMsg] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [success, setSuccess] = useState('');
 
   const [passwordErrors, setPasswordErrors] = useState({
     uppercase: true,
@@ -59,7 +69,7 @@ export const RegisterForm = (props) => {
     if (props.errorMessage) {
       setErrorMessage(props.errorMessage);
     }
-  },[props.errorMessage]);
+  }, [props.errorMessage]);
   // Event handler for email change
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -93,11 +103,11 @@ export const RegisterForm = (props) => {
       toggleDisabled();
     }
   };
-    // Function to validate email format
+  // Function to validate email format
   const validateEmail = (emailValue) => {
     return regexEmail.test(emailValue);
   };
-    // Function to validate all password errors
+  // Function to validate all password errors
   const allPasswordErrorsChecked = Object.values(passwordErrors).every((error) => !error);
   // Function to validate password format
   const validatePassword = (passwordValue) => {
@@ -127,14 +137,48 @@ export const RegisterForm = (props) => {
     }
   };
 
+  const loginfromGoogle = (response) => {
+    loginSocial(response.data.access_token, response.data.email)
+      .then((res) => {
+        setSuccess(true);
+        const user = JSON.stringify(res.data);
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/member';
+      })
+      .catch(() => {
+        setSuccess(false);
+      });
+  };
+
+  const handleFacebookLoginSuccess = (response) => {
+    loginFacebook(response.data.accessToken, response.data.userID)
+      .then((res) => {
+        setSuccess(true);
+        const user = JSON.stringify(res.data);
+        localStorage.setItem('storedUser', user);
+        window.location.href = '/member';
+      })
+      .catch(() => {
+        setSuccess(false);
+        setErrMsg(
+          `Your email address or password is incorrect. 
+        Please try again, or click "Forgot your password"`
+        );
+      });
+  };
+
   return (
     <>
       <Form
         className="py-4"
         onSubmit={handleSubmit}
         noValidate
-        // validated={validated}
+      // validated={validated}
       >
+        {errorMessage && (
+          <MessageBar variant="error">{errorMessage}</MessageBar>
+        )}
+
         <FormEmailInput
           autoComplete="off"
           required
@@ -206,7 +250,36 @@ export const RegisterForm = (props) => {
           <MessageBar variant="error">{passwordMatchError}</MessageBar>
         )}
         <div className={styles.signUpText}>Or sign up with</div>
-        <SocialButtonsGroup />
+
+        <LoginSocialFacebook
+          appId={process.env.APP_ID}
+          onResolve={(response) => {
+            handleFacebookLoginSuccess(response);
+            console.log(response);
+          }}
+          onReject={(error) => {
+            // handleFacebookLoginFailure(error);
+            console.log(error);
+          }}
+        >
+          <FacebookLoginButton />
+          {/* <FacebookLoginButton onClick={() => alert('Hello')} /> */}
+        </LoginSocialFacebook>
+        <div> &nbsp; </div>
+        <LoginSocialGoogle
+          client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
+          onResolve={loginfromGoogle}
+          onReject={(err) => {
+            setErrMsg(
+              `You are not able to login with Google.
+                   Please try again later`
+            );
+            console.log(err);
+          }}
+        >
+          <GoogleLoginButton />
+        </LoginSocialGoogle>
+        {/*<SocialButtonsGroup />*/}
       </Form>
     </>
   );
@@ -216,6 +289,5 @@ export default RegisterForm;
 RegisterForm.propTypes = {
   onSubmitData: PropTypes.func,
   email: PropTypes.string,
-  paramEmail: PropTypes.string,
   errorMessage: PropTypes.string,
 };
