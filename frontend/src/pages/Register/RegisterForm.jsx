@@ -29,7 +29,7 @@ const regexUpperCase = /[A-Z]/;
 const regexLowerCase = /[a-z]/;
 const regexNumber = /\d/;
 const regexSpecialChar = /[!@#$%^&*()_+=[\]{};':"\\|,.<>?-]/;
-const regexLength = /^.{8,25}$/;
+const regexLength = /^.{8,40}$/;
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
@@ -234,7 +234,7 @@ export const RegisterForm = (props) => {
               clear={passwordErrors.special}
             />
             <IconText
-              title="Between 8-25 characters"
+              title="Between 8-40 characters"
               clear={passwordErrors.length}
             />
           </MessageBar>
