@@ -98,9 +98,10 @@ export const RegisterForm = (props) => {
   const handleEmailBlur = () => {
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email address.');
+      setIsDisabled(true);
     } else {
       setEmailError('');
-      toggleDisabled();
+      setIsDisabled(false);
     }
   };
   // Function to validate email format
