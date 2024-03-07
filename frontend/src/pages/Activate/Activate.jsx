@@ -17,14 +17,17 @@ const Activate = () => {
   const navigate = useNavigate();
   let { email, emailVerificationToken } = params;
 
+  // States to manage user data, loading status, and link expiration
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [expired, setExpired] = useState(false);
 
+  // Function to handle navigation to sign-in page
   const handleClick = () => {
     navigate('/signin');
   };
 
+  // Function to fetch user data and check for link expiration
   const fetchData = async () => {
     try {
       const { data } = await activate(email, emailVerificationToken);
@@ -32,6 +35,7 @@ const Activate = () => {
       setLoading(false);
     } catch (error) {
       console.error('Error:', error);
+      // Check if the link has expired
       if (error.response && error.response.data && error.response.data.message === 'jwt expired') {
         setExpired(true);
       }
@@ -39,8 +43,9 @@ const Activate = () => {
     }
   };
   
+  // Fetch data when the component mounts
   useEffect(() => {
-    fetchData(); // Fetch data when the component mounts
+    fetchData(); 
   }, []); // Empty dependency array to run the effect only once
   
   return (
@@ -58,8 +63,10 @@ const Activate = () => {
         <FatherSonBlock>
           <h1 className={styles.registerTitle}>Sign up Kids First</h1>
 
+          {/* Show loading message while fetching data */}
           {loading && <p>Loading...</p>}
 
+          {/* Show success message if email is activated */}
           { (!loading && userData.emailIsActivated) && (
             <>
               <FeedbackBlock message={userData.message} image={SuccessImg}/>
