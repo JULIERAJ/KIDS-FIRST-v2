@@ -19,21 +19,30 @@ const Activate = () => {
 
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
-  //have to decide what to show on status Loading (Skeletons etc)
+  const [expired, setExpired] = useState(false);
 
   const handleClick = () => {
     navigate('/signin');
   };
 
+  const fetchData = async () => {
+    try {
+      const { data } = await activate(email, emailVerificationToken);
+      setUserData(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error:', error);
+      if (error.response && error.response.data && error.response.data.message === 'jwt expired') {
+        setExpired(true);
+      }
+      setLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    activate(email, emailVerificationToken)
-      .then(({ data }) => {
-        setUserData(data);
-        setLoading(false);
-      })
-      .catch((error) => error);
-  }, [email, emailVerificationToken]);
-
+    fetchData(); // Fetch data when the component mounts
+  }, []); // Empty dependency array to run the effect only once
+  
   return (
     <>
       <Header
@@ -71,10 +80,14 @@ const Activate = () => {
               </div>
             </>
           )}
-          { (!loading && !userData.emailIsActivated) && (
+          { (!loading && !userData.emailIsActivated && expired) && (
             <div>
-              <p>something went wrong</p>
-              <button>resend verification email</button>
+              <p>The link was expired</p>
+            </div>
+          )}
+          { (!loading && !userData.emailIsActivated && !expired) && (
+            <div>
+              <p>Something went wrong</p>
             </div>
           )}
         </FatherSonBlock>
