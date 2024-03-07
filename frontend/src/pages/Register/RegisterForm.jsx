@@ -220,7 +220,7 @@ export const RegisterForm = (props) => {
             />
             <IconText title="At least 1 number" clear={passwordErrors.number} />
             <IconText
-              title="At least 1 special character ()"
+              title="At least 1 special character"
               clear={passwordErrors.special}
             />
             <IconText
