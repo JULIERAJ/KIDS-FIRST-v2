@@ -60,10 +60,6 @@ export const RegisterForm = (props) => {
   // State variable to manage the disabled state
   const [isDisabled, setIsDisabled] = useState(true);
 
-  // Function to toggle the disabled state
-  const toggleDisabled = () => {
-    setIsDisabled(!isDisabled);
-  };
   // Effect hook to handle errors received from the backend
   useEffect(() => {
     if (props.errorMessage) {
@@ -73,6 +69,13 @@ export const RegisterForm = (props) => {
   // Event handler for email change
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address.');
+      setIsDisabled(true);
+    } else {
+      setEmailError('');
+      setIsDisabled(false);
+    }
   };
   // Event handler for password change
   const handlePasswordChange = (e) => {
@@ -94,16 +97,7 @@ export const RegisterForm = (props) => {
     setPasswordListVisible(false);
     setPasswordMatchError('');
   };
-  // Event handler for handling email blur
-  const handleEmailBlur = () => {
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-      setIsDisabled(true);
-    } else {
-      setEmailError('');
-      setIsDisabled(false);
-    }
-  };
+
   // Function to validate email format
   const validateEmail = (emailValue) => {
     return regexEmail.test(emailValue);
@@ -162,7 +156,7 @@ export const RegisterForm = (props) => {
       .catch(() => {
         setSuccess(false);
         setErrMsg(
-          `Your email address or password is incorrect. 
+          `Your email address or password is incorrect.
         Please try again, or click "Forgot your password"`
         );
       });
@@ -176,15 +170,10 @@ export const RegisterForm = (props) => {
         noValidate
       // validated={validated}
       >
-        {errorMessage && (
-          <MessageBar variant="error">{errorMessage}</MessageBar>
-        )}
-
         <FormEmailInput
           autoComplete="off"
           required
           onChange={handleEmailChange}
-          onBlur={handleEmailBlur}
           defaultValue={email}
         />
         <FormPasswordInput
