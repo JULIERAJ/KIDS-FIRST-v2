@@ -36,6 +36,7 @@ export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [email, setEmail] = useState('');
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -103,7 +104,9 @@ export const RegisterForm = (props) => {
     return regexEmail.test(emailValue);
   };
   // Function to validate all password errors
-  const allPasswordErrorsChecked = Object.values(passwordErrors).every((error) => !error);
+  const allPasswordErrorsChecked = Object.values(passwordErrors).every(
+    (error) => !error
+  );
   // Function to validate password format
   const validatePassword = (passwordValue) => {
     const errors = {
@@ -117,17 +120,15 @@ export const RegisterForm = (props) => {
   };
   // Function to validate password confirmation
   const validateConfirmPassword = (confirmPasswordValue) => {
-    setPasswordMatchError(confirmPasswordValue !== password ? 'Passwords do not match.' : '');
+    setPasswordMatchError(
+      confirmPasswordValue !== password ? 'Passwords do not match.' : ''
+    );
   };
   // Event handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform form submission if all validations pass
-    if (
-      !emailError &&
-      allPasswordErrorsChecked &&
-      !passwordMatchError
-    ) {
+    if (!emailError && allPasswordErrorsChecked && !passwordMatchError) {
       props.onSubmitData(email, password);
     }
   };
@@ -165,13 +166,13 @@ export const RegisterForm = (props) => {
   return (
     <>
       <Form
-        className="py-4"
+        className='py-4'
         onSubmit={handleSubmit}
         noValidate
-      // validated={validated}
+        // validated={validated}
       >
         <FormEmailInput
-          autoComplete="off"
+          autoComplete='off'
           required
           onChange={handleEmailChange}
           defaultValue={email}
@@ -200,10 +201,10 @@ export const RegisterForm = (props) => {
           disabled={isDisabled}
         />
         <Button
-          className="primary-btn w-100 my-5"
-          type="submit"
-          size="lg"
-          variant="light"
+          className='primary-btn w-100 my-5'
+          type='submit'
+          size='lg'
+          variant='light'
         >
           Sign up
         </Button>
@@ -211,33 +212,31 @@ export const RegisterForm = (props) => {
         {passwordListVisible && (
           <MessageBar variant={allPasswordErrorsChecked ? 'success' : 'error'}>
             <IconText
-              title="At least 1 uppercase character"
+              title='At least 1 uppercase character'
               clear={passwordErrors.uppercase}
             />
             <IconText
-              title="At least 1 lowercase character"
+              title='At least 1 lowercase character'
               clear={passwordErrors.lowercase}
             />
-            <IconText title="At least 1 number" clear={passwordErrors.number} />
+            <IconText title='At least 1 number' clear={passwordErrors.number} />
             <IconText
-              title="At least 1 special character"
+              title='At least 1 special character'
               clear={passwordErrors.special}
             />
             <IconText
-              title="Between 8-40 characters"
+              title='Between 8-40 characters'
               clear={passwordErrors.length}
             />
           </MessageBar>
         )}
 
         {errorMessage && (
-          <MessageBar variant="error">{errorMessage}</MessageBar>
+          <MessageBar variant='error'>{errorMessage}</MessageBar>
         )}
-        {emailError && (
-          <MessageBar variant="error">{emailError}</MessageBar>
-        )}
+        {emailError && <MessageBar variant='error'>{emailError}</MessageBar>}
         {passwordMatchError && (
-          <MessageBar variant="error">{passwordMatchError}</MessageBar>
+          <MessageBar variant='error'>{passwordMatchError}</MessageBar>
         )}
         <div className={styles.signUpText}>Or sign up with</div>
 
