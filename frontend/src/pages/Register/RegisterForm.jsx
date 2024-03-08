@@ -34,9 +34,7 @@ const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
-
   const [email, setEmail] = useState('');
-
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState('');
