@@ -53,7 +53,7 @@ export const SIDEBAR_DATA = [
     alt: 'album-icon',
   },
   {
-    title: 'Kids',
+    title: 'Kids’ Info',
     icon: Kids,
     path: '/kids',
     alt: 'kids-icon',
