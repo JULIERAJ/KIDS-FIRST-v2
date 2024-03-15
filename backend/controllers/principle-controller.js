@@ -10,7 +10,7 @@ require('dotenv').config({ path: './.env.local' });
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,40}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
 const jwtOptions = {
@@ -32,7 +32,7 @@ const registration = async (req, res) => {
     if (!passwordRegExp.test(password)) {
       return res.status(400).json({
         message:
-          'Password must be at least 10 characters long and contain\
+          'Password must be at least 8 characters long and contain\
            at least one uppercase letter, one lowercase letter, and one number',
       });
     } else if (!emailRegExp.test(email)) {
@@ -101,6 +101,35 @@ const accountActivation = async (req, res) => {
   }
 };
 
+const resendActivationEmail = async (req, res) => {
+  // Extract the email from the request body
+  const { email } = req.body;
+
+  try {
+    // Find the user associated with the provided email
+    const user = await principleService.findUser(email);
+
+    if (!user) {
+      // If user is not found, return a 404 status with a corresponding message
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate an email verification token using JWT
+    const emailVerificationToken = await jwt.sign(
+      { email },
+      process.env.JWT_EMAIL_VERIFICATION_SECRET,
+      { expiresIn: '1h' },
+    );
+
+    // Send the activation email with the generated token
+    await emailService.sendActivationEmail(email, emailVerificationToken);
+
+    return res.status(200).json({ message: 'Activation email resent successfully' });
+  } catch (e) {
+    return res.status(500).json({ message: 'Internal server error. Please try again later.' });
+  }
+};
+
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -118,8 +147,7 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-
-    // when the user login, then find that user's family(s), then push the info  to the front 
+       // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
 
     return res.status(200).json({
@@ -302,4 +330,5 @@ module.exports = {
   requestResetPassword,
   resetPasswordActivation,
   resetPasswordUpdates,
+  resendActivationEmail,
 };

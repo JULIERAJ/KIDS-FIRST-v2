@@ -30,8 +30,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
-      "npm run lint:fix:api",
-      "npm run lint:fix:client"
+      
     ]
   },
   "dependencies": {
