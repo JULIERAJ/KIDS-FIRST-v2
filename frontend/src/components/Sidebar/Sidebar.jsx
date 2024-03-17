@@ -7,6 +7,8 @@ import { SIDEBAR_DATA } from './sidebarData';
 
 import kidsFirstLogo from '../../media/logo/kids_first_logo_beta.png';
 
+//SidebarItemsCard component displays a sidebar menu item.
+
 const SidebarItemsCard = ({ title, icon, path, alt }) => {
   return (
     <Tab.Container>
