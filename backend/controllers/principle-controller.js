@@ -9,7 +9,7 @@ require('dotenv').config({ path: './.env.local' });
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,40}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
 const jwtOptions = {
@@ -31,7 +31,7 @@ const registration = async (req, res) => {
     if (!passwordRegExp.test(password)) {
       return res.status(400).json({
         message:
-          'Password must be at least 10 characters long and contain\
+          'Password must be at least 8 characters long and contain\
            at least one uppercase letter, one lowercase letter, and one number',
       });
     } else if (!emailRegExp.test(email)) {
@@ -146,8 +146,8 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-    
-    // when the user login, then find that user's family(s), then push the info  to the front 
+
+    // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
 
       return res.status(200).json({
@@ -226,13 +226,13 @@ const loginSocial = async (req, res) => {
       }
       return newPassword;
     };
-    let password = generatePassword(); 
+    let password = generatePassword();
     user = await principleService.registration(
       userID,
       password
     );
     console.log(user.email + " " + password);
-    ///  await familyService.familyRegistration('bababaal',user._id); 
+    ///  await familyService.familyRegistration('bababaal',user._id);
   }
 
 
