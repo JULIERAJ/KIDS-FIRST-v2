@@ -217,8 +217,7 @@ const loginSocial = async (req, res) => {
     return res.status(401).json({ error: 'Error fetching data from Google' });
   }
   user = await principleService.findUser(userID);
-
-  if (!user) {
+   if (!user) {
     function generatePassword() {
       charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       newPassword = "";

@@ -176,7 +176,7 @@ export const RegisterForm = (props) => {
         className='py-4'
         onSubmit={handleSubmit}
         noValidate
-        // validated={validated}
+      // validated={validated}
       >
         <FormEmailInput
           autoComplete='off'
@@ -238,9 +238,9 @@ export const RegisterForm = (props) => {
           </MessageBar>
         )}
         {!successSo && <MessageBar variant="error">{errMsgSocial}</MessageBar>}
-        {/*  {errorMessage && (
+        {errorMessage && (
           <MessageBar variant='error'>{errorMessage}</MessageBar>
-        )}*/}
+        )}
         {emailError && <MessageBar variant='error'>{emailError}</MessageBar>}
         {passwordMatchError && (
           <MessageBar variant='error'>{passwordMatchError}</MessageBar>
