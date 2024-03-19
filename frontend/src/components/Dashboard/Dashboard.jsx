@@ -6,12 +6,9 @@ import { FaCircle } from 'react-icons/fa';
 
 import styles from './Dashboard.module.css';
 
-import Sidebar from '../Sidebar/Sidebar';
-
-const Dashboard = () => {
+const DashboardHeader = () => {
   return (
     <div style={{ display: 'flex' }}>
-      <Sidebar />
       <Container as='aside' className={`${styles.Dashboard}`}>
         <div className={`${styles.heading}`}>
           <h2 className={styles.rightAlign}>Dashboard</h2>
@@ -23,14 +20,8 @@ const Dashboard = () => {
             </div>
           </h2>
         </div>
-
-        <p>
-          <b>Calender</b>
-          <br></br>
-          Overview of this week&apos;s events
-        </p>
       </Container>
     </div>
   );
 };
-export default Dashboard;
+export default DashboardHeader;
