@@ -25,7 +25,26 @@
   height: 48px;
   align-items: center;
   padding-left: 10px;
+  position: relative;
 }
+
+
+.sidebarMenuItem::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  background-color: black;
+  transition: width 0.5s ease;
+}
+
+.sidebarMenuItem:hover::after {
+  width: calc(100% - 20px);
+}
+
 
 /* setting icon */
 .rowContainer:nth-last-child(2) {
@@ -42,24 +61,45 @@
 
 .sidebarLink {
   text-decoration: none;
-  color: black !important;
+  color: black;
   font-size: 0.9rem;
   line-height: 35px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .sidebarLink:hover {
   transition: all 0.2s ease;
-  color: orange;
+  color: black;
 }
 
 .sidebarMenuItem:hover img {
-  transform: scale(1.2);
   transition: all 0.2s ease;
 }
 
-.sidebarMenu:hover {
-  cursor: pointer;
-  filter: invert(0.5) sepia(4) saturate(6) hue-rotate(0deg);
+.sidebarMenuItem:hover a {
+  font-weight: 600;
+}
+
+.sidebarMenuItem:hover {
+  transition: all 0.2s ease;
+}
+
+
+/* Define styles for the active state of the sidebar menu item */
+.sidebarMenuItem.active .sidebarLink {
+  color: orange;
+  font-weight: 600;
+}
+
+.sidebarMenu.active {
+
   border-right: 5px solid rgba(240, 148, 67, 0.724);
+}
+
+.sidebarMenuItem.active .sidebarLink:hover::after {
+  width: 0;
+}
+
+.sidebarMenuItem.active .sidebarLink::after {
+  width: 0;
 }
