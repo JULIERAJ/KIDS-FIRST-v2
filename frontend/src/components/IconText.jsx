@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
-
-import checkIcon from '../media/icons/check.png';
-
-const IconText = ({ title }) => 
-  <div>
-    <img src={checkIcon} width="12" alt="checkIcon"/> 
-    {' '}
-    {title}
-  </div>;
-
+import { FaCheck } from 'react-icons/fa';
+import { GrClose } from 'react-icons/gr';
+const IconText = ({ title, clear }) =>
+{
+  return (
+    <div>
+      {clear ? <GrClose /> : <FaCheck color='white'/>}
+      {' '}
+      {title}
+    </div>
+  );};
 IconText.propTypes = {
   title: PropTypes.string,
+  clear: PropTypes.bool,
 };
 
 export default IconText;
