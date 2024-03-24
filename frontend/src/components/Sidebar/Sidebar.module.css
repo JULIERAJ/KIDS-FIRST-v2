@@ -87,13 +87,13 @@
 
 /* Define styles for the active state of the sidebar menu item */
 .sidebarMenuItem.active .sidebarLink {
-  color: orange;
+  color: #EB7005;
   font-weight: 600;
 }
 
 .sidebarMenu.active {
 
-  border-right: 5px solid rgba(240, 148, 67, 0.724);
+  border-right: 5px solid rgba(235, 112, 5, 0.724);
 }
 
 .sidebarMenuItem.active .sidebarLink:hover::after {
