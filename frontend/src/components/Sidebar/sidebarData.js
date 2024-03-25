@@ -10,7 +10,7 @@ import HomeActive from '../../media/icons/homeActive.png';
 import HomeHover from '../../media/icons/homeHover.svg';
 
 import Kids from '../../media/icons/kids.png';
-import KidsActive from '../../media/icons/kidsActive.svg';
+import KidsActive from '../../media/icons/kidsActive.png';
 import KidsHover from '../../media/icons/kidsHover.svg';
 import Message from '../../media/icons/message.png';
 import MessageActive from '../../media/icons/messageActive.png';
