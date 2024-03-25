@@ -1,7 +1,7 @@
 
 .Dashboard {
   position: relative;
-  background-color: rgba(229, 229, 229, 1);
+  background-color: #fdfdfd;
   border-radius: 16px;
   border: 1px solid #e5e5e5;
   width: 1224px; 
@@ -53,7 +53,7 @@
   justify-content: center;
   width: 60px; 
   height: 60px; 
-  background-color: orange; 
+  background-color: #EB7005; 
   border-radius: 50%; 
 }
 
