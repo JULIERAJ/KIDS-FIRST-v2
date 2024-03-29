@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { EventProvider } from './components/Calendar/EventContext';
 import KFCalendar from './components/Calendar/KFCalendar';
 import LandingLayout from './components/LandingLayout';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -32,7 +33,7 @@ const App = () => (
         {/* <Route path='/family' element={<Family />} /> */}
         <Route path='/member' element={<FinalPanel />} /> 
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/calendarview' element={<KFCalendar />} />
+        <Route path='/calendarview' element={<EventProvider><KFCalendar /></EventProvider>} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route
           path='/reset-password/:email/:resetPasswordToken'

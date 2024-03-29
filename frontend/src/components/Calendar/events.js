@@ -1,90 +1,128 @@
 export default [
   {
-    title: 'All Day Event very long title',
-    allDay: true,
-    start: new Date(2024, 3, 0),
-    end: new Date(2024, 3, 1),
+    title: 'James-All Day Event very long title',
+    kidsName: 'James',
+    start: new Date(2024, 1, 1, 8, 0), // Start time: 8:00 AM
+    end: new Date(2024, 1, 1, 17, 0), // End time: 5:00 PM
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'A description for All Day Event very long title',
+    color: '#C29EEF'
   },
   {
-    title: 'Long Event',
-    start: new Date(2024, 3, 7),
-    end: new Date(2024, 3, 10),
-  },
-
-  {
-    title: 'DTS STARTS',
-    start: new Date(2016, 2, 13, 0, 0, 0),
-    end: new Date(2016, 2, 20, 0, 0, 0),
-  },
-
-  {
-    title: 'DTS ENDS',
-    start: new Date(2016, 10, 6, 0, 0, 0),
-    end: new Date(2016, 10, 13, 0, 0, 0),
-  },
-
-  {
-    title: 'Some Event',
-    start: new Date('March 18, 2024 03:24:00'),
-    end: new Date('March 18, 2024 04:24:00'),
-  },
-  {
-    title: 'Conference',
-    start: new Date(2024, 3, 11),
-    end: new Date(2024, 3, 13),
-    desc: 'Big conference for important people',
-  },
-  {
-    title: 'Meeting',
-    start: new Date(2024, 3, 12, 10, 30, 0, 0),
-    end: new Date(2024, 3, 12, 12, 30, 0, 0),
-    desc: 'Pre-meeting meeting, to prepare for the meeting',
-  },
-  {
-    title: 'Lunch',
-    start: new Date(2024, 3, 12, 12, 0, 0, 0),
-    end: new Date(2024, 3, 12, 13, 0, 0, 0),
-    desc: 'Power lunch',
-  },
-  {
-    title: 'Meeting',
-    start: new Date(2024, 3, 12, 14, 0, 0, 0),
-    end: new Date(2024, 3, 12, 15, 0, 0, 0),
-  },
-  {
-    title: 'Happy Hour',
-    start: new Date(2024, 3, 12, 17, 0, 0, 0),
-    end: new Date(2024, 3, 12, 17, 30, 0, 0),
-    desc: 'Most important meal of the day',
-  },
-  {
-    title: 'Dinner',
-    start: new Date(2024, 3, 12, 20, 0, 0, 0),
-    end: new Date(2024, 3, 12, 21, 0, 0, 0),
-  },
-  {
-    title: 'Birthday Party',
-    start: new Date(2024, 3, 13, 7, 0, 0),
-    end: new Date(2024, 3, 13, 10, 30, 0),
-  },
-  {
-    title: 'Birthday Party 2',
-    start: new Date(2024, 3, 13, 7, 0, 0),
-    end: new Date(2024, 3, 13, 10, 30, 0),
-  },
-  {
-    title: 'Birthday Party 3',
-    start: new Date(2024, 3, 13, 7, 0, 0),
-    end: new Date(2024, 3, 13, 10, 30, 0),
-  },
-  {
-    title: 'Late Night Event',
-    start: new Date(2024, 3, 17, 19, 30, 0),
-    end: new Date(2024, 3, 18, 2, 0, 0),
-  },
-  {
-    title: 'Multi-day Event',
+    title: 'James-Multi-day Event',
+    kidsName: 'James',
     start: new Date(2024, 3, 20, 19, 30, 0),
     end: new Date(2024, 3, 22, 2, 0, 0),
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'A description for All Day Event very long title',
+    color: '#C29EEF'
   },
-];
+  {
+    title: 'Viki-Dentist Appointment',
+    kidsName: 'Viki',
+    start: new Date(2024, 2, 13, 10, 0), // Start time: 10:00 AM
+    end: new Date(2024, 2, 13, 11, 0), // End time: 11:00 AM
+    type: 'Shared event (your ex-partner will also be attending this event)',
+    desc: 'Appointment for dental check up',
+    color: '#FF6B6D'
+  },
+  {
+    title: 'James-Dentist Appointment',
+    kidsName: 'James',
+    start: new Date(2024, 2, 6, 14, 0), // Start time: 2:00 PM
+    end: new Date(2024, 2, 6, 15, 0), // End time: 3:00 PM
+    type: 'Shared event (your ex-partner will also be attending this event)',
+    desc: 'Appointment for dental check up',
+    color: '#C29EEF'
+  },
+  {
+    title: 'Sarah-Tennis practice',
+    kidsName: 'Sarah',
+    start: new Date(2024, 2, 18, 16, 0), // Start time: 4:00 PM
+    end: new Date(2024, 2, 18, 17, 0), // End time: 5:00 PM
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'A description for Some Event',
+    color: '#FFD666'
+  },
+  {
+    title: 'Viki-Conference',
+    kidsName: 'Viki',
+    start: new Date(2024, 3, 11, 9, 0), // Start time: 9:00 AM
+    end: new Date(2024, 3, 11, 17, 0), // End time: 5:00 PM
+    type: 'Shared event (your ex-partner will also be attending this event)',
+    desc: 'A description for Conference',
+    color: '#FF6B6D'
+  },
+  {
+    title: 'James-Meeting with Rose',
+    kidsName: 'James',
+    start: new Date(2024, 3, 12, 10, 30), // Start time: 10:30 AM
+    end: new Date(2024, 3, 12, 11, 30), // End time: 11:30 AM
+    type: 'Shared event (your ex-partner will also be attending this event)',
+    desc: 'A description for Meeting',
+    color: '#C29EEF'
+  },
+  {
+    title: 'Sarah-Lunch at Restaurant (March 22)',
+    kidsName: 'Sarah',
+    start: new Date(2024, 2, 22, 9, 0), // Start time: March 22, 2024, 9:00 AM
+    end: new Date(2024, 2, 22, 11, 0), // End time: March 22, 2024, 11:00 AM
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'Make the reservation before',
+    color: '#FFD666'
+  },
+  {
+    title: 'Sarah-Dinner at Home (March 9)',
+    kidsName: 'Sarah',
+    start: new Date(2024, 2, 9, 16, 0), // Start time: March 9, 2024, 4:00 PM
+    end: new Date(2024, 2, 9, 18, 0), // End time: March 9, 2024, 6:00 PM
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'Make the reservation before',
+    color: '#FFD666'
+  },
+  {
+    title: 'Sarah-Lunch at Restaurant',
+    kidsName: 'Sarah',
+    start: new Date(2024, 3, 12, 12, 30), // Start time: 12:30 PM
+    end: new Date(2024, 3, 12, 13, 30), // End time: 1:30 PM
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'Make the reservation before',
+    color: '#FFD666'
+  },
+  {
+    title: 'Viki-Class Registration',
+    kidsName: 'Viki',
+    start: new Date(2024, 3, 12, 14, 0), // Start time: 2:00 PM
+    end: new Date(2024, 3, 12, 15, 0), // End time: 3:00 PM
+    type: 'Shared event (your ex-partner will also be attending this event)',
+    desc: 'Register for ballet classes',
+    color: '#FF6B6D'
+  },
+  {
+    title: 'James-Happy Hour',
+    kidsName: 'James',
+    start: new Date(2024, 3, 12, 18, 0), // Start time: 6:00 PM
+    end: new Date(2024, 3, 12, 19, 0), // End time: 7:00 PM
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'A description for Happy Hour',
+    color: '#C29EEF'
+  },
+  {
+    title: 'Sarah-Dinner with Joe',
+    kidsName: 'Sarah',
+    start: new Date(2024, 3, 12, 19, 0), // Start time: 7:00 PM
+    end: new Date(2024, 3, 12, 20, 0), // End time: 8:00 PM
+    type: 'Solo event (your ex-partner will not be present at this event)',
+    desc: 'A description for Dinner',
+    color: '#FFD666'
+  },
+  {
+    title: 'Viki-Birthday Party',
+    kidsName: 'Viki',
+    start: new Date(2024, 3, 13, 9, 0), // Start time: 9:00 AM
+    end: new Date(2024, 3, 13, 11, 0), // End time: 11:00 AM
+    type: 'Shared event (your ex-partner will also be attending this event)',
+    desc: 'A description for Birthday Party',
+    color: '#FF6B6D'
+  }
+]; 
