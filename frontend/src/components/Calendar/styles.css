@@ -288,7 +288,8 @@ button.rbc-input::-moz-focus-inner {
   box-shadow: none;
   margin: 0;
   padding: 2px 5px;
-  background-color: #ffa500;
+  /* negar removed the default orange bg color from events in all views*/
+  /* background-color: #ffa500; */
   border-radius: 5px;
   color: hwb(0 4% 96%);
   cursor: pointer;
@@ -301,10 +302,10 @@ button.rbc-input::-moz-focus-inner {
   cursor: inherit;
   pointer-events: none;
 }
-.rbc-event.rbc-selected,
+/* .rbc-event.rbc-selected,
 .rbc-day-slot .rbc-selected.rbc-background-event {
   background-color: red;
-}
+} */
 .rbc-event:focus,
 .rbc-day-slot .rbc-background-event:focus {
   outline: 5px auto #3b99fc;
@@ -689,13 +690,13 @@ button.rbc-input::-moz-focus-inner {
   /* min-height: 20px; */
 }
 
-/*Negar: Following 2 css for disable the row "All day" */
-.rbc-allday-cell {
+/*Negar: un-comment Following 2 css to disable the row "All day eevents" */
+/* .rbc-allday-cell {
   display: none;
 }
 .rbc-time-view .rbc-header {
   border-bottom: none;
-}
+} */
 
 .rbc-time-header {
   display: -webkit-box;
@@ -829,16 +830,15 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .KF-toolbar {
-  background-color: #f5d9de;
+  background-color: #FCFCFC;
   padding: 15px;
   margin: 15px;
 
   button {
-    background-color: white;
     cursor: pointer;
 
     &:hover {
-      background-color: rgba(244, 246, 177, 0.664);
+     
     }
   }
 
@@ -851,7 +851,7 @@ button.rbc-input::-moz-focus-inner {
   .toolbar button {
     margin: 5px;
     padding: 6px 10px;
-    border-radius: 15px;
+    border-radius: 8px;
   }
 
   .create {
