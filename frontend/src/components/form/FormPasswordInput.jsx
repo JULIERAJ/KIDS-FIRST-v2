@@ -4,9 +4,9 @@ import FormInput from './FormInput';
 
 /*
   RegExp: at least one symbol, uppercase letter, lowercase letter, number,
-  min length 8 characters, max length 20 characters
+  min length 8 characters, max length 40 characters
 */
-const passwordRegExp = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,20}$';
+const passwordRegExp = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,40}$';
 
 const FormPasswordInput = ({
   id = 'password',
@@ -24,7 +24,7 @@ const FormPasswordInput = ({
       label={label}
       name={name}
       minLength="8"
-      maxLength="20"
+      maxLength="40"
       pattern={passwordRegExp}
       placeholder="********"
       type={showPassword ? 'text' : 'password'} // Password visibility toggle
