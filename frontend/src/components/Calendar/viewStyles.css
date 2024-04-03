@@ -51,8 +51,6 @@
   padding-left: 10px; 
 }
 
-
-
 /* Target the monthly headers */
 .rbc-month-view  {
   background-color: #FFFEF9;
@@ -128,7 +126,6 @@
   transform: translateX(100%); 
 }
 
-
 /* date identity for today : Straight cyan horizontal line */
 .rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::before {
   content: '';
@@ -152,9 +149,6 @@
   margin-top: -10px;
 }
 
-
 .rbc-time-gutter.rbc-time-column {
   padding-right: 20px
 }
-
-
