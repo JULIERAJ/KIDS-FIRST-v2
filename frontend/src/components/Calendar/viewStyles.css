@@ -34,13 +34,23 @@
 /* calendar body styles for monthly view: */
 .rbc-date-cell {
   position: relative; 
-  button {
-      position: absolute; 
-      top: 14px; 
-      left:10px; /* Align to the left */
-      font-weight: 500;
-  }
 }
+
+.rbc-row-content .rbc-row .rbc-date-cell {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.rbc-row-content .rbc-row .rbc-date-cell button {
+  flex-shrink: 0; /* Prevent button from shrinking */
+  font-weight: 500;
+}
+
+.rbc-date-cell button {
+  padding-top: 10px;
+  padding-left: 10px; 
+}
+
 
 
 /* Target the monthly headers */
@@ -94,32 +104,22 @@
 
  /* cyan date identity for today including a polygon and a rectangle */
 .rbc-date-cell.rbc-now.rbc-current button.rbc-button-link {
-  /* position: relative; */
+  position: relative;
   padding-left: 10px; 
+  padding-top: 3px;
   padding-right: 14px; 
+  margin-left: 5px;
   background-color: #34BDC3; 
   color: white; 
   border: none; 
   border-radius: 20px; 
 }
 
-.rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::before {
-  content: '';
-  /* position: absolute;
-   top: 0;
-  left: 0;  */
-  width: 50%;
-  height: 100%;
-  border-top-left-radius: 20px; 
-  border-bottom-left-radius: 20px; 
-  background-color: #34BDC3;
-}
-
 .rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::after {
   content: '';
   position: absolute;
-  top: 0;
-  right: 10px;
+  top: 1px;
+  right: 7px;
   width: 0;
   height: 0;
   border-top: 12px solid transparent; 
@@ -134,7 +134,7 @@
   content: '';
   position: absolute;
   top: 50%;
-  right: -100px;
+  left: 38px;
   transform: translateY(-50%);
   width: 100px; 
   height: 2px; 
