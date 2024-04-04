@@ -1,21 +1,24 @@
 import Album from '../../media/icons/album.png';
 import AlbumActive from '../../media/icons/albumActive.png';
-import AlbumHover from '../../media/icons/albumHover.svg';
+import AlbumHover from '../../media/icons/albumHover.png';
 import Calendar from '../../media/icons/calendar.png';
 import CalendarActive from '../../media/icons/calendarActive.png';
-import CalendarHover from '../../media/icons/calendarHover.svg';
+import CalendarHover from '../../media/icons/calendarHover.png';
+import Message from '../../media/icons/chat.png';
+import MessageActive from '../../media/icons/chatActive.png';
+import MessageHover from '../../media/icons/chatHover.png';
+import Kids from '../../media/icons/face.png';
+import KidsActive from '../../media/icons/faceActive.png';
+import KidsHover from '../../media/icons/faceHover.png';
 import Help from '../../media/icons/help.png';
+import HelpActive from '../../media/icons/helpActive.png';
 import Home from '../../media/icons/home.png';
 import HomeActive from '../../media/icons/homeActive.png';
-import HomeHover from '../../media/icons/homeHover.svg';
+import HomeHover from '../../media/icons/homeHover.png';
 
-import Kids from '../../media/icons/kids.png';
-import KidsActive from '../../media/icons/kidsActive.png';
-import KidsHover from '../../media/icons/kidsHover.svg';
-import Message from '../../media/icons/message.png';
-import MessageActive from '../../media/icons/messageActive.png';
-import MessageHover from '../../media/icons/messageHover.svg';
-import Setting from '../../media/icons/setting.png';
+import Setting from '../../media/icons/settings.png';
+import SettingActive from '../../media/icons/settingsActive.png';
+import SettingHover from '../../media/icons/settingsHover.png';
 
 export const SIDEBAR_DATA = [
   {
@@ -61,15 +64,15 @@ export const SIDEBAR_DATA = [
   {
     title: 'Settings',
     icon: Setting,
-    activeIcon:Setting,
-    hoverIcon:Setting,
+    activeIcon:SettingActive,
+    hoverIcon:SettingHover,
     path: '/settings',
     alt: 'settings-icon',
   },
   {
     title: 'Help',
     icon: Help,
-    activeIcon:Help,
+    activeIcon:HelpActive,
     hoverIcon:Help,
     path: '/help',
     alt: 'help-icon',
