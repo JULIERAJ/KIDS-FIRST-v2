@@ -185,7 +185,7 @@ export const RegisterForm = (props) => {
             <FormFirstNameInput
               autoComplete='off'
               required
-              onChange={handleEmailChange}
+              // onChange={handleEmailChange}
               defaultValue={email}
             />
           </Col>
@@ -193,7 +193,7 @@ export const RegisterForm = (props) => {
             <FormLastNameInput
               autoComplete='off'
               required
-              onChange={handleEmailChange}
+              //onChange={handleEmailChange}
               defaultValue={email}
             />
           </Col>
