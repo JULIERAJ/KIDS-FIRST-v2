@@ -21,6 +21,10 @@ import styles from './Register.module.css';
 import { loginSocial, loginFacebook } from '../../api';
 
 import FormEmailInput from '../../components/form/FormEmailInput';
+import {
+  FormFirstNameInput,
+  FormLastNameInput,
+} from '../../components/form/FormNameInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
 
 import IconText from '../../components/IconText';
@@ -176,19 +180,22 @@ export const RegisterForm = (props) => {
         noValidate
         // validated={validated}
       >
-        {/* First name and last name fields in the same row */}
         <Row>
           <Col>
-            <Form.Group controlId='firstName'>
-              <Form.Label>First Name</Form.Label>
-              <Form.Control type='text' placeholder='First name' required />
-            </Form.Group>
+            <FormFirstNameInput
+              autoComplete='off'
+              required
+              onChange={handleEmailChange}
+              defaultValue={email}
+            />
           </Col>
           <Col>
-            <Form.Group controlId='lastName'>
-              <Form.Label>Last Name (optional)</Form.Label>
-              <Form.Control type='text' placeholder='Last name' required />
-            </Form.Group>
+            <FormLastNameInput
+              autoComplete='off'
+              required
+              onChange={handleEmailChange}
+              defaultValue={email}
+            />
           </Col>
         </Row>
         <FormEmailInput
