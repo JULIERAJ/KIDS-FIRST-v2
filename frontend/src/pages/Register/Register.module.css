@@ -10,3 +10,27 @@
   line-height: 21px;
   text-align: center;
 }
+/* In Register.module.css or your preferred CSS file */
+
+.orDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.dashLine {
+  flex-grow: 1;
+  border-top: 1px solid #000;
+}
+
+
+.alreadyMember {
+  text-align: center;
+  margin-top: 20px;
+}
+.loginLink {
+  cursor: pointer;
+  color: #f08324; /* Set color to white */
+  text-decoration: underline; /* Add underline */
+}

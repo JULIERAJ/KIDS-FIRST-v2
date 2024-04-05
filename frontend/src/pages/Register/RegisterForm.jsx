@@ -45,7 +45,7 @@ export const RegisterForm = (props) => {
   const [emailError, setEmailError] = useState('');
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State to toggle password visibility
-  const [errMsgSocial, setErrMsgSocial] = useState('');//state for login from google and FB
+  const [errMsgSocial, setErrMsgSocial] = useState(''); //state for login from google and FB
   const [successSo, setSuccessSo] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [errMsg, setErrMsg] = useState('');
@@ -139,9 +139,7 @@ export const RegisterForm = (props) => {
   };
 
   const loginfromGoogle = (response) => {
-    setErrMsgSocial(
-      'Log-in unsuccessful. Please try again later, or sign-up.'
-    );
+    setErrMsgSocial('Log-in unsuccessful. Please try again later, or sign-up.');
     loginSocial(response.data.access_token, response.data.email)
       .then((res) => {
         setSuccessSo(true);
@@ -176,8 +174,23 @@ export const RegisterForm = (props) => {
         className='py-4'
         onSubmit={handleSubmit}
         noValidate
-      // validated={validated}
+        // validated={validated}
       >
+        {/* First name and last name fields in the same row */}
+        <Row>
+          <Col>
+            <Form.Group controlId='firstName'>
+              <Form.Label>First Name</Form.Label>
+              <Form.Control type='text' placeholder='First name' required />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId='lastName'>
+              <Form.Label>Last Name (optional)</Form.Label>
+              <Form.Control type='text' placeholder='Last name' required />
+            </Form.Group>
+          </Col>
+        </Row>
         <FormEmailInput
           autoComplete='off'
           required
@@ -237,7 +250,7 @@ export const RegisterForm = (props) => {
             />
           </MessageBar>
         )}
-        {!successSo && <MessageBar variant="error">{errMsgSocial}</MessageBar>}
+        {!successSo && <MessageBar variant='error'>{errMsgSocial}</MessageBar>}
         {errorMessage && (
           <MessageBar variant='error'>{errorMessage}</MessageBar>
         )}
@@ -245,9 +258,14 @@ export const RegisterForm = (props) => {
         {passwordMatchError && (
           <MessageBar variant='error'>{passwordMatchError}</MessageBar>
         )}
-        <div className={styles.signUpText}>Or sign up with</div>
+        {/* Horizontal line with "Or" surrounded by dashes */}
+        <div className={styles.orDivider}>
+          <span className={styles.dashLine}></span> Or{' '}
+          <span className={styles.dashLine}></span>
+        </div>
+        {/* <div className={styles.signUpText}>Or</div> */}
 
-        <Row className="py-5">
+        <Row className='py-5'>
           <Col xs={12} md={6}>
             <LoginSocialGoogle
               client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
@@ -260,10 +278,14 @@ export const RegisterForm = (props) => {
                 console.log(err);
               }}
             >
-
-              <GoogleLoginButton title="Google" align={'center'} icon={''} size='45px'
-                className="tertiary-btn w-100">
-                <img src={googleIcon} width="25" height="25" alt="" />{' '}Google
+              <GoogleLoginButton
+                title='Google'
+                align={'center'}
+                icon={''}
+                size='45px'
+                className='tertiary-btn w-100'
+              >
+                <img src={googleIcon} width='25' height='25' alt='' /> Google
               </GoogleLoginButton>
             </LoginSocialGoogle>
           </Col>
@@ -279,13 +301,23 @@ export const RegisterForm = (props) => {
                 console.log(error);
               }}
             >
-              <FacebookLoginButton title="Facebook" align={'center'} icon={''} size='45px'
-                className="tertiary-btn w-100">
-                <img src={facebookIcon} width="25" height="25" alt="" /> {' '}Facebook
+              <FacebookLoginButton
+                title='Facebook'
+                align={'center'}
+                icon={''}
+                size='45px'
+                className='tertiary-btn w-100'
+              >
+                <img src={facebookIcon} width='25' height='25' alt='' />{' '}
+                Facebook
               </FacebookLoginButton>
             </LoginSocialFacebook>
           </Col>
-
+        </Row>
+        <Row className='justify-content-center'>
+          <div className={styles.alreadyMember}>
+            Already a member? <span className={styles.loginLink}>Log in</span>
+          </div>
         </Row>
       </Form>
     </>
