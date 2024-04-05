@@ -43,6 +43,8 @@ const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -76,6 +78,15 @@ export const RegisterForm = (props) => {
       setErrorMessage(props.errorMessage);
     }
   }, [props.errorMessage]);
+
+  // Event handler for First name change
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  };
+  // Event handler for Last name change
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  };
   // Event handler for email change
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -185,16 +196,16 @@ export const RegisterForm = (props) => {
             <FormFirstNameInput
               autoComplete='off'
               required
-              // onChange={handleEmailChange}
-              defaultValue={email}
+              onChange={handleFirstNameChange}
+              defaultValue={firstname}
             />
           </Col>
           <Col>
             <FormLastNameInput
               autoComplete='off'
               required
-              //onChange={handleEmailChange}
-              defaultValue={email}
+              onChange={handleLastNameChange}
+              defaultValue={lastname}
             />
           </Col>
         </Row>

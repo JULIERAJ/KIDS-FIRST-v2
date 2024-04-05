@@ -8,7 +8,7 @@ export const FormFirstNameInput = (props) => (
     label='Firstname'
     name='FirstName'
     placeholder='First Name'
-    type='email'
+    type='text'
     defaultValue={props.defaultValue}
     {...props}
   />
@@ -24,7 +24,7 @@ export const FormLastNameInput = (props) => (
     label='Lastname'
     name='LastName'
     placeholder='Last Name'
-    type='email'
+    type='text'
     defaultValue={props.defaultValue}
     {...props}
   />
