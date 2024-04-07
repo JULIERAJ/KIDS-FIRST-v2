@@ -18,9 +18,14 @@ const jwtOptions = {
 };
 
 const registration = async (req, res) => {
-  const { email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
 
   try {
+    // check that first name is entered
+    if (!firstname) {
+      return res.status(400).json({ message: 'First name is required' });
+    }
+
     let user = await principleService.findUser(email);
 
     if (user) {
