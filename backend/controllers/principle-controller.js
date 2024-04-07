@@ -43,7 +43,7 @@ const registration = async (req, res) => {
     } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });
     } else if (!user) {
-      user = await principleService.registration(email, password);
+      user = await principleService.registration(firstname, lastname, email, password);
 
       const emailVerificationToken = await jwt.sign(
         { email },
