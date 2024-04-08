@@ -3,6 +3,8 @@ import './Signin.css';
 import { useState, useEffect } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
@@ -16,6 +18,8 @@ import FormPasswordInput from '../../components/form/FormPasswordInput';
 import Header from '../../components/Header/Header';
 import MessageBar from '../../components/MessageBar';
 import TextLink from '../../components/TextLink';
+import facebookIcon from '../../media/icons/facebook.png';
+import googleIcon from '../../media/icons/google.png';
 
 const HeaderLink = (
   <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />
@@ -26,6 +30,8 @@ export default function Signin() {
   const [password, setPassword] = useState('');
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState();
+  const [errMsgSocial, setErrMsgSocial] = useState('');
+  const [successSo, setSuccessSo] = useState(true);
 
   useEffect(() => {
     setSuccess(true);
@@ -59,25 +65,23 @@ export default function Signin() {
         window.location.href = '/member';
       })
       .catch(() => {
-        setSuccess(false);
-        setErrMsg(
-          `Your email address or password is incorrect. 
-        Please try again, or click "Forgot your password"`
-        );
+        setSuccessSo(false);
+        setErrMsgSocial('Log-in unsuccessful. Please try again later, or sign-up.');
       });
   };
 
   const loginfromGoogle = (response) => {
     loginSocial(response.data.access_token, response.data.email)
       .then((res) => {
-        setSuccess(true);
+        setSuccessSo(true);
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
         window.location.href = '/member';
         console.groupCollapsed(response.data);
       })
       .catch(() => {
-        setSuccess(false);
+        setSuccessSo(false);
+        setErrMsgSocial('Log-in unsuccessful. Please try again later, or sign-up.');
       });
   };
 
@@ -119,33 +123,42 @@ export default function Signin() {
             </Button>
 
             <div className="or-login-with">Or Log in with</div>
-            <LoginSocialFacebook
-              appId={process.env.APP_ID}
-              onResolve={(response) => {
-                handleFacebookLoginSuccess(response);
-                console.log(response);
-              }}
-              onReject={(error) => {
-                // handleFacebookLoginFailure(error);
-                console.log(error);
-              }}
-            >
-              <FacebookLoginButton />
-            </LoginSocialFacebook>
-            <div> &nbsp; </div>
-            <LoginSocialGoogle
-              client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
-              onResolve={loginfromGoogle}
-              onReject={(err) => {
-                setErrMsg(
-                  `You are not able to login with Google.
-                   Please try again later`
-                );
-                console.log(err);
-              }}
-            >
-              <GoogleLoginButton />
-            </LoginSocialGoogle>
+            {!successSo && <MessageBar variant="error">{errMsgSocial}</MessageBar>}
+
+            <Row className="py-5">
+              <Col xs={12} md={6}>
+                <LoginSocialGoogle
+                  client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
+                  onResolve={loginfromGoogle}
+                  onReject={(err) => {
+                    console.log(err);
+                  }}
+                >
+                  <GoogleLoginButton title="Google" align={'center'} icon={''} size='45px'
+                    className="tertiary-btn w-100">
+                    <img src={googleIcon} width="25" height="25" alt="" />{' '}Google
+                  </GoogleLoginButton>
+                </LoginSocialGoogle>
+              </Col>
+              <Col xs={12} md={6}>
+                <LoginSocialFacebook
+                  appId={process.env.APP_ID}
+                  onResolve={(response) => {
+                    handleFacebookLoginSuccess(response);
+                    console.log(response);
+                  }}
+                  onReject={(error) => {
+                    // handleFacebookLoginFailure(error);
+                    console.log(error);
+                  }}
+                >
+                  <FacebookLoginButton title="Facebook" align={'center'} icon={''} size='45px'
+                    className="tertiary-btn w-100">
+                    <img src={facebookIcon} width="25" height="25" alt="" /> {' '}Facebook
+                  </FacebookLoginButton>
+                </LoginSocialFacebook>
+              </Col>
+            </Row>
           </Form>
         </FatherSonBlock>
       </Container>
