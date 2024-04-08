@@ -14,16 +14,16 @@ moment.locale('en-GB');
 
 const localizer = momentLocalizer(moment);
 
-const KFCalendar = () => {
+const KFCalendar = (props) => {
 
   const { filteredEventsData } = useContext(EventContext);
   //console.log(filteredEventsData);
   const { components, defaultDate } = useMemo(
     () => ({
       components: {
-        day: { event: DayEvent },
-        week: { header: DayViewHeader, event: WeekEvent },
-        month: { event: MonthEvent },
+        day: { event: DayEvent, header: DayViewHeader },
+        week: { event: WeekEvent, header: DayViewHeader},
+        month: { event: MonthEvent, header: DayViewHeader },
         toolbar: KFToolbar,
       },
       defaultDate: new Date(),

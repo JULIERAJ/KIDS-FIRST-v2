@@ -1,6 +1,6 @@
 export default [
   {
-    title: 'James-All Day Event very long title',
+    title: 'All Day Event very long title',
     kidsName: 'James',
     start: new Date(2024, 1, 1, 8, 0), // Start time: 8:00 AM
     end: new Date(2024, 1, 1, 17, 0), // End time: 5:00 PM
@@ -9,7 +9,7 @@ export default [
     color: '#C29EEF'
   },
   {
-    title: 'James-Multi-day Event',
+    title: 'Multi-day Event',
     kidsName: 'James',
     start: new Date(2024, 3, 20, 19, 30, 0),
     end: new Date(2024, 3, 22, 2, 0, 0),
@@ -18,7 +18,7 @@ export default [
     color: '#C29EEF'
   },
   {
-    title: 'Viki-Dentist Appointment',
+    title: 'Dentist Appointment',
     kidsName: 'Viki',
     start: new Date(2024, 2, 13, 10, 0), // Start time: 10:00 AM
     end: new Date(2024, 2, 13, 11, 0), // End time: 11:00 AM
@@ -27,7 +27,7 @@ export default [
     color: '#FF6B6D'
   },
   {
-    title: 'James-Dentist Appointment',
+    title: 'Dentist Appointment',
     kidsName: 'James',
     start: new Date(2024, 2, 6, 14, 0), // Start time: 2:00 PM
     end: new Date(2024, 2, 6, 15, 0), // End time: 3:00 PM
@@ -36,7 +36,7 @@ export default [
     color: '#C29EEF'
   },
   {
-    title: 'Sarah-Tennis practice',
+    title: 'Tennis practice',
     kidsName: 'Sarah',
     start: new Date(2024, 2, 18, 16, 0), // Start time: 4:00 PM
     end: new Date(2024, 2, 18, 17, 0), // End time: 5:00 PM
@@ -45,7 +45,7 @@ export default [
     color: '#FFD666'
   },
   {
-    title: 'Viki-Conference',
+    title: 'Conference',
     kidsName: 'Viki',
     start: new Date(2024, 3, 11, 9, 0), // Start time: 9:00 AM
     end: new Date(2024, 3, 11, 17, 0), // End time: 5:00 PM
@@ -54,7 +54,7 @@ export default [
     color: '#FF6B6D'
   },
   {
-    title: 'James-Meeting with Rose',
+    title: 'Meeting with Rose',
     kidsName: 'James',
     start: new Date(2024, 3, 12, 10, 30), // Start time: 10:30 AM
     end: new Date(2024, 3, 12, 11, 30), // End time: 11:30 AM
@@ -63,7 +63,7 @@ export default [
     color: '#C29EEF'
   },
   {
-    title: 'Sarah-Lunch at Restaurant (March 22)',
+    title: 'Lunch at Restaurant (March 22)',
     kidsName: 'Sarah',
     start: new Date(2024, 2, 22, 9, 0), // Start time: March 22, 2024, 9:00 AM
     end: new Date(2024, 2, 22, 11, 0), // End time: March 22, 2024, 11:00 AM
@@ -72,7 +72,7 @@ export default [
     color: '#FFD666'
   },
   {
-    title: 'Sarah-Dinner at Home (March 9)',
+    title: 'Dinner at Home (March 9)',
     kidsName: 'Sarah',
     start: new Date(2024, 2, 9, 16, 0), // Start time: March 9, 2024, 4:00 PM
     end: new Date(2024, 2, 9, 18, 0), // End time: March 9, 2024, 6:00 PM
@@ -81,7 +81,7 @@ export default [
     color: '#FFD666'
   },
   {
-    title: 'Sarah-Lunch at Restaurant',
+    title: 'Lunch at Restaurant',
     kidsName: 'Sarah',
     start: new Date(2024, 3, 12, 12, 30), // Start time: 12:30 PM
     end: new Date(2024, 3, 12, 13, 30), // End time: 1:30 PM
@@ -90,7 +90,7 @@ export default [
     color: '#FFD666'
   },
   {
-    title: 'Viki-Class Registration',
+    title: 'Class Registration',
     kidsName: 'Viki',
     start: new Date(2024, 3, 12, 14, 0), // Start time: 2:00 PM
     end: new Date(2024, 3, 12, 15, 0), // End time: 3:00 PM
@@ -99,7 +99,7 @@ export default [
     color: '#FF6B6D'
   },
   {
-    title: 'James-Happy Hour',
+    title: 'Happy Hour',
     kidsName: 'James',
     start: new Date(2024, 3, 12, 18, 0), // Start time: 6:00 PM
     end: new Date(2024, 3, 12, 19, 0), // End time: 7:00 PM
@@ -108,7 +108,7 @@ export default [
     color: '#C29EEF'
   },
   {
-    title: 'Sarah-Dinner with Joe',
+    title: 'Dinner with Joe',
     kidsName: 'Sarah',
     start: new Date(2024, 3, 12, 19, 0), // Start time: 7:00 PM
     end: new Date(2024, 3, 12, 20, 0), // End time: 8:00 PM
@@ -117,7 +117,7 @@ export default [
     color: '#FFD666'
   },
   {
-    title: 'Viki-Birthday Party',
+    title: 'Birthday Party',
     kidsName: 'Viki',
     start: new Date(2024, 3, 13, 9, 0), // Start time: 9:00 AM
     end: new Date(2024, 3, 13, 11, 0), // End time: 11:00 AM
