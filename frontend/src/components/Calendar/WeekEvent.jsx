@@ -1,59 +1,52 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-const getColorForName = (name) => {
-  // Implement logic to map kid names to colors here:
-  const colors = {
-    'A': '#FFD666',
-    'B': '#FF6B6D',
-    'C': '#C29EEF',
-    // ... add more mappings as needed
+const getColorForBackground = (name) => {
+  const colorsBackground = {
+    'A': 'rgba(255, 214, 102, 0.5)',
+    'B': 'rgba(255, 107, 109, 0.5)',
+    'C': 'rgba(194, 158, 239, 0.5)',
   };
-  return colors[name.charAt(0).toUpperCase()] || 'black'; // Default black
+  return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)'; 
 };
 
 const WeekEvent = ({ event }) => {
-  const { color, kidsName, title, timing } = event; // Destructure event data
+  const { color, kidsName, title, timing } = event; 
 
-  // Consolidated styles with clear naming and positioning
-  const eventBoxStyle = {
-    backgroundColor: color,
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100vw', 
-    minHeight: '100vh',
-    position: 'absolute', // Consider adjusting positioning based on calendar layout
-    top: '33px', 
-    left: '10px', 
+  const commonStyle = {
     borderRadius: '0px 7px 7px 0px',
   };
-
-  const lineStyle = {
-    width: '2px',
-    height: '100%', // Matches event box height
-    backgroundColor: getColorForName(kidsName),
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    gap: '0px',
-    borderRadius: '0px 7px 7px 0px',
-  };
-
   const circleStyle = {
+    ...commonStyle,
     width: '20px',
     height: '20px',
-    borderRadius: '50%',
     backgroundColor: color,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: '18px',
     color: 'white',
+    borderRadius: '50%',
     position: 'absolute',
-    top: '29px', 
-    left: '13px', 
+    top: 0,
+    left: 0,
+    marginLeft: '5px',
+    marginTop:'15px'
   };
 
+  const titleStyle = {
+    ...commonStyle,
+    fontFamily: 'Roboto',
+    color: '#081821',
+    fontSize: '16px',
+    fontWeight: 500,
+    lineHeight: '18.75px',
+    textAlign: 'left',
+    marginLeft: '15px',
+    position: 'absolute',
+    top: '-8px', 
+    marginTop:'20px'
+  };
   const contentWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -61,17 +54,6 @@ const WeekEvent = ({ event }) => {
     marginLeft: '25px', // Adjust spacing between circle and content
     marginTop: '2px', // Adjust spacing above content
   };
-
-  const titleStyle = {
-    fontFamily: 'Roboto',
-    fontSize: '16px',
-    fontWeight: 500,
-    lineHeight: '18.75px',
-    textAlign: 'left',
-    color: '#081821',
-    marginBottom: '2px', // Optional margin for spacing
-  };
-
   const timingStyle = {
     fontSize: '14px',
     color: '#011D26',
@@ -79,12 +61,21 @@ const WeekEvent = ({ event }) => {
     lineHeight: '16.41px',
   };
 
+  const boxStyle = {
+    backgroundColor: getColorForBackground(kidsName),
+    borderLeft: `3px solid ${color}`,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
+    top: 0,
+    left: 0,
+    start:'top'
+  };
+
   return (
-    <div className="event-box" style={eventBoxStyle}>
-      <div className="line" style={lineStyle}></div>
-      <span className="circle" style={circleStyle}>
-        {kidsName.charAt(0).toUpperCase()}
-      </span>
+    <div className="event-box" style={boxStyle}>
       <div style={contentWrapperStyle}>
         <div className="title" style={titleStyle}>
           {title && <span>{title}</span>}
@@ -93,6 +84,9 @@ const WeekEvent = ({ event }) => {
           {timing && <span>{timing}</span>}
         </div>
       </div>
+      <span className="circle" style={circleStyle}>
+        {kidsName.charAt(0).toUpperCase()}
+      </span>
     </div>
   );
 };
