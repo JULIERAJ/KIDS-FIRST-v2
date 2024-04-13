@@ -27,7 +27,7 @@ KIDS FIRST is a co-parenting app that aspires to give divorced parents a fair an
 10. Open `frontend` folder
 11. Install dependencies by running `npm i`
 12. Copy file `.env.example` and rename it to `.env.local`. Or run this command: `cp .env.example .env.local`.
-13. Add Firebase credentials to the `.env.local` (ask other devs about Firebase variables)
+13. Add environment credentials to the `.env.local` (ask other devs)
 14. Run `npm run start`
 
 Create your own branch and use it while developing your code.

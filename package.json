@@ -29,11 +29,6 @@
     "lint-staged": "^13.1.0"
   },
   "lint-staged": {
-    "**/*.{js,jsx}": [
-      
-    ]
-  },
-  "dependencies": {
-    "firebase": "^9.17.0"
+    "**/*.{js,jsx}": []
   }
 }
