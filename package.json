@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:fix:api": "cd ./backend && npm run lint:fix",
-    "lint:fix:client": "cd ./frontend && npm run lint:fix",
-    "prepare": "husky install"
+    "lint:fix:client": "cd ./frontend && npm run lint:fix"
   },
   "repository": {
     "type": "git",
@@ -19,21 +18,5 @@
   "bugs": {
     "url": "https://github.com/JULIERAJ/KIDS-FIRST-v2/issues"
   },
-  "homepage": "https://github.com/JULIERAJ/KIDS-FIRST-v2#readme",
-  "devDependencies": {
-    "eslint": "^8.29.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-react": "^7.31.11",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.1.0"
-  },
-  "lint-staged": {
-    "**/*.{js,jsx}": [
-      
-    ]
-  },
-  "dependencies": {
-    "firebase": "^9.17.0"
-  }
+  "homepage": "https://github.com/JULIERAJ/KIDS-FIRST-v2#readme"
 }
