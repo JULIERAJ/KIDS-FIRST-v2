@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 
@@ -12,6 +14,8 @@ import FormPasswordInput from '../../components/form/FormPasswordInput';
 import Header from '../../components/Header/Header';
 import MessageBar from '../../components/MessageBar';
 import TextLink from '../../components/TextLink';
+import facebookIcon from '../../media/icons/facebook.png';
+import googleIcon from '../../media/icons/google.png';
 import { EMAIL_REG_EXP } from '../../utils/index';
 
 const HeaderLink = (
@@ -37,9 +41,7 @@ export default function Signin() {
         })
         .catch(({ response }) => {
           if(response.status === 404) {
-            setErrorMesasage(
-              'This account doesn\'t exist. Please enter a different email address or try "Sign Up".'
-            );
+            setErrorMesasage('This account doesn\'t exist. Please enter a different email address or try "Sign Up".');
           } if(response.status === 401) {
             setErrorMesasage('Incorrect email or password! Please try again or use "Change Password".');
           }
@@ -82,8 +84,8 @@ export default function Signin() {
         window.location.href = '/member';
         console.groupCollapsed(response.data);
       })
-      .catch((error) => {
-        setErrorMesasage(error);
+      .catch(() => {
+        setErrorMesasage('Log-in unsuccessful. Please try again later, or sign-up.');
       });
   };
 
@@ -126,30 +128,40 @@ export default function Signin() {
 
             <div className="or-login-with">Or Log in with</div>
 
-            <LoginSocialFacebook
-              appId={process.env.APP_ID}
-              onResolve={(response) => {
-                handleFacebookLoginSuccess(response);
-                console.log(response);
-              }}
-              onReject={(error) => {
-                // handleFacebookLoginFailure(error);
-                console.log(error);
-              }}
-            >
-              <FacebookLoginButton />
-            </LoginSocialFacebook>
-
-            <div> &nbsp; </div>
-
-            <LoginSocialGoogle
-              client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-              onResolve={loginfromGoogle}
-              onReject={() => setErrorMesasage('You are not able to login with Google. Please try again later')}
-            >
-              <GoogleLoginButton />
-            </LoginSocialGoogle>
-
+            <Row className="py-5">
+              <Col xs={12} md={6}>
+                <LoginSocialGoogle
+                  client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
+                  onResolve={loginfromGoogle}
+                  onReject={(err) => {
+                    console.log(err);
+                  }}
+                >
+                  <GoogleLoginButton title="Google" align={'center'} icon={''} size='45px'
+                    className="tertiary-btn w-100">
+                    <img src={googleIcon} width="25" height="25" alt="" />{' '}Google
+                  </GoogleLoginButton>
+                </LoginSocialGoogle>
+              </Col>
+              <Col xs={12} md={6}>
+                <LoginSocialFacebook
+                  appId={process.env.APP_ID}
+                  onResolve={(response) => {
+                    handleFacebookLoginSuccess(response);
+                    console.log(response);
+                  }}
+                  onReject={(error) => {
+                    // handleFacebookLoginFailure(error);
+                    console.log(error);
+                  }}
+                >
+                  <FacebookLoginButton title="Facebook" align={'center'} icon={''} size='45px'
+                    className="tertiary-btn w-100">
+                    <img src={facebookIcon} width="25" height="25" alt="" /> {' '}Facebook
+                  </FacebookLoginButton>
+                </LoginSocialFacebook>
+              </Col>
+            </Row>
           </Form>
         </FatherSonBlock>
       </Container>

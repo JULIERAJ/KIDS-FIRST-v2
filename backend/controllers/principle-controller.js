@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
+const { response } = require('express');
 
 require('dotenv').config({ path: './.env.local' });
 
@@ -147,11 +148,10 @@ const login = async (req, res) => {
     if (!isPasswordCorrect) {
       return res.status(401).json({ error: 'Password is not correct' });
     }
-
-    // when the user login, then find that user's family(s), then push the info  to the front
+       // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
 
-      return res.status(200).json({
+    return res.status(200).json({
       email: user.email,
       id: user._id,
       familyId: principleFamily[0].id,
@@ -214,11 +214,11 @@ const loginFacebook = async (req, res) => {
 };
 const loginSocial = async (req, res) => {
   const { userID } = req.body;
-  // console.log("user  " + userID);
-
+  if (userID === undefined) {
+    return res.status(401).json({ error: 'Error fetching data from Google' });
+  }
   user = await principleService.findUser(userID);
-
-  if (!user) {
+   if (!user) {
     function generatePassword() {
       charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       newPassword = "";
@@ -230,15 +230,12 @@ const loginSocial = async (req, res) => {
     let password = generatePassword();
     user = await principleService.registration(
       userID,
-      password
+      password,
     );
-    console.log(user.email + " " + password);
-    ///  await familyService.familyRegistration('bababaal',user._id);
+    principleService.activateAccount(user.email);
   }
 
-
   const principleFamily = await familyService.findPrincipleFamilyName(user._id);
-  //console.log(principleFamily);
   return res.status(200).json({
     email: user.email,
     id: user._id,
