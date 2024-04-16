@@ -1,0 +1,83 @@
+.modal-content {
+  width: 589px;
+  height: 935px;
+ }
+
+ .dateTimeInputs {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.modal-header {
+  background: #FFD666;
+  width: 589px;
+  height: 80px;
+}
+
+
+.modal-title {
+  color: #FFFEF9;
+  font-size: 22px;
+  margin-left: 38%;
+}
+
+
+
+.submitButton {
+  background-color: #FBA051;
+  border: none;
+  width: 464px;
+  height: 48px;
+}
+.submitButton:hover {
+  background-color: #eb7005;
+}
+
+.submitButton:focus,
+.submitButton.clicked {
+background-color: #d65c00 !important;
+border-color: #d65c00 !important;
+}
+/*Arrow Drop Down*/
+.customDropdown {
+  position: relative;
+}
+
+.selectWithIcon {
+  position: relative;
+}
+
+.dropdownIcon {
+  position: absolute;
+  right: 10px; /* Adjust the position as needed */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #4c4e4f;
+  font-weight: 200;
+}
+.placeholder {
+  color: #081821; 
+  width: 456px;
+  height: 48px;
+}
+
+.inputWithCircles {
+  position: relative;
+}
+
+/*circle*/
+
+.customCheckbox input[type="checkbox"] {
+  width: 31px;
+  height: 31px;
+  margin-left: 25px;
+
+}
+.colorCircle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px; /* Adjust spacing as needed */
+}
