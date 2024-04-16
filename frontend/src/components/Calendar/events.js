@@ -9,7 +9,7 @@ export default [
     color: '#C29EEF'
     
   },
-  /*{
+  {
     title: 'James-Multi-day Event',
     kidsName: 'James',
     start: new Date(2024, 3, 20, 19, 30, 0),
@@ -17,7 +17,7 @@ export default [
     type: 'Solo event (your ex-partner will not be present at this event)',
     desc: 'A description for All Day Event very long title',
     color: '#C29EEF'
-  },*/
+  },
   {
     title: 'Viki-Dentist Appointment',
     kidsName: 'Viki',
