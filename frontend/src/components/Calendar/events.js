@@ -7,6 +7,7 @@ export default [
     type: 'Solo event (your ex-partner will not be present at this event)',
     desc: 'A description for All Day Event very long title',
     color: '#C29EEF'
+    
   },
   {
     title: 'James-Multi-day Event',

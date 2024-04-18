@@ -16,7 +16,7 @@ const getColorForBackground = (name) => {
     'A': 'rgba(255, 214, 102, 0.5)',
     'B': 'rgba(255, 107, 109, 0.5)',
     'C': 'rgba(194, 158, 239, 0.5)',
-    // Add more mappings as needed
+    
   };
   return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)'; // Default transparent
 };
@@ -27,7 +27,7 @@ const MonthEvent = ({ event }) => {
   const commonStyle = {
     borderRadius: '0px 7px 7px 0px',
   };
-
+ 
   const circleStyle = {
     ...commonStyle,
     width: '20px',
@@ -40,12 +40,12 @@ const MonthEvent = ({ event }) => {
     color: 'white',
     borderRadius: '50%',
     position: 'absolute',
-    top: 0,
-    left: 0,
-    marginLeft: '15px',
+    top: -5,
+    left: -20,
+    marginLeft: '30px',
     marginTop: '12px'
   };
-
+ 
   const titleStyle = {
     ...commonStyle,
     fontFamily: 'Roboto',
@@ -53,13 +53,13 @@ const MonthEvent = ({ event }) => {
     fontWeight: 500,
     lineHeight: '18.75px',
     textAlign: 'left',
-    marginRight:'30px',
-   
+    marginLeft: '-30px',
+    marginTop: '-5px',
   };
- 
+
   /*const lineStyle = {
     width: '2px',
-    height: '100%',
+    height: '100%', 
     backgroundColor: color,
     position: 'absolute',
     top: 0,
@@ -68,14 +68,12 @@ const MonthEvent = ({ event }) => {
  
   const boxStyle = {
     backgroundColor: getColorForBackground(kidsName),
-    borderLeft: `3px solid ${color}`,
+    borderLeft: `2px solid ${color}`,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     position: 'relative',
-    marginTop: '25px',
-    top: 0,
-    left: 0,
+    marginTop: '30px'
   };
 
   const getTruncatedTitle = (title) => {
@@ -88,14 +86,13 @@ const MonthEvent = ({ event }) => {
   const truncatedTitle = getTruncatedTitle(title);
 
   return (
-    <div className="rbc-event-content" style={{ position: 'relative', marginTop:'20px' }}>
-      <div className="kid-events-container" style={{ ...boxStyle, position: 'absolute', marginTop: '10px' }}>
-
+    <div className="rbc-event-content" style={{ position: 'relative', marginTop:'30px', height:'auto' }}>
+      <div className="kid-events-container" style={boxStyle}>
         <span className="circle" style={circleStyle}>
           {kidsName.charAt(0).toUpperCase()}
         </span>
         {truncatedTitle && <span className="title" style={titleStyle}>{truncatedTitle}</span>}
-       
+        {/*<div className="line" style={lineStyle}></div>*/}
       </div>
     </div>
   );
@@ -104,4 +101,5 @@ const MonthEvent = ({ event }) => {
 MonthEvent.propTypes = {
   event: PropTypes.object.isRequired,
 };
+
 export default MonthEvent;

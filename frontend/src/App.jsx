@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { EventProvider } from './components/Calendar/EventContext';
 import KFCalendar from './components/Calendar/KFCalendar';
+import EventModal from './components/EventModal/EventModal';
 import LandingLayout from './components/LandingLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
@@ -40,6 +41,7 @@ const App = () => (
           element={<ResetPassword />}
         />
         <Route path='/sidebar' element={<Sidebar />} />
+        <Route path="/eventmodal" element={<EventModal />} />
       </Route>
     </Routes>
   </BrowserRouter>

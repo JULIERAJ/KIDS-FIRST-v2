@@ -8,7 +8,7 @@
 button.rbc-btn {
   overflow: visible;
   text-transform: none;
-  -webkit-appearance: button;
+  /*-webkit-appearance: button;*/
   cursor: pointer;
 }
 
@@ -56,7 +56,7 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-ellipsis,
 .rbc-show-more,
-.rbc-row-segment .rbc-event-content,
+.rbc-row-segment /*.rbc-event-content,*/ /*Ala commented*/
 .rbc-event-label {
   display: block;
   overflow: hidden;
@@ -66,11 +66,11 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-rtl {
   direction: rtl;
-}
+}*/
 
 .rbc-off-range {
   color: #999999;
-}
+}*/
 
 .rbc-off-range-bg {
   background: #e6e6e6;
@@ -91,7 +91,6 @@ button.rbc-input::-moz-focus-inner {
   min-height: 0;
   border-bottom: 1px solid #ddd;
 }
-
 /* Negar added .rbc-month-view to apply the style only on month view */
 .rbc-month-view .rbc-header + .rbc-header {
   border-left: 1px solid #ddd;
@@ -99,7 +98,7 @@ button.rbc-input::-moz-focus-inner {
 
 /* Negar added following style */
 .rbc-time-view .rbc-header + .rbc-header {
-  //border-left: 1px solid orange;
+  border-left: 1px solid orange;
 
 
 }
@@ -110,7 +109,10 @@ button.rbc-input::-moz-focus-inner {
   border-block-end-style: none;
 }
 
-
+/*Negar delet it*/
+/*.rbc-header + .rbc-header {
+  border-left: 1px solid #ddd;
+}*/
 .rbc-rtl .rbc-header + .rbc-header {
   border-left-width: 0;
   border-right: 1px solid #ddd;
@@ -165,11 +167,11 @@ button.rbc-input::-moz-focus-inner {
   .rbc-row-content-scroll-container::-webkit-scrollbar {
   display: none;
 }
-
 /* Negar commented the bg color for today */
-/* .rbc-today {
+/*green color day*
+/*.rbc-today {
   background-color: hwb(138 82% 2%);
-} */
+}*/
 
 .rbc-toolbar {
   display: -webkit-box;
@@ -236,7 +238,8 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-btn-group {
   display: inline-block;
-  white-space: nowrap;
+   white-space: nowrap;
+
 }
 .rbc-btn-group > button:first-child:not(:last-child) {
   border-top-right-radius: 0;
@@ -279,7 +282,8 @@ button.rbc-input::-moz-focus-inner {
     flex-direction: column;
   }
 }
-.rbc-event,
+/*Ala commented it*/
+/*.rbc-event,*/ 
 .rbc-day-slot .rbc-background-event {
   border: none;
   -webkit-box-sizing: border-box;
@@ -291,7 +295,7 @@ button.rbc-input::-moz-focus-inner {
   /* negar removed the default orange bg color from events in all views*/
   /* background-color: #ffa500; */
   border-radius: 5px;
-  color: hwb(0 4% 96%);
+ /* color: hwb(0 4% 96%);*/
   cursor: pointer;
   width: 100%;
   text-align: left;
@@ -302,10 +306,11 @@ button.rbc-input::-moz-focus-inner {
   cursor: inherit;
   pointer-events: none;
 }
-/* .rbc-event.rbc-selected,
+
+.rbc-event.rbc-selected,
 .rbc-day-slot .rbc-selected.rbc-background-event {
   background-color: red;
-} */
+}
 .rbc-event:focus,
 .rbc-day-slot .rbc-background-event:focus {
   outline: 5px auto #3b99fc;
@@ -349,10 +354,10 @@ button.rbc-input::-moz-focus-inner {
   -ms-flex-direction: row;
   flex-direction: row;
 }
-
-.rbc-row-segment {
+/*ala*/
+/*.rbc-row-segment {
   padding: 0 1px 1px 1px;
-}
+}*/
 .rbc-selected-cell {
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -373,8 +378,8 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-month-view {
   position: relative;
-  /* negar changed the border to none */
-  border: none;       
+   /* negar changed the border to none */
+   border: none;    
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -453,7 +458,8 @@ button.rbc-input::-moz-focus-inner {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 0px;
   flex: 1 0 0;
-  //overflow: hidden;
+  /*Negar */
+  /*overflow: hidden;*/
 }
 
 .rbc-day-bg {
@@ -487,14 +493,13 @@ button.rbc-input::-moz-focus-inner {
   margin: -10px -10px 5px -10px;
   padding: 2px 10px;
 }
-
 /* Negar added this style for squares in weekly and daily views */
 .rbc-time-column .rbc-timeslot-group {
   display: flex;
   flex-direction: row; 
   justify-content: space-around; 
   align-items: flex-start;  
-  //border-bottom: 1px solid #ddd;
+  /*border-bottom: 1px solid #ddd;*/
   min-height: 120px;  
 }
 
@@ -502,13 +507,6 @@ button.rbc-input::-moz-focus-inner {
 .rbc-day-slot .rbc-timeslot-group  {
   border: 1px solid #011D2633;
 }
-
-/* Negar: Adjust padding to create white space */
-/* .rbc-day-slot .rbc-timeslot-group {
-  margin: 0 60px; 
-  border-left: none;
-  border-right: none;
-} */
 
 
 .rbc-time-gutter,
@@ -528,7 +526,8 @@ button.rbc-input::-moz-focus-inner {
 .rbc-day-slot .rbc-events-container {
   bottom: 0;
   left: 0;
-  position: absolute;
+  /*Ala Commented it*/
+  /*position: absolute;*/
   right: 0;
   margin-right: 10px;
   top: 0;
@@ -565,6 +564,16 @@ button.rbc-input::-moz-focus-inner {
   padding-right: 5px;
   width: auto;
 }
+/*Ala added style*/
+  .rbc-event-label{
+  position: absolute;
+  margin-top: 60px;
+  z-index: 999;
+  margin-left: 40px;
+
+}
+  
+
 .rbc-day-slot .rbc-event-content {
   width: 100%;
   -webkit-box-flex: 1;
@@ -575,9 +584,11 @@ button.rbc-input::-moz-focus-inner {
   height: 100%;
   min-height: 1em;
 }
-/* .rbc-day-slot .rbc-time-slot {
+
+/*Negar*/
+/*.rbc-day-slot .rbc-time-slot {
   border-top: 1px solid #f7f7f7;
-} */
+}*/
 
 .rbc-time-view-resources .rbc-time-gutter,
 .rbc-time-view-resources .rbc-time-header-gutter {
@@ -588,7 +599,6 @@ button.rbc-input::-moz-focus-inner {
   z-index: 10;
   margin-right: -1px;
 }
-
 .rbc-time-view-resources .rbc-time-header {
   overflow: hidden;
 }
@@ -608,7 +618,7 @@ button.rbc-input::-moz-focus-inner {
 }
 .rbc-time-view-resources .rbc-header,
 .rbc-time-view-resources .rbc-day-bg {
-  width: 40px;
+  width: 140px;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 0px;
   flex: 1 1 0;
@@ -661,9 +671,10 @@ button.rbc-input::-moz-focus-inner {
   width: 100%;
   /* Negar changed the border to none */
   border: none;
+  /*border: 1px solid #ddd;*/
   min-height: 0;
-  /* Negar added next line */
-  margin-top: 20px;
+   /* Negar added next line */
+   margin-top: 20px;
 }
 .rbc-time-view .rbc-time-gutter {
   white-space: nowrap;
@@ -689,7 +700,6 @@ button.rbc-input::-moz-focus-inner {
   /* Negar commented next line */
   /* min-height: 20px; */
 }
-
 /*Negar: un-comment Following 2 css to disable the row "All day eevents" */
 /* .rbc-allday-cell {
   display: none;
@@ -744,7 +754,6 @@ button.rbc-input::-moz-focus-inner {
   /* border-left: 1px solid #ddd; */
   border-width: 0;
 }
-
 .rbc-rtl .rbc-time-header-content {
   border-left-width: 0;
   border-right: 1px solid #ddd;
@@ -791,55 +800,57 @@ button.rbc-input::-moz-focus-inner {
   user-select: none;
   -webkit-user-select: none;
 }
-
+/*rbc-indicator for week*/
 .rbc-current-time-indicator {
-  position: absolute;
-  z-index: 3;
-  left: 0;
-  right: 0;
-  height: 3px;
-  /* Negar changed the color of today line */
-  background-color: #34BDC3;
-  //pointer-events: none;
-}
-
-
-/* Negar Rounded edge on the left */
-.rbc-current-time-indicator::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -36px; 
-  transform: translateY(-50%);
-  width: 49px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #34BDC3; 
-}
-
-/* Negar Tapered, pointed edge on the right */
-.rbc-current-time-indicator::after {
-  content: '';
-  position: absolute;
-  top: -13px;
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent; 
-  border-bottom: 15px solid transparent; 
-  border-left: 20px solid #34BDC3;
-}
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    right: 0;
+    height: 3px;
+    /* Negar changed the color of today line */
+    background-color: #34BDC3;
+    pointer-events: none;
+  }
+  
+  
+  /* Negar Rounded edge on the left */
+  .rbc-current-time-indicator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -36px; 
+    transform: translateY(-50%);
+    width: 49px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #34BDC3; 
+  }
+  
+  /* Negar Tapered, pointed edge on the right */
+  .rbc-current-time-indicator::after {
+    content: '';
+    position: absolute;
+    top: -13px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent; 
+    border-bottom: 15px solid transparent; 
+    border-left: 20px solid #34BDC3;
+  }
+  
 
 .KF-toolbar {
-  background-color: #FCFCFC;
+  background-color: #fcfcfc;
+  /*background-color: #f5d9de;*/
   padding: 15px;
   margin: 15px;
-
-  button {
+  /*big and small button*/
+  /*button {
     cursor: pointer;
 
     &:hover {
-     
-    }
+      background-color: #f08324;
+    }*/
   }
 
   .toolbar {
@@ -847,30 +858,72 @@ button.rbc-input::-moz-focus-inner {
     justify-content: space-between;
     margin-top: 25px;
   }
-
+  /*border big button*/
   .toolbar button {
     margin: 5px;
-    padding: 6px 10px;
+    /*Ala commented it for 3 small buttons*/
+    /*padding: 6px 10px;*/
     border-radius: 8px;
+    border-color: #EB7005;
   }
 
-  .create {
-    background-color: #ffa500;
-  }
+  /*.create {
+    background-color: #eb7005;
+  }*/
 
-  .round-btn button {
+  .round-btn button{
     padding: 12px 15px;
     margin: 5px 10px;
     border-radius: 50%;
     background-color: hsl(80, 91%, 59%);
+    /*Negar*/
+    /*background-color: #c29eef;
+    border: none; 
+    height: 40px;
+    width: 40px;
+    text-align: center;*/
   }
 
   .round-btn span {
     margin: 15px 15px;
   }
-}
+
 
 .rbc-toolbar-label {
   font-weight: bold;
   font-size: 1.5em;
 }
+
+/* Styles for week header */
+/*Negar*/
+/*.day-header {
+  height: 70px;
+}
+
+.weekday {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+.day {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+/* Apply color for today's date */
+/*Negar*/
+/*.day-header .weekday.today {
+  color: #EB7005;
+  font-weight: bold;
+}
+
+.day-header .day.today {
+  color: #EB7005;
+  font-weight: bold;
+}*/

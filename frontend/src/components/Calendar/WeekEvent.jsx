@@ -18,8 +18,8 @@ const WeekEvent = ({ event }) => {
   };
   const circleStyle = {
     ...commonStyle,
-    width: '20px',
-    height: '20px',
+    width: '25px',
+    height: '25px',
     backgroundColor: color,
     display: 'flex',
     justifyContent: 'center',
@@ -63,7 +63,7 @@ const WeekEvent = ({ event }) => {
 
   const boxStyle = {
     backgroundColor: getColorForBackground(kidsName),
-    borderLeft: `3px solid ${color}`,
+    borderLeft: `2px solid ${color}`,
     height: '100%',
     display: 'flex',
     flexDirection: 'row',
