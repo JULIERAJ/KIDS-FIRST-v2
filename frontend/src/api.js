@@ -58,5 +58,5 @@ export const resetPassword = (email, password, resetPasswordToken) =>
     resetPasswordToken,
   });
 
-  export const resendEmailVerification = (email) =>
+export const resendEmailVerification = (email) =>
   axios.post(`${API_URL}resend-email`, { email });
