@@ -5,10 +5,8 @@
 */
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+
+import { Image, Col, Row, Form, Button } from 'react-bootstrap';
 
 import {
   GoogleLoginButton,
@@ -27,8 +25,9 @@ import {
 } from '../../components/form/FormNameInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
 
-import IconText from '../../components/IconText';
+import IconText from '../../components/Icon/IconText';
 import MessageBar from '../../components/MessageBar';
+import IconError from '../../media/icons/error.png';
 
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
@@ -43,34 +42,25 @@ const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State to toggle password visibility
   const [errMsgSocial, setErrMsgSocial] = useState(''); //state for login from google and FB
   const [successSo, setSuccessSo] = useState(true);
-  // eslint-disable-next-line no-unused-vars
   const [errMsg, setErrMsg] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState('');
+  const [showPasswordAccepted, setShowPasswordAccepted] = useState(false);
 
   const [passwordErrors, setPasswordErrors] = useState({
-    uppercase: true,
-    lowercase: true,
-    number: true,
-    special: true,
-    length: true,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    special: false,
+    length: false,
   });
-
-  const [passwordMatchError, setPasswordMatchError] = useState('');
-  const [passwordListVisible, setPasswordListVisible] = useState(false);
-
-  // State variable to manage the disabled state
-  const [isDisabled, setIsDisabled] = useState(true);
 
   // Effect hook to handle errors received from the backend
   useEffect(() => {
@@ -79,23 +69,46 @@ export const RegisterForm = (props) => {
     }
   }, [props.errorMessage]);
 
+  const [firstNameErrors, setFirstNameErrors] = useState('');
+  const [lastNameErrors, setLastNameErrors] = useState('');
   // Event handler for First name change
   const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
+    const value = e.target.value;
+    let newErrors = '';
+    if (!validateName(value)) {
+      newErrors = 'Please use only letters';
+    } else if (!value) {
+      newErrors = 'Please enter your first name';
+    }
+    setFirstNameErrors(newErrors);
+    if (!newErrors) {
+      setFirstName(value);
+    }
   };
+  const validateName = (name) => {
+    const re = /^[a-zA-Z]*$/;
+    return re.test(name);
+  };
+
   // Event handler for Last name change
   const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
+    const value = e.target.value;
+    let newErrors = '';
+    if (!validateName(value)) {
+      newErrors = 'Please use only letters';
+    }
+    setLastNameErrors(newErrors);
+    if (!newErrors) {
+      setLastName(value);
+    }
   };
   // Event handler for email change
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email address.');
-      setIsDisabled(true);
     } else {
       setEmailError('');
-      setIsDisabled(false);
     }
   };
   // Event handler for password change
@@ -103,30 +116,13 @@ export const RegisterForm = (props) => {
     setPassword(e.target.value);
     validatePassword(e.target.value);
   };
-  // Event handler for confirming password change
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    validateConfirmPassword(e.target.value);
-  };
-  // Event handler for focusing on the password field
-  const handlePasswordFocus = () => {
-    setPasswordListVisible(true);
-    setPasswordMatchError('');
-  };
-  // Event handler for focusing on the confirm password field
-  const handleConfirmPasswordFocus = () => {
-    setPasswordListVisible(false);
-    setPasswordMatchError('');
-  };
 
   // Function to validate email format
   const validateEmail = (emailValue) => {
     return regexEmail.test(emailValue);
   };
-  // Function to validate all password errors
-  const allPasswordErrorsChecked = Object.values(passwordErrors).every(
-    (error) => !error
-  );
+
+
   // Function to validate password format
   const validatePassword = (passwordValue) => {
     const errors = {
@@ -137,19 +133,24 @@ export const RegisterForm = (props) => {
       length: !regexLength.test(passwordValue),
     };
     setPasswordErrors(errors);
+    // Check if all errors are resolved
+    const allErrorsResolved = Object.values(errors).every((error) => !error);
+    setAllPasswordErrorsChecked(allErrorsResolved);
+    setShowPasswordAccepted(true);
   };
-  // Function to validate password confirmation
-  const validateConfirmPassword = (confirmPasswordValue) => {
-    setPasswordMatchError(
-      confirmPasswordValue !== password ? 'Passwords do not match.' : ''
-    );
-  };
+
   // Event handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform form submission if all validations pass
-    if (!emailError && allPasswordErrorsChecked && !passwordMatchError) {
-      props.onSubmitData(email, password);
+    if (
+      firstNameErrors === '' &&
+      lastNameErrors === '' &&
+      emailError === '' &&
+      allPasswordErrorsChecked
+    ) {
+      props.onSubmitData(firstName, lastName, email, password);
+      setShowPasswordAccepted(false);
     }
   };
 
@@ -183,6 +184,32 @@ export const RegisterForm = (props) => {
       });
   };
 
+  const errorMessagePassword = Object.entries(passwordErrors)
+    .filter(([key, value]) => value) // Filter out the flags with false value
+    .map(([key]) => {
+    // Map each flag to its corresponding error message
+      switch (key) {
+      case 'uppercase':
+      case 'lowercase':
+        return 'upper and lower case characters';
+      case 'number':
+        return 'a number';
+      case 'special':
+        return 'a special character';
+      case 'length':
+        return '8 characters';
+      default:
+        return ''; // Handle other cases if needed
+      }
+    })
+    .join(', '); // Join multiple error messages with a comma
+
+
+  const errorMessageWithInclude = errorMessagePassword ?
+    `Include at least: ${errorMessagePassword}` : '';
+
+  const [allPasswordErrorsChecked, setAllPasswordErrorsChecked] = useState(false);
+
   return (
     <>
       <Form
@@ -197,7 +224,9 @@ export const RegisterForm = (props) => {
               autoComplete='off'
               required
               onChange={handleFirstNameChange}
-              defaultValue={firstname}
+              defaultValue={firstName}
+              isInvalid={firstNameErrors}
+              errors={firstNameErrors}
             />
           </Col>
           <Col>
@@ -205,7 +234,9 @@ export const RegisterForm = (props) => {
               autoComplete='off'
               required
               onChange={handleLastNameChange}
-              defaultValue={lastname}
+              defaultValue={lastName}
+              isInvalid={lastNameErrors}
+              errors={lastNameErrors}
             />
           </Col>
         </Row>
@@ -214,30 +245,33 @@ export const RegisterForm = (props) => {
           required
           onChange={handleEmailChange}
           defaultValue={email}
+          isInvalid={emailError}
+          errors={emailError}
         />
         <FormPasswordInput
           required
           type={showPassword ? 'text' : 'password'} // Toggle password visibility
           value={password}
           onChange={handlePasswordChange}
-          onFocus={handlePasswordFocus}
           showPassword={showPassword}
           setShowPassword={setShowPassword}
-          disabled={isDisabled}
+          isInvalid={!!errorMessageWithInclude}
+          errors={errorMessageWithInclude}
         />
-        <FormPasswordInput
-          id='confirmPassword'
-          label='Password Confirmation'
-          name='confirmPassword'
-          required
-          type={showConfirmPassword ? 'text' : 'password'} // Toggle password visibility
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-          onFocus={handleConfirmPasswordFocus}
-          showPassword={showConfirmPassword}
-          setShowPassword={setShowConfirmPassword}
-          disabled={isDisabled}
-        />
+        {/* Display error messages */}
+
+        {(showPasswordAccepted && allPasswordErrorsChecked)&&(
+          <p style={{ color: 'green' }}>&#x2713; Password accepted</p>
+        )}
+
+        {errorMessage &&(
+          <p style={{ color: 'red' }}><Image src={IconError}/> {errorMessage}</p>
+        )}
+
+        {/* // </MessageBar> */}
+        {/* )} */}
+        {!successSo && <MessageBar variant='error'>{errMsgSocial}</MessageBar>}
+
         <Button
           className='primary-btn w-100 my-5'
           type='submit'
@@ -246,36 +280,6 @@ export const RegisterForm = (props) => {
         >
           Sign up
         </Button>
-        {/* Display error messages */}
-        {passwordListVisible && (
-          <MessageBar variant={allPasswordErrorsChecked ? 'success' : 'error'}>
-            <IconText
-              title='At least 1 uppercase character'
-              clear={passwordErrors.uppercase}
-            />
-            <IconText
-              title='At least 1 lowercase character'
-              clear={passwordErrors.lowercase}
-            />
-            <IconText title='At least 1 number' clear={passwordErrors.number} />
-            <IconText
-              title='At least 1 special character'
-              clear={passwordErrors.special}
-            />
-            <IconText
-              title='Between 8-40 characters'
-              clear={passwordErrors.length}
-            />
-          </MessageBar>
-        )}
-        {!successSo && <MessageBar variant='error'>{errMsgSocial}</MessageBar>}
-        {errorMessage && (
-          <MessageBar variant='error'>{errorMessage}</MessageBar>
-        )}
-        {emailError && <MessageBar variant='error'>{emailError}</MessageBar>}
-        {passwordMatchError && (
-          <MessageBar variant='error'>{passwordMatchError}</MessageBar>
-        )}
         {/* Horizontal line with "Or" surrounded by dashes */}
         <div className={styles.orDivider}>
           <span className={styles.dashLine}></span> Or{' '}

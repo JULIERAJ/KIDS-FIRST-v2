@@ -10,12 +10,15 @@ export const FormFirstNameInput = (props) => (
     placeholder='First Name'
     type='text'
     defaultValue={props.defaultValue}
+    isInvalid={!!props.errors}
+    errorMessage={props.errors}
     {...props}
   />
 );
 
 FormFirstNameInput.propTypes = {
   defaultValue: PropTypes.string,
+  errors: PropTypes.string,
 };
 
 export const FormLastNameInput = (props) => (
@@ -26,10 +29,13 @@ export const FormLastNameInput = (props) => (
     placeholder='Last Name'
     type='text'
     defaultValue={props.defaultValue}
+    isInvalid={!!props.errors}
+    errorMessage={props.errors}
     {...props}
   />
 );
 
 FormLastNameInput.propTypes = {
   defaultValue: PropTypes.string,
+  errors: PropTypes.string,
 };
