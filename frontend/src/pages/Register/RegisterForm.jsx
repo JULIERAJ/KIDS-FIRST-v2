@@ -25,10 +25,9 @@ import {
 } from '../../components/form/FormNameInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
 
-import IconText from '../../components/Icon/IconText';
 import MessageBar from '../../components/MessageBar';
+import IconDone from '../../media/icons/done.png';
 import IconError from '../../media/icons/error.png';
-
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
 //import SocialButtonsGroup from '../../components/SocialButtonsGroup';
@@ -122,7 +121,6 @@ export const RegisterForm = (props) => {
     return regexEmail.test(emailValue);
   };
 
-
   // Function to validate password format
   const validatePassword = (passwordValue) => {
     const errors = {
@@ -185,9 +183,8 @@ export const RegisterForm = (props) => {
   };
 
   const errorMessagePassword = Object.entries(passwordErrors)
-    .filter(([key, value]) => value) // Filter out the flags with false value
+    .filter(entry => entry[1])
     .map(([key]) => {
-    // Map each flag to its corresponding error message
       switch (key) {
       case 'uppercase':
       case 'lowercase':
@@ -199,11 +196,10 @@ export const RegisterForm = (props) => {
       case 'length':
         return '8 characters';
       default:
-        return ''; // Handle other cases if needed
+        return '';
       }
     })
-    .join(', '); // Join multiple error messages with a comma
-
+    .join(', ');
 
   const errorMessageWithInclude = errorMessagePassword ?
     `Include at least: ${errorMessagePassword}` : '';
@@ -261,11 +257,11 @@ export const RegisterForm = (props) => {
         {/* Display error messages */}
 
         {(showPasswordAccepted && allPasswordErrorsChecked)&&(
-          <p style={{ color: 'green' }}>&#x2713; Password accepted</p>
+          <p className={styles.greenText}><Image src={IconDone} /> Password accepted</p>
         )}
 
         {errorMessage &&(
-          <p style={{ color: 'red' }}><Image src={IconError}/> {errorMessage}</p>
+          <p className= {styles.redText}><Image src={IconError}/> {errorMessage}</p>
         )}
 
         {/* // </MessageBar> */}
