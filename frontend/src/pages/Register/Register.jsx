@@ -29,9 +29,9 @@ const Register = () => {
   //added password error message
   const [errorMessage, setErrorMessage] = useState('');
 
-  const registerUserHandler = async (email, password) => {
+  const registerUserHandler = async (firstName,lastName, email, password) => {
     try {
-      const { data } = await register({ email, password });
+      const { data } = await register({ firstName,lastName,email, password });
       setUserData(data);
       localStorage.setItem('storedUser', data);
       setActiveComponent(false);

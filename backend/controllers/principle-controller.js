@@ -1,10 +1,11 @@
 
+const { response } = require('express');
 const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
+
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
-const { response } = require('express');
 
 require('dotenv').config({ path: './.env.local' });
 
@@ -18,15 +19,20 @@ const jwtOptions = {
 };
 
 const registration = async (req, res) => {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   try {
+    // check that first name is entered
+    if (!firstName) {
+      return res.status(400).json({ message: 'First name is required' });
+    }
+
     let user = await principleService.findUser(email);
 
     if (user) {
       return res
         .status(409)
-        .json({ message: `The user with ${email} email already exists` });
+        .json({ message: 'This email address is already in use' });
     }
 
     if (!passwordRegExp.test(password)) {
@@ -38,7 +44,7 @@ const registration = async (req, res) => {
     } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });
     } else if (!user) {
-      user = await principleService.registration(email, password);
+      user = await principleService.registration(firstName, lastName, email, password);
 
       const emailVerificationToken = await jwt.sign(
         { email },
@@ -140,14 +146,13 @@ const login = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-
     const correctPassword = await principleService.isPasswordCorrect(email, password);
     if (!correctPassword) {
       return res
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-       // when the user login, then find that user's family(s), then push the info  to the front
+    // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
 
     return res.status(200).json({
@@ -217,15 +222,15 @@ const loginSocial = async (req, res) => {
     return res.status(401).json({ error: 'Error fetching data from Google' });
   }
   user = await principleService.findUser(userID);
-   if (!user) {
+  if (!user) {
     function generatePassword() {
-      charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      newPassword = "";
+      charset = '!@#$%^&*()' + '0123456789' + 'abcdefghijklmnopqrstuvwxyz' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      newPassword = '';
       for (let i = 0; i < 10; i++) {
         newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
       }
       return newPassword;
-    };
+    }
     let password = generatePassword();
     user = await principleService.registration(
       userID,

@@ -10,12 +10,15 @@ const FormEmailInput = (props) => (
     placeholder="example@email.com"
     type="email"
     defaultValue={props.defaultValue}
+    isInvalid={!!props.errors}
+    errorMessage={props.errors}
     {...props}
   />
 );
 
 FormEmailInput.propTypes = {
   defaultValue: PropTypes.string,
+  errors: PropTypes.string,
 };
 
 export default FormEmailInput;
