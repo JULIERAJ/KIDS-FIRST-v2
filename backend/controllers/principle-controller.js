@@ -140,17 +140,19 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await principleService.findUser(email);
+    const isEmailCorrect = email && emailRegExp.test(email);
+    if (!isEmailCorrect) {
+      return res.status(400).json({ error: 'Invalid email address' });
+    }
 
+    const user = await principleService.findUser(email);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const correctPassword = await principleService.isPasswordCorrect(email, password);
-    if (!correctPassword) {
-      return res
-        .status(401)
-        .json({ error: 'Password or username is not correct' });
+    const isPasswordCorrect = password && await principleService.isPasswordCorrect(email, password);
+    if (!isPasswordCorrect) {
+      return res.status(401).json({ error: 'Password is not correct' });
     }
     // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);

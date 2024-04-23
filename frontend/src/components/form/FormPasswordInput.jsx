@@ -28,6 +28,7 @@ const FormPasswordInput = ({
       maxLength="40"
       pattern={passwordRegExp}
       placeholder="********"
+      autoComplete="password"
       type={showPassword ? 'text' : 'password'} // Password visibility toggle
       onCopy={preventCopyPaste}
       onPaste={preventCopyPaste}

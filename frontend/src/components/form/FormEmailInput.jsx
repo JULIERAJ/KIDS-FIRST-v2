@@ -9,6 +9,7 @@ const FormEmailInput = (props) => (
     name="email"
     placeholder="example@email.com"
     type="email"
+    autoComplete="email"
     defaultValue={props.defaultValue}
     isInvalid={!!props.errors}
     errorMessage={props.errors}
