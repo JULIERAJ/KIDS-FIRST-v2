@@ -32,28 +32,31 @@
 
 /* calendar body styles for monthly view: */
 .rbc-date-cell {
-  position: relative; 
+  position: relative;
+
   button {
-      position: absolute; 
-      top: 14px; 
-      left:10px; /* Align to the left */
-      font-weight: 500;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    /* Align to the left */
+    font-weight: 500;
   }
 }
 
 
 /* Target the monthly headers */
-.rbc-month-view  {
+.rbc-month-view {
   background-color: #FFFEF9;
 }
 
-.rbc-month-view .rbc-off-range-bg  {
+.rbc-month-view .rbc-off-range-bg {
   background-color: #FFFEF9;
-  font-weight: normal; 
+  font-weight: normal;
 }
 
 .rbc-date-cell.rbc-off-range button {
-  font-weight: 500; /* Semi-bold */
+  font-weight: 500;
+  /* Semi-bold */
 }
 
 /* .rbc-month-view,
@@ -91,15 +94,15 @@
   text-align: center;
 }
 
- /* cyan date identity for today including a polygon and a rectangle */
+/* cyan date identity for today including a polygon and a rectangle */
 .rbc-date-cell.rbc-now.rbc-current button.rbc-button-link {
   /* position: relative; */
-  padding-left: 10px; 
-  padding-right: 14px; 
-  background-color: #34BDC3; 
-  color: white; 
-  border: none; 
-  border-radius: 20px; 
+  padding-left: 10px;
+  padding-right: 14px;
+  background-color: #34BDC3;
+  color: white;
+  border: none;
+  border-radius: 20px;
 }
 
 .rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::before {
@@ -109,8 +112,8 @@
   left: 0;  */
   width: 50%;
   height: 100%;
-  border-top-left-radius: 20px; 
-  border-bottom-left-radius: 20px; 
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   background-color: #34BDC3;
 }
 
@@ -121,10 +124,10 @@
   right: 10px;
   width: 0;
   height: 0;
-  border-top: 12px solid transparent; 
-  border-bottom: 12px solid transparent; 
-  border-left: 20px solid #34BDC3; 
-  transform: translateX(100%); 
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid #34BDC3;
+  transform: translateX(100%);
 }
 
 
@@ -135,8 +138,8 @@
   top: 50%;
   right: -100px;
   transform: translateY(-50%);
-  width: 100px; 
-  height: 2px; 
+  width: 100px;
+  height: 2px;
   background-color: #34BDC3;
 }
 
@@ -154,4 +157,29 @@
 
 .rbc-time-gutter.rbc-time-column {
   padding-right: 20px
+}
+
+/* .rbc-background-event {
+  opacity: 0.6;
+} */
+
+.rbc-event-label {
+  display: none !important;
+}
+
+.rbc-day-slot .rbc-event-content {
+  width: 100%;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 0px;
+  flex: 1 1 0;
+  word-wrap: break-word;
+  line-height: 1;
+  height: 100%;
+  min-height: 1em;
+}
+
+.event-box {
+  display: block !important;
+  width: 60%;
+  border-radius: 10px;
 }

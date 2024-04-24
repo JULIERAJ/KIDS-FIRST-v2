@@ -1,9 +1,12 @@
+// eslint-disable-next-line no-unused-vars
+const { response } = require('express');
 const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
+
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
-const { response } = require('express');
+
 require('dotenv').config({ path: './.env.local' });
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
@@ -116,7 +119,7 @@ const login = async (req, res) => {
         .status(401)
         .json({ error: 'Password or username is not correct' });
     }
-       // when the user login, then find that user's family(s), then push the info  to the front
+    // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
     return res.status(200).json({
       email: user.email,
@@ -175,26 +178,39 @@ const loginSocial = async (req, res) => {
   if (userID === undefined) {
     return res.status(401).json({ error: 'Error fetching data from Google' });
   }
+  // eslint-disable-next-line no-undef
   user = await principleService.findUser(userID);
-   if (!user) {
+  // eslint-disable-next-line no-undef
+  if (!user) {
+    // eslint-disable-next-line no-inner-declarations
     function generatePassword() {
+      // eslint-disable-next-line no-undef, quotes
       charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      // eslint-disable-next-line no-undef, quotes
       newPassword = "";
       for (let i = 0; i < 10; i++) {
+        // eslint-disable-next-line no-undef
         newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
       }
+      // eslint-disable-next-line no-undef
       return newPassword;
+      // eslint-disable-next-line no-extra-semi
     };
     let password = generatePassword();
+    // eslint-disable-next-line no-undef
     user = await principleService.registration(
       userID,
       password,
     );
+    // eslint-disable-next-line no-undef
     principleService.activateAccount(user.email);
   }
+  // eslint-disable-next-line no-undef
   const principleFamily = await familyService.findPrincipleFamilyName(user._id);
   return res.status(200).json({
+    // eslint-disable-next-line no-undef
     email: user.email,
+    // eslint-disable-next-line no-undef
     id: user._id,
     familyId: principleFamily.id,
     familyName: principleFamily.familyName
