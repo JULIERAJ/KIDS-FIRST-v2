@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cron = require('node-cron');
@@ -81,16 +82,17 @@ const deleteInactiveUsers = async () => {
       emailIsActivated: false, // Filter: email is not activated
       createdAt: { $lt: oneHourAgo } // Filter: created more than 1 hour ago
     });
-    
+
     // Delete inactive users
     await Promise.all(
       // Map over the array of inactive users and delete each user
-      inactiveUsers.map(async (user) => { 
+      inactiveUsers.map(async (user) => {
         await Principle.findByIdAndDelete(user._id); // Delete user by ID
       })
     );
 
     // Log the number of inactive users deleted
+    // eslint-disable-next-line no-console
     console.log('Inactive users deleted:', inactiveUsers.length);
   } catch (error) {
     console.error('Error deleting inactive users:', error);

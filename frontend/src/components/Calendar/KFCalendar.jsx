@@ -46,6 +46,7 @@ const KFCalendar = () => {
         components={components}
         defaultDate={defaultDate}
         onView={handleViewChange}
+        popup={true}
       />
     </div>
   );

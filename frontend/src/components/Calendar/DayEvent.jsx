@@ -1,19 +1,10 @@
 import PropTypes from 'prop-types';
 import './viewStyles.css';
 
-// const getColorForBackground = (name) => {
-//   const colorsBackground = {
-//     'A': 'rgba(255, 214, 102, 0.5)',
-//     'B': 'rgba(255, 107, 109, 0.5)',
-//     'C': 'rgba(194, 158, 239, 0.5)',
-//   };
-//   return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)';
-// };
-
 export const DayEvent = ({ event }) => {
-  // eslint-disable-next-line no-console
   console.log(event);
   const { title, color, kidsName, start, end, desc, type } = event;
+
   const commonStyle = {
     borderRadius: '0px 7px 7px 0px',
   };
@@ -92,18 +83,29 @@ export const DayEvent = ({ event }) => {
     display: 'flex'
   };
 
+  // Helper function to check if the event spans multiple days
+  const isMultiDay = (startDate, endDate) => {
+    return endDate.getDate() > startDate.getDate() ||
+      endDate.getMonth() > startDate.getMonth() ||
+      endDate.getFullYear() > startDate.getFullYear();
+  };
+
   // Function to format date and time
   const formatEventTime = (startDate, endDate) => {
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
     const dateOptions = { weekday: 'short', day: '2-digit', month: 'short' };
     const startTime = startDate.toLocaleTimeString('en-GB', timeOptions);
     const endTime = endDate.toLocaleTimeString('en-GB', timeOptions);
-    const date = startDate.toLocaleDateString('en-GB', dateOptions);
+    const startDateFormatted = startDate.toLocaleDateString('en-GB', dateOptions);
+    const endDateFormatted = endDate.toLocaleDateString('en-GB', dateOptions);
 
-    return `${startTime} - ${endTime} ${date}`;
+    if (isMultiDay(startDate, endDate)) {
+      return `${startTime}, ${startDateFormatted} - ${endTime}, ${endDateFormatted}`;
+    } else {
+      return `${startTime} - ${endTime} ${startDateFormatted}`;
+    }
   };
 
-  // Inside the return statement of the DayEvent component
   return (
     <div className="event-box" style={boxStyle}>
       <div style={contentWrapperStyle} className="content-wrapper">
@@ -111,7 +113,7 @@ export const DayEvent = ({ event }) => {
           {title && <span>{title}</span>}
         </div>
         <div className="timing" style={timingStyle}>
-          {(start && end) && (
+          {start && end && (
             <span>{formatEventTime(start, end)}</span>
           )}
         </div>
@@ -122,14 +124,11 @@ export const DayEvent = ({ event }) => {
           {type && <span>{type}</span>}
         </div>
       </div>
-      <div>
-      </div>
       <span className="circle" style={circleStyle}>
         {kidsName && kidsName.charAt(0).toUpperCase()}
       </span>
-    </div >
+    </div>
   );
-
 };
 
 DayEvent.propTypes = {
@@ -150,8 +149,7 @@ export const DayViewHeader = ({ date }) => {
     const options = { weekday: 'short', day: '2-digit' };
     return new Date(date).toLocaleDateString('en-GB', options);
   };
-  // eslint-disable-next-line no-console
-  console.log('formatDate is: ', formatDate(date));
+
   return <div>{formatDate(date)}</div>;
 };
 

@@ -1,25 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import './viewStyles.css';
 
-/*const getColorForName = (name) => {
-  const colors = {
-    'A': 'rgb(255, 214, 102)',
-    'B': 'rgb(255, 107, 109)',
-    'C': 'rgb(194, 158, 239)',
-    // Add more mappings as needed
-  };
-  return colors[name.charAt(0).toUpperCase()] || 'black'; // Default black
-};*/
-
-const getColorForBackground = (name) => {
-  const colorsBackground = {
-    'A': 'rgba(255, 214, 102, 0.5)',
-    'B': 'rgba(255, 107, 109, 0.5)',
-    'C': 'rgba(194, 158, 239, 0.5)',
-    
-  };
-  return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)'; // Default transparent
-};
+// const getColorForBackground = (name) => {
+//   const colorsBackground = {
+//     'A': 'rgba(255, 214, 102, 0.5)',
+//     'B': 'rgba(255, 107, 109, 0.5)',
+//     'C': 'rgba(194, 158, 239, 0.5)',
+//   };
+//   return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)'; // Default transparent
+// };
 
 const MonthEvent = ({ event }) => {
   const { color, kidsName, title } = event;
@@ -27,7 +17,7 @@ const MonthEvent = ({ event }) => {
   const commonStyle = {
     borderRadius: '0px 7px 7px 0px',
   };
- 
+
   const circleStyle = {
     ...commonStyle,
     width: '20px',
@@ -43,9 +33,9 @@ const MonthEvent = ({ event }) => {
     top: -5,
     left: -20,
     marginLeft: '30px',
-    marginTop: '12px'
+    marginTop: '12px',
   };
- 
+
   const titleStyle = {
     ...commonStyle,
     fontFamily: 'Roboto',
@@ -57,23 +47,15 @@ const MonthEvent = ({ event }) => {
     marginTop: '-5px',
   };
 
-  /*const lineStyle = {
-    width: '2px',
-    height: '100%', 
-    backgroundColor: color,
-    position: 'absolute',
-    top: 0,
-    left: 0
-  };*/
- 
   const boxStyle = {
-    backgroundColor: getColorForBackground(kidsName),
+    backgroundColor: `${color}4D`,
     borderLeft: `2px solid ${color}`,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     position: 'relative',
-    marginTop: '30px'
+    //marginTop: '30px',
+    borderRadius: '0px 7px 7px 0px',
   };
 
   const getTruncatedTitle = (title) => {
@@ -86,13 +68,12 @@ const MonthEvent = ({ event }) => {
   const truncatedTitle = getTruncatedTitle(title);
 
   return (
-    <div className="rbc-event-content" style={{ position: 'relative', marginTop:'30px', height:'auto' }}>
+    <div className="rbc-event-content">
       <div className="kid-events-container" style={boxStyle}>
         <span className="circle" style={circleStyle}>
           {kidsName.charAt(0).toUpperCase()}
         </span>
         {truncatedTitle && <span className="title" style={titleStyle}>{truncatedTitle}</span>}
-        {/*<div className="line" style={lineStyle}></div>*/}
       </div>
     </div>
   );

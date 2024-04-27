@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable max-len */
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -12,10 +14,10 @@ import './headerStyles.css';
 
 const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate, handleCreateButtonClick }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const handleViewButtonClick = (view) => {
-    setActiveView(view); 
-    onView(view); 
+    setActiveView(view);
+    onView(view);
   };
 
   const { setFilteredEventsData } = useContext(EventContext);
@@ -39,7 +41,7 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
 
     setSelectedChildren(updatedChildren);
   };
-  
+
   // Get unique kid names
   const uniqueKidNames = Array.from(new Set(events.map(event => event.kidsName)));
 
@@ -69,17 +71,18 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
         <div className="buttonsContainer">
           {/* Big button */}
           <div className="bigButtonContainer">
-            <button onClick={handleCreateButtonClick} className="styles.bigButton" 
+            <button onClick={handleCreateButtonClick} className="styles.bigButton"
               style={{ border: '2px solid #EB7005' }}>
               {/* smaller buttons inside big button */}
               <div className="smallButtonsContainer">
                 {views.map((view) => (
                   <button key={view} type="button" onClick={() =>
                     handleViewButtonClick(view)} className={`controlButton 
-                      ${activeView === view ? 'active' : ''}`} style={{ backgroundColor: 
-                      activeView === view ? '#FCFCFC' : 'transparent', color: activeView === view ?
-                    '#EB7005' : '', border: activeView === view ? 
-                    '2px solid #EB7005' : 'none' }}>
+                      ${activeView === view ? 'active' : ''}`} style={{
+                      backgroundColor: activeView === view ? '#FCFCFC' : 'transparent', color: activeView === view ?
+                        '#EB7005' : '', border: activeView === view ?
+                          '2px solid #EB7005' : 'none'
+                    }}>
                     {/* Change button text based on view */}
                     {view === 'day' ? 'Daily' : view === 'week' ? 'Weekly' : 'Monthly'}
                   </button>
@@ -112,8 +115,8 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
                 <p className="kid-name">{kidName}</p>
                 {/* Toggle button */}
                 <button className="toggle-event-button" onClick={() =>
-                  handleFilterEvents(kidName)}> {selectedChildren.includes(kidName) ? 
-                    <AiOutlineClose /> : <FiPlus /> }</button>
+                  handleFilterEvents(kidName)}> {selectedChildren.includes(kidName) ?
+                    <AiOutlineClose /> : <FiPlus />}</button>
               </div>
             </div>
           ) : null;
