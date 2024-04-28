@@ -61,11 +61,6 @@
   color: black;
 }
 
-.greenText{
-font-family: Roboto;
-font-size: 10px;
-font-weight: 600;
-line-height: 14px;
-color:#178222;
+input:focus::placeholder {
+  color: transparent;
 }
-

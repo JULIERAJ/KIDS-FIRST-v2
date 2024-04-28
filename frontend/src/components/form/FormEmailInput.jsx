@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
-import FromInput from './FormInput';
+import FormInput from './FormInput';
 
 const FormEmailInput = (props) => (
-  < FromInput
+  < FormInput
     id="email"
     label="Email"
     name="email"
-    placeholder="example@email.com"
+    placeholder="user@mail.com"
     type="email"
     autoComplete="email"
     defaultValue={props.defaultValue}

@@ -5,7 +5,7 @@ import FormInput from './FormInput';
 export const FormFirstNameInput = (props) => (
   <FormInput
     id='firstname'
-    label='Firstname'
+    label='First Name'
     name='FirstName'
     placeholder='First Name'
     type='text'
@@ -24,7 +24,7 @@ FormFirstNameInput.propTypes = {
 export const FormLastNameInput = (props) => (
   <FormInput
     id='lastname'
-    label='Lastname'
+    label='Last Name'
     name='LastName'
     placeholder='Last Name'
     type='text'
