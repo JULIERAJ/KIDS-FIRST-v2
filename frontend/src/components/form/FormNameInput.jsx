@@ -1,11 +1,13 @@
+/* eslint-disable no-undef */
 import PropTypes from 'prop-types';
 
 import FormInput from './FormInput';
+import styles from './FormInput.module.css'; // Import the CSS module
 
 export const FormFirstNameInput = (props) => (
   <FormInput
     id='firstname'
-    label='Firstname'
+    label='First Name'
     name='FirstName'
     placeholder='First Name'
     type='text'
@@ -24,8 +26,13 @@ FormFirstNameInput.propTypes = {
 export const FormLastNameInput = (props) => (
   <FormInput
     id='lastname'
-    label='Lastname'
+    //label='Last Name (Optional)'
     name='LastName'
+    label={
+      <>
+        Last Name <span className={styles.optionalText}> (Optional)</span>
+      </>
+    }
     placeholder='Last Name'
     type='text'
     defaultValue={props.defaultValue}

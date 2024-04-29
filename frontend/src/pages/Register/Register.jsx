@@ -29,9 +29,9 @@ const Register = () => {
   //added password error message
   const [errorMessage, setErrorMessage] = useState('');
 
-  const registerUserHandler = async (firstName,lastName, email, password) => {
+  const registerUserHandler = async (firstName, lastName, email, password) => {
     try {
-      const { data } = await register({ firstName,lastName,email, password });
+      const { data } = await register({ firstName, lastName, email, password });
       setUserData(data);
       localStorage.setItem('storedUser', data);
       setActiveComponent(false);
@@ -56,11 +56,11 @@ const Register = () => {
         />
       </div>
 
-      <Container className='content-layout py-4'>
+      <Container className={`content-layout py-4 ${styles.customContainer}`}>
         <Row>
           <Col className='d-flex justify-content-center align-items-center'>
             <div>
-              <h1 className={styles.registerTitle}>Sign up Kids First</h1>
+              <h1 className={styles.registerTitle}>Welcome to Kids First</h1>
               {activeComponent ? (
                 <RegisterForm
                   onSubmitData={registerUserHandler}

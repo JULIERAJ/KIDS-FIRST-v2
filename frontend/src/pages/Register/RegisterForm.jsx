@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /*
   This component represents a registration form. It allows users to sign up by providing their email,
    password, and confirming the password.
@@ -183,28 +184,30 @@ export const RegisterForm = (props) => {
   };
 
   const errorMessagePassword = Object.entries(passwordErrors)
-    .filter(entry => entry[1])
+    .filter((entry) => entry[1])
     .map(([key]) => {
       switch (key) {
-      case 'uppercase':
-      case 'lowercase':
-        return 'upper and lower case characters';
-      case 'number':
-        return 'a number';
-      case 'special':
-        return 'a special character';
-      case 'length':
-        return '8 characters';
-      default:
-        return '';
+        case 'uppercase':
+        case 'lowercase':
+          return 'upper and lower case characters';
+        case 'number':
+          return 'a number';
+        case 'special':
+          return 'a special character';
+        case 'length':
+          return '8 characters';
+        default:
+          return '';
       }
     })
     .join(', ');
 
-  const errorMessageWithInclude = errorMessagePassword ?
-    `Include at least: ${errorMessagePassword}` : '';
+  const errorMessageWithInclude = errorMessagePassword
+    ? `Include at least: ${errorMessagePassword}`
+    : '';
 
-  const [allPasswordErrorsChecked, setAllPasswordErrorsChecked] = useState(false);
+  const [allPasswordErrorsChecked, setAllPasswordErrorsChecked] =
+    useState(false);
 
   return (
     <>
@@ -214,15 +217,17 @@ export const RegisterForm = (props) => {
         noValidate
         // validated={validated}
       >
-        <Row>
+        <Row className={styles.TextInputField}>
           <Col>
             <FormFirstNameInput
+              className={styles.firstNameInput}
               autoComplete='off'
               required
               onChange={handleFirstNameChange}
               defaultValue={firstName}
               isInvalid={firstNameErrors}
               errors={firstNameErrors}
+              labelClassName={styles.firstNameLabel}
             />
           </Col>
           <Col>
@@ -233,6 +238,7 @@ export const RegisterForm = (props) => {
               defaultValue={lastName}
               isInvalid={lastNameErrors}
               errors={lastNameErrors}
+              labelClassName={styles.LastNameLabel}
             />
           </Col>
         </Row>
@@ -243,6 +249,7 @@ export const RegisterForm = (props) => {
           defaultValue={email}
           isInvalid={emailError}
           errors={emailError}
+          labelClassName={styles.EmailLabel}
         />
         <FormPasswordInput
           required
@@ -253,15 +260,20 @@ export const RegisterForm = (props) => {
           setShowPassword={setShowPassword}
           isInvalid={!!errorMessageWithInclude}
           errors={errorMessageWithInclude}
+          labelClassName={styles.PasswordLabel}
         />
         {/* Display error messages */}
 
-        {(showPasswordAccepted && allPasswordErrorsChecked)&&(
-          <p className={styles.greenText}><Image src={IconDone} /> Password accepted</p>
+        {showPasswordAccepted && allPasswordErrorsChecked && (
+          <p className={styles.greenText}>
+            <Image src={IconDone} /> Password accepted
+          </p>
         )}
 
-        {errorMessage &&(
-          <p className= {styles.redText}><Image src={IconError}/> {errorMessage}</p>
+        {errorMessage && (
+          <p className={styles.redText}>
+            <Image src={IconError} /> {errorMessage}
+          </p>
         )}
 
         {/* // </MessageBar> */}
@@ -269,16 +281,22 @@ export const RegisterForm = (props) => {
         {!successSo && <MessageBar variant='error'>{errMsgSocial}</MessageBar>}
 
         <Button
-          className='primary-btn w-100 my-5'
+          className={`primary-btn w-100 my-5 ${styles.customButton}`}
           type='submit'
           size='lg'
           variant='light'
         >
-          Sign up
+          <span className={styles.signUpText}>Sign up</span>
         </Button>
+
         {/* Horizontal line with "Or" surrounded by dashes */}
-        <div className={styles.orDivider}>
+        {/* <div className={styles.orDivider}>
           <span className={styles.dashLine}></span> Or{' '}
+          <span className={styles.dashLine}></span>
+        </div> */}
+        <div className={styles.orDivider}>
+          <span className={styles.dashLine}></span>
+          <span className={`${styles.orText}`}>Or</span>
           <span className={styles.dashLine}></span>
         </div>
         {/* <div className={styles.signUpText}>Or</div> */}

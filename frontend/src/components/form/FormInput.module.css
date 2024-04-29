@@ -37,3 +37,13 @@
   background-image: none !important;
   border-radius: 0.375rem!important;
 }
+
+
+.optionalText {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 15.36px;
+  letter-spacing: 0.02em;
+  text-align: left;
+}

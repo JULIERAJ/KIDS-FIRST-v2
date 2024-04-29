@@ -7,31 +7,44 @@ import styles from './FormInput.module.css';
 
 import IconError from '../../media/icons/error.png';
 
-const FromInput = ({ label, showPassword, setShowPassword,errorMessage, ...props }) => (
-  <Form.Group className='py-2'>{/* Container for form input and button */}
-    <Form.Label>{label}</Form.Label>{/* Label for the form input */}
+const FromInput = ({
+  label,
+  showPassword,
+  setShowPassword,
+  errorMessage,
+  labelClassName,
+  ...props
+}) => (
+  <Form.Group className='py-2'>
+    {/* Container for form input and button */}
+    <Form.Label className={labelClassName}>{label}</Form.Label>
+    {/* <Form.Label>{label}</Form.Label> */}
+    {/* Label for the form input */}
     <InputGroup>
-      <Form.Control {...props} className={errorMessage ? styles.errorInput : ''}/>{/* Form input element */}
+      <Form.Control
+        {...props}
+        className={errorMessage ? styles.errorInput : ''}
+      />
+      {/* Form input element */}
       {/* Show password button for the 'Password' field */}
-      {(label === 'Password' ) && (
+      {label === 'Password' && (
         <Button
           variant='light'
           className={styles.formInputButton}
-          onClick={(event) =>
-          {
+          onClick={(event) => {
             event.preventDefault();
             setShowPassword(!showPassword);
           }}
         >
-          {showPassword ? <FaEyeSlash />: <FaEye />}
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
         </Button>
       )}
-      {errorMessage && <Form.Control.Feedback type="invalid"
-        className={styles.errorFeedback}>
-        <Image src={IconError} />
-        {errorMessage}
-      </Form.Control.Feedback>}
-
+      {errorMessage && (
+        <Form.Control.Feedback type='invalid' className={styles.errorFeedback}>
+          <Image src={IconError} />
+          {errorMessage}
+        </Form.Control.Feedback>
+      )}
     </InputGroup>
   </Form.Group>
 );
@@ -42,6 +55,7 @@ FromInput.propTypes = {
   setShowPassword: PropTypes.func,
   type: PropTypes.string,
   errorMessage: PropTypes.string,
+  labelClassName: PropTypes.string, // PropType for labelClassName
 };
 
 export default FromInput;
