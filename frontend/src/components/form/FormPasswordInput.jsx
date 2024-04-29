@@ -16,10 +16,13 @@ const FormPasswordInput = ({
   showPassword, // State to manage password visibility
   setShowPassword, // Function to toggle password visibility
   errors,
+  successMessage,
+  showTextPassword,
   ...rest
 }) => {
   // Function to prevent copy and paste actions on the input field
   const preventCopyPaste = (e) => e.preventDefault();
+
   return (
     <FormInput
       id={id}
@@ -37,6 +40,8 @@ const FormPasswordInput = ({
       setShowPassword={setShowPassword} // Function to toggle password visibility
       isInvalid={!!errors}
       errorMessage={errors}
+      successMessage={successMessage}
+      showTextPassword={showTextPassword}
       {...rest}
     />
   );
@@ -49,6 +54,8 @@ FormPasswordInput.propTypes = {
   showPassword: PropTypes.bool,
   setShowPassword: PropTypes.func,
   errors: PropTypes.string,
+  successMessage: PropTypes.string,
+  showTextPassword: PropTypes.string,
 };
 
 export default FormPasswordInput;

@@ -1,36 +1,37 @@
 import PropTypes from 'prop-types';
 
-import { Button, Form, InputGroup, Image } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
+
+import { BsExclamationCircle, BsCheckLg } from 'react-icons/bs';
+
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import styles from './FormInput.module.css';
 
-import IconError from '../../media/icons/error.png';
-
-const FromInput = ({
+const FormInput = ({
   label,
   showPassword,
   setShowPassword,
   errorMessage,
+  successMessage,
+  showTextPassword,
   labelClassName,
   ...props
 }) => (
   <Form.Group className='py-2'>
     {/* Container for form input and button */}
-    <Form.Label className={labelClassName}>{label}</Form.Label>
-    {/* <Form.Label>{label}</Form.Label> */}
+    <Form.Label>{label}</Form.Label>
     {/* Label for the form input */}
     <InputGroup>
       <Form.Control
         {...props}
         className={errorMessage ? styles.errorInput : ''}
       />
-      {/* Form input element */}
-      {/* Show password button for the 'Password' field */}
+
       {label === 'Password' && (
         <Button
           variant='light'
-          className={styles.formInputButton}
+          className={errorMessage ? styles.errorInput : styles.formInputButton}
           onClick={(event) => {
             event.preventDefault();
             setShowPassword(!showPassword);
@@ -39,23 +40,34 @@ const FromInput = ({
           {showPassword ? <FaEyeSlash /> : <FaEye />}
         </Button>
       )}
-      {errorMessage && (
-        <Form.Control.Feedback type='invalid' className={styles.errorFeedback}>
-          <Image src={IconError} />
-          {errorMessage}
-        </Form.Control.Feedback>
-      )}
     </InputGroup>
+    {successMessage && (
+      <Form.Control.Feedback className={styles.successFeedback}>
+        <BsCheckLg />
+        {successMessage}
+      </Form.Control.Feedback>
+    )}
+    {errorMessage && (
+      <Form.Control.Feedback type='invalid' className={styles.errorFeedback}>
+        <BsExclamationCircle />
+        {errorMessage}
+      </Form.Control.Feedback>
+    )}
+    {showTextPassword && (
+      <Form.Text className={styles.passwordText}>{showTextPassword}</Form.Text>
+    )}
   </Form.Group>
 );
 
-FromInput.propTypes = {
+FormInput.propTypes = {
   label: PropTypes.string,
   showPassword: PropTypes.bool,
   setShowPassword: PropTypes.func,
   type: PropTypes.string,
   errorMessage: PropTypes.string,
   labelClassName: PropTypes.string, // PropType for labelClassName
+  successMessage: PropTypes.string,
+  showTextPassword: PropTypes.string,
 };
 
-export default FromInput;
+export default FormInput;

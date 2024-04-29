@@ -17,6 +17,10 @@
  {
   border-left: 1px solid transparent;
   background-color: #fff;
+  /* background: #F7F8F8; */
+  /* border: 1px solid #A4DFE1; */
+  /* box-shadow: 0px 2px 4px -1px #4A7A7C0F !important; */
+  border-radius: 8px;
 }
 
 .errorFeedback {
@@ -28,8 +32,8 @@
   font-weight: 600;
   line-height: 14px;
 }
-.errorFeedback img {
-  margin-right: 5px;
+.errorFeedback svg {
+  margin-right: 5px ;
 }
 
 .errorInput {
@@ -46,4 +50,35 @@
   line-height: 15.36px;
   letter-spacing: 0.02em;
   text-align: left;
+}
+
+
+
+
+.successFeedback {
+font-family: Roboto;
+font-size: 10px;
+font-weight: 600;
+line-height: 14px;
+color:#178222;
+display: flex;
+align-items: center;
+}
+
+
+.errorInput:focus{
+box-shadow: none;
+}
+
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus{
+  box-shadow: none !important;
+}
+
+
+.passwordText{
+font-family: Roboto;
+font-size: 10px;
+font-weight: 600;
+line-height: 14px;
+text-align: left;
 }

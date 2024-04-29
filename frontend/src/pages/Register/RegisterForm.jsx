@@ -7,7 +7,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
-import { Image, Col, Row, Form, Button } from 'react-bootstrap';
+import { Col, Row, Form, Button } from 'react-bootstrap';
 
 import {
   GoogleLoginButton,
@@ -27,8 +27,6 @@ import {
 import FormPasswordInput from '../../components/form/FormPasswordInput';
 
 import MessageBar from '../../components/MessageBar';
-import IconDone from '../../media/icons/done.png';
-import IconError from '../../media/icons/error.png';
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
 //import SocialButtonsGroup from '../../components/SocialButtonsGroup';
@@ -52,8 +50,10 @@ export const RegisterForm = (props) => {
   const [successSo, setSuccessSo] = useState(true);
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState('');
-  const [showPasswordAccepted, setShowPasswordAccepted] = useState(false);
-
+  const [successMessage, setSuccessMessage] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const [initialFocus, setInitialFocus] = useState(false);
+  const [showTextPassword, setShowTextPassword] = useState('');
   const [passwordErrors, setPasswordErrors] = useState({
     uppercase: false,
     lowercase: false,
@@ -65,7 +65,7 @@ export const RegisterForm = (props) => {
   // Effect hook to handle errors received from the backend
   useEffect(() => {
     if (props.errorMessage) {
-      setErrorMessage(props.errorMessage);
+      setEmailError(props.errorMessage);
     }
   }, [props.errorMessage]);
 
@@ -114,6 +114,22 @@ export const RegisterForm = (props) => {
   // Event handler for password change
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setShowTextPassword('');
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    if (!initialFocus && !allPasswordErrorsChecked) {
+      setShowTextPassword(
+        'Include at least:' +
+          ' • 8 characters  • upper and lower case characters  • a number  • a special character'
+      );
+      setInitialFocus(true);
+    }
+  };
+  const handleBlur = (e) => {
+    setIsFocused(false);
+    setShowTextPassword('');
     validatePassword(e.target.value);
   };
 
@@ -135,12 +151,57 @@ export const RegisterForm = (props) => {
     // Check if all errors are resolved
     const allErrorsResolved = Object.values(errors).every((error) => !error);
     setAllPasswordErrorsChecked(allErrorsResolved);
-    setShowPasswordAccepted(true);
+    // Set success message if all errors are resolved, otherwise clear it
+    setSuccessMessage(allErrorsResolved ? 'Password accepted' : '');
   };
 
   // Event handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Check if any of the required fields are empty or have placeholder values
+    const fields = [
+      {
+        value: firstName.trim(),
+        errorSetter: setFirstNameErrors,
+        placeholder: 'First Name',
+      },
+      {
+        value: email.trim(),
+        errorSetter: setEmailError,
+        placeholder: 'user@mail.com',
+      },
+    ];
+    let hasEmptyField = false;
+
+    fields.forEach(({ value, errorSetter, placeholder }) => {
+      if (value === '' || value === placeholder) {
+        if (placeholder === 'First Name') {
+          errorSetter(`Please enter your ${placeholder.toLowerCase()}`);
+        } else {
+          errorSetter('Please enter a valid email address');
+        }
+        hasEmptyField = true;
+      }
+    });
+
+    if (!password.trim()) {
+      // Construct the complete error message for the password field
+      const errorMessagePassword =
+        'Include at least:' +
+        '• 8 characters • upper and lower case characters • a number • a special character';
+
+      // Set the error message for the empty password field
+      setPasswordErrors({
+        uppercase: true,
+        lowercase: true,
+        number: true,
+        special: true,
+        length: errorMessagePassword,
+      });
+      hasEmptyField = true;
+      return;
+    }
+    if (hasEmptyField) return;
     // Perform form submission if all validations pass
     if (
       firstNameErrors === '' &&
@@ -149,7 +210,6 @@ export const RegisterForm = (props) => {
       allPasswordErrorsChecked
     ) {
       props.onSubmitData(firstName, lastName, email, password);
-      setShowPasswordAccepted(false);
     }
   };
 
@@ -261,20 +321,11 @@ export const RegisterForm = (props) => {
           isInvalid={!!errorMessageWithInclude}
           errors={errorMessageWithInclude}
           labelClassName={styles.PasswordLabel}
+          successMessage={successMessage}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          showTextPassword={showTextPassword}
         />
-        {/* Display error messages */}
-
-        {showPasswordAccepted && allPasswordErrorsChecked && (
-          <p className={styles.greenText}>
-            <Image src={IconDone} /> Password accepted
-          </p>
-        )}
-
-        {errorMessage && (
-          <p className={styles.redText}>
-            <Image src={IconError} /> {errorMessage}
-          </p>
-        )}
 
         {/* // </MessageBar> */}
         {/* )} */}
