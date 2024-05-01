@@ -310,6 +310,7 @@ export const RegisterForm = (props) => {
           isInvalid={emailError}
           errors={emailError}
           labelClassName={styles.EmailLabel}
+          // className='EmailInput'
         />
         <FormPasswordInput
           required
@@ -332,7 +333,7 @@ export const RegisterForm = (props) => {
         {!successSo && <MessageBar variant='error'>{errMsgSocial}</MessageBar>}
 
         <Button
-          className={`primary-btn w-100 my-5 ${styles.customButton}`}
+          className={`primary-btn ${styles.customButton}`}
           type='submit'
           size='lg'
           variant='light'
@@ -352,7 +353,7 @@ export const RegisterForm = (props) => {
         </div>
         {/* <div className={styles.signUpText}>Or</div> */}
 
-        <Row className='py-5'>
+        <Row className='SocialButton'>
           <Col xs={12} md={6}>
             <LoginSocialGoogle
               client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}

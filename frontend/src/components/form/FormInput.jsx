@@ -20,7 +20,8 @@ const FormInput = ({
 }) => (
   <Form.Group className='py-2'>
     {/* Container for form input and button */}
-    <Form.Label>{label}</Form.Label>
+
+    <Form.Label className={labelClassName}>{label}</Form.Label>
     {/* Label for the form input */}
     <InputGroup>
       <Form.Control

@@ -7,12 +7,13 @@ import { useParams } from 'react-router-dom';
 
 import EmailVerify from './EmailVerify';
 import styles from './Register.module.css';
+
 import RegisterForm from './RegisterForm';
 
 import { register } from '../../api';
 // import FatherSonBlock from '../../components/FatherSonBlock';
 import Header from '../../components/Header';
-import TextLink from '../../components/TextLink';
+// import TextLink from '../../components/TextLink';
 
 const Register = () => {
   const params = useParams();
@@ -44,36 +45,45 @@ const Register = () => {
 
   return (
     <>
-      <div>
-        <Header
-          widget={
-            <TextLink
-              title='Already a member?'
-              to='/signin'
-              linkTitle='Log in'
-            />
-          }
-        />
-      </div>
+      <div className={`${styles.outerContainer}`}>
+        <div>
+          <Header
+          // widget={
+          //   <TextLink
+          //     title='Already a member?'
+          //     to='/signin'
+          //     linkTitle='Log in'
+          //   />
+          // }
+          />
+        </div>
 
-      <Container className={`content-layout py-4 ${styles.customContainer}`}>
-        <Row>
-          <Col className='d-flex justify-content-center align-items-center'>
-            <div>
-              <h1 className={styles.registerTitle}>Welcome to Kids First</h1>
-              {activeComponent ? (
-                <RegisterForm
-                  onSubmitData={registerUserHandler}
-                  paramEmail={paramEmail}
-                  errorMessage={errorMessage}
-                />
-              ) : (
-                <EmailVerify userData={userData} />
-              )}
-            </div>
-          </Col>
-        </Row>
-      </Container>
+        <Container className={`content-layout py-4 ${styles.customContainer}`}>
+          <div>
+            <Row>
+              {/* <Col className='d-flex justify-content-center align-items-center'> */}
+              <Col
+                className={`d-flex justify-content-center align-items-center ${styles.formContainer}`}
+              >
+                <div>
+                  <h1 className={styles.registerTitle}>
+                    Welcome to Kids First
+                  </h1>
+                  {activeComponent ? (
+                    <RegisterForm
+                      onSubmitData={registerUserHandler}
+                      paramEmail={paramEmail}
+                      errorMessage={errorMessage}
+                    />
+                  ) : (
+                    <EmailVerify userData={userData} />
+                  )}
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </Container>
+      </div>
     </>
   );
 };
