@@ -4,11 +4,14 @@
   border-radius: 20px;
   border: 1px solid #e5e5e5;
   height: 100vh;
-  width: 158px;
+  max-width: 170px;
   margin-left: 15px;
   top: 24px;
   font-size: 0.9rem;
   margin-right: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 707px;
 }
 
 .sidebarHeader {
@@ -19,7 +22,9 @@
   margin-top: 32px;
   margin-bottom: 16px;
 }
-
+.sidebarMenu{
+  display: flex;
+}
 .sidebarMenuItem {
   display: flex;
   height: 48px;
@@ -29,7 +34,7 @@
 }
 
 
-.sidebarMenuItem::after {
+/* .sidebarMenuItem::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -39,26 +44,43 @@
   height: 2px;
   background-color: black;
   transition: width 0.5s ease;
-}
+} */
 
-.sidebarMenuItem:hover::after {
+/* .sidebarMenuItem:hover::after {
   width: calc(100% - 20px);
-}
+} */
 
 
 /* setting icon */
-.rowContainer:nth-last-child(2) {
+.rowContainer{
+  height: 80px;
+}
+/* .rowContainer:nth-last-child(2) {
   position: absolute;
   bottom: 90.3px;
   width: 100%;
-}
+} */
 /* help icon */
-.rowContainer:nth-last-child(1) {
+/* .rowContainer:nth-last-child(1) {
   position: absolute;
   bottom: 33.3px;
   width: 100%;
+} */
+  /* Position the last two buttons at the bottom */
+  .rowContainer:nth-last-child(-n+2) {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
 }
-
+/* Adjust margin for the second last button to separate from the last button */
+.rowContainer:nth-last-child(2) {
+position: absolute;
+bottom: 0.5%;
+width: 100%;
+}
+.nav{
+  align-items: center;
+}
 .sidebarLink {
   text-decoration: none;
   color: black;
@@ -92,7 +114,7 @@
 }
 
 .sidebarMenu.active {
-
+  background-color:  #FDF1E6;
   border-right: 5px solid rgba(235, 112, 5, 0.724);
 }
 
@@ -103,3 +125,8 @@
 .sidebarMenuItem.active .sidebarLink::after {
   width: 0;
 }
+
+.sidebarMenu:hover{
+background-color: #FDF1E6;
+}
+

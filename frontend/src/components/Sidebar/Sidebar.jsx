@@ -5,7 +5,8 @@ import { Image, Container, Col, Nav, Row, Tab } from 'react-bootstrap';
 import styles from './Sidebar.module.css';
 import { SIDEBAR_DATA } from './sidebarData';
 
-import kidsFirstLogo from '../../media/logo/kids_first_logo_beta.png';
+// import kidsFirstLogo from '../../media/logo/kids_first_logo_beta.png';
+import kidsFirstLogo from '../../media/logo/LOGO-BYME.png';
 
 //SidebarItemsCard component displays a sidebar menu item.
 
@@ -18,7 +19,7 @@ const SidebarItemsCard = ({ title, icon, activeIcon, hoverIcon, path, alt, isAct
     <Tab.Container>
       <Row className={styles.rowContainer}>
         <Col className={`${styles.sidebarMenu} ${isActive ? styles.active : ''}`}>
-          <Nav>
+          <Nav className={styles.nav}>
             <Nav.Item
               className={`${styles.sidebarMenuItem} ${isActive ? styles.active : ''}`}
               id={window.location.pathname === path ? 'active' : ''}
@@ -29,10 +30,6 @@ const SidebarItemsCard = ({ title, icon, activeIcon, hoverIcon, path, alt, isAct
                 alt={alt}
                 className={`${styles.sidebarIcon} ${isActive ? styles.activeIcon : ''}`}
                 onClick={handleClick}
-                style={{
-                  width: '20.63px',
-                  height: '19.25px',
-                }}
               />
               <Nav.Link
                 eventKey='link-1'

@@ -12,10 +12,10 @@ import KidsActive from '../../media/icons/faceActive.png';
 import KidsHover from '../../media/icons/faceHover.png';
 import Help from '../../media/icons/help.png';
 import HelpActive from '../../media/icons/helpActive.png';
+import HelpHover from '../../media/icons/helpHover.png';
 import Home from '../../media/icons/home.png';
 import HomeActive from '../../media/icons/homeActive.png';
 import HomeHover from '../../media/icons/homeHover.png';
-
 import Setting from '../../media/icons/settings.png';
 import SettingActive from '../../media/icons/settingsActive.png';
 import SettingHover from '../../media/icons/settingsHover.png';
@@ -73,7 +73,7 @@ export const SIDEBAR_DATA = [
     title: 'Help',
     icon: Help,
     activeIcon:HelpActive,
-    hoverIcon:Help,
+    hoverIcon:HelpHover,
     path: '/help',
     alt: 'help-icon',
   },
