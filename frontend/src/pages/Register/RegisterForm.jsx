@@ -39,7 +39,7 @@ const regexLength = /^.{8,40}$/;
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -48,9 +48,13 @@ export const RegisterForm = (props) => {
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [errMsgSocial, setErrMsgSocial] = useState(''); //state for login from google and FB
   const [successSo, setSuccessSo] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [errMsg, setErrMsg] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [success, setSuccess] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  // eslint-disable-next-line no-unused-vars
   const [isFocused, setIsFocused] = useState(false);
   const [initialFocus, setInitialFocus] = useState(false);
   const [showTextPassword, setShowTextPassword] = useState('');
@@ -260,6 +264,16 @@ export const RegisterForm = (props) => {
           return '';
       }
     })
+    .reduce((acc, message) => {
+      if (message === 'upper and lower case characters') {
+        if (!acc.includes(message)) {
+          acc.push(message);
+        }
+      } else {
+        acc.push(message);
+      }
+      return acc;
+    }, [])
     .join(', ');
 
   const errorMessageWithInclude = errorMessagePassword
