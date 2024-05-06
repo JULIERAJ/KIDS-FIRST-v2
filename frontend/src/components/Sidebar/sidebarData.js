@@ -20,7 +20,7 @@ export const SIDEBAR_DATA = [
     icon: <CalendarMonthIcon color="action" sx={{ fontSize: 32 }} />,
     activeIcon: <CalendarMonthIcon sx={{ color: '#F08324', fontSize: 32 }}/>,
     hoverIcon: <CalendarMonthIcon sx={{ fontSize: 32 }} />,
-    path: '/calendar',
+    path: '/calendarview',
     alt: 'calendar-icon',
   },
   {
