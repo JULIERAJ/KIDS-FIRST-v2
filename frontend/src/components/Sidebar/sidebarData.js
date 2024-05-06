@@ -1,79 +1,65 @@
-import Album from '../../media/icons/album.png';
-import AlbumActive from '../../media/icons/albumActive.png';
-import AlbumHover from '../../media/icons/albumHover.png';
-import Calendar from '../../media/icons/calendar.png';
-import CalendarActive from '../../media/icons/calendarActive.png';
-import CalendarHover from '../../media/icons/calendarHover.png';
-import Message from '../../media/icons/chat.png';
-import MessageActive from '../../media/icons/chatActive.png';
-import MessageHover from '../../media/icons/chatHover.png';
-import Kids from '../../media/icons/face.png';
-import KidsActive from '../../media/icons/faceActive.png';
-import KidsHover from '../../media/icons/faceHover.png';
-import Help from '../../media/icons/help.png';
-import HelpActive from '../../media/icons/helpActive.png';
-import HelpHover from '../../media/icons/helpHover.png';
-import Home from '../../media/icons/home.png';
-import HomeActive from '../../media/icons/homeActive.png';
-import HomeHover from '../../media/icons/homeHover.png';
-import Setting from '../../media/icons/settings.png';
-import SettingActive from '../../media/icons/settingsActive.png';
-import SettingHover from '../../media/icons/settingsHover.png';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ChatIcon from '@mui/icons-material/Chat';
+import CollectionsIcon from '@mui/icons-material/Collections';
+import FaceIcon from '@mui/icons-material/Face';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import HomeIcon from '@mui/icons-material/Home';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const SIDEBAR_DATA = [
   {
     title: 'Dashboard',
-    icon: Home,
-    activeIcon: HomeActive,
-    hoverIcon: HomeHover,
+    icon: <HomeIcon color="action" sx={{ fontSize: 32 }} />,
+    activeIcon: <HomeIcon sx={{ color: '#F08324', fontSize: 32 }} />,
+    hoverIcon:  <HomeIcon sx={{ fontSize: 32 }} />,
     path: '/dashboard',
     alt: 'dashboard-icon',
   },
   {
     title: 'Calendar',
-    icon: Calendar,
-    activeIcon: CalendarActive,
-    hoverIcon: CalendarHover,
+    icon: <CalendarMonthIcon color="action" sx={{ fontSize: 32 }} />,
+    activeIcon: <CalendarMonthIcon sx={{ color: '#F08324', fontSize: 32 }}/>,
+    hoverIcon: <CalendarMonthIcon sx={{ fontSize: 32 }} />,
     path: '/calendar',
     alt: 'calendar-icon',
   },
   {
     title: 'Messages',
-    icon: Message,
-    activeIcon: MessageActive,
-    hoverIcon: MessageHover,
+    icon: <ChatIcon color="action" sx={{ fontSize: 32 }}/>,
+    activeIcon: <ChatIcon sx={{ color: '#F08324', fontSize: 32 }}/>,
+    hoverIcon: <ChatIcon sx={{ fontSize: 32 }} />,
     path: '/messages',
     alt: 'messages-icon',
   },
   {
     title: 'Album',
-    icon: Album,
-    activeIcon: AlbumActive,
-    hoverIcon: AlbumHover,
+    icon: <CollectionsIcon color="action" sx={{ fontSize: 32 }}/>,
+    activeIcon: <CollectionsIcon sx={{ color: '#F08324', fontSize: 32 }}/>,
+    hoverIcon: <CollectionsIcon sx={{ fontSize: 32 }}/>,
     path: '/album',
     alt: 'album-icon',
   },
   {
     title: 'Kids’ Info',
-    icon: Kids,
-    activeIcon: KidsActive,
-    hoverIcon: KidsHover,
+    icon: <FaceIcon color="action" sx={{ fontSize: 32 }}/>,
+    activeIcon: <FaceIcon sx={{ color: '#F08324', fontSize: 32 }}/>,
+    hoverIcon: <FaceIcon sx={{ fontSize: 32 }} />,
     path: '/kids',
     alt: 'kids-icon',
   },
   {
     title: 'Settings',
-    icon: Setting,
-    activeIcon:SettingActive,
-    hoverIcon:SettingHover,
+    icon: <SettingsIcon color="action" sx={{ fontSize: 32 }}/>,
+    activeIcon:<SettingsIcon sx={{ color: '#F08324', fontSize: 32 }}/>,
+    hoverIcon:<SettingsIcon sx={{ fontSize: 32 }} />,
     path: '/settings',
     alt: 'settings-icon',
   },
   {
     title: 'Help',
-    icon: Help,
-    activeIcon:HelpActive,
-    hoverIcon:HelpHover,
+    icon: <HelpOutlineIcon color="action" sx={{ fontSize: 32 }}/>,
+    activeIcon: <HelpOutlineIcon sx={{ color: '#F08324', fontSize: 32 }}/>,
+    hoverIcon: <HelpOutlineIcon sx={{ fontSize: 32 }} />,
     path: '/help',
     alt: 'help-icon',
   },
