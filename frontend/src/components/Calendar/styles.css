@@ -337,6 +337,8 @@ button.rbc-input::-moz-focus-inner {
 .rbc-event.rbc-selected,
 .rbc-day-slot .rbc-selected.rbc-background-event {
   background-color: red;
+  margin-left: 10px;
+
 }
 
 .rbc-event:focus,

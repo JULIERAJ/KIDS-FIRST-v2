@@ -19,8 +19,8 @@ const WeekEvent = ({ event }) => {
   };
   const circleStyle = {
     ...commonStyle,
-    width: '45px',
-    height: '45px',
+    width: '40px',
+    height: '40px',
     backgroundColor: color,
     justifyContent: 'center',
     alignItems: 'center',

@@ -183,3 +183,11 @@
   width: 60%;
   border-radius: 10px;
 }
+
+.kids-events-container {
+  align-items: center;
+}
+
+.rbc-event-content {
+  margin-left: 5px;
+}

@@ -49,7 +49,7 @@ const MonthEvent = ({ event }) => {
 
   const boxStyle = {
     backgroundColor: `${color}4D`,
-    borderLeft: `2px solid ${color}`,
+    borderLeft: `4px solid ${color}`,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -68,7 +68,7 @@ const MonthEvent = ({ event }) => {
   const truncatedTitle = getTruncatedTitle(title);
 
   return (
-    <div className="rbc-event-content">
+    <div className="rbc-event-content" >
       <div className="kid-events-container" style={boxStyle}>
         <span className="circle" style={circleStyle}>
           {kidsName.charAt(0).toUpperCase()}

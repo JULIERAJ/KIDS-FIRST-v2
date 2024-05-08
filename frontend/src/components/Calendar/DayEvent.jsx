@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import './viewStyles.css';
 
 export const DayEvent = ({ event }) => {
-  console.log(event);
   const { title, color, kidsName, start, end, desc, type } = event;
 
   const commonStyle = {
@@ -11,8 +10,8 @@ export const DayEvent = ({ event }) => {
 
   const circleStyle = {
     ...commonStyle,
-    width: '45px',
-    height: '45px',
+    width: '40px',
+    height: '40px',
     backgroundColor: color,
     justifyContent: 'center',
     alignItems: 'center',
@@ -121,7 +120,16 @@ export const DayEvent = ({ event }) => {
           {desc && <span>{desc}</span>}
         </div>
         <div style={{ fontSize: '14px', opacity: '0.4' }}>
-          {type && <span>{type}</span>}
+          {type && <span> <span
+            style={{
+              fontFamily: 'Material Symbols Outlined',
+              fontSize: '18px',
+              lineHeight: '18px',
+              marginRight: '8px',
+              verticalAlign: 'middle'
+            }}>
+            {type.includes('Solo') ? 'person' : 'group'}
+          </span>{type}</span>}
         </div>
       </div>
       <span className="circle" style={circleStyle}>
