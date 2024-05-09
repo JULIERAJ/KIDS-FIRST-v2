@@ -8,6 +8,7 @@ const HomeDashboard = () => {
     <div className="dashboard">
       {/* Pending Events */}
       <PendingEvents />
+      
     </div>
   );
 };

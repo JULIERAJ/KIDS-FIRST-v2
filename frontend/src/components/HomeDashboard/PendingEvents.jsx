@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './PendingEvents.css';
+import './HomeDashboard.css';
 
 import thumbsDown from '../../media/icons/Thumbs down.png';
 
