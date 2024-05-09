@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import HomeDashboard from './components/HomeDashboard/HomeDashboard';
 import LandingLayout from './components/LandingLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard';
+
 // import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
@@ -37,7 +39,8 @@ const App = () => (
           element={<ResetPassword />}
         />
         <Route path='/sidebar' element={<Sidebar />} />
-      </Route>
+        <Route path='/homedashboard' element={<HomeDashboard />} />
+         </Route>
     </Routes>
   </BrowserRouter>
 );

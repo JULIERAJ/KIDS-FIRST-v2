@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.9.1",
+    "@material-ui/core": "^4.12.4",
     "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -12,6 +13,7 @@
     "bootstrap": "^5.3.3",
     "emailjs-com": "^3.2.0",
     "firebase": "^9.15.0",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
@@ -23,6 +25,11 @@
     "web-vitals": "^3.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "eslint": "^9.1.1",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react": "^7.34.1",
+    "globals": "^15.0.0",
     "prop-types": "^15.8.1"
   },
   "scripts": {

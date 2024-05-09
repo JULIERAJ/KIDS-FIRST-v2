@@ -3,6 +3,7 @@
    password, and confirming the password.
   It includes form fields for email, password, and password confirmation, along with validation checks for each field.
 */
+//import { jwtDecode } from 'jwt-decode';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -28,6 +29,7 @@ import MessageBar from '../../components/MessageBar';
 
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
+
 //import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
 const regexUpperCase = /[A-Z]/;
@@ -139,9 +141,9 @@ export const RegisterForm = (props) => {
   };
 
   const loginfromGoogle = (response) => {
-    setErrMsgSocial(
-      'Log-in unsuccessful. Please try again later, or sign-up.'
-    );
+    //  console.log('email :'+response.data.email);
+    console.log(response);
+    // console.log('Decoded Token :'+ jwtDecode(response.data.access_token));
     loginSocial(response.data.access_token, response.data.email)
       .then((res) => {
         setSuccessSo(true);
@@ -151,6 +153,9 @@ export const RegisterForm = (props) => {
       })
       .catch(() => {
         setSuccessSo(false);
+        setErrMsgSocial(
+          'Log-in unsuccessful. Please try again later, or sign-up.'
+        );
       });
   };
 
