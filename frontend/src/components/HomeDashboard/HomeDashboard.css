@@ -62,13 +62,7 @@
       
     }
     
-    .event-box,
-    .message-box {
-      background-color: #f2f2f2;
-      padding: 5px;
-      margin-bottom: 5px;
-    }
-  
+      
     .event-box {
       width: 555px;
       height: 78px;
@@ -76,10 +70,14 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       padding: 10px;
-    }
+      background-color: #f2f2f2;
+      padding: 5px;
+    
+      }
     
     .message-boxes {
-      
+      width: 555px;
+      height: 78px;      
       overflow-y: auto; 
     }
     

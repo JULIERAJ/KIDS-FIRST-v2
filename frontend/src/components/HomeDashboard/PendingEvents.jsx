@@ -2,18 +2,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './HomeDashboard.css';
 
-import thumbsDown from '../../media/icons/Thumbs down.png';
+import decline from '../../media/icons/Thumbs down.png';
 
-import vector from '../../media/icons/Thumbs up.png';
+import accept from '../../media/icons/Thumbs up.png';
 
 //////
 const getColorForBackground = (name) => {
     // Check if name is valid (not null or undefined)
-    if (name && typeof name === 'string' && name.length+1 > 0) {
+    if (name && typeof name === 'string' && name.length > 0) {
       const colorsBackground = {
       'A': 'rgba(255, 214, 102, 0.5)',
       'B': 'rgba(255, 107, 109, 0.5)',
       'C': 'rgba(213, 202, 235, 0.5)',
+      'E': 'rgba(0, 0, 0, 0.5)',
    };
   return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)';
       } else {
@@ -50,7 +51,7 @@ const getColorForBackground = (name) => {
         ...commonStyle,
         fontFamily: 'Roboto',
         color: '#081821',
-        fontSize: '16px',
+        fontSize: '15px',
         fontWeight: 500,
         lineHeight: '18.75px',
         textAlign: 'left',
@@ -69,7 +70,7 @@ const getColorForBackground = (name) => {
     };
 
     const timingStyle = {
-        fontSize: '14px',
+        fontSize: '12px',
         color: '#011D26',
         fontWeight: 200,
         lineHeight: '16.41px',
@@ -79,12 +80,12 @@ const getColorForBackground = (name) => {
     const boxStyle = {
         backgroundColor: getColorForBackground(kidsName),
         border:'0px',
-        borderLeft: `4px solid ${color}`,
+        borderLeft: `3px solid ${color}`,
         height: '100%',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius:'1px',
+        borderRadius:'5px',
         position: 'relative',
         top: 0,
         left: 0,
@@ -103,7 +104,7 @@ const getColorForBackground = (name) => {
                    
                     {/* First image icon 
                     <ManagePendingEvent>*/}
-                     <img src={image} alt="icon" style={{ marginLeft: '80%', marginRight: '20px' }} />{/*</ManagePendingEvent>*/}
+                     <img src={image} alt="icon" style={{ marginLeft: '85%', marginRight: '15px' }} />{/*</ManagePendingEvent>*/}
                     {/* Second image icon */}
                     <img src={image2} alt="icon" />
                     
@@ -155,8 +156,8 @@ const PendingEvents = () => {
             kidsName: 'A',          
             timing: '5:00-6:00 PM   Wed, 21Sep',
             color: '#ffd666',
-            image: thumbsDown,
-            image2: vector
+            image: decline,
+            image2: accept
         },
         {
             id: 2,
@@ -164,18 +165,18 @@ const PendingEvents = () => {
             kidsName: 'B',
             timing: '5:00-6:00 PM   Wed, 21Sep',
             color: '#ff6b6d',
-            image: thumbsDown,
-            image2: vector
+            image: decline,
+            image2: accept
         },
         {
             id: 3,
             title: 'Soccer Practice',
-            kidsName: 'V',
+            kidsName: 'C',
             timing: '5:00-6:00 PM   Wed, 21Sep',
             color: '#c29eef',
-            image: thumbsDown,
-            image2: vector
-        },
+            image: decline,
+            image2: accept
+        }
     ];
    
     return (
