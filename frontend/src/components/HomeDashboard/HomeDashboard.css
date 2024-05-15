@@ -2,6 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap:  8rem;
+    margin: 4rem;
+    
+    
+    justify-content: space-around;
+    
+  }
+
+  .eventMessage {
+    display: flex;
+    flex-direction: row; 
   }
   
   .calendar-overview {
@@ -36,12 +47,7 @@
   
   .title {
     margin-top: 10px;
-  }
-  
-    /*pending events*/
-    .pending-events {
-      margin-top: 20px;
-    }
+  }  
     
     .two-columns {
       display: flex;
@@ -90,14 +96,6 @@
       padding: 10px;
     }
   
-  /*pending event*/
-  /*.pending-events {
-    width: 601px;
-    height: 353px;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }*/
-  
   .two-columns {
     display: flex;
   }
@@ -109,9 +107,7 @@
   
   
   .pending-events {
-    width: 1202px; 
-    height: 555px;
-    display: flex; 
+    margin-top: 2rem;
   }
   
   .left-column,
@@ -196,3 +192,55 @@ top: 0px;
   padding-right: 20px
 }
 
+
+
+/*************************************** Message Notification ************************************/
+
+.message-event {
+  margin: 8rem;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-around;
+  /* column-gap: 3rem; */
+}
+
+.rounded {
+  border: 1px solid #ccc;
+  border-radius: 20px !important;
+  padding: 0.8rem;
+}
+
+.messages {
+ display: flex;
+ flex-direction: row;
+ column-gap: 0.8rem;
+ padding: 0.5rem;
+  
+}
+
+.circleShape {
+  background-color: #019da4;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+.message {
+    font-family: Roboto;
+font-size: 16px;
+font-weight: 500;
+line-height: 18.75px;
+text-align: left;
+
+  }

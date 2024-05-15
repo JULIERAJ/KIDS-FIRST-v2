@@ -180,7 +180,8 @@ const PendingEvents = () => {
     ];
    
     return (
-        <div className="pending-events">
+        // <div className="pending-events">
+        <div>
             <div className="left-column">
                 <h5>Pending Events</h5>
                 <p>Events shared to you by your ex-partner</p>
