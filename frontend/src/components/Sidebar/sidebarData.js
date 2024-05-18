@@ -1,7 +1,7 @@
 
 export const SIDEBAR_DATA = [
   {
-    title: 'Dashboard',
+    title: 'Home',
     icon: <span className="material-symbols-rounded home "
       style={{ 'font-size': '32px' }}>home</span>,
     activeIcon:<span className="material-symbols-rounded home "
