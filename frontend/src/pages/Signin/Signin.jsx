@@ -1,15 +1,11 @@
-/* eslint-disable no-console */
-import './Signin.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import {
-  FacebookLoginButton,
-  GoogleLoginButton,
-} from 'react-social-login-buttons';
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+
+import './Signin.css';
 
 import { login, loginFacebook, loginSocial } from '../../api';
 import FatherSonBlock from '../../components/FatherSonBlock';
@@ -20,6 +16,7 @@ import MessageBar from '../../components/MessageBar';
 import TextLink from '../../components/TextLink';
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
+import { EMAIL_REG_EXP } from '../../utils/index';
 
 const HeaderLink = (
   <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />
@@ -28,60 +25,67 @@ const HeaderLink = (
 export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errMsg, setErrMsg] = useState('');
-  const [success, setSuccess] = useState();
-  const [errMsgSocial, setErrMsgSocial] = useState('');
-  const [successSo, setSuccessSo] = useState(true);
-
-  useEffect(() => {
-    setSuccess(true);
-  }, [email, password]);
+  const [errorMesasage, setErrorMesasage] = useState('');
+  const [isEmailCorrect, setIsEmailCorrect] = useState();
 
   function handleLogin(e) {
     e.preventDefault();
 
-    login(email, password)
-      .then((res) => {
-        setSuccess(true);
-        const user = JSON.stringify(res.data);
-        localStorage.setItem('storedUser', user);
-        window.location.href = '/member';
-      })
-      .catch(() => {
-        setSuccess(false);
-        setErrMsg(
-          `Your email address or password is incorrect. 
-          Please try again, or click "Forgot your password"`
-        );
-      });
+    if(isEmailCorrect) {
+      login(email, password)
+        .then((res) => {
+          const user = JSON.stringify(res.data);
+
+          localStorage.setItem('storedUser', user);
+          window.location.href = '/member';
+        })
+        .catch(({ response }) => {
+          if(response.status === 404) {
+            setErrorMesasage('This account doesn\'t exist. Please enter a different email address or try "Sign Up".');
+          } if(response.status === 401) {
+            setErrorMesasage('Incorrect email or password! Please try again or use "Change Password".');
+          }
+        });
+    }
   }
+
+  const handleEmailInputBlure = () => {
+    if(email !== '') {
+      const isCorrectEmail = EMAIL_REG_EXP.test(email);
+
+      setIsEmailCorrect(isCorrectEmail);
+      
+      if(!isCorrectEmail) {
+        setErrorMesasage('Email address format is not correct. Please enter the valid email address format.');
+      }
+    }
+  };
 
   const handleFacebookLoginSuccess = (response) => {
     loginFacebook(response.data.accessToken, response.data.userID)
       .then((res) => {
-        setSuccess(true);
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
         window.location.href = '/member';
       })
       .catch(() => {
-        setSuccessSo(false);
-        setErrMsgSocial('Log-in unsuccessful. Please try again later, or sign-up.');
+        setErrorMesasage(
+          'Your email address or password is incorrect. Please try again, or click "Forgot your password"'
+        );
       });
   };
 
   const loginfromGoogle = (response) => {
     loginSocial(response.data.access_token, response.data.email)
       .then((res) => {
-        setSuccessSo(true);
         const user = JSON.stringify(res.data);
+        
         localStorage.setItem('storedUser', user);
         window.location.href = '/member';
         console.groupCollapsed(response.data);
       })
       .catch(() => {
-        setSuccessSo(false);
-        setErrMsgSocial('Log-in unsuccessful. Please try again later, or sign-up.');
+        setErrorMesasage('Log-in unsuccessful. Please try again later, or sign-up.');
       });
   };
 
@@ -93,10 +97,9 @@ export default function Signin() {
           <Form className="py-4" onSubmit={handleLogin}>
             <h1 className="login-title">Log in Kids First</h1>
 
-            {!success && <MessageBar variant="error">{errMsg}</MessageBar>}
-
             <FormEmailInput
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={handleEmailInputBlure}
               value={email}
               required
             />
@@ -114,16 +117,16 @@ export default function Signin() {
             </div>
 
             <Button
-              className="primary-btn w-100 my-5"
-              type="submit"
-              size="lg"
-              variant="light"
-            >
+              className='primary-btn w-100 my-3'
+              type='submit'
+              size='lg'
+              variant='light'>
               Log In
             </Button>
 
+            {errorMesasage && <MessageBar variant="error mt-3 mb-5">{errorMesasage}</MessageBar>}
+
             <div className="or-login-with">Or Log in with</div>
-            {!successSo && <MessageBar variant="error">{errMsgSocial}</MessageBar>}
 
             <Row className="py-5">
               <Col xs={12} md={6}>
