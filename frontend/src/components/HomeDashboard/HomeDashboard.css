@@ -1,144 +1,139 @@
 .dashboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .calendar-overview {
-    margin-bottom: 20px;
-  }
-  
-  .week-events {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .day-event {
-    width: 165px;
-    height: 245px;
-    border: 1px solid #ccc;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-  }
-  
-  .day {
-    font-weight: bold;
-  }
-  
-  .date {
-    margin-top: 5px;
-  }
-  
-  .time {
-    margin-top: 5px;
-  }
-  
-  .title {
-    margin-top: 10px;
-  }
-  
-    /*pending events*/
-    .pending-events {
-      margin-top: 20px;
-    }
-    
-    .two-columns {
-      display: flex;
-      justify-content: space-between;
-      margin: 0;
-    }
-    
-    .left-column,
-    .right-column {
-      width: 48%; 
-    }
-    /*pending Event box size*/
-    .event-boxes,
-    .message-boxes {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 20px;
-      
-    }
-    
-    .event-box,
-    .message-box {
-      background-color: #f2f2f2;
-      padding: 5px;
-      margin-bottom: 5px;
-    }
-  
-    .event-box {
-      width: 555px;
-      height: 78px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
-    }
-    
-    .message-boxes {
-      
-      overflow-y: auto; 
-    }
-    
-    .message-box {
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
-    }
-  
-  /*pending event*/
-  /*.pending-events {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-overview {
+  margin-bottom: 20px;
+}
+
+.week-events {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day-event {
+  width: 165px;
+  height: 245px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.day {
+  font-weight: bold;
+}
+
+.date {
+  margin-top: 5px;
+}
+
+.time {
+  margin-top: 5px;
+}
+
+.title {
+  margin-top: 10px;
+}
+
+/*pending events*/
+.pending-events {
+  margin-top: 20px;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.left-column,
+.right-column {
+  width: 48%;
+}
+/*pending Event box size*/
+.event-boxes,
+.message-boxes {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.event-box,
+.message-box {
+  background-color: #f2f2f2;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.event-box {
+  width: 555px;
+  height: 78px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.message-boxes {
+  overflow-y: auto;
+}
+
+.message-box {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/*pending event*/
+/*.pending-events {
     width: 601px;
     height: 353px;
     border: 1px solid #ccc;
     padding: 10px;
   }*/
-  
-  .two-columns {
-    display: flex;
-  }
-  
-  .left-column, .right-column {
-    width: 555px; 
-    height: 353px; 
-  }
-  
-  
-  .pending-events {
-    width: 1202px; 
-    height: 555px;
-    display: flex; 
-  }
-  
-  .left-column,
-  .right-column {
-    width: 601px;
-    height: 353px;
-    padding: 10px;
-  }
-  
-  .event-boxes {
-    display: flex;
-    flex-direction: column;
-  }
 
-  .modal-event {
+.two-columns {
+  display: flex;
+}
 
-/* Group 1000006325 */
+.left-column,
+.right-column {
+  width: 555px;
+  height: 353px;
+}
 
-position: absolute;
-width: 404px;
-height: 309px;
-left: 0px;
-top: 0px;
+.pending-events {
+  width: 1202px;
+  height: 555px;
+  display: flex;
+}
 
- 
+.left-column,
+.right-column {
+  width: 601px;
+  height: 353px;
+  padding: 10px;
+}
+
+.event-boxes {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-event {
+  /* Group 1000006325 */
+
+  position: absolute;
+  width: 404px;
+  height: 309px;
+  left: 0px;
+  top: 0px;
 }
 
 .day {
@@ -151,25 +146,22 @@ top: 0px;
 
 /* Apply color for today's date */
 .day-header .weekday.today {
-  color: #EB7005;
+  color: #eb7005;
   font-weight: bold;
 }
 
 .day-header .day.today {
-  color: #EB7005;
+  color: #eb7005;
   font-weight: bold;
 }
 
-  .rbc-header {
+.rbc-header {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80px;
-
- 
 }
 
- 
 /* date identity for today : Straight cyan horizontal line */
 .rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::before {
   content: '';
@@ -177,9 +169,9 @@ top: 0px;
   top: 50%;
   right: -100px;
   transform: translateY(-50%);
-  width: 100px; 
-  height: 2px; 
-  background-color: #34BDC3;
+  width: 100px;
+  height: 2px;
+  background-color: #34bdc3;
 }
 
 /* Adjust the styles for time slots */
@@ -193,8 +185,11 @@ top: 0px;
   margin-top: -10px;
 }
 
-
 .rbc-time-gutter.rbc-time-column {
-  padding-right: 20px
+  padding-right: 20px;
 }
 
+.week-event {
+  margin-top: 30px;
+  margin-left: 150px;
+}

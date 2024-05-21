@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaCircle } from 'react-icons/fa6';
 
@@ -7,6 +7,7 @@ import { FaCircle } from 'react-icons/fa6';
 const customStyles = {
   yellow: {
     backgroundColor: '#ffeb3b', // or any yellow you like
+    color: 'black', // default text color for non-Saturday yellow cards
   },
   red: {
     backgroundColor: '#f44336', // or any red you like
@@ -15,89 +16,89 @@ const customStyles = {
     backgroundColor: '#9c27b0', // or any purple you like
   },
   grey: {
-    backgroundColor: '#D3D3D3 ', // Bootstrap grey
+    backgroundColor: '#D3D3D3', // Bootstrap grey
   },
   orange: {
     backgroundColor: '#fd7e14', // or any orange you like
+    color: 'white', // white text color for Saturday
   },
 };
 
-const DayCard = ({ day, date, events }) => {
-  const headerColor = day === 'Sat' ? customStyles.orange : customStyles.grey;
+const DayCard = ({ day, date, events, isToday }) => {
+  const headerColor = isToday ? customStyles.orange : customStyles.grey;
+  const textColor = isToday ? 'white' : 'black';
 
   return (
-    <>
-      <Card
+    <Card
+      style={{
+        borderRadius: '24px',
+        marginTop: '10px',
+        width: '170px',
+        height: '245px',
+      }}
+    >
+      <Card.Header
+        className="text-center"
         style={{
-          borderRadius: '24px',
-          marginTop: '10px',
+          ...headerColor,
+          borderTopLeftRadius: '24px',
+          borderTopRightRadius: '24px',
+          height: '60.6px',
           width: '170px',
-          height: '245px',
         }}
       >
-        <Card.Header
-          className=" text-center"
+        <div
           style={{
-            ...headerColor,
-            borderTopLeftRadius: '24px',
-            borderTopRightRadius: '24px',
-            height: '60.6px',
-            width: '170px',
+            fontSize: '22px',
+            fontWeight: '600',
+            lineHeight: '25.78px',
+            color: textColor, // text color for today and other days
           }}
         >
-          <div
-            style={{
-              fontSize: '22px',
-              fontWeight: '600',
-
-              lineHeight: '25.78px',
-            }}
-          >
-            {day}
-          </div>
-          <div
-            style={{
-              fontSize: '18px',
-              fontWeight: '400',
-
-              lineHeight: '21.09px',
-            }}
-          >
-            {date}
-          </div>
-        </Card.Header>
-        <Card.Body>
-          {events.map((event, index) => (
-            <div key={index} className="d-flex">
-              <FaCircle
-                style={{ width: '10.8px', height: '11px' }}
-                color={event.color}
-                className="me-2 mt-1 align-self-start"
-              />
-              <div>
-                <div
-                  style={{
-                    fontSize: '14px',
-                    color: 'gray',
-                    fontWeight: '200',
-                  }}
-                >
-                  {event.time}
-                </div>
-                <div
-                  style={{
-                    fontSize: '16px',
-                    fontWeight: '400',
-                  }}
-                >
-                  {event.title}
-                </div>
+          {day}
+        </div>
+        <div
+          style={{
+            fontSize: '18px',
+            fontWeight: '400',
+            lineHeight: '21.09px',
+            color: textColor, // text color for today and other days
+          }}
+        >
+          {date}
+        </div>
+      </Card.Header>
+      <Card.Body>
+        {events.map((event, index) => (
+          <div key={index} className="d-flex">
+            <FaCircle
+              style={{ width: '10.8px', height: '11px' }}
+              color={event.color}
+              className="me-2 mt-1 align-self-start"
+            />
+            <div>
+              <div
+                style={{
+                  fontSize: '14px',
+                  color: 'gray',
+                  fontWeight: '200',
+                }}
+              >
+                {event.time}
+              </div>
+              <div
+                style={{
+                  fontSize: '16px',
+                  fontWeight: '400',
+                }}
+              >
+                {event.title}
               </div>
             </div>
-          ))}
-        </Card.Body>
-      </Card>
-    </>
+          </div>
+        ))}
+      </Card.Body>
+    </Card>
   );
 };
 
@@ -133,7 +134,7 @@ export default function WeeksOverview() {
         {
           time: '12:00 - 02:00 PM',
           title: 'Play Rehearsal',
-          color: ' #FAE3AA     ',
+          color: '#FAE3AA',
         },
       ],
     },
@@ -143,7 +144,7 @@ export default function WeeksOverview() {
       events: [
         { time: '08:00 - 11:00 AM', title: 'Field Trip', color: '#FF6B6D' },
       ],
-    }, // An empty events array
+    },
     {
       day: 'Fri',
       date: 'Nov 06',
@@ -157,7 +158,7 @@ export default function WeeksOverview() {
     },
     {
       day: 'Sat',
-      date: 'Nov 06',
+      date: 'Nov 07',
       events: [
         {
           time: '12:30 - 01:30 PM',
@@ -166,25 +167,35 @@ export default function WeeksOverview() {
         },
       ],
     },
-    {
-      day: 'Sun',
-      date: 'Nov 06',
-      events: [
-        {
-          time: '12:30 - 01:30 PM',
-          title: 'Soccer Practice',
-          color: '#FF6B6D',
-        },
-      ],
-    },
-    // ... and so on for the rest of the days
   ];
+
+  const today = new Date();
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    weekday: 'short',
+    day: '2-digit',
+    month: 'short',
+  });
+  const formattedDate = formatter.format(today).replace(/,/g, '');
+  const todayParts = formattedDate.split(' ');
+
+  // Define today's events
+  const todayEvents = [
+    { time: '08:00 - 11:00 AM', title: 'Field Trip', color: '#FF6B6D' },
+  ];
+
+  // Add today's date to the days array
+  days.unshift({
+    day: todayParts[0],
+    date: `${todayParts[1]} ${todayParts[2]}`,
+    events: todayEvents,
+  });
+
   return (
-    <Container className="mt-4">
+    <div className="week-event">
       <div>
         <h5
           style={{
-            font: 'Roboto',
+            fontFamily: 'Roboto',
             fontWeight: '500',
             fontSize: '16px',
             lineHeight: '18.75px',
@@ -195,10 +206,9 @@ export default function WeeksOverview() {
       </div>
 
       <div>
-        {' '}
         <p
           style={{
-            font: 'Roboto',
+            fontFamily: 'Roboto',
             fontWeight: '300',
             fontSize: '16px',
             lineHeight: '18.75px',
@@ -210,12 +220,15 @@ export default function WeeksOverview() {
       <Row className="flex-nowrap" style={{ overflowX: 'auto' }}>
         {days.map((day, index) => (
           <Col key={index} style={{ flex: 1, minWidth: '160px' }}>
-            {' '}
-            {/* Minimum width can be adjusted */}
-            <DayCard day={day.day} date={day.date} events={day.events} />
+            <DayCard
+              day={day.day}
+              date={day.date}
+              events={day.events}
+              isToday={index === 0} // today is always the first element in the array
+            />
           </Col>
         ))}
       </Row>
-    </Container>
+    </div>
   );
 }
