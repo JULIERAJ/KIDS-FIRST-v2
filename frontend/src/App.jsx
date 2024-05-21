@@ -6,7 +6,7 @@ import EventModal from './components/EventModal/EventModal';
 import LandingLayout from './components/LandingLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
 // import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
@@ -32,7 +32,7 @@ const App = () => (
           element={<Activate />}
         />
         {/* <Route path='/family' element={<Family />} /> */}
-        <Route path='/member' element={<FinalPanel />} /> 
+        <Route path='/member' element={<FinalPanel />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/calendarview' element={<EventProvider><KFCalendar /></EventProvider>} />
         <Route path='/forgot-password' element={<ForgetPassword />} />

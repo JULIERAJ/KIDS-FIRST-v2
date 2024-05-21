@@ -6,8 +6,8 @@ const API_PORT = process.env.REACT_APP_API_PORT;
 const API_URL = `http://localhost:${API_PORT}/api/`;
 
 /*
-if signed in successfully, go to the 'families' page to select family 
-then go to dashboard need to store user information in the session 
+if signed in successfully, go to the 'families' page to select family
+then go to dashboard need to store user information in the session
 */
 export const login = (email, password) => axios.post(`${API_URL}login`, { email, password });
 
@@ -57,6 +57,4 @@ export const resetPassword = (email, password, resetPasswordToken) =>
     password,
     resetPasswordToken,
   });
-
-export const resendEmailVerification = (email) =>
-  axios.post(`${API_URL}resend-email`, { email });
+export const resendEmailVerification = (email) => axios.post(`${API_URL}resend-email`, { email });

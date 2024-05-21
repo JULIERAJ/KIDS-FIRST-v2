@@ -6,7 +6,9 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 import {
   GoogleLoginButton,
@@ -23,24 +25,28 @@ import FormPasswordInput from '../../components/form/FormPasswordInput';
 
 import IconText from '../../components/IconText';
 import MessageBar from '../../components/MessageBar';
+
+import facebookIcon from '../../media/icons/facebook.png';
+import googleIcon from '../../media/icons/google.png';
 //import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
 const regexUpperCase = /[A-Z]/;
 const regexLowerCase = /[a-z]/;
 const regexNumber = /\d/;
 const regexSpecialChar = /[!@#$%^&*()_+=[\]{};':"\\|,.<>?-]/;
-const regexLength = /^.{8,25}$/;
+const regexLength = /^.{8,40}$/;
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
   const [errorMessage, setErrorMessage] = useState('');
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State to toggle password visibility
+  const [errMsgSocial, setErrMsgSocial] = useState('');//state for login from google and FB
+  const [successSo, setSuccessSo] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [errMsg, setErrMsg] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -60,10 +66,6 @@ export const RegisterForm = (props) => {
   // State variable to manage the disabled state
   const [isDisabled, setIsDisabled] = useState(true);
 
-  // Function to toggle the disabled state
-  const toggleDisabled = () => {
-    setIsDisabled(!isDisabled);
-  };
   // Effect hook to handle errors received from the backend
   useEffect(() => {
     if (props.errorMessage) {
@@ -73,6 +75,13 @@ export const RegisterForm = (props) => {
   // Event handler for email change
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address.');
+      setIsDisabled(true);
+    } else {
+      setEmailError('');
+      setIsDisabled(false);
+    }
   };
   // Event handler for password change
   const handlePasswordChange = (e) => {
@@ -94,21 +103,15 @@ export const RegisterForm = (props) => {
     setPasswordListVisible(false);
     setPasswordMatchError('');
   };
-  // Event handler for handling email blur
-  const handleEmailBlur = () => {
-    if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
-    } else {
-      setEmailError('');
-      toggleDisabled();
-    }
-  };
+
   // Function to validate email format
   const validateEmail = (emailValue) => {
     return regexEmail.test(emailValue);
   };
   // Function to validate all password errors
-  const allPasswordErrorsChecked = Object.values(passwordErrors).every((error) => !error);
+  const allPasswordErrorsChecked = Object.values(passwordErrors).every(
+    (error) => !error
+  );
   // Function to validate password format
   const validatePassword = (passwordValue) => {
     const errors = {
@@ -122,47 +125,47 @@ export const RegisterForm = (props) => {
   };
   // Function to validate password confirmation
   const validateConfirmPassword = (confirmPasswordValue) => {
-    setPasswordMatchError(confirmPasswordValue !== password ? 'Passwords do not match.' : '');
+    setPasswordMatchError(
+      confirmPasswordValue !== password ? 'Passwords do not match.' : ''
+    );
   };
   // Event handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     // Perform form submission if all validations pass
-    if (
-      !emailError &&
-      allPasswordErrorsChecked &&
-      !passwordMatchError
-    ) {
+    if (!emailError && allPasswordErrorsChecked && !passwordMatchError) {
       props.onSubmitData(email, password);
     }
   };
 
   const loginfromGoogle = (response) => {
+    setErrMsgSocial(
+      'Log-in unsuccessful. Please try again later, or sign-up.'
+    );
     loginSocial(response.data.access_token, response.data.email)
       .then((res) => {
-        setSuccess(true);
+        setSuccessSo(true);
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
         window.location.href = '/member';
       })
       .catch(() => {
-        setSuccess(false);
+        setSuccessSo(false);
       });
   };
 
   const handleFacebookLoginSuccess = (response) => {
     loginFacebook(response.data.accessToken, response.data.userID)
       .then((res) => {
-        setSuccess(true);
+        setSuccessSo(true);
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
         window.location.href = '/member';
       })
       .catch(() => {
-        setSuccess(false);
-        setErrMsg(
-          `Your email address or password is incorrect. 
-        Please try again, or click "Forgot your password"`
+        setSuccessSo(false);
+        setErrMsgSocial(
+          'Log-in unsuccessful. Please try again later, or sign-up.'
         );
       });
   };
@@ -170,20 +173,15 @@ export const RegisterForm = (props) => {
   return (
     <>
       <Form
-        className="py-4"
+        className='py-4'
         onSubmit={handleSubmit}
         noValidate
       // validated={validated}
       >
-        {errorMessage && (
-          <MessageBar variant="error">{errorMessage}</MessageBar>
-        )}
-
         <FormEmailInput
-          autoComplete="off"
+          autoComplete='off'
           required
           onChange={handleEmailChange}
-          onBlur={handleEmailBlur}
           defaultValue={email}
         />
         <FormPasswordInput
@@ -210,10 +208,10 @@ export const RegisterForm = (props) => {
           disabled={isDisabled}
         />
         <Button
-          className="primary-btn w-100 my-5"
-          type="submit"
-          size="lg"
-          variant="light"
+          className='primary-btn w-100 my-5'
+          type='submit'
+          size='lg'
+          variant='light'
         >
           Sign up
         </Button>
@@ -221,65 +219,74 @@ export const RegisterForm = (props) => {
         {passwordListVisible && (
           <MessageBar variant={allPasswordErrorsChecked ? 'success' : 'error'}>
             <IconText
-              title="At least 1 uppercase character"
+              title='At least 1 uppercase character'
               clear={passwordErrors.uppercase}
             />
             <IconText
-              title="At least 1 lowercase character"
+              title='At least 1 lowercase character'
               clear={passwordErrors.lowercase}
             />
-            <IconText title="At least 1 number" clear={passwordErrors.number} />
+            <IconText title='At least 1 number' clear={passwordErrors.number} />
             <IconText
-              title="At least 1 special character ()"
+              title='At least 1 special character'
               clear={passwordErrors.special}
             />
             <IconText
-              title="Between 8-25 characters"
+              title='Between 8-40 characters'
               clear={passwordErrors.length}
             />
           </MessageBar>
         )}
-
+        {!successSo && <MessageBar variant="error">{errMsgSocial}</MessageBar>}
         {errorMessage && (
-          <MessageBar variant="error">{errorMessage}</MessageBar>
+          <MessageBar variant='error'>{errorMessage}</MessageBar>
         )}
-        {emailError && (
-          <MessageBar variant="error">{emailError}</MessageBar>
-        )}
+        {emailError && <MessageBar variant='error'>{emailError}</MessageBar>}
         {passwordMatchError && (
-          <MessageBar variant="error">{passwordMatchError}</MessageBar>
+          <MessageBar variant='error'>{passwordMatchError}</MessageBar>
         )}
         <div className={styles.signUpText}>Or sign up with</div>
 
-        <LoginSocialFacebook
-          appId={process.env.APP_ID}
-          onResolve={(response) => {
-            handleFacebookLoginSuccess(response);
-            console.log(response);
-          }}
-          onReject={(error) => {
-            // handleFacebookLoginFailure(error);
-            console.log(error);
-          }}
-        >
-          <FacebookLoginButton />
-          {/* <FacebookLoginButton onClick={() => alert('Hello')} /> */}
-        </LoginSocialFacebook>
-        <div> &nbsp; </div>
-        <LoginSocialGoogle
-          client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
-          onResolve={loginfromGoogle}
-          onReject={(err) => {
-            setErrMsg(
-              `You are not able to login with Google.
+        <Row className="py-5">
+          <Col xs={12} md={6}>
+            <LoginSocialGoogle
+              client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
+              onResolve={loginfromGoogle}
+              onReject={(err) => {
+                setErrMsg(
+                  `You are not able to login with Google.
                    Please try again later`
-            );
-            console.log(err);
-          }}
-        >
-          <GoogleLoginButton />
-        </LoginSocialGoogle>
-        {/*<SocialButtonsGroup />*/}
+                );
+                console.log(err);
+              }}
+            >
+
+              <GoogleLoginButton title="Google" align={'center'} icon={''} size='45px'
+                className="tertiary-btn w-100">
+                <img src={googleIcon} width="25" height="25" alt="" />{' '}Google
+              </GoogleLoginButton>
+            </LoginSocialGoogle>
+          </Col>
+          <Col xs={12} md={6}>
+            <LoginSocialFacebook
+              appId={process.env.APP_ID}
+              onResolve={(response) => {
+                handleFacebookLoginSuccess(response);
+                console.log(response);
+              }}
+              onReject={(error) => {
+                // handleFacebookLoginFailure(error);
+                console.log(error);
+              }}
+            >
+              <FacebookLoginButton title="Facebook" align={'center'} icon={''} size='45px'
+                className="tertiary-btn w-100">
+                <img src={facebookIcon} width="25" height="25" alt="" /> {' '}Facebook
+              </FacebookLoginButton>
+            </LoginSocialFacebook>
+          </Col>
+
+        </Row>
       </Form>
     </>
   );

@@ -3,6 +3,11 @@
 // import Button from 'react-bootstrap/Button';
 // import Form from 'react-bootstrap/Form';
 
+import styles from './Dashboard.module.css';
+
+import DashboardHeader from '../../components/DashboardHeader/DashboardHeader';
+import Sidebar from '../../components/Sidebar/Sidebar';
+
 // import { sendInvitation } from '../api';
 
 // export default function Dashboard() {
@@ -26,7 +31,7 @@
 //       invitationUrl: invitationUrl,
 //     })
 //       .then(() => {
-//         // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', 
+//         // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID',
 //         // form.current, 'YOUR_PUBLIC_KEY')
 //         sendForm(
 //           'service_60w5krl',
@@ -90,3 +95,13 @@
 //     </div>
 //   );
 // }
+
+export default function Dashboard() {
+
+  return (
+    <div className={styles.dashboard}>
+      <Sidebar/>
+      <DashboardHeader/>
+    </div>
+  );
+}
