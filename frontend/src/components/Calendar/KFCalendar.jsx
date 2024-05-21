@@ -16,6 +16,39 @@ const KFCalendar = () => {
   const { filteredEventsData } = useContext(EventContext);
   const [activeView, setActiveView] = useState('month'); // State to manage active view
 
+  const getMaxOverlaps = (event, events) => {
+    let maxOverlaps = 1; // Assume at least the event itself
+    const eventStart = new Date(event.start).getTime();
+    const eventEnd = new Date(event.end).getTime();
+    // eslint-disable-next-line no-console
+    console.log('events: ', events);
+    events.forEach(otherEvent => {
+
+      if (event.id !== otherEvent.id) {
+        const otherStart = new Date(otherEvent.start).getTime();
+        const otherEnd = new Date(otherEvent.end).getTime();
+
+        if ((otherStart < eventEnd && otherEnd > eventStart) || (eventStart < otherEnd && eventEnd > otherStart)) {
+          maxOverlaps++;
+        }
+      }
+    });
+
+    return maxOverlaps;
+  };
+
+  const eventStyleGetter = (event) => {
+    const overlaps = getMaxOverlaps(event, filteredEventsData);
+    const width = 100 / overlaps; // Divide 100% by the number of overlapping events
+    // eslint-disable-next-line no-console
+    console.log('width is : ', width);
+    return {
+      style: {
+        width: `${width}% !important`
+      }
+    };
+  };
+
   const handleViewChange = (view) => {
     setActiveView(view); // Update active view state
   };
@@ -47,6 +80,7 @@ const KFCalendar = () => {
         defaultDate={defaultDate}
         onView={handleViewChange}
         popup={true}
+        eventPropGetter={eventStyleGetter}
       />
     </div>
   );

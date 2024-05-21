@@ -43,9 +43,7 @@ const WeekEvent = ({ event }) => {
     lineHeight: '18.75px',
     textAlign: 'left',
     marginLeft: '0px',
-    position: 'absolute',
-    top: '-8px',
-    marginTop: '30px',
+    marginTop: '22px',
     marginBottom: '0px'
   };
 
@@ -61,8 +59,6 @@ const WeekEvent = ({ event }) => {
     opacity: '0.4',
     fontWeight: 200,
     lineHeight: '40px',
-    marginTop: '35px',
-    marginLeft: '10px',
     marginRight: '5px',
   };
 
@@ -70,7 +66,6 @@ const WeekEvent = ({ event }) => {
     backgroundColor: `${color}4D`,
     borderLeft: `5px solid ${color}`,
     height: '100%',
-    width: '100%',
     alignItems: 'center',
     position: 'relative',
     top: 0,
@@ -83,12 +78,10 @@ const WeekEvent = ({ event }) => {
   // eslint-disable-next-line no-unused-vars
   const formatEventTime = (startDate, endDate) => {
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
-    const dateOptions = { weekday: 'short', day: '2-digit', month: 'short' };
     const startTime = startDate.toLocaleTimeString('en-GB', timeOptions);
     const endTime = endDate.toLocaleTimeString('en-GB', timeOptions);
-    const date = startDate.toLocaleDateString('en-GB', dateOptions);
 
-    return `${startTime} - ${endTime} ${date}`;
+    return `${startTime} - ${endTime}`;
   };
   return (
     <div className="event-box" style={boxStyle}>

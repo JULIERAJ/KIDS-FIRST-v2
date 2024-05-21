@@ -180,7 +180,7 @@
 
 .event-box {
   display: block !important;
-  width: 60%;
+  /* width: 60%; */
   border-radius: 10px;
 }
 

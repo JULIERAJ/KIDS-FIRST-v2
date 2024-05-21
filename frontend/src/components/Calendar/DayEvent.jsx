@@ -74,6 +74,7 @@ export const DayEvent = ({ event }) => {
     backgroundColor: `${color}4D`,
     borderLeft: `5px solid ${color}`,
     height: '100%',
+    width: '100%',
     alignItems: 'center',
     position: 'relative',
     top: 0,
