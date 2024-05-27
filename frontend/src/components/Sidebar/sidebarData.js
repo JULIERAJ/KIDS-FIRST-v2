@@ -111,7 +111,7 @@ export const SIDEBAR_DATA = [
         'font-size': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>settings</span>,
-    path: '/settings',
+    path: '/dashboard/settings',
     alt: 'settings-icon',
   },
   {
@@ -130,7 +130,7 @@ export const SIDEBAR_DATA = [
         'font-size': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>help</span>,
-    path: '/help',
+    path: '/dashboard/help',
     alt: 'help-icon',
   },
 ];
