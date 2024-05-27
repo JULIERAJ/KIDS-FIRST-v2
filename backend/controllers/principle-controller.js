@@ -6,7 +6,6 @@ const fetch = require('node-fetch');
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
-const { response } = require('express');
 
 require('dotenv').config({ path: './.env.local' });
 // 1 upper/lower case letter, 1 number, 1 special symbol

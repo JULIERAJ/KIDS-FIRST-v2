@@ -66,7 +66,7 @@ const KFCalendar = () => {
   }), [activeView]);
 
   return (
-    <div style={{ height: '100vh' }}>
+    <div style={{ height: 'calc(100vh - 104px)' }}>
       <Calendar
         events={filteredEventsData}
         step={15}

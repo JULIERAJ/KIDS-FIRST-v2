@@ -35,7 +35,7 @@ export const SIDEBAR_DATA = [
         'font-size': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>calendar_month</span>,
-    path: '/calendarview',
+    path: '/dashboard/calendarview',
     alt: 'calendar-icon',
   },
   {
@@ -54,7 +54,7 @@ export const SIDEBAR_DATA = [
         'font-size': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>chat</span>,
-    path: '/messages',
+    path: '/dashboard/messages',
     alt: 'messages-icon',
   },
   {
@@ -73,7 +73,7 @@ export const SIDEBAR_DATA = [
         'font-size': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>photo_library</span>,
-    path: '/album',
+    path: '/dashboard/album',
     alt: 'album-icon',
   },
   {
@@ -92,7 +92,7 @@ export const SIDEBAR_DATA = [
         'font-size': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>face</span>,
-    path: '/kids',
+    path: '/dashboard/kids',
     alt: 'kids-icon',
   },
   {

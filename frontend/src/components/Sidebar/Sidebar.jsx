@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Image, Container, Nav, Navbar } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Sidebar.module.css';
 import { SIDEBAR_DATA } from './sidebarData';
@@ -22,24 +23,25 @@ const SidebarItemsCard = ({ title, icon, activeIcon, hoverIcon, path, isActive, 
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}>
           {isActive ? activeIcon : (isHovered ? hoverIcon : icon)}
-          <Nav.Link
+          <NavLink
             eventKey='link-1'
             to={path}
             className={styles.sidebarLink}
             onClick={handleClick}>
             {title}
-          </Nav.Link>
+          </NavLink>
         </Nav.Item>
       </Nav>
     </>
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ setTitle }) => {
   const [activeLink, setActiveLink] = useState(null);
 
-  const handleClick = (path) => {
+  const handleClick = (path, title) => {
     setActiveLink(path);
+    setTitle(title);
   };
 
   // Separate sidebar items into two arrays: one for "Settings" and "Help", and the other for all others
@@ -58,7 +60,7 @@ const Sidebar = () => {
             {otherItems.map((item, key) => (
               <SidebarItemsCard key={key} {...item}
                 isActive={item.path === activeLink}
-                onClick={() => handleClick(item.path)}
+                onClick={() => handleClick(item.path, item.title)}
               />
             ))}
           </div>
@@ -68,7 +70,7 @@ const Sidebar = () => {
             {settingsHelpItems.map((item, key) => (
               <SidebarItemsCard key={key} {...item}
                 isActive={item.path === activeLink}
-                onClick={() => handleClick(item.path)}
+                onClick={() => handleClick(item.path, item.title)}
               />
             ))}
           </div>
@@ -87,6 +89,10 @@ SidebarItemsCard.propTypes = {
   alt: PropTypes.string,
   onClick: PropTypes.func,
   isActive: PropTypes.bool
+};
+
+Sidebar.propTypes = {
+  setTitle: PropTypes.func
 };
 
 export default Sidebar;

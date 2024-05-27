@@ -4,7 +4,6 @@ import { EventProvider } from './components/Calendar/EventContext';
 import KFCalendar from './components/Calendar/KFCalendar';
 import EventModal from './components/EventModal/EventModal';
 import LandingLayout from './components/LandingLayout';
-import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard/Dashboard';
 // import Family from './pages/Family';
@@ -33,14 +32,16 @@ const App = () => (
         />
         {/* <Route path='/family' element={<Family />} /> */}
         <Route path='/member' element={<FinalPanel />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/calendarview' element={<EventProvider><KFCalendar /></EventProvider>} />
+
+        <Route path="/dashboard/*" element={<Dashboard />}>
+          <Route path="calendarview" element={<EventProvider><KFCalendar /></EventProvider>} />
+        </Route>
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route
           path='/reset-password/:email/:resetPasswordToken'
           element={<ResetPassword />}
         />
-        <Route path='/sidebar' element={<Sidebar />} />
+
         <Route path="/eventmodal" element={<EventModal />} />
       </Route>
     </Routes>
