@@ -16,7 +16,7 @@ export const SIDEBAR_DATA = [
         'font-size': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>home</span>,
-    path: '/dashboard',
+    path: '/dashboard/homedashboard',
     alt: 'dashboard-icon',
   },
   {

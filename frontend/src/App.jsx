@@ -39,6 +39,7 @@ const App = () => (
 
         <Route path="/dashboard/*" element={<Dashboard />}>
           <Route path="calendarview" element={<EventProvider><KFCalendar /></EventProvider>} />
+          <Route path='homedashboard' element={<HomeDashboard />} />
         </Route>
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route
@@ -47,7 +48,7 @@ const App = () => (
         />
 
         <Route path="/eventmodal" element={<EventModal />} />
-        <Route path='/homedashboard' element={<HomeDashboard />} />
+
          </Route>
     </Routes>
   </BrowserRouter>
