@@ -91,7 +91,7 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
             </button>
           </div>
           {/* Create button */}
-          <button onClick={() => { openModal(); handleCreateButtonClick; }} className="createButton">
+          <button onClick={() => { openModal(); handleCreateButtonClick(); }} className="createButton">
             Create&nbsp;
             <div style={{ width: '8px', height: '8px', marginBottom: '20px' }}>
               <FiPlus />
