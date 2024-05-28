@@ -1,11 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
 import { EventProvider } from './components/Calendar/EventContext';
 import KFCalendar from './components/Calendar/KFCalendar';
 import EventModal from './components/EventModal/EventModal';
+
+import HomeDashboard from './components/HomeDashboard/HomeDashboard';
 import LandingLayout from './components/LandingLayout';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard/Dashboard';
+
 // import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
@@ -43,7 +47,8 @@ const App = () => (
         />
 
         <Route path="/eventmodal" element={<EventModal />} />
-      </Route>
+        <Route path='/homedashboard' element={<HomeDashboard />} />
+         </Route>
     </Routes>
   </BrowserRouter>
 );
