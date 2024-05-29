@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
 const emailService = require('../service/email-service');
@@ -10,7 +9,8 @@ require('dotenv').config({ path: './.env.local' });
 
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,40}$/;
+const passwordRegExp =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,40}$/;
 const emailRegExp = /^\S+@\S+\.\S+$/;
 
 const jwtOptions = {
@@ -75,7 +75,8 @@ const accountActivation = async (req, res) => {
       });
     }
 
-    const activationTokenVerified = await principleService.emailTokenVerification(activationToken);
+    const activationTokenVerified =
+      await principleService.emailTokenVerification(activationToken);
 
     if (!activationTokenVerified) {
       return res
@@ -87,7 +88,10 @@ const accountActivation = async (req, res) => {
       // autogenerate family name and save it in db
       const familyName = familyService.generateFamilyName();
 
-      const familyNameRegistartion = await familyService.familyRegistration(familyName, principleData._id);
+      const familyNameRegistartion = await familyService.familyRegistration(
+        familyName,
+        principleData._id
+      );
 
       return res.status(200).json({
         message: 'the account is successfully activated',
@@ -118,15 +122,19 @@ const resendActivationEmail = async (req, res) => {
     const emailVerificationToken = await jwt.sign(
       { email },
       process.env.JWT_EMAIL_VERIFICATION_SECRET,
-      { expiresIn: '1h' },
+      { expiresIn: '1h' }
     );
 
     // Send the activation email with the generated token
     await emailService.sendActivationEmail(email, emailVerificationToken);
 
-    return res.status(200).json({ message: 'Activation email resent successfully' });
+    return res
+      .status(200)
+      .json({ message: 'Activation email resent successfully' });
   } catch (e) {
-    return res.status(500).json({ message: 'Internal server error. Please try again later.' });
+    return res
+      .status(500)
+      .json({ message: 'Internal server error. Please try again later.' });
   }
 };
 
@@ -138,24 +146,27 @@ const login = async (req, res) => {
     if (!isEmailCorrect) {
       return res.status(400).json({ error: 'Invalid email address' });
     }
-    
+
     const user = await principleService.findUser(email);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const isPasswordCorrect = password && await principleService.isPasswordCorrect(email, password);
+    const isPasswordCorrect =
+      password && (await principleService.isPasswordCorrect(email, password));
     if (!isPasswordCorrect) {
       return res.status(401).json({ error: 'Password is not correct' });
     }
-       // when the user login, then find that user's family(s), then push the info  to the front
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id);
+    // when the user login, then find that user's family(s), then push the info  to the front
+    const principleFamily = await familyService.findPrincipleFamilyName(
+      user._id
+    );
 
     return res.status(200).json({
       email: user.email,
       id: user._id,
       familyId: principleFamily[0].id,
-      familyName: principleFamily[0].familyName
+      familyName: principleFamily[0].familyName,
     });
   } catch (e) {
     return res.status(500).json({ message: 'Failed to login' });
@@ -218,20 +229,23 @@ const loginSocial = async (req, res) => {
     return res.status(401).json({ error: 'Error fetching data from Google' });
   }
   user = await principleService.findUser(userID);
-   if (!user) {
+  if (!user) {
     function generatePassword() {
-      charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      newPassword = "";
+      charset =
+        '!@#$%^&*()' +
+        '0123456789' +
+        'abcdefghijklmnopqrstuvwxyz' +
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      newPassword = '';
       for (let i = 0; i < 10; i++) {
-        newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
+        newPassword += charset.charAt(
+          Math.floor(Math.random() * charset.length)
+        );
       }
       return newPassword;
-    };
+    }
     let password = generatePassword();
-    user = await principleService.registration(
-      userID,
-      password,
-    );
+    user = await principleService.registration(userID, password);
     principleService.activateAccount(user.email);
   }
 
@@ -240,7 +254,7 @@ const loginSocial = async (req, res) => {
     email: user.email,
     id: user._id,
     familyId: principleFamily.id,
-    familyName: principleFamily.familyName
+    familyName: principleFamily.familyName,
   });
 };
 const requestResetPassword = async (req, res) => {
