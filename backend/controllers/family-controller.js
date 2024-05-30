@@ -1,3 +1,5 @@
+const { StatusCodes } = require('http-status-codes');
+
 const familyService = require('../service/family-service');
 
 const familyRegistration = async (req, res) => {
@@ -14,16 +16,12 @@ const familyRegistration = async (req, res) => {
         familyName,
         principleId
       );
-      return res
-        .status(StatusCodes.CREATED)
-        .json(familyData);
+      return res.status(StatusCodes.CREATED).json(familyData);
     } else {
-      return res
-        .status(StatusCodes.CONFLICT)
-        .json({
-          message: `The family with the name "${familyName}" already exists under this principle.`,
-          // have to think what message to give to a user. 
-          // Family name already exists under this Principle?  
+      return res.status(StatusCodes.CONFLICT).json({
+        message: `The family with the name "${familyName}" already exists under this principle.`,
+        // have to think what message to give to a user.
+        // Family name already exists under this Principle?
       });
     }
   } catch (e) {

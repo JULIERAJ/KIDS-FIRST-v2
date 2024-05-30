@@ -6,25 +6,31 @@ const isDuplicate = async (firstName, lastName, family) => {
   const checkDuplicate = await Member.findOne({
     firstName,
     lastName,
-    family
+    family,
   });
   return checkDuplicate ? true : false;
 };
 
 const memberRegistration = async ({
-  family, 
+  family,
   firstName,
   lastName,
   principle,
   kidsList,
   inviteeEmail,
-  inviteeInviteLater
+  inviteeInviteLater,
 }) => {
   // use helper function on array kidNames to create kid members
   await saveKids(kidsList, family);
   await savePrinciple(firstName, lastName, principle, family);
   // await saveInvitation(principle, family, inviteeEmail);
-  await invitationController.invitation(principle, family, inviteeEmail, firstName, inviteeInviteLater ); 
+  await invitationController.invitation(
+    principle,
+    family,
+    inviteeEmail,
+    firstName,
+    inviteeInviteLater
+  );
 };
 
 const saveKids = async (kidsList, family) => {
@@ -48,7 +54,7 @@ const savePrinciple = async (firstName, lastName, principle, family) => {
     lastName,
     principle,
     family,
-    role: 'parent' 
+    role: 'parent',
   });
   await principleMemberInfo.save();
 };
@@ -56,13 +62,13 @@ const savePrinciple = async (firstName, lastName, principle, family) => {
 // const saveInvitation = async (principle, family, inviteeEmail) => {
 //   try {
 //     const invitationInfo = new Invitation({
-//     inviter : principle, 
-//     family, 
+//     inviter : principle,
+//     family,
 //     inviteeEmail
 //   });
 //   await invitationInfo.save();
 //  } catch (err ){
-//   console.log('invitationInfo error ', err); 
+//   console.log('invitationInfo error ', err);
 // }
 // };
 

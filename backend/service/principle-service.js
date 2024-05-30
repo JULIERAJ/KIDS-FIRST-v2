@@ -74,13 +74,13 @@ const deleteInactiveUsers = async () => {
     // Find users who haven't activated their account and were created more than 1 hour ago
     const inactiveUsers = await Principle.find({
       emailIsActivated: false, // Filter: email is not activated
-      createdAt: { $lt: oneHourAgo } // Filter: created more than 1 hour ago
+      createdAt: { $lt: oneHourAgo }, // Filter: created more than 1 hour ago
     });
-    
+
     // Delete inactive users
     await Promise.all(
       // Map over the array of inactive users and delete each user
-      inactiveUsers.map(async (user) => { 
+      inactiveUsers.map(async (user) => {
         await Principle.findByIdAndDelete(user._id); // Delete user by ID
       })
     );
