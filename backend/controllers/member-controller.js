@@ -20,14 +20,20 @@ const memberRegistration = async (req, res) => {
         inviteeEmail,
         inviteeInviteLater
       });
-      return res.status(201).json(memberData);
+      return res
+        .status(StatusCodes.CREATED)
+        .json(memberData);
     } else {
-      return res.status(409).json({
-        message: `the member ${firstName} ${lastName} already exists`,
+      return res
+        .status(StatusCodes.CONFLICT)
+        .json({
+        message: `The member ${firstName} ${lastName} already exists in the family ${family}.`,
       });
     }
   } catch (e) {
-    return res.status(500).json({ message: 'something went wrong' });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Something went wrong' });
   }
 };
 
