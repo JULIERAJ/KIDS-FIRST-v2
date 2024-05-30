@@ -14,16 +14,22 @@ const familyRegistration = async (req, res) => {
         familyName,
         principleId
       );
-      return res.status(201).json(familyData);
+      return res
+        .status(StatusCodes.CREATED)
+        .json(familyData);
     } else {
-      return res.status(409).json({
-        message: `the family with ${familyName} name already exists`,
-        // have to think what message to give to a user. 
-        // Family name already exists under this Principle?  
+      return res
+        .status(StatusCodes.CONFLICT)
+        .json({
+          message: `The family with the name "${familyName}" already exists under this principle.`,
+          // have to think what message to give to a user. 
+          // Family name already exists under this Principle?  
       });
     }
   } catch (e) {
-    return res.status(500).json({ message: 'something went wrong' });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Something went wrong' });
   }
 };
 

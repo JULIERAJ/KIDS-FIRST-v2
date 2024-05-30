@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const { StatusCodes } = require('http-status-codes');
 const emailService = require('../service/email-service');
 const invitationService = require('../service/invitation-service');
 const principleService = require('../service/principle-service');
@@ -43,10 +43,13 @@ const invitation = async (inviter, family, inviteeEmail, firstName, inviteeInvit
           emailVerificationToken,
           firstName
         );
-        /*return res.status(201).json({
+        /*
+        return {
+          statusCode: StatusCodes.CREATED,
           message: 'Invitation email is sent',
           inviteeEmail: inviteeEmail,
-        });*/ 
+        };
+        */ 
 
         /* eslint-disable no-unused-vars */
         const invitee = await invitationService.createInvitation(
@@ -57,7 +60,10 @@ const invitation = async (inviter, family, inviteeEmail, firstName, inviteeInvit
         );
       }
     } catch (e) {
-      // return res.status(500).json('something went wrong');
+        return {
+        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        message: 'Something went wrong',
+      };
     }
   }
 };
@@ -70,7 +76,9 @@ const invitationAccepted = async (req, res) => {
     const invitation = await invitationService.findInviteeEmail(email);
 
     if (invitation.invitationAccepted === true) {
-      return res.status(200).json({
+      return res
+        .status(StatusCodes.OK)
+        .json({
         message: 'Invitation has been accepted, proceed to registration',
         email: invitation.inviteeEmail,
         invitationAccepted: invitation.invitationAccepted,
@@ -81,18 +89,22 @@ const invitationAccepted = async (req, res) => {
 
     if (!activationTokenVerified) {
       return res
-        .status(400)
+        .status(StatusCodes.BAD_REQUEST)
         .json({ message: 'invitation link is not correct' });
     } else {
       const invitationData = await invitationService.acceptedInvitation(email);
-      return res.status(200).json({
+      return res
+        .status(StatusCodes.OK
+        ).json({
         message: 'the invitation is successfully accepted',
         email: invitationData.inviteeEmail,
         invitationAccepted: invitationData.invitationAccepted,
       });
     }
   } catch (e) {
-    return res.status(500).json({ message: e.message });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: e.message });
   }
 };
 
