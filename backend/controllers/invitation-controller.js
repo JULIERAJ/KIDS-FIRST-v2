@@ -23,7 +23,7 @@ const invitation = async (
         const emailVerificationToken = await jwt.sign(
           { inviteeEmail },
           process.env.JWT_EMAIL_VERIFICATION_SECRET,
-          { expiresIn: '24h' }
+          { expiresIn: process.env.JWT_EMAIL_LIFETIME }
         );
 
         await emailService.sendInvitationEmail(
@@ -44,7 +44,7 @@ const invitation = async (
         const emailVerificationToken = await jwt.sign(
           { inviteeEmail },
           process.env.JWT_EMAIL_VERIFICATION_SECRET,
-          { expiresIn: '24h' }
+          { expiresIn: process.env.JWT_EMAIL_LIFETIME }
         );
 
         const invitationURL = await emailService.sendInvitationEmail(

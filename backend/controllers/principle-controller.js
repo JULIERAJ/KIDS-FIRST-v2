@@ -130,7 +130,7 @@ const resendActivationEmail = async (req, res) => {
     const emailVerificationToken = await jwt.sign(
       { email },
       process.env.JWT_EMAIL_VERIFICATION_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: process.env.JWT_LIFETIME }
     );
 
     // Send the activation email with the generated token
