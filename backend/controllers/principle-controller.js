@@ -1,20 +1,21 @@
+const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
+
 const fetch = require('node-fetch');
+
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
-const { StatusCodes } = require('http-status-codes');
-const { response } = require('express');
+const {
+  generatePassword,
+  passwordRegExp,
+  emailRegExp,
+} = require('../utils/passwordUtils');
 
 require('dotenv').config({ path: './.env.local' });
 
-// 1 upper/lower case letter, 1 number, 1 special symbol
-const passwordRegExp =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,40}$/;
-const emailRegExp = /^\S+@\S+\.\S+$/;
-
 const jwtOptions = {
-  expiresIn: '1h',
+  expiresIn: process.env.JWT_LIFETIME,
 };
 
 const registration = async (req, res) => {
@@ -30,12 +31,11 @@ const registration = async (req, res) => {
     }
 
     if (!passwordRegExp.test(password)) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({
-          message:
-            'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one symbol.',
-        });
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: `Password must be at least 8 characters 
+          long and contain at least one uppercase letter, one lowercase letter, 
+          one number, and one symbol.`,
+      });
     } else if (!emailRegExp.test(email)) {
       return res
         .status(StatusCodes.BAD_REQUEST)
@@ -51,13 +51,11 @@ const registration = async (req, res) => {
 
       await emailService.sendActivationEmail(email, emailVerificationToken);
 
-      return res
-        .status(StatusCodes.CREATED)
-        .json({
-          message: 'Verify your email.',
-          email: user.email,
-          emailIsActivated: user.emailIsActivated,
-        });
+      return res.status(StatusCodes.CREATED).json({
+        message: 'Verify your email.',
+        email: user.email,
+        emailIsActivated: user.emailIsActivated,
+      });
     }
   } catch (e) {
     return res
@@ -74,16 +72,15 @@ const accountActivation = async (req, res) => {
     const user = await principleService.findUser(email);
 
     if (user.emailIsActivated === true) {
-      return res
-        .status(StatusCodes.OK)
-        .json({
-          message: 'Email has been verified',
-          email: user.email,
-          emailIsActivated: user.emailIsActivated,
-        });
+      return res.status(StatusCodes.OK).json({
+        message: 'Email has been verified',
+        email: user.email,
+        emailIsActivated: user.emailIsActivated,
+      });
     }
 
-    const activationTokenVerified = await principleService.emailTokenVerification(activationToken);
+    const activationTokenVerified =
+      await principleService.emailTokenVerification(activationToken);
 
     if (!activationTokenVerified) {
       return res
@@ -95,19 +92,17 @@ const accountActivation = async (req, res) => {
       // autogenerate family name and save it in db
       const familyName = familyService.generateFamilyName();
 
-      const familyNameRegistartion = await familyService.familyRegistration(
+      const familyNameRegistration = await familyService.familyRegistration(
         familyName,
         principleData._id
       );
 
-      return res
-        .status(StatusCodes.OK)
-        .json({
-          message: 'The account is successfully activated',
-          email: principleData.email,
-          emailIsActivated: principleData.emailIsActivated,
-          familyName: familyNameRegistartion.familyName,
-        });
+      return res.status(StatusCodes.OK).json({
+        message: 'The account is successfully activated',
+        email: principleData.email,
+        emailIsActivated: principleData.emailIsActivated,
+        familyName: familyNameRegistration.familyName,
+      });
     }
   } catch (e) {
     return res
@@ -169,7 +164,8 @@ const login = async (req, res) => {
         .json({ error: 'User not found' });
     }
 
-    const isPasswordCorrect = password && (await principleService.isPasswordCorrect(email, password));
+    const isPasswordCorrect =
+      password && (await principleService.isPasswordCorrect(email, password));
     if (!isPasswordCorrect) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
@@ -177,7 +173,9 @@ const login = async (req, res) => {
     }
 
     // when the user login, then find that user's family(s), then push the info  to the front
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id);
+    const principleFamily = await familyService.findPrincipleFamilyName(
+      user._id
+    );
 
     return res.status(StatusCodes.OK).json({
       email: user.email,
@@ -207,7 +205,11 @@ const loginFacebook = async (req, res) => {
     if (!user) {
       const password = data.email + process.env.JWT_EMAIL_VERIFICATION_SECRET;
       const emailIsActivated = true;
-      await principleService.registration(data.email, password, emailIsActivated);
+      await principleService.registration(
+        data.email,
+        password,
+        emailIsActivated
+      );
 
       const token = jwt.sign(
         { email: data.email },
@@ -248,22 +250,8 @@ const loginSocial = async (req, res) => {
       .status(StatusCodes.UNAUTHORIZED)
       .json({ error: 'Error fetching data from Google' });
   }
-  user = await principleService.findUser(userID);
+  let user = await principleService.findUser(userID);
   if (!user) {
-    function generatePassword() {
-      charset =
-        '!@#$%^&*()' +
-        '0123456789' +
-        'abcdefghijklmnopqrstuvwxyz' +
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      newPassword = '';
-      for (let i = 0; i < 10; i++) {
-        newPassword += charset.charAt(
-          Math.floor(Math.random() * charset.length)
-        );
-      }
-      return newPassword;
-    }
     let password = generatePassword();
     user = await principleService.registration(userID, password);
     principleService.activateAccount(user.email);
@@ -301,12 +289,17 @@ const requestResetPassword = async (req, res) => {
     );
 
     // Send an email with the reset password link
-    await emailService.sendResetPasswordEmail(email, passwordResetVerificationToken);
+    await emailService.sendResetPasswordEmail(
+      email,
+      passwordResetVerificationToken
+    );
     return res.status(StatusCodes.OK).json({
       message: `Reset password link sent to ${email}`,
     });
   } catch (e) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: e.message });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: e.message });
   }
 };
 
@@ -314,14 +307,19 @@ const resetPasswordActivation = async (req, res) => {
   const { email, resetPasswordToken } = req.params;
   try {
     if (principleService.validateUserAndToken(email, resetPasswordToken)) {
-      return res.status(StatusCodes.CREATED).json({ status: StatusCodes.CREATED });
-    } else {
       return res
-        .status(StatusCodes.UNAUTHORIZED)
-        .json({ status: StatusCodes.UNAUTHORIZED, message: 'User does not exist' });
+        .status(StatusCodes.CREATED)
+        .json({ status: StatusCodes.CREATED });
+    } else {
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        status: StatusCodes.UNAUTHORIZED,
+        message: 'User does not exist',
+      });
     }
   } catch (err) {
-    return res.status(StatusCodes.UNAUTHORIZED).json({ status: StatusCodes.UNAUTHORIZED, error: err.message });
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ status: StatusCodes.UNAUTHORIZED, error: err.message });
   }
 };
 
@@ -330,16 +328,16 @@ const resetPasswordUpdates = async (req, res) => {
   const { password } = req.body;
 
   if (!passwordRegExp.test(password)) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({
-        message:
-          'Password must be at least 10 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one symbol',
-      });
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: `Password must be at least 10 characters long and contain 
+        at least one uppercase letter, one lowercase letter, one number, and one symbol`,
+    });
   }
 
   try {
-    const decoded = await principleService.emailTokenVerification(resetPasswordToken);
+    const decoded = await principleService.emailTokenVerification(
+      resetPasswordToken
+    );
 
     if (!decoded) {
       return res
@@ -350,7 +348,9 @@ const resetPasswordUpdates = async (req, res) => {
     let user = await principleService.updateUserPassword(email, password);
     // hash password using isPasswordCorrect
     await user.save();
-    return res.status(StatusCodes.OK).json({ msg: 'Password updated successfully' });
+    return res
+      .status(StatusCodes.OK)
+      .json({ msg: 'Password updated successfully' });
   } catch (err) {
     console.error(err.message);
     return res

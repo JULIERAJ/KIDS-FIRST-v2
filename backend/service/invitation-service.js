@@ -27,7 +27,7 @@ const findInviteeEmail = async (inviteeEmail) => {
   return InviteeEmail ? InviteeEmail : null;
 };
 
-const findInviteeDuplcate = async (inviteeEmail, family) => {
+const findInviteeDuplicate = async (inviteeEmail, family) => {
   const inviteeDuplicate = await Invitation.find({
     inviteeEmail,
     family
@@ -45,4 +45,4 @@ const acceptedInvitation = async (inviteeEmail) => {
   return invitation;
 };
 
-module.exports = { createInvitation, findInviteeEmail, acceptedInvitation, findInviteeDuplcate };
+module.exports = { createInvitation, findInviteeEmail, acceptedInvitation, findInviteeDuplicate };
