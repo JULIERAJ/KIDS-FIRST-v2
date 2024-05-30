@@ -14,7 +14,7 @@ const createInvitation = async (
   });
 
   await invitation.save();
-  
+
   return {
     inviteeEmail: invitation.inviteeEmail,
     inviter: invitation.inviter,
@@ -30,9 +30,9 @@ const findInviteeEmail = async (inviteeEmail) => {
 const findInviteeDuplicate = async (inviteeEmail, family) => {
   const inviteeDuplicate = await Invitation.find({
     inviteeEmail,
-    family
+    family,
   }).exec();
-  
+
   return inviteeDuplicate.length > 0 ? true : false;
 };
 
@@ -45,4 +45,9 @@ const acceptedInvitation = async (inviteeEmail) => {
   return invitation;
 };
 
-module.exports = { createInvitation, findInviteeEmail, acceptedInvitation, findInviteeDuplicate };
+module.exports = {
+  createInvitation,
+  findInviteeEmail,
+  acceptedInvitation,
+  findInviteeDuplicate,
+};
