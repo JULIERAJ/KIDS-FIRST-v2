@@ -116,13 +116,12 @@ For more details on branch naming conventions, you can refer to [this guide](htt
    - In the PR body, provide a clear and concise description of what has been done.
    - Include **detailed testing instructions** for testing the changes in Postman.
    - Example:
-     ```
      ### What has been done
      - Added JWT-based authentication for user login and registration.
      - Refactored the authentication module to improve readability and performance.
      
      ### Testing Instructions
-     **1. Open Postman.
+     1. Open Postman.
      2. Make a POST request to `http://localhost:8000/api/register` with the following JSON body:**
         ```json
         {
@@ -130,7 +129,7 @@ For more details on branch naming conventions, you can refer to [this guide](htt
           "password": "Password123!"
         }
         ```
-     **3. Verify that you receive a JWT token in the response.
+     3. Verify that you receive a JWT token in the response.
      4. Make a GET request to `http://localhost:8000/api/user/profile` with the JWT token in the Authorization header:**
         ```
         Authorization: Bearer <your-jwt-token>
