@@ -6,6 +6,7 @@
 3. [Commit Naming Rules and Frequency](#commit-naming-rules-and-frequency)
 4. [Pull Request (PR) Rules and Procedure](#pull-request-pr-rules-and-procedure)
 5. [Guidelines to Solve Merge Conflicts](#guidelines-to-solve-merge-conflicts)
+6. [Guidelines for Reviews](#guidelines-for-reviews)
 
 ---
 
