@@ -39,21 +39,26 @@
 ## Branch Naming Rules
 
 1. **Feature Branches:**
-   - Use the `feature/` prefix for new features.
-   - Format: `feature/issue-number/short-description`
+   - Use the `feature/` prefix for adding, refactoring, or removing a feature.
+   - Format: `feature/issue-number-description`
    - Example: `feature/123/add-authentication`
 
 2. **Bug Fix Branches:**
-   - Use the `fix/` prefix for bug fixes.
-   - Format: `fix/issue-number/short-description`
-   - Example: `fix/456/login-error`
+   - Use the `bugfix/` prefix for fixing a bug.
+   - Format: `bugfix/issue-number/description`
+   - Example: `bugfix/456/fix-login-error`
 
-3. **Refactor Branches:**
-   - Use the `refactor/` prefix for refactoring code.
-   - Format: `refactor/issue-number/short-description`
-   - Example: `refactor/789/auth-module`
+3. **Hotfix Branches:**
+   - Use the `hotfix/` prefix for changing code with a temporary solution and/or without following the usual process (usually because of an emergency).
+   - Format: `hotfix/issue-number/description`
+   - Example: `hotfix/789/patch-vulnerability`
 
-For more details on branch naming conventions, you can refer to [this guide](https://nvie.com/posts/a-successful-git-branching-model/).
+4. **Test Branches:**
+   - Use the `test/` prefix for experimenting outside of an issue/ticket.
+   - Format: `test/issue-number/description`
+   - Example: `test/101/experiment-auth-module`
+
+For more details on branch naming conventions, you can refer to [this guide](https://dev.to/varbsan/a-simplified-convention-for-naming-branches-and-commits-in-git-il4).
 
 ---
 
@@ -64,36 +69,24 @@ For more details on branch naming conventions, you can refer to [this guide](htt
    - Use the following format for commit messages:
      ```
      <type>[optional scope]: <description>
-
-     [optional body]
-
-     [optional footer(s)]
      ```
    - Types can include: `feat` (feature), `fix` (bug fix), `docs` (documentation), `style` (formatting, missing semi colons, etc.), `refactor` (refactoring code), `test` (adding missing tests), `chore` (updating build tasks, package manager configs, etc.).
 
    - Examples:
      ```
      feat: add user authentication
-
-     Added JWT-based authentication for user login and registration.
      ```
 
      ```
      fix(auth): resolve login error
-
-     Fixed an issue causing login errors when using special characters.
      ```
 
      ```
      refactor(auth): simplify authentication module
-
-     Refactored the authentication module to improve readability and performance.
      ```
 
      ```
      docs(readme): update contribution guidelines
-
-     Updated the README file with new contribution guidelines.
      ```
 
 2. **Frequency:**
