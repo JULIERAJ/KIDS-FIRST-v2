@@ -136,7 +136,6 @@ For more details on branch naming conventions, you can refer to [this guide](htt
         Authorization: Bearer <your-jwt-token>
         ```
      **5. Verify that you receive the user's profile information.**
-     ```
 
 3. **Request Reviews:**
    - Request reviews from all relevant team members or people working on the feature.
