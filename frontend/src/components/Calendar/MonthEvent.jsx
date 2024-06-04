@@ -55,6 +55,7 @@ const MonthEvent = ({ event }) => {
     alignItems: 'center',
     position: 'relative',
     //marginTop: '30px',
+    marginLeft: '-9px',
     borderRadius: '0px 7px 7px 0px',
   };
 

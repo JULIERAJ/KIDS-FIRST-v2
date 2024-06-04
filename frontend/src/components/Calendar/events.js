@@ -94,8 +94,8 @@ export default [
     id: '10',
     title: 'Sarah-Lunch at Restaurant',
     kidsName: 'Sarah',
-    start: new Date(2024, 3, 12, 15, 0), // Start time: 12:30 PM
-    end: new Date(2024, 3, 12, 16, 0), // End time: 1:30 PM
+    start: new Date(2024, 3, 12, 17, 0), // Start time: 12:30 PM
+    end: new Date(2024, 3, 12, 18, 0), // End time: 1:30 PM
     type: 'Solo event (your ex-partner will not be present at this event)',
     desc: 'Make the reservation before',
     color: '#FFD666'

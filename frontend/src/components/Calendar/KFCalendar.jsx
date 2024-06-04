@@ -9,44 +9,53 @@ import MonthEvent from './MonthEvent.jsx';
 import './styles.css';
 import WeekEvent from './WeekEvent.jsx';
 
+// Set up moment localizer
 moment.locale('en-GB');
 const localizer = momentLocalizer(moment);
+
+// Utility to calculate the number of overlapping events at the same time slot
+const getOverlapCount = (event, allEvents) => {
+  return allEvents.filter(otherEvent => (
+    otherEvent.id !== event.id &&
+    otherEvent.start < event.end &&
+    otherEvent.end > event.start
+  )).length + 1; // Include the event itself in the count
+};
 
 const KFCalendar = () => {
   const { filteredEventsData } = useContext(EventContext);
   const [activeView, setActiveView] = useState('month'); // State to manage active view
 
-  const getMaxOverlaps = (event, events) => {
-    let maxOverlaps = 1; // Assume at least the event itself
-    const eventStart = new Date(event.start).getTime();
-    const eventEnd = new Date(event.end).getTime();
-    // eslint-disable-next-line no-console
-    console.log('events: ', events);
-    events.forEach(otherEvent => {
-
-      if (event.id !== otherEvent.id) {
-        const otherStart = new Date(otherEvent.start).getTime();
-        const otherEnd = new Date(otherEvent.end).getTime();
-
-        if ((otherStart < eventEnd && otherEnd > eventStart) || (eventStart < otherEnd && eventEnd > otherStart)) {
-          maxOverlaps++;
+  // Event property getter to adjust the style based on overlapping events
+  const eventStyleGetter = (event, start, end, isSelected, allEvents) => {
+    const overlapCount = getOverlapCount(event, allEvents);
+    // const widthPercentage = 100 / overlapCount;
+    // Check if the current view is 'day'
+    if (activeView === 'day') {
+      return {
+        className: 'day-view-event',
+        style: {
+          '--event-count': overlapCount, // Set the CSS variable locally
+          // eslint-disable-next-line quotes
+          width: `calc(100% / var(--event-count))`, // Use the local CSS variable
+          height: '100%',
+          position: 'absolute',
+          overflow: 'hidden'
         }
-      }
-    });
-
-    return maxOverlaps;
-  };
-
-  const eventStyleGetter = (event) => {
-    const overlaps = getMaxOverlaps(event, filteredEventsData);
-    const width = 100 / overlaps; // Divide 100% by the number of overlapping events
-    // eslint-disable-next-line no-console
-    console.log('width is : ', width);
-    return {
-      style: {
-        width: `${width}% !important`
-      }
-    };
+      };
+    } else if (activeView === 'week') {
+      return {
+        className: 'week-view-event',
+        style: {
+          '--event-count': overlapCount, // Set the CSS variable locally
+          // eslint-disable-next-line quotes
+          width: `calc(100% / var(--event-count))`, // Use the local CSS variable
+          height: '100%',
+          position: 'absolute',
+          overflow: 'hidden'
+        }
+      };
+    }
   };
 
   const handleViewChange = (view) => {
@@ -80,7 +89,8 @@ const KFCalendar = () => {
         defaultDate={defaultDate}
         onView={handleViewChange}
         popup={true}
-        eventPropGetter={eventStyleGetter}
+        eventPropGetter={(event, start, end, isSelected) =>
+          eventStyleGetter(event, start, end, isSelected, filteredEventsData)}
       />
     </div>
   );

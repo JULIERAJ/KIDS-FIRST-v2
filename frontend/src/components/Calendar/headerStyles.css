@@ -8,7 +8,6 @@
   font-size: 18px;
   font-weight: bold;
   color: #081821;
-
 }
 
 /* Container for buttons*/
@@ -64,13 +63,17 @@
 
 /* Media Query for Responsive Design */
 @media only screen and (max-width: 400px) {
+
   /* Adjustments for smaller screens */
   .buttonsContainer {
-    flex-direction: column; /* Change direction to column */
+    flex-direction: column;
+    /* Change direction to column */
   }
 
   .styles.bigButton {
-    width: auto; /* Allow button to take full width */
-    margin-bottom: 10px; /* Add spacing between big button and create button */
+    width: auto;
+    /* Allow button to take full width */
+    margin-bottom: 10px;
+    /* Add spacing between big button and create button */
   }
 }
