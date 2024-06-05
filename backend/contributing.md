@@ -41,7 +41,7 @@
 
 1. **Feature Branches:**
    - Use the `feature/` prefix for adding, refactoring, or removing a feature.
-   - Format: `feature/issue-number-description`
+   - Format: `feature/issue-number/description`
    - Example: `feature/123/add-authentication`
 
 2. **Bug Fix Branches:**
