@@ -143,7 +143,7 @@ For more details on branch naming conventions, you can refer to [this guide](htt
      git branch -d <branch-name>
      git push origin --delete <branch-name>
      ```
-
+For more details on managing Pull Requests, you can refer to [this guide in GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/getting-started/best-practices-for-pull-requests).
 ---
 
 ## Guidelines to Solve Merge Conflicts
@@ -181,7 +181,7 @@ For more details on branch naming conventions, you can refer to [this guide](htt
      git pull origin dev-back
      ```
 
-For more details on resolving merge conflicts, you can refer to [this guide](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts).
+For more details on resolving merge conflicts, you can refer to [this guide in GitHub Docs](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/about-merge-conflicts).
 
 ---
 
