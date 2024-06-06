@@ -51,8 +51,6 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
 
   return (
     <div className="KF-toolbar">
-      <em> ~ Custom toolbar ~ </em>
-
       <div className="toolbar">
         <div className="rbc-btn-group">
           <button type="button" onClick={() => onNavigate('PREV')}
@@ -65,7 +63,7 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
           </button>
         </div>
 
-        <div className="rbc-toolbar-label">{label}</div>
+        <div className="rbc-toolbar-label" >{label}</div>
 
         {/* Container for buttons */}
         <div className="buttonsContainer">

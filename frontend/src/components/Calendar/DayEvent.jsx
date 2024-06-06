@@ -50,13 +50,14 @@ export const DayEvent = ({ event }) => {
     flexDirection: 'column',
     marginLeft: '0',
     marginTop: '0px',
+    marginBottom: '-5px',
     opacity: '0.75',
   };
 
   const contentWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
-    marginLeft: '60px',
+    marginLeft: '50px',
     marginTop: '0px',
   };
 
@@ -78,9 +79,11 @@ export const DayEvent = ({ event }) => {
     alignItems: 'center',
     position: 'relative',
     top: 0,
-    left: 0,
+    left: '-4px',
     start: 'top',
-    display: 'flex'
+    display: 'flex',
+    paddingRight: '5px',
+    paddingBottom: '5px'
   };
 
   // Helper function to check if the event spans multiple days

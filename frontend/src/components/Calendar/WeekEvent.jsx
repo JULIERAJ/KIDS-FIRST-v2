@@ -19,8 +19,8 @@ const WeekEvent = ({ event }) => {
   };
   const circleStyle = {
     ...commonStyle,
-    width: '40px',
-    height: '40px',
+    width: '25px',
+    height: '25px',
     backgroundColor: color,
     justifyContent: 'center',
     alignItems: 'center',
@@ -30,8 +30,8 @@ const WeekEvent = ({ event }) => {
     position: 'absolute',
     top: 0,
     left: 0,
-    marginLeft: '5px',
-    marginTop: '15px'
+    marginLeft: '0px',
+    marginTop: '18px'
   };
 
   const titleStyle = {
@@ -39,7 +39,7 @@ const WeekEvent = ({ event }) => {
     fontFamily: 'Roboto',
     color: '#081821',
     fontSize: '16px',
-    fontWeight: 500,
+    fontWeight: '500',
     lineHeight: '18.75px',
     textAlign: 'left',
     marginLeft: '0px',
@@ -50,14 +50,16 @@ const WeekEvent = ({ event }) => {
   const contentWrapperStyle = {
     display: 'flex',
     flexDirection: 'column',
-    marginLeft: '60px',
+    marginLeft: '28px',
     marginTop: '0px',
   };
 
   const timingStyle = {
-    fontSize: '14px',
+    fontSize: '12px',
     opacity: '0.4',
-    fontWeight: 200,
+    wordBreak: 'break-all',
+    whiteSpace: 'normal',
+    fontWeight: '200',
     lineHeight: '40px',
     marginRight: '5px',
   };
@@ -69,10 +71,19 @@ const WeekEvent = ({ event }) => {
     alignItems: 'center',
     position: 'relative',
     top: 0,
-    left: 0,
+    left: '-4px',
     start: 'top',
     display: 'flex'
   };
+
+  const getTruncatedTitle = (title) => {
+    if (title.length <= 11) {
+      return title;
+    }
+    return title.substring(0, 11) + '...';
+  };
+
+  const truncatedTitle = getTruncatedTitle(title);
 
   // Function to format date and time
   // eslint-disable-next-line no-unused-vars
@@ -86,9 +97,7 @@ const WeekEvent = ({ event }) => {
   return (
     <div className="event-box" style={boxStyle}>
       <div style={contentWrapperStyle} className="content-wrapper">
-        <div className="title" style={titleStyle}>
-          {title && <span>{title}</span>}
-        </div>
+        {truncatedTitle && <span className="title" style={titleStyle}>{truncatedTitle}</span>}
         <div className="timing" style={timingStyle}>
           {(start && end) && (
             <span>{formatEventTime(start, end)}</span>

@@ -337,7 +337,7 @@ button.rbc-input::-moz-focus-inner {
 .rbc-event.rbc-selected,
 .rbc-day-slot .rbc-selected.rbc-background-event {
   background-color: red;
-  margin-left: 10px;
+  margin-left: 0px;
 
 }
 
@@ -540,7 +540,8 @@ button.rbc-input::-moz-focus-inner {
   justify-content: space-around;
   align-items: flex-start;
   /*border-bottom: 1px solid #ddd;*/
-  min-height: 120px;
+  min-height: 50px;
+  min-width: 113px;
 }
 
 /* Negar: add border to all time slots without a label */
@@ -948,7 +949,7 @@ button.rbc-input::-moz-focus-inner {
   background-color: hsl(80, 91%, 59%);
   /*Negar*/
   /*background-color: #c29eef;
-    border: none; 
+    border: none;
     height: 40px;
     width: 40px;
     text-align: center;*/
