@@ -24,7 +24,7 @@ const SidebarItemsCard = ({ title, icon, activeIcon, hoverIcon, path, isActive, 
           onMouseLeave={() => setIsHovered(false)}>
           {isActive ? activeIcon : (isHovered ? hoverIcon : icon)}
           <NavLink
-            eventKey='link-1'
+            eventkey='link-1'
             to={path}
             className={styles.sidebarLink}
             onClick={handleClick}>
@@ -81,10 +81,10 @@ const Sidebar = ({ setTitle }) => {
 };
 
 SidebarItemsCard.propTypes = {
-  title: PropTypes.string,
-  icon: PropTypes.node,
-  activeIcon: PropTypes.string,
-  hoverIcon: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+  activeIcon: PropTypes.node.isRequired,
+  hoverIcon:  PropTypes.node.isRequired,
   path: PropTypes.string,
   alt: PropTypes.string,
   onClick: PropTypes.func,

@@ -3,9 +3,9 @@ export const SIDEBAR_DATA = [
   {
     title: 'Home',
     icon: <span className="material-symbols-rounded home "
-      style={{ 'font-size': '32px' }}>home</span>,
+      style={{ 'fontSize': '32px' }}>home</span>,
     activeIcon:<span className="material-symbols-rounded home "
-      style={{ 'font-size': '32px',
+      style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
@@ -13,7 +13,7 @@ export const SIDEBAR_DATA = [
     hoverIcon:
     <span className="material-symbols-rounded home "
       style={{
-        'font-size': '32px',
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>home</span>,
     path: '/dashboard/homedashboard',
@@ -22,9 +22,9 @@ export const SIDEBAR_DATA = [
   {
     title: 'Calendar',
     icon: <span className="material-symbols-rounded home "
-      style={{ 'font-size': '32px' }}>calendar_month</span>,
+      style={{ 'fontSize': '32px' }}>calendar_month</span>,
     activeIcon:<span className="material-symbols-rounded home "
-      style={{ 'font-size': '32px',
+      style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
@@ -32,7 +32,7 @@ export const SIDEBAR_DATA = [
     hoverIcon:
     <span className="material-symbols-rounded home "
       style={{
-        'font-size': '32px',
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>calendar_month</span>,
     path: '/dashboard/calendarview',
@@ -41,9 +41,9 @@ export const SIDEBAR_DATA = [
   {
     title: 'Messages',
     icon: <span className="material-symbols-rounded "
-      style={{ 'font-size': '32px' }}>chat</span>,
+      style={{ 'fontSize': '32px' }}>chat</span>,
     activeIcon:<span className="material-symbols-rounded"
-      style={{ 'font-size': '32px',
+      style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
@@ -51,7 +51,7 @@ export const SIDEBAR_DATA = [
     hoverIcon:
     <span className="material-symbols-rounded"
       style={{
-        'font-size': '32px',
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>chat</span>,
     path: '/dashboard/messages',
@@ -60,9 +60,9 @@ export const SIDEBAR_DATA = [
   {
     title: 'Album',
     icon: <span className="material-symbols-rounded"
-      style={{ 'font-size': '32px' }}>photo_library</span>,
+      style={{ 'fontSize': '32px' }}>photo_library</span>,
     activeIcon:<span className="material-symbols-rounded"
-      style={{ 'font-size': '32px',
+      style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
@@ -70,7 +70,7 @@ export const SIDEBAR_DATA = [
     hoverIcon:
     <span className="material-symbols-rounded"
       style={{
-        'font-size': '32px',
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>photo_library</span>,
     path: '/dashboard/album',
@@ -79,9 +79,9 @@ export const SIDEBAR_DATA = [
   {
     title: 'Kids’ Info',
     icon: <span className="material-symbols-rounded"
-      style={{ 'font-size': '32px' }}>face</span>,
+      style={{ 'fontSize': '32px' }}>face</span>,
     activeIcon:<span className="material-symbols-rounded"
-      style={{ 'font-size': '32px',
+      style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
@@ -89,7 +89,7 @@ export const SIDEBAR_DATA = [
     hoverIcon:
     <span className="material-symbols-rounded"
       style={{
-        'font-size': '32px',
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>face</span>,
     path: '/dashboard/kids',
@@ -98,9 +98,9 @@ export const SIDEBAR_DATA = [
   {
     title: 'Settings',
     icon: <span className="material-symbols-rounded"
-      style={{ 'font-size': '32px' }}>settings</span>,
+      style={{ 'fontSize': '32px' }}>settings</span>,
     activeIcon:<span className="material-symbols-rounded"
-      style={{ 'font-size': '32px',
+      style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
@@ -108,7 +108,7 @@ export const SIDEBAR_DATA = [
     hoverIcon:
     <span className="material-symbols-rounded"
       style={{
-        'font-size': '32px',
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>settings</span>,
     path: '/dashboard/settings',
@@ -117,9 +117,9 @@ export const SIDEBAR_DATA = [
   {
     title: 'Help',
     icon: <span className="material-symbols-rounded"
-      style={{ 'font-size': '32px' }}>help</span>,
+      style={{ 'fontSize': '32px' }}>help</span>,
     activeIcon:<span className="material-symbols-rounded"
-      style={{ 'font-size': '32px',
+      style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
@@ -127,7 +127,7 @@ export const SIDEBAR_DATA = [
     hoverIcon:
     <span className="material-symbols-rounded"
       style={{
-        'font-size': '32px',
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>help</span>,
     path: '/dashboard/help',
