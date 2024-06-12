@@ -1,8 +1,4 @@
-.formInput{
-  border: 1px solid var #FF7B72
-}
-
-.formInputButton{
+.formInputButton {
   background-color: #fff;
   border-top: 1px solid #ced4da;
   border-bottom: 1px solid #ced4da;
@@ -13,8 +9,7 @@
 
 .formInputButton:hover,
 .formInputButton:focus,
-.formInputButton:active
- {
+.formInputButton:active {
   border-left: 1px solid transparent;
   background-color: #fff;
   /* background: #F7F8F8; */
@@ -26,22 +21,21 @@
 .errorFeedback {
   display: flex;
   align-items: center;
-  color: #DA3633;
+  color: #da3633;
   font-family: Roboto;
   font-size: 10px;
   font-weight: 600;
   line-height: 14px;
 }
 .errorFeedback svg {
-  margin-right: 5px ;
+  margin-right: 5px;
 }
 
 .errorInput {
-  border-color: #DA3633;
+  border-color: #da3633;
   background-image: none !important;
-  border-radius: 0.375rem!important;
+  border-radius: 0.375rem !important;
 }
-
 
 .optionalText {
   font-family: Roboto;
@@ -50,35 +44,45 @@
   line-height: 15.36px;
   letter-spacing: 0.02em;
   text-align: left;
+  color: rgba(89, 107, 115, 1);
 }
-
-
-
 
 .successFeedback {
-font-family: Roboto;
-font-size: 10px;
-font-weight: 600;
-line-height: 14px;
-color:#178222;
-display: flex;
-align-items: center;
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  color: #178222;
+  display: flex;
+  align-items: center;
 }
 
-
-.errorInput:focus{
-box-shadow: none;
+.errorInput:focus {
+  box-shadow: none;
 }
 
-.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus{
+.was-validated .form-control:invalid:focus,
+.form-control.is-invalid:focus {
   box-shadow: none !important;
 }
 
+.passwordText {
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  text-align: left;
+}
 
-.passwordText{
-font-family: Roboto;
-font-size: 10px;
-font-weight: 600;
-line-height: 14px;
-text-align: left;
+input {
+  border: 1px solid #9eafb7 !important;
+  padding: 17.6px 8px !important;
+  font-size: 16px !important;
+  line-height: 15.36px !important;
+  color: #596b73 !important;
+  
+}
+
+input#lastname {
+  background-color: red !important;
 }

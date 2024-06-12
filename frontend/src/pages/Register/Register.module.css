@@ -1,50 +1,39 @@
-.outerContainer {
-  width: 1440px;
+.page {
   height: 1024px;
-  left: 307px;
-  background-color: #EFF0F0;
-}
-.EmailInput{
-  margin-top:16px;
-}
-.customContainer {
-  width: 910px;
-  height: 840px;
- position: absolute;
-  top: 120px;
-  left: 265px;
-  border-Radius: 16px;
-  background-Color: #FFFFFF
-}
-.formContainer {
-  width: 442px;
-  height: 678px;
-position: relative;
-  top: 56px;
-  /* left: 234px; */
-  gap: 56px;
+  background-color: #eff0f0;
 }
 
-.registerTitle {
+.page__window {
+  max-width: 910px;
+  height: 840px;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+.page__wrapper {
+  padding: 56px 234px 104px;
+}
+
+.page__title {
   font-family: Roboto;
   font-size: 32px;
   font-weight: 700;
   line-height: 38.4px;
   letter-spacing: -0.01em;
   text-align: center;
-  /* width: 309px; */
-  height: 40px;
-  gap: 0px;
-  opacity: 0px;
+  margin-bottom: 24px;
   color: var(--fg-Primary, #081821);
 }
-.TextInputField{
-  Width: 442px;
-  height: 79px;
-  gap:24px
 
+.EmailInput {
+  margin-top: 16px;
 }
-.firstNameLabel,.LastNameLabel{
+
+.TextInputField {
+  height: 79px;
+}
+.firstNameLabel,
+.LastNameLabel {
   font-family: Roboto;
   font-weight: 600;
   font-size: 16px;
@@ -52,7 +41,8 @@ position: relative;
   letter-spacing: 2%;
   color: #081821;
 }
-.EmailLabel,.PasswordLabel{
+.EmailLabel,
+.PasswordLabel {
   margin-top: 24px;
   font-family: Roboto;
   font-weight: 600;
@@ -60,7 +50,6 @@ position: relative;
   line-height: 15.36px;
   letter-spacing: 2%;
   color: #081821;
-
 }
 .optionalText {
   font-family: Roboto;
@@ -78,8 +67,6 @@ position: relative;
   color: aliceblue;
 }
 /* In Register.module.css or your preferred CSS file */
-
-
 
 .orDivider {
   margin-top: 24px;
@@ -137,23 +124,23 @@ position: relative;
   justify-content: center;
 }
 
-.passwordList p{
+.passwordList p {
   margin-bottom: 0;
   margin-right: 10px;
-  color: #DA3633;
+  color: #da3633;
   font-weight: 600;
   font-size: 10px;
   line-height: 14px;
 }
 
-.redText{
-  color: #DA3633;
+.redText {
+  color: #da3633;
   font-weight: 600;
   font-size: 10px;
   line-height: 14px;
   font-family: Roboto;
 }
-.blackText{
+.blackText {
   color: black;
 }
 
@@ -169,7 +156,7 @@ input:focus::placeholder {
   font-size: 18px;
   line-height: 25.2px;
   text-align: center;
-  color: #FCFCFC;
+  color: #fcfcfc;
 }
 .customButton {
   margin-top: 24px;
@@ -177,6 +164,6 @@ input:focus::placeholder {
   height: 56px;
   /* Add other button styles here */
 }
-.SocialButton{
+.SocialButton {
   margin-top: 24px;
 }
