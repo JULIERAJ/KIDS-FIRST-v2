@@ -1,27 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './viewStyles.css';
-
-// const getColorForBackground = (name) => {
-//   const colorsBackground = {
-//     'A': 'rgba(255, 214, 102, 0.5)',
-//     'B': 'rgba(255, 107, 109, 0.5)',
-//     'C': 'rgba(194, 158, 239, 0.5)',
-//   };
-//   return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)'; // Default transparent
-// };
+import './DayEventStyles.css';
 
 const MonthEvent = ({ event }) => {
   const { color, kidsName, title } = event;
 
   const commonStyle = {
-    borderRadius: '0px 7px 7px 0px',
+    // borderRadius: '0px 7px 7px 0px',
   };
 
   const circleStyle = {
     ...commonStyle,
-    width: '20px',
-    height: '20px',
+    width: '20.36px',
+    height: '21px',
     backgroundColor: color,
     display: 'flex',
     justifyContent: 'center',
@@ -34,17 +26,6 @@ const MonthEvent = ({ event }) => {
     left: -20,
     marginLeft: '30px',
     marginTop: '12px',
-  };
-
-  const titleStyle = {
-    ...commonStyle,
-    fontFamily: 'Roboto',
-    fontSize: '16px',
-    fontWeight: 500,
-    lineHeight: '18.75px',
-    textAlign: 'left',
-    marginLeft: '-30px',
-    marginTop: '-5px',
   };
 
   const boxStyle = {
@@ -74,7 +55,7 @@ const MonthEvent = ({ event }) => {
         <span className="circle" style={circleStyle}>
           {kidsName.charAt(0).toUpperCase()}
         </span>
-        {truncatedTitle && <span className="title" style={titleStyle}>{truncatedTitle}</span>}
+        {truncatedTitle && <span className="title" style={{ marginLeft: '-30px', marginTop: '-5px' }}>{truncatedTitle}</span>}
       </div>
     </div>
   );
