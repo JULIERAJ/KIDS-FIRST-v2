@@ -1,17 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './viewStyles.css';
-import './DayEventStyles.css';
+import './DayMonthEventStyles.css';
 
 const MonthEvent = ({ event }) => {
   const { color, kidsName, title } = event;
 
-  const commonStyle = {
-    // borderRadius: '0px 7px 7px 0px',
-  };
-
   const circleStyle = {
-    ...commonStyle,
     width: '20.36px',
     height: '21px',
     backgroundColor: color,
@@ -35,7 +30,6 @@ const MonthEvent = ({ event }) => {
     flexDirection: 'row',
     alignItems: 'center',
     position: 'relative',
-    //marginTop: '30px',
     marginLeft: '-9px',
     borderRadius: '0px 7px 7px 0px',
   };

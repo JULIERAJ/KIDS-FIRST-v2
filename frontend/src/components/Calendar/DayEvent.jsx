@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './viewStyles.css';
-import './DayEventStyles.css';
+import './DayMonthEventStyles.css';
 import { formatEventTime } from './utils/dateUtils';
 
 export const DayEvent = ({ event }) => {

@@ -44,7 +44,6 @@ const WeekEvent = ({ event }) => {
   const truncatedTitle = getTruncatedTitle(title);
 
   // Function to format date and time
-  // eslint-disable-next-line no-unused-vars
   const formatEventTime = (startDate, endDate) => {
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
     const startTime = startDate.toLocaleTimeString('en-GB', timeOptions);
