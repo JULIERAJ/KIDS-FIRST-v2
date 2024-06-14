@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { useRef, useEffect, useState } from 'react';
+
+import { Form, InputGroup } from 'react-bootstrap';
 
 import { BsExclamationCircle, BsCheckLg } from 'react-icons/bs';
 
@@ -16,49 +18,65 @@ const FormInput = ({
   successMessage,
   showTextPassword,
   labelClassName,
+  type,
   ...props
-}) => (
-  <Form.Group className='py-2'>
-    {/* Container for form input and button */}
+}) => {
+  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState('');
 
-    <Form.Label className={labelClassName}>{label}</Form.Label>
-    {/* Label for the form input */}
-    <InputGroup>
-      <Form.Control
-        {...props}
-        className={errorMessage ? styles.errorInput : ''}
-      />
+  useEffect(() => {
+    if (inputRef.current) {
+      setInputValue(inputRef.current.value);
+    }
+  }, []);
 
-      {label === 'Password' && (
-        <Button
-          variant='light'
-          className={errorMessage ? styles.errorInput : styles.formInputButton}
-          onClick={(event) => {
-            event.preventDefault();
-            setShowPassword(!showPassword);
-          }}
-        >
-          {showPassword ? <FaEyeSlash /> : <FaEye />}
-        </Button>
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const isPassword = label === 'Password';
+
+  return (
+    <Form.Group className="py-2">
+      <Form.Label className={labelClassName}>{label}</Form.Label>
+      <InputGroup className={styles.inputGroup}>
+        <Form.Control
+          ref={inputRef}
+          {...props}
+          type={isPassword && showPassword ? 'text' : type}
+          className={`${styles.inputField} ${errorMessage ? styles.errorInput : ''}`}
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+        {isPassword && inputValue && (
+          <div
+            className={`${styles.formInputIcon} ${errorMessage ? styles.formInputIconError : ''}`}
+            onClick={() => setShowPassword(!showPassword)}
+            role="button"
+            tabIndex={0}
+          >
+            {showPassword ? <FaEye /> : <FaEyeSlash />}
+          </div>
+        )}
+      </InputGroup>
+      {successMessage && (
+        <Form.Control.Feedback className={`${styles.feedback} ${styles.successFeedback}`} >
+          <BsCheckLg className={`${styles.icon} ${styles.successIcon}`} />
+          {successMessage}
+        </Form.Control.Feedback>
       )}
-    </InputGroup>
-    {successMessage && (
-      <Form.Control.Feedback className={styles.successFeedback}>
-        <BsCheckLg />
-        {successMessage}
-      </Form.Control.Feedback>
-    )}
-    {errorMessage && (
-      <Form.Control.Feedback type='invalid' className={styles.errorFeedback}>
-        <BsExclamationCircle />
-        {errorMessage}
-      </Form.Control.Feedback>
-    )}
-    {showTextPassword && (
-      <Form.Text className={styles.passwordText}>{showTextPassword}</Form.Text>
-    )}
-  </Form.Group>
-);
+      {errorMessage && (
+        <Form.Control.Feedback type="invalid" className={`${styles.feedback} ${styles.errorFeedback}`} >
+          <BsExclamationCircle className={`${styles.icon} ${styles.errorIcon}`} />
+          {errorMessage}
+        </Form.Control.Feedback>
+      )}
+      {showTextPassword && (
+        <Form.Text className={styles.passwordText}>{showTextPassword}</Form.Text>
+      )}
+    </Form.Group>
+  );
+};
 
 FormInput.propTypes = {
   label: PropTypes.string,
@@ -66,7 +84,7 @@ FormInput.propTypes = {
   setShowPassword: PropTypes.func,
   type: PropTypes.string,
   errorMessage: PropTypes.string,
-  labelClassName: PropTypes.string, // PropType for labelClassName
+  labelClassName: PropTypes.string,
   successMessage: PropTypes.string,
   showTextPassword: PropTypes.string,
 };

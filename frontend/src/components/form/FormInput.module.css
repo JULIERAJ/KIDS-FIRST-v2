@@ -1,43 +1,18 @@
-.formInputButton {
+/* General input styles */
+.inputField {
+  padding-right: 2.5rem; 
+  border-radius: 8px !important; 
+}
+
+input {
+  border: 1px solid #9eafb7 !important;
+  padding: 17.6px 8px !important;
+  font-size: 16px !important;
+  line-height: 15.36px !important;
+  color: #596b73 !important;
   background-color: #f6f8f8 !important;
-  border-top: 1px solid #9eafb7;
-  border-bottom: 1px solid #9eafb7;
-  border-right: 1px solid #9eafb7;
-  border-left: 1px solid transparent;
-  
-}
-
-.formInputButton:active,
-.formInputButton:hover,
-.formInputButton:focus,
-.formInputButton:focus-visible,
-.formInputButton:active {
-  border-left: 1px solid transparent !important;
-  background-color: #f6f8f8 !important;
-  
-}
-
-.errorFeedback {
-  display: flex;
-  align-items: center;
-  color: #da3633;
-  font-family: Roboto;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 14px;
-}
-.errorFeedback svg {
-  margin-right: 5px;
-}
-
-.errorInput {
-  border-color: #da3633;
-  background-image: none !important;
-}
-
-.errorInput:last-child {
-  border-color: #da3633;
-  border-radius: 0px 8px 8px 0px !important;
+  box-shadow: none;
+  border-radius: 8px;
 }
 
 .optionalText {
@@ -50,41 +25,85 @@
   color: rgba(89, 107, 115, 1);
 }
 
-.successFeedback {
-  font-family: Roboto;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 14px;
-  color: #178222;
-  display: flex;
-  align-items: center;
+/* Error input styles */
+.errorInput {
+  border-color: #da3633 !important;
+  background-image: none !important;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
 
-.errorInput:focus {
-  box-shadow: none;
-}
-
+.errorInput:focus,
 .was-validated .form-control:invalid:focus,
 .form-control.is-invalid:focus {
   box-shadow: none !important;
 }
 
+/* Icon styles */
+.icon {
+  margin: 0 0.3rem 0 0;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.successIcon {
+  color: #178222;
+}
+
+.errorIcon {
+  color: #da3633;
+}
+
+/* Feedback styles */
+.feedback {
+  display: flex;
+  align-items: center;
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  margin: 0.7rem 0;
+}
+
+.successFeedback {
+  color: #178222;
+}
+
+.errorFeedback {
+  color: #da3633;
+}
+
+/* Input group styles */
+.inputGroup {
+  position: relative;
+}
+
+/* Password visibility icon styles */
+.formInputIcon {
+  font-size: 1.3rem;
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  background: none;
+  border: none;
+  z-index: 10;
+  color: #000; 
+}
+
+.formInputIconError {
+  color: #da3633 !important;
+}
+
+/* Password text styles */
 .passwordText {
   font-family: Roboto;
   font-size: 10px;
   font-weight: 600;
   line-height: 14px;
   text-align: left;
+  color: #6c757d;
 }
-
-input {
-  border: 1px solid #9eafb7 !important;
-  padding: 17.6px 8px !important;
-  font-size: 16px !important;
-  line-height: 15.36px !important;
-  color: #596b73 !important;
-  background-color: #f6f8f8 !important;
-  box-shadow: none;
-}
-
-
