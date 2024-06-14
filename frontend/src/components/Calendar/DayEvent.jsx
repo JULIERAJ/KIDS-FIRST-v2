@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import './viewStyles.css';
 import './DayMonthEventStyles.css';
 import { formatEventTime } from './utils/dateUtils';
 
@@ -38,7 +37,7 @@ export const DayEvent = ({ event }) => {
   };
 
   return (
-    <div className="event-box" style={boxStyle}>
+    <div className='event-box' style={boxStyle}>
       <div className="DayEventContentWrapperStyle content-wrapper">
         <div className="title titleStyle" >
           {title && <span>{title}</span>}
@@ -81,20 +80,6 @@ DayEvent.propTypes = {
     start: PropTypes.instanceOf(Date),
     end: PropTypes.instanceOf(Date),
   }).isRequired,
-};
-
-export const DayViewHeader = ({ date }) => {
-
-  const formatDate = (date) => {
-    const options = { weekday: 'short', day: '2-digit' };
-    return new Date(date).toLocaleDateString('en-GB', options);
-  };
-
-  return <div>{formatDate(date)}</div>;
-};
-
-DayViewHeader.propTypes = {
-  date: PropTypes.instanceOf(Date),
 };
 
 export default DayEvent;

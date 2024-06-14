@@ -1,8 +1,9 @@
 import moment from 'moment';
 import React, { useState, useContext, useMemo } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { getOverlapCount, DayViewHeader } from './utils/dateUtils.jsx';
 
-import { DayEvent, DayViewHeader } from './DayEvent.jsx';
+import { DayEvent } from './DayEvent.jsx';
 import EventContext from './EventContext';
 import KFToolbar from './KFToolbar.jsx';
 import MonthEvent from './MonthEvent.jsx';
@@ -13,14 +14,7 @@ import WeekEvent from './WeekEvent.jsx';
 moment.locale('en-GB');
 const localizer = momentLocalizer(moment);
 
-// Utility to calculate the number of overlapping events at the same time slot
-const getOverlapCount = (event, allEvents) => {
-  return allEvents.filter(otherEvent => (
-    otherEvent.id !== event.id &&
-    otherEvent.start < event.end &&
-    otherEvent.end > event.start
-  )).length + 1; // Include the event itself in the count
-};
+
 
 const KFCalendar = () => {
   const { filteredEventsData } = useContext(EventContext);

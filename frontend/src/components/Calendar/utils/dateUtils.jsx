@@ -20,3 +20,21 @@ export const formatEventTime = (startDate, endDate) => {
         return `${startTime} - ${endTime} ${startDateFormatted}`;
     }
 };
+
+// Utility to calculate the number of overlapping events at the same time slot
+export const getOverlapCount = (event, allEvents) => {
+    return allEvents.filter(otherEvent => (
+        otherEvent.id !== event.id &&
+        otherEvent.start < event.end &&
+        otherEvent.end > event.start
+    )).length + 1; // Include the event itself in the count
+};
+
+export const DayViewHeader = ({ date }) => {
+
+    const formatDate = (date) => {
+        const options = { weekday: 'short', day: '2-digit' };
+        return new Date(date).toLocaleDateString('en-GB', options);
+    };
+    return <div>{formatDate(date)}</div>;
+};
