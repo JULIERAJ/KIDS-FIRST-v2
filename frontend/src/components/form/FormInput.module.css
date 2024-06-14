@@ -1,18 +1,26 @@
 /* General input styles */
+.inputGroup {
+  position: relative;
+}
+
 .inputField {
   padding-right: 2.5rem; 
   border-radius: 8px !important; 
-}
-
-input {
-  border: 1px solid #9eafb7 !important;
+  border: 1.5px solid #9eafb7 !important;
   padding: 17.6px 8px !important;
   font-size: 16px !important;
   line-height: 15.36px !important;
   color: #596b73 !important;
   background-color: #f6f8f8 !important;
-  box-shadow: none;
+  box-shadow: none !important;
   border-radius: 8px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease; 
+}
+
+.inputField:focus {
+  border-color: #A4DFE1 !important; 
+  box-shadow: 0px 2px 4px -1px rgba(74, 122, 124, 0.06), 0px 6px 10px -1px rgba(74, 122, 124, 0.1) !important; /* Adjust shadow on focus */
+  outline: none !important;
 }
 
 .optionalText {
@@ -29,7 +37,7 @@ input {
 .errorInput {
   border-color: #da3633 !important;
   background-image: none !important;
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
 }
 
 .errorInput:focus,
@@ -41,7 +49,7 @@ input {
 /* Icon styles */
 .icon {
   margin: 0 0.3rem 0 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
   vertical-align: middle;
 }
 
@@ -72,14 +80,9 @@ input {
   color: #da3633;
 }
 
-/* Input group styles */
-.inputGroup {
-  position: relative;
-}
-
 /* Password visibility icon styles */
 .formInputIcon {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   position: absolute;
   right: 2px;
   top: 50%;
