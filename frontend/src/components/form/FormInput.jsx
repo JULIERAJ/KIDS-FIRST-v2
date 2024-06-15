@@ -61,7 +61,7 @@ const FormInput = ({
 );
 
 FormInput.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   showPassword: PropTypes.bool,
   setShowPassword: PropTypes.func,
   type: PropTypes.string,
