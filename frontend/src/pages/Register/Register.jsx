@@ -45,7 +45,7 @@ const Register = () => {
 
   return (
     <>
-      <div className={`${styles.outerContainer}`}>
+      <div className={styles.page}>
         <div>
           <Header
           // widget={
@@ -58,17 +58,14 @@ const Register = () => {
           />
         </div>
 
-        <Container className={`content-layout py-4 ${styles.customContainer}`}>
+        <Container className={styles.page__window}>
           <div>
             <Row>
               {/* <Col className='d-flex justify-content-center align-items-center'> */}
               <Col
-                className={`d-flex justify-content-center align-items-center ${styles.formContainer}`}
-              >
+                className={`d-flex justify-content-center align-items-center ${styles.page__wrapper}`}>
                 <div>
-                  <h1 className={styles.registerTitle}>
-                    Welcome to Kids First
-                  </h1>
+                  <h1 className={styles.page__title}>Welcome to Kids First</h1>
                   {activeComponent ? (
                     <RegisterForm
                       onSubmitData={registerUserHandler}

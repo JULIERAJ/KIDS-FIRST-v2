@@ -25,12 +25,12 @@ FormFirstNameInput.propTypes = {
 
 export const FormLastNameInput = (props) => (
   <FormInput
+    
     id='lastname'
-    //label='Last Name (Optional)'
     name='LastName'
     label={
       <>
-        Last Name <span className={styles.optionalText}> (Optional)</span>
+        Last Name <span className={styles.optionalText}> (optional)</span>
       </>
     }
     placeholder='Last Name'
@@ -38,6 +38,7 @@ export const FormLastNameInput = (props) => (
     defaultValue={props.defaultValue}
     isInvalid={!!props.errors}
     errorMessage={props.errors}
+    className={styles.input__last}
     {...props}
   />
 );
