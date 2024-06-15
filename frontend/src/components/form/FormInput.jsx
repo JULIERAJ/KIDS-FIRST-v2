@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 import { Form, InputGroup } from 'react-bootstrap';
 
@@ -19,19 +19,24 @@ const FormInput = ({
   showTextPassword,
   labelClassName,
   type,
+  value,
+  onChange,
+  onFocus,
+  onBlur,
   ...props
 }) => {
   const inputRef = useRef(null);
-  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     if (inputRef.current) {
-      setInputValue(inputRef.current.value);
+      inputRef.current.value = value || '';
     }
-  }, []);
+  }, [value]);
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+    if (onChange) {
+      onChange(e);
+    }
   };
 
   const isPassword = label === 'Password';
@@ -44,11 +49,14 @@ const FormInput = ({
           ref={inputRef}
           {...props}
           type={isPassword && showPassword ? 'text' : type}
-          className={`${styles.inputField} ${errorMessage ? styles.errorInput : ''}`}
-          value={inputValue}
+          className={`${styles.inputField} ${errorMessage ?
+            styles.errorInput : successMessage ? styles.successInput : ''}`}
+          value={value}
           onChange={handleInputChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
         />
-        {isPassword && inputValue && (
+        {isPassword && value && (
           <div
             className={`${styles.formInputIcon} ${errorMessage ? styles.formInputIconError : ''}`}
             onClick={() => setShowPassword(!showPassword)}
@@ -60,13 +68,13 @@ const FormInput = ({
         )}
       </InputGroup>
       {successMessage && (
-        <Form.Control.Feedback className={`${styles.feedback} ${styles.successFeedback}`} >
+        <Form.Control.Feedback className={`${styles.feedback} ${styles.successFeedback}`}>
           <BsCheckLg className={`${styles.icon} ${styles.successIcon}`} />
           {successMessage}
         </Form.Control.Feedback>
       )}
       {errorMessage && (
-        <Form.Control.Feedback type="invalid" className={`${styles.feedback} ${styles.errorFeedback}`} >
+        <Form.Control.Feedback type="invalid" className={`${styles.feedback} ${styles.errorFeedback}`}>
           <BsExclamationCircle className={`${styles.icon} ${styles.errorIcon}`} />
           {errorMessage}
         </Form.Control.Feedback>
@@ -87,6 +95,10 @@ FormInput.propTypes = {
   labelClassName: PropTypes.string,
   successMessage: PropTypes.string,
   showTextPassword: PropTypes.string,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  value: PropTypes.string,
 };
 
 export default FormInput;
