@@ -38,7 +38,7 @@
   letter-spacing: 2%;
   color: #081821;
 }
-.EmailLabel,
+.emailLabel,
 .PasswordLabel {
   margin-top: 24px;
   font-family: Roboto;
@@ -63,35 +63,35 @@
   text-align: center;
   color: aliceblue;
 }
-/* In Register.module.css or your preferred CSS file */
+
 
 .orDivider {
   margin-top: 24px;
-  text-align: center; /* Align the text center */
-  margin: 20px 0; /* Adjust the margin as needed */
+  text-align: center; 
+  margin: 20px 0; 
 }
 
 .dashLine {
-  position: relative; /* Set position to relative */
-  color: #454848; /* Set the color */
+  position: relative; 
+  color: #454848; 
 }
 
 .dashLine:before,
 .dashLine:after {
   content: '';
-  position: absolute; /* Set position to absolute */
-  top: 50%; /* Set top position to center vertically */
-  width: 200px; /* Set the width */
-  height: 1px; /* Set the height */
-  background-color: #454848; /* Set the color */
+  position: absolute;
+  top: 50%; 
+  width: 200px; 
+  height: 1px; 
+  background-color: #454848; 
 }
 
 .dashLine:before {
-  left: -220px; /* Adjust the position of the first dash line */
+  left: -220px; 
 }
 
 .dashLine:after {
-  right: -220px; /* Adjust the position of the second dash line */
+  right: -220px; 
 }
 .orText {
   width: 24px;
@@ -111,8 +111,8 @@
 }
 .loginLink {
   cursor: pointer;
-  color: #f08324; /* Set color to white */
-  text-decoration: underline; /* Add underline */
+  color: #f08324; 
+  text-decoration: underline; 
 }
 
 .passwordList {
@@ -161,6 +161,6 @@ input:focus::placeholder {
   height: 56px;
   /* Add other button styles here */
 }
-.SocialButton {
+.socialButton {
   margin-top: 24px;
 }

@@ -29,7 +29,6 @@ import FormPasswordInput from '../../components/form/FormPasswordInput';
 import MessageBar from '../../components/MessageBar';
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
-//import SocialButtonsGroup from '../../components/SocialButtonsGroup';
 
 const regexUpperCase = /[A-Z]/;
 const regexLowerCase = /[a-z]/;
@@ -323,7 +322,7 @@ export const RegisterForm = (props) => {
           defaultValue={email}
           isInvalid={emailError}
           errors={emailError}
-          labelClassName={styles.EmailLabel}
+          labelClassName={styles.emailLabel}
           // className='EmailInput'
         />
         <FormPasswordInput
@@ -367,7 +366,7 @@ export const RegisterForm = (props) => {
         </div>
         {/* <div className={styles.signUpText}>Or</div> */}
 
-        <Row className='SocialButton'>
+        <Row className='socialButton'>
           <Col xs={12} md={6}>
             <LoginSocialGoogle
               client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
