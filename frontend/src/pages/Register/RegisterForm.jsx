@@ -6,8 +6,8 @@
 */
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-
 import { Col, Row, Form, Button } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 import {
   GoogleLoginButton,
@@ -38,7 +38,6 @@ const regexLength = /^.{8,40}$/;
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const RegisterForm = (props) => {
-  // const [errorMessage, setErrorMessage] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -417,7 +416,8 @@ export const RegisterForm = (props) => {
         </Row>
         <Row className='justify-content-center'>
           <div className={styles.alreadyMember}>
-            Already a member? <span className={styles.loginLink}>Log in</span>
+            Already a member?
+            <NavLink className={styles.loginLink} to="/signin">Log in</NavLink>
           </div>
         </Row>
       </Form>
