@@ -11,9 +11,7 @@ import styles from './Register.module.css';
 import RegisterForm from './RegisterForm';
 
 import { register } from '../../api';
-// import FatherSonBlock from '../../components/FatherSonBlock';
 import Header from '../../components/Header';
-// import TextLink from '../../components/TextLink';
 
 const Register = () => {
   const params = useParams();
@@ -47,21 +45,11 @@ const Register = () => {
     <>
       <div className={styles.page}>
         <div>
-          <Header
-          // widget={
-          //   <TextLink
-          //     title='Already a member?'
-          //     to='/signin'
-          //     linkTitle='Log in'
-          //   />
-          // }
-          />
+          <Header/>
         </div>
-
         <Container className={styles.page__window}>
           <div>
             <Row>
-              {/* <Col className='d-flex justify-content-center align-items-center'> */}
               <Col
                 className={`d-flex justify-content-center align-items-center ${styles.page__wrapper}`}>
                 <div>
