@@ -11,9 +11,8 @@ Briefly describe what this pull request does.
 Any additional information relevant to the PR, such as context, reasons for changes, or anything you want to draw attention to, like the scope of the ticket.
 
 ## Test Steps
-Instructions on how to test the changes:
-1. Step-by-step instructions on how to test the new features or fixes.
-2. Include any specific commands or setups needed.
+- Step-by-step instructions on how to test the new features or fixes.
+- Include any specific commands or setups needed.
 
 ## UI/UX Outcome
 - Add any relevant screenshots or videos to demonstrate the UI/UX changes.
