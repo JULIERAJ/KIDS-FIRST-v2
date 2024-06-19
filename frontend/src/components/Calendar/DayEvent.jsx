@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
-import './viewStyles.css';
+import './DayMonthEventStyles.css';
+import { formatEventTime } from './utils/dateUtils';
 
 export const DayEvent = ({ event }) => {
   const { title, color, kidsName, start, end, desc, type } = event;
 
-  const commonStyle = {
-    borderRadius: '0px 7px 7px 0px',
-  };
-
   const circleStyle = {
-    ...commonStyle,
     width: '40px',
     height: '40px',
     backgroundColor: color,
@@ -23,52 +19,6 @@ export const DayEvent = ({ event }) => {
     left: 0,
     marginLeft: '5px',
     marginTop: '15px'
-  };
-
-  const titleStyle = {
-    ...commonStyle,
-    fontFamily: 'Roboto',
-    color: '#081821',
-    fontSize: '16px',
-    fontWeight: 500,
-    lineHeight: '18.75px',
-    textAlign: 'left',
-    marginLeft: '0px',
-    position: 'absolute',
-    top: '-8px',
-    marginTop: '30px',
-    marginBottom: '0px'
-  };
-
-  const descStyle = {
-    fontFamily: 'Roboto',
-    color: '#081821',
-    fontWeight: 200,
-    fontSize: '16px',
-    lineHeight: '40px',
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: '0',
-    marginTop: '0px',
-    marginBottom: '-5px',
-    opacity: '0.75',
-  };
-
-  const contentWrapperStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: '50px',
-    marginTop: '0px',
-  };
-
-  const timingStyle = {
-    fontSize: '14px',
-    opacity: '0.4',
-    fontWeight: 200,
-    lineHeight: '40px',
-    marginTop: '5px',
-    marginLeft: 'auto',
-    marginRight: '5px',
   };
 
   const boxStyle = {
@@ -86,41 +36,18 @@ export const DayEvent = ({ event }) => {
     paddingBottom: '5px'
   };
 
-  // Helper function to check if the event spans multiple days
-  const isMultiDay = (startDate, endDate) => {
-    return endDate.getDate() > startDate.getDate() ||
-      endDate.getMonth() > startDate.getMonth() ||
-      endDate.getFullYear() > startDate.getFullYear();
-  };
-
-  // Function to format date and time
-  const formatEventTime = (startDate, endDate) => {
-    const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
-    const dateOptions = { weekday: 'short', day: '2-digit', month: 'short' };
-    const startTime = startDate.toLocaleTimeString('en-GB', timeOptions);
-    const endTime = endDate.toLocaleTimeString('en-GB', timeOptions);
-    const startDateFormatted = startDate.toLocaleDateString('en-GB', dateOptions);
-    const endDateFormatted = endDate.toLocaleDateString('en-GB', dateOptions);
-
-    if (isMultiDay(startDate, endDate)) {
-      return `${startTime}, ${startDateFormatted} - ${endTime}, ${endDateFormatted}`;
-    } else {
-      return `${startTime} - ${endTime} ${startDateFormatted}`;
-    }
-  };
-
   return (
-    <div className="event-box" style={boxStyle}>
-      <div style={contentWrapperStyle} className="content-wrapper">
-        <div className="title" style={titleStyle}>
+    <div className='event-box' style={boxStyle}>
+      <div className="DayEventContentWrapperStyle content-wrapper">
+        <div className="title titleStyle" >
           {title && <span>{title}</span>}
         </div>
-        <div className="timing" style={timingStyle}>
+        <div className="DayEventTimingStyle" >
           {start && end && (
             <span>{formatEventTime(start, end)}</span>
           )}
         </div>
-        <div style={descStyle}>
+        <div className="descStyle">
           {desc && <span>{desc}</span>}
         </div>
         <div style={{ fontSize: '14px', opacity: '0.4' }}>
@@ -153,20 +80,6 @@ DayEvent.propTypes = {
     start: PropTypes.instanceOf(Date),
     end: PropTypes.instanceOf(Date),
   }).isRequired,
-};
-
-export const DayViewHeader = ({ date }) => {
-
-  const formatDate = (date) => {
-    const options = { weekday: 'short', day: '2-digit' };
-    return new Date(date).toLocaleDateString('en-GB', options);
-  };
-
-  return <div>{formatDate(date)}</div>;
-};
-
-DayViewHeader.propTypes = {
-  date: PropTypes.instanceOf(Date),
 };
 
 export default DayEvent;

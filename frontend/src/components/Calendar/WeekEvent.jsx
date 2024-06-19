@@ -1,24 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './viewStyles.css';
-
-// const getColorForBackground = (name) => {
-//   const colorsBackground = {
-//     'A': 'rgba(255, 214, 102, 0.5)',
-//     'B': 'rgba(255, 107, 109, 0.5)',
-//     'C': 'rgba(194, 158, 239, 0.5)',
-//   };
-//   return colorsBackground[name.charAt(0).toUpperCase()] || 'rgba(0, 0, 0, 0)'; 
-// };
+import './WeekEventStyles.css';
 
 const WeekEvent = ({ event }) => {
   const { color, kidsName, title, start, end } = event;
 
-  const commonStyle = {
-    borderRadius: '0px 7px 7px 0px',
-  };
   const circleStyle = {
-    ...commonStyle,
     width: '25px',
     height: '25px',
     backgroundColor: color,
@@ -31,37 +19,7 @@ const WeekEvent = ({ event }) => {
     top: 0,
     left: 0,
     marginLeft: '0px',
-    marginTop: '18px'
-  };
-
-  const titleStyle = {
-    ...commonStyle,
-    fontFamily: 'Roboto',
-    color: '#081821',
-    fontSize: '16px',
-    fontWeight: '500',
-    lineHeight: '18.75px',
-    textAlign: 'left',
-    marginLeft: '0px',
-    marginTop: '22px',
-    marginBottom: '0px'
-  };
-
-  const contentWrapperStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    marginLeft: '28px',
-    marginTop: '0px',
-  };
-
-  const timingStyle = {
-    fontSize: '12px',
-    opacity: '0.4',
-    wordBreak: 'break-all',
-    whiteSpace: 'normal',
-    fontWeight: '200',
-    lineHeight: '40px',
-    marginRight: '5px',
+    marginTop: '15px'
   };
 
   const boxStyle = {
@@ -86,19 +44,17 @@ const WeekEvent = ({ event }) => {
   const truncatedTitle = getTruncatedTitle(title);
 
   // Function to format date and time
-  // eslint-disable-next-line no-unused-vars
   const formatEventTime = (startDate, endDate) => {
     const timeOptions = { hour: '2-digit', minute: '2-digit', hour12: false };
     const startTime = startDate.toLocaleTimeString('en-GB', timeOptions);
     const endTime = endDate.toLocaleTimeString('en-GB', timeOptions);
-
     return `${startTime} - ${endTime}`;
   };
   return (
     <div className="event-box" style={boxStyle}>
-      <div style={contentWrapperStyle} className="content-wrapper">
-        {truncatedTitle && <span className="title" style={titleStyle}>{truncatedTitle}</span>}
-        <div className="timing" style={timingStyle}>
+      <div className="contentWrapperStyle content-wrapper">
+        {truncatedTitle && <span className="titleStyle title" >{truncatedTitle}</span>}
+        <div className="timingStyle">
           {(start && end) && (
             <span>{formatEventTime(start, end)}</span>
           )}

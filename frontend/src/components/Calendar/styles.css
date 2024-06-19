@@ -913,7 +913,7 @@ button.rbc-input::-moz-focus-inner {
   background-color: #fcfcfc;
   /*background-color: #f5d9de;*/
   padding: 15px;
-  margin: 15px;
+  margin: 0px;
   /*big and small button*/
   /*button {
     cursor: pointer;
@@ -963,6 +963,7 @@ button.rbc-input::-moz-focus-inner {
 .rbc-toolbar-label {
   font-weight: bold;
   font-size: 1.5em;
+  left: 0px;
 }
 
 /* Styles for week header */

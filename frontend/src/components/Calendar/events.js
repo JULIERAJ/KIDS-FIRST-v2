@@ -1,4 +1,4 @@
-export default [
+const events = [
   {
     id: '1',
     title: 'James-All Day Event very long title',
@@ -8,7 +8,6 @@ export default [
     type: 'Solo event (your ex-partner will not be present at this event)',
     desc: 'A description for All Day Event very long title',
     color: '#C29EEF'
-
   },
   {
     id: '2',
@@ -140,4 +139,6 @@ export default [
     desc: 'A description for Birthday Party',
     color: '#FF6B6D'
   }
-]; 
+];
+
+export default events;
