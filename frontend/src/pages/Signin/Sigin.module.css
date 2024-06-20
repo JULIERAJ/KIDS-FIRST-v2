@@ -1,0 +1,105 @@
+.page {
+  height: 1024px;
+  background-color: #eff0f0;
+}
+
+
+.page__window {
+  max-width: 910px;
+  height: 840px;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+
+.page__wrapper {
+  padding: 56px 234px 104px;
+}
+
+.page__title {
+  font-family: Roboto;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38.4px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--fg-Primary, #081821);
+}
+
+.registerLink {
+  cursor: pointer;
+  color: #f08324;
+  text-decoration: underline;
+  font-size: 18px;
+  width: 400;
+  padding-left: 5px;
+}
+.registerLink:hover, .registerLink:active{
+  color: #f08324;
+  text-decoration: underline;
+}
+
+.login-title {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  margin-bottom: 8%;
+}
+
+.forget-password {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--main-orange) !important;
+  margin-top:10px;
+  padding-left: 0;
+}
+
+.or-login-with {
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.orDivider {
+  margin-top: 24px;
+  text-align: center;
+  margin: 20px 0;
+}
+.dashLine {
+  position: relative;
+  color: #454848;
+}
+
+.dashLine:before,
+.dashLine:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 200px;
+  height: 1px;
+  background-color: #454848;
+}
+
+.dashLine:before {
+  left: -220px;
+}
+
+.dashLine:after {
+  right: -220px;
+}
+.orText {
+  width: 24px;
+  height: 22px;
+  top: -1px;
+  left: 209px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22.4px;
+  text-align: center;
+  color: #454848;
+}

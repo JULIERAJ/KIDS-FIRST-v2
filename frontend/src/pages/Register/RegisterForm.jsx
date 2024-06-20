@@ -322,7 +322,6 @@ export const RegisterForm = (props) => {
           isInvalid={emailError}
           errors={emailError}
           labelClassName={styles.emailLabel}
-          // className='EmailInput'
         />
         <FormPasswordInput
           required
