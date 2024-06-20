@@ -52,7 +52,7 @@ export default function Signin() {
           if (response.status === 404) {
             setErrorMesasage('This account doesn\'t exist. Please enter a different email address or try "Sign Up".');
           } else if (response.status === 401) {
-            setErrorMesasage('Incorrect email or password! Please try again or use "Change Password".');
+            setErrorMesasage('Invalid password or email address');
           } else {
             setErrorMesasage('An unknown error occurred. Please try again later.');
           }
