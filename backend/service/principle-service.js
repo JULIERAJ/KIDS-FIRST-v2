@@ -7,11 +7,11 @@ const Principle = require('../models/Principle');
 
 require('dotenv').config({ path: './.env.local' });
 
-const registration = async (email, password) => {
-  const principle = new Principle({ email, password });
+const registration = async (firstname, lastname, email, password) => {
+  const principle = new Principle({ firstname, lastname, email, password });
   await principle.save();
 
-  return { id: principle._id, email: principle.email };
+  return { id: principle._id, email: principle.email, firstname: principle.firstname, lastname: principle.lastname };
 };
 
 const findUser = async (email) => {

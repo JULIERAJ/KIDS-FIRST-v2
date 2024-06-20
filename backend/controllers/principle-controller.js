@@ -16,13 +16,19 @@ const jwtOptions = {
   expiresIn: '1h',
 };
 const registration = async (req, res) => {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
+
   try {
+    // check that first name is entered
+    if (!firstName) {
+      return res.status(400).json({ message: 'First name is required' });
+    }
+
     let user = await principleService.findUser(email);
     if (user) {
       return res
         .status(409)
-        .json({ message: `The user with ${email} email already exists` });
+        .json({ message: 'This email address is already in use' });
     }
     if (!passwordRegExp.test(password)) {
       return res.status(400).json({
@@ -33,7 +39,8 @@ const registration = async (req, res) => {
     } else if (!emailRegExp.test(email)) {
       return res.status(400).json({ message: 'Invalid email' });
     } else if (!user) {
-      user = await principleService.registration(email, password);
+      user = await principleService.registration(firstName, lastName, email, password);
+
       const emailVerificationToken = await jwt.sign(
         { email },
         process.env.JWT_EMAIL_VERIFICATION_SECRET,
@@ -186,18 +193,15 @@ const loginSocial = async (req, res) => {
   user = await principleService.findUser(userID);
   if (!user) {
     function generatePassword() {
-      // eslint-disable-next-line no-undef, quotes
-      charset = "!@#$%^&*()" + "0123456789" + "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      // eslint-disable-next-line no-undef, quotes
-      newPassword = "";
+      charset = '!@#$%^&*()' + '0123456789' + 'abcdefghijklmnopqrstuvwxyz' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      newPassword = '';
       for (let i = 0; i < 10; i++) {
         // eslint-disable-next-line no-undef
         newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
       }
       // eslint-disable-next-line no-undef
       return newPassword;
-      // eslint-disable-next-line no-extra-semi
-    };
+    }
     let password = generatePassword();
     user = await principleService.registration(
       userID,

@@ -1,0 +1,118 @@
+/* General input styles */
+.inputGroup {
+  position: relative;
+}
+
+.inputField {
+  padding-right: 2.5rem;
+  border-radius: 8px !important;
+  border: 1.5px solid #9eafb7 !important;
+  padding: 17.6px 8px !important;
+  font-size: 16px !important;
+  line-height: 15.36px !important;
+  color: #596b73 !important;
+  background-color: #f6f8f8 !important;
+  box-shadow: none !important;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #A4DFE1 !important;
+  box-shadow: 0px 2px 4px -1px rgba(74, 122, 124, 0.06), 0px 6px 10px -1px rgba(74, 122, 124, 0.1) !important;
+  outline: none !important;
+}
+
+.successInput {
+  border-color: #5DC968 !important;
+}
+
+.errorInput {
+  border-color: #FF7B72 !important;
+  background-image: none !important;
+}
+
+.inputField.successInput:focus {
+  border-color: #5DC968 !important;
+  box-shadow: 0px 2px 4px -1px rgba(74, 122, 124, 0.06), 0px 6px 10px -1px rgba(74, 122, 124, 0.1) !important;
+}
+
+.inputField.errorInput:focus {
+  border-color: #FF7B72 !important;
+  box-shadow: none !important;
+}
+
+.optionalText {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 15.36px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  color: rgba(89, 107, 115, 1);
+}
+
+/* Icon styles */
+.icon {
+  margin: 0 0.3rem 0 0;
+  font-size: 1.5rem;
+  vertical-align: middle;
+}
+
+.successIcon {
+  color: #178222;
+}
+
+.errorIcon {
+  color: #DA3633;
+}
+
+/* Feedback styles */
+.feedback {
+  display: flex;
+  align-items: center;
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  margin: 0.7rem 0;
+}
+
+.successFeedback {
+  color: #178222;
+}
+
+.errorFeedback {
+  color: #DA3633;
+  margin-top: 0.5rem;
+}
+
+/* Password visibility icon styles */
+.formInputIcon {
+  font-size: 1.5rem;
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  background: none;
+  border: none;
+  z-index: 10;
+  color: #000;
+}
+
+.formInputIconError {
+  color: #DA3633 !important;
+}
+
+/* Password text styles */
+.passwordText {
+  font-family: Roboto;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  text-align: left;
+  color: #6c757d;
+}
