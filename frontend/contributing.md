@@ -178,7 +178,7 @@ For more details on managing Pull Requests, you can refer to [this guide in GitH
 3. **Continue the Merge:**
    - Once all conflicts are resolved and added, continue with the merge:
      ```bash
-     git commit
+     git commit -m "resolve merge conflicts in <share file names>"
      ```
 
 4. **Update Your Branch:**
