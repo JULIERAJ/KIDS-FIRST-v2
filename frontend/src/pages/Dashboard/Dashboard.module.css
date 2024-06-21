@@ -2,11 +2,21 @@
   display: flex;
   background-color: #F2F5F5;
 }
-.sidebar{
-  position: fixed;
-}
+
 
 .content {
-  width: 100%;
+  margin-left: 168px;
+  width: calc(100% - 168px);
   padding: 14px;
+  background-color: #F2F5F5;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+  .content {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+  }
 }

@@ -1,13 +1,16 @@
 .sidebar {
-  background-color:#FDFDFD;
+  background-color: #FDFDFD;
   border-radius: 20px;
   border: 1px solid #e5e5e5;
-  font-size: 0.9rem;
-  flex-direction: column;
-  padding: 0px;
-  min-height: 707px;
+  padding: 0;
   height: 100vh;
-  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 168px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebarHeader {
@@ -19,7 +22,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 168px;
+  width: 100%;
   min-height: 586px;
   height: 80%;
 }
@@ -38,11 +41,7 @@
 .nav{
   width: 100%;
 }
-
-.nav:active {
-  border-right: 4px solid rgba(235, 112, 5, 0.724);
-}
-.nav.active {
+.nav:active, .nav.active {
   border-right: 4px solid rgba(235, 112, 5, 0.724);
 }
 
@@ -76,7 +75,6 @@
 }
 
 .sidebarMenu.active {
-  /* background-color:  #FDF1E6; */
   border-right: 5px solid rgba(235, 112, 5, 0.724);
 }
 
