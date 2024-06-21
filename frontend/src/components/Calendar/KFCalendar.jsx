@@ -20,6 +20,13 @@ const KFCalendar = () => {
   const { filteredEventsData } = useContext(EventContext);
   const [activeView, setActiveView] = useState('month'); // State to manage active view
 
+  // Define the handleCreateButtonClick function
+  // eslint-disable-next-line no-unused-vars
+  const handleCreateButtonClick = () => {
+    console.log('Create button clicked!');
+    // Additional logic for creating a new event
+  };
+
   // Event property getter to adjust the style based on overlapping events
   const eventStyleGetter = (event, start, end, isSelected, allEvents) => {
     const overlapCount = getOverlapCount(event, allEvents);
@@ -62,7 +69,12 @@ const KFCalendar = () => {
       week: { header: DayViewHeader, event: WeekEvent },
       month: { event: MonthEvent },
       toolbar: (props) => (
-        <KFToolbar {...props} activeView={activeView} setActiveView={setActiveView} />
+        <KFToolbar
+          {...props}
+          activeView={activeView}
+          setActiveView={setActiveView}
+          handleCreateButtonClick={handleCreateButtonClick} // Pass the function as a prop
+        />
       ),
     },
     defaultDate: new Date(),

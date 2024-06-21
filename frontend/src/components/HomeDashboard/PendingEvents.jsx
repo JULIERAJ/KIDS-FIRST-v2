@@ -198,7 +198,7 @@ const PendingEvents = () => {
   );
 };
 
-PendingEvents.propTypes = {
-  pendingMessages: PropTypes.array.isRequired, // Define prop types here
-};
+// PendingEvents.propTypes = {
+//   pendingMessages: PropTypes.array.isRequired, // Define prop types here
+// };
 export default PendingEvents;
