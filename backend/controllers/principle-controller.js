@@ -16,8 +16,6 @@ const {
   emailRegExp,
 } = require('../utils/passwordUtils');
 
-require('dotenv').config({ path: './.env.local' });
-
 const jwtOptions = {
   expiresIn: process.env.JWT_LIFETIME,
 };
@@ -26,15 +24,16 @@ const registration = async (req, res) => {
   try {
     // check that first name is entered
     if (!firstName) {
-      return res.status(400).json({ message: 'First name is required' });
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'First name is required' });
     }
     let user = await principleService.findUser(email);
 
     if (user) {
       return res
         .status(StatusCodes.CONFLICT)
-        .json({ message:  'This email address is already in use' });
-
+        .json({ message: 'This email address is already in use' });
     }
     if (!passwordRegExp.test(password)) {
       return res.status(StatusCodes.BAD_REQUEST).json({
@@ -47,7 +46,12 @@ const registration = async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: 'Invalid email' });
     } else if (!user) {
-      user = await principleService.registration(firstName, lastName, email, password);
+      user = await principleService.registration(
+        firstName,
+        lastName,
+        email,
+        password
+      );
       const emailVerificationToken = await jwt.sign(
         { email },
         process.env.JWT_EMAIL_VERIFICATION_SECRET,
@@ -134,7 +138,6 @@ const resendActivationEmail = async (req, res) => {
     return res
       .status(StatusCodes.OK)
       .json({ message: 'Activation email resent successfully' });
-
   } catch (e) {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
@@ -166,14 +169,12 @@ const login = async (req, res) => {
         .json({ error: 'Password is not correct' });
     }
 
-
     // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(
       user._id
     );
 
     return res.status(StatusCodes.OK).json({
-
       email: user.email,
       id: user._id,
       familyId: principleFamily[0].id,
@@ -240,7 +241,6 @@ const loginSocial = async (req, res) => {
 
   let user = await principleService.findUser(userID);
   if (!user) {
-
     let password = generatePassword();
     user = await principleService.registration(userID, password);
     principleService.activateAccount(user.email);
