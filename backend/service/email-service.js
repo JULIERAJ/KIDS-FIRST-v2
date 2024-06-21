@@ -18,7 +18,12 @@ let transporter = nodemailer.createTransport({
 
 //function to render the email template using EJS
 const renderTemplate = (templateName, data) => {
-  const templatePath = path.join(__dirname, '..','templates', `${templateName}.ejs`);
+  const templatePath = path.join(
+    __dirname,
+    '..',
+    'templates',
+    `${templateName}.ejs`
+  );
   return ejs.renderFile(templatePath, data);
 };
 
@@ -30,11 +35,13 @@ const sendEmail = async (email, subject, htmlContent) => {
       to: email,
       subject: subject,
       html: htmlContent,
-      attachments: [{
-        filename: 'kids_first_logo_beta.png',
-        path: '../frontend/src/media/logo/kids_first_logo_beta.png',
-        cid: 'logo'
-      }]
+      attachments: [
+        {
+          filename: 'kids_first_logo_beta.png',
+          path: '../frontend/src/media/logo/kids_first_logo_beta.png',
+          cid: 'logo',
+        },
+      ],
     });
   } catch (error) {
     console.error('Error sending email:', error);
@@ -44,8 +51,22 @@ const sendEmail = async (email, subject, htmlContent) => {
 };
 
 // function that sends a general email
-const sendGeneralEmail = async (email, subject, greetingText, messageText, buttonText, endText, href) => {
-  const htmlContent = await renderTemplate('body', { greetingText, messageText, buttonText, endText, href });
+const sendGeneralEmail = async (
+  email,
+  subject,
+  greetingText,
+  messageText,
+  buttonText,
+  endText,
+  href
+) => {
+  const htmlContent = await renderTemplate('body', {
+    greetingText,
+    messageText,
+    buttonText,
+    endText,
+    href,
+  });
   await sendEmail(email, subject, htmlContent);
 };
 
@@ -54,26 +75,49 @@ const sendActivationEmail = async (email, emailVerificationToken) => {
   const href = `${process.env.CLIENT_URL}/activate/${email}/${emailVerificationToken}`;
   const subject = 'KIDS FIRST Account Verification';
   const greetingText = 'Hello and welcome to KIDS FIRST!';
-  const messageText = 'To continue the registration process, please click Verify My Account.';
-  const endText = 'If you don’t use this link within 1 hour, it will expire.';
+  const messageText =
+    'To continue the registration process, please click Verify My Account.';
+  const endText = 'If you don\'t use this link within 1 hour, it will expire.';
   const buttonText = 'Verify My Account';
-  await sendGeneralEmail(email, subject, greetingText, messageText, buttonText, endText, href);
+  await sendGeneralEmail(
+    email,
+    subject,
+    greetingText,
+    messageText,
+    buttonText,
+    endText,
+    href
+  );
 };
 
 // function that sends reset password email with the link
 const sendResetPasswordEmail = async (email, resetPasswordToken) => {
   const href = `${process.env.CLIENT_URL}/reset-password/${email}/${resetPasswordToken}`;
   const subject = '[Kids First] Please reset your password';
-  const greetingText = 'Reset your KIDS FIRST password'; 
-  const messageText = 'We heard that you lost your KIDS FIRST password, sorry about that! ' + 
-  'But don’t worry you can use the following button to reset your password:';
+  const greetingText = 'Reset your KIDS FIRST password';
+  const messageText =
+    'We heard that you lost your KIDS FIRST password, sorry about that! ' +
+    'But don’t worry you can use the following button to reset your password:';
   const endText = 'If you don’t use this link within 3 hours, it will expire.';
   const buttonText = 'Reset Your Password';
-  await sendGeneralEmail(email, subject, greetingText, messageText, buttonText, endText, href);
+  await sendGeneralEmail(
+    email,
+    subject,
+    greetingText,
+    messageText,
+    buttonText,
+    endText,
+    href
+  );
 };
 
 // function that sends invitation email with the link
-const sendInvitationEmail = async (email, family, emailVerificationToken, firstName) => {
+const sendInvitationEmail = async (
+  email,
+  family,
+  emailVerificationToken,
+  firstName
+) => {
   const href = `${process.env.CLIENT_URL}/register/${email}/${family}/${emailVerificationToken}`;
   const subject = `You have been invited by ${firstName} to register in Kids First app`;
   const greetingText = '';
@@ -81,7 +125,19 @@ const sendInvitationEmail = async (email, family, emailVerificationToken, firstN
   To register on Kids First app, please click the link below:`;
   const endText = '';
   const buttonText = 'Click Here';
-  await sendGeneralEmail(email, subject, greetingText, messageText, buttonText, endText, href);
+  await sendGeneralEmail(
+    email,
+    subject,
+    greetingText,
+    messageText,
+    buttonText,
+    endText,
+    href
+  );
 };
 
-module.exports = { sendActivationEmail, sendResetPasswordEmail, sendInvitationEmail };
+module.exports = {
+  sendActivationEmail,
+  sendResetPasswordEmail,
+  sendInvitationEmail,
+};

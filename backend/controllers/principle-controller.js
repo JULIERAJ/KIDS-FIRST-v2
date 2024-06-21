@@ -1,16 +1,25 @@
-const { response } = require('express');
+const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
+
 const fetch = require('node-fetch');
+
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
+
 require('dotenv').config({ path: './.env.local' });
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,40}$/;
-const emailRegExp = /^\S+@\S+\.\S+$/;
+const {
+  generatePassword,
+  passwordRegExp,
+  emailRegExp,
+} = require('../utils/passwordUtils');
+
+require('dotenv').config({ path: './.env.local' });
+
 const jwtOptions = {
-  expiresIn: '1h',
+  expiresIn: process.env.JWT_LIFETIME,
 };
 const registration = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
@@ -23,17 +32,20 @@ const registration = async (req, res) => {
 
     if (user) {
       return res
-        .status(409)
-        .json({ message: 'This email address is already in use' });
+        .status(StatusCodes.CONFLICT)
+        .json({ message:  'This email address is already in use' });
+
     }
     if (!passwordRegExp.test(password)) {
-      return res.status(400).json({
-        message:
-          'Password must be at least 8 characters long and contain\
-           at least one uppercase letter, one lowercase letter, and one number',
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: `Password must be at least 8 characters 
+          long and contain at least one uppercase letter, one lowercase letter, 
+          one number, and one symbol.`,
       });
     } else if (!emailRegExp.test(email)) {
-      return res.status(400).json({ message: 'Invalid email' });
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'Invalid email' });
     } else if (!user) {
       user = await principleService.registration(firstName, lastName, email, password);
       const emailVerificationToken = await jwt.sign(
@@ -42,14 +54,17 @@ const registration = async (req, res) => {
         jwtOptions
       );
       await emailService.sendActivationEmail(email, emailVerificationToken);
-      return res.status(201).json({
+
+      return res.status(StatusCodes.CREATED).json({
         message: 'Verify your email.',
         email: user.email,
         emailIsActivated: user.emailIsActivated,
       });
     }
   } catch (e) {
-    return res.status(500).json({ message: 'something went wrong' });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Something went wrong' });
   }
 };
 const accountActivation = async (req, res) => {
@@ -58,31 +73,41 @@ const accountActivation = async (req, res) => {
   try {
     const user = await principleService.findUser(email);
     if (user.emailIsActivated === true) {
-      return res.status(200).json({
+      return res.status(StatusCodes.OK).json({
         message: 'Email has been verified',
         email: user.email,
         emailIsActivated: user.emailIsActivated,
       });
     }
-    const activationTokenVerified = await principleService.emailTokenVerification(activationToken);
+
+    const activationTokenVerified =
+      await principleService.emailTokenVerification(activationToken);
+
     if (!activationTokenVerified) {
       return res
-        .status(400)
-        .json({ message: 'activation link is not correct' });
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: 'Activation link is not correct' });
     } else {
       const principleData = await principleService.activateAccount(email);
       // autogenerate family name and save it in db
       const familyName = familyService.generateFamilyName();
-      const familyNameRegistartion = await familyService.familyRegistration(familyName, principleData._id);
-      return res.status(200).json({
-        message: 'the account is successfully activated',
+
+      const familyNameRegistration = await familyService.familyRegistration(
+        familyName,
+        principleData._id
+      );
+
+      return res.status(StatusCodes.OK).json({
+        message: 'The account is successfully activated',
         email: principleData.email,
         emailIsActivated: principleData.emailIsActivated,
-        familyName: familyNameRegistartion.familyName,
+        familyName: familyNameRegistration.familyName,
       });
     }
   } catch (e) {
-    return res.status(500).json({ message: e.message });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: e.message });
   }
 };
 const resendActivationEmail = async (req, res) => {
@@ -93,19 +118,27 @@ const resendActivationEmail = async (req, res) => {
     const user = await principleService.findUser(email);
     if (!user) {
       // If user is not found, return a 404 status with a corresponding message
-      return res.status(404).json({ message: 'User not found' });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: 'User not found' });
     }
     // Generate an email verification token using JWT
     const emailVerificationToken = await jwt.sign(
       { email },
       process.env.JWT_EMAIL_VERIFICATION_SECRET,
-      { expiresIn: '1h' },
+      { expiresIn: process.env.JWT_LIFETIME }
     );
     // Send the activation email with the generated token
     await emailService.sendActivationEmail(email, emailVerificationToken);
-    return res.status(200).json({ message: 'Activation email resent successfully' });
+
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: 'Activation email resent successfully' });
+
   } catch (e) {
-    return res.status(500).json({ message: 'Internal server error. Please try again later.' });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Internal server error. Please try again later.' });
   }
 };
 const login = async (req, res) => {
@@ -113,26 +146,43 @@ const login = async (req, res) => {
   try {
     const isEmailCorrect = email && emailRegExp.test(email);
     if (!isEmailCorrect) {
-      return res.status(400).json({ error: 'Invalid email address' });
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ error: 'Invalid email address' });
     }
+
     const user = await principleService.findUser(email);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: 'User not found' });
     }
-    const isPasswordCorrect = password && await principleService.isPasswordCorrect(email, password);
+
+    const isPasswordCorrect =
+      password && (await principleService.isPasswordCorrect(email, password));
     if (!isPasswordCorrect) {
-      return res.status(401).json({ error: 'Password is not correct' });
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ error: 'Password is not correct' });
     }
+
+
     // when the user login, then find that user's family(s), then push the info  to the front
-    const principleFamily = await familyService.findPrincipleFamilyName(user._id);
-    return res.status(200).json({
+    const principleFamily = await familyService.findPrincipleFamilyName(
+      user._id
+    );
+
+    return res.status(StatusCodes.OK).json({
+
       email: user.email,
       id: user._id,
       familyId: principleFamily[0].id,
-      familyName: principleFamily[0].familyName
+      familyName: principleFamily[0].familyName,
     });
   } catch (e) {
-    return res.status(500).json({ message: 'Failed to login' });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: 'Failed to login' });
   }
 };
 const loginFacebook = async (req, res) => {
@@ -174,91 +224,98 @@ const loginFacebook = async (req, res) => {
     }
   } catch (error) {
     console.error('Fetch error:', error);
-    res.status(500).json({ error: 'Error fetching data from Facebook' });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: 'Error fetching data from Facebook' });
   }
 };
+
 const loginSocial = async (req, res) => {
   const { userID } = req.body;
   if (userID === undefined) {
-    return res.status(401).json({ error: 'Error fetching data from Google' });
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ error: 'Error fetching data from Google' });
   }
-  user = await principleService.findUser(userID);
+
+  let user = await principleService.findUser(userID);
   if (!user) {
-    function generatePassword() {
-      charset = '!@#$%^&*()' + '0123456789' + 'abcdefghijklmnopqrstuvwxyz' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      newPassword = '';
-      for (let i = 0; i < 10; i++) {
-        newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
-      }
-      return newPassword;
-    }
+
     let password = generatePassword();
-    user = await principleService.registration(
-      userID,
-      password,
-    );
+    user = await principleService.registration(userID, password);
     principleService.activateAccount(user.email);
   }
   const principleFamily = await familyService.findPrincipleFamilyName(user._id);
-  return res.status(200).json({
+  return res.status(StatusCodes.OK).json({
     email: user.email,
     id: user._id,
     familyId: principleFamily.id,
-    familyName: principleFamily.familyName
+    familyName: principleFamily.familyName,
   });
 };
+
 const requestResetPassword = async (req, res) => {
   const { email } = req.body;
   if (!email) {
-    return res.status(400).json({ error: 'Email is required' });
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ error: 'Email is required' });
   }
   try {
     const user = await principleService.findUser(email);
     if (!user) {
       return res
-        .status(404)
+        .status(StatusCodes.NOT_FOUND)
         .json({ error: 'No user found with this email address' });
     }
+
     // Generate a reset password token
     const passwordResetVerificationToken = await jwt.sign(
       { email },
       process.env.JWT_EMAIL_VERIFICATION_SECRET,
       jwtOptions
     );
+
     // Send an email with the reset password link
     await emailService.sendResetPasswordEmail(
       email,
       passwordResetVerificationToken
     );
-    return res.status(200).json({
+    return res.status(StatusCodes.OK).json({
       message: `Reset password link sent to ${email}`,
     });
   } catch (e) {
-    return res.status(500).json({ message: e.message });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: e.message });
   }
 };
 const resetPasswordActivation = async (req, res) => {
   const { email, resetPasswordToken } = req.params;
   try {
     if (principleService.validateUserAndToken(email, resetPasswordToken)) {
-      return res.status(201).json({ status: 201 });
-    } else {
       return res
-        .status(401)
-        .json({ status: 401, message: 'User does not exist' });
+        .status(StatusCodes.CREATED)
+        .json({ status: StatusCodes.CREATED });
+    } else {
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        status: StatusCodes.UNAUTHORIZED,
+        message: 'User does not exist',
+      });
     }
   } catch (err) {
-    return res.status(401).json({ status: 401, error: err.message });
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ status: StatusCodes.UNAUTHORIZED, error: err.message });
   }
 };
 const resetPasswordUpdates = async (req, res) => {
   const { email, resetPasswordToken } = req.params;
   const { password } = req.body;
   if (!passwordRegExp.test(password)) {
-    return res.status(400).json({
-      message:
-        'Password must be at least 10 characters long\
-         and contain at least one uppercase letter, one lowercase letter, and one number',
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: `Password must be at least 10 characters long and contain 
+        at least one uppercase letter, one lowercase letter, one number, and one symbol`,
     });
   }
   try {
@@ -266,17 +323,22 @@ const resetPasswordUpdates = async (req, res) => {
       resetPasswordToken
     );
     if (!decoded) {
-      return res.status(401).json({ msg: 'Invalid token' });
+      return res
+        .status(StatusCodes.UNAUTHORIZED)
+        .json({ msg: 'Invalid token' });
     }
     // update user
     let user = await principleService.updateUserPassword(email, password);
     // hash password using isPasswordCorrect
     await user.save();
-    return res.status(200).json({ msg: 'Password updated successfully' });
+    return res
+      .status(StatusCodes.OK)
+      .json({ msg: 'Password updated successfully' });
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error(err.message);
-    return res.status(500).json({ msg: 'Server error' });
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ msg: 'Server error' });
   }
 };
 module.exports = {
