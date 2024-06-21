@@ -1,0 +1,229 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8rem;
+  margin: 4rem;
+  justify-content: space-around;
+}
+
+.eventMessage {
+  display: flex;
+  flex-direction: row;
+}
+
+.calendar-overview {
+  margin-bottom: 20px;
+}
+
+.week-events {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.day-event {
+  width: 165px;
+  height: 245px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.day {
+  font-weight: bold;
+}
+
+.date {
+  margin-top: 5px;
+}
+
+.time {
+  margin-top: 5px;
+}
+
+.title {
+  margin-top: 10px;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.left-column,
+.right-column {
+  width: 48%;
+}
+/*pending Event box size*/
+.event-boxes,
+.message-boxes {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.event-box {
+  width: 555px;
+  height: 78px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  padding: 5px;
+}
+
+.message-boxes {
+  width: 555px;
+  height: 78px;
+  overflow-y: auto;
+}
+
+.message-box {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.two-columns {
+  display: flex;
+}
+
+.left-column,
+.right-column {
+  width: 555px;
+  height: 353px;
+}
+
+.pending-events {
+  margin-top: 2rem;
+}
+
+.left-column,
+.right-column {
+  width: 601px;
+  height: 353px;
+  padding: 10px;
+}
+
+.event-boxes {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-event {
+  /* Group 1000006325 */
+
+  position: absolute;
+  width: 404px;
+  height: 309px;
+  left: 0px;
+  top: 0px;
+}
+
+.day {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+/* Apply color for today's date */
+.day-header .weekday.today {
+  color: #eb7005;
+  font-weight: bold;
+}
+
+.day-header .day.today {
+  color: #eb7005;
+  font-weight: bold;
+}
+
+.rbc-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+/* date identity for today : Straight cyan horizontal line */
+.rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 2px;
+  background-color: #34bdc3;
+}
+
+/* Adjust the styles for time slots */
+/* .rbc-timeslot-group {
+display: flex;
+flex-direction: column;
+height: 50px; 
+} */
+
+.rbc-time-slot:has(.rbc-label) {
+  margin-top: -10px;
+}
+
+.rbc-time-gutter.rbc-time-column {
+  padding-right: 20px;
+}
+
+/*************************************** Message Notification ************************************/
+
+.message-event {
+  margin: 8rem;
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-around;
+  /* column-gap: 3rem; */
+}
+
+.rounded {
+  border: 1px solid #ccc;
+  border-radius: 20px !important;
+  padding: 0.8rem;
+}
+
+.messages {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.8rem;
+  padding: 0.5rem;
+}
+
+.circleShape {
+  background-color: #019da4;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+.message {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  text-align: left;
+}

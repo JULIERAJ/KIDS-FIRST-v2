@@ -1,64 +1,103 @@
 .sidebar {
-  position: relative;
-  background-color: rgba(229, 229, 229, 1);
+  background-color:#FDFDFD;
   border-radius: 20px;
   border: 1px solid #e5e5e5;
-  height: 100vh;
-  width: 150px;
-  margin-left: 15px;
-  top: 15px;
   font-size: 0.9rem;
+  flex-direction: column;
+  padding: 0px;
+  min-height: 707px;
+  height: 100vh;
+  justify-content: flex-start;
 }
 
 .sidebarHeader {
+  margin-bottom: 32px;
+  padding: 24px 43px 4px;
+}
+
+.sidebarMenu{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 32px;
-  margin-bottom: 16px;
+  justify-content: space-between;
+  width: 168px;
+  min-height: 586px;
+  height: 80%;
 }
 
 .sidebarMenuItem {
   display: flex;
-  height: 48px;
   align-items: center;
-  padding-left: 10px;
+  gap: 8px;
+  padding: 24px 0px 24px 16px;
 }
 
-/* setting icon */
-.rowContainer:nth-last-child(2) {
-  position: absolute;
-  bottom: 90.3px;
+.rowContainer{
+  height: 80px;
+}
+
+.nav{
   width: 100%;
 }
-/* help icon */
-.rowContainer:nth-last-child(1) {
-  position: absolute;
-  bottom: 33.3px;
-  width: 100%;
+
+.nav:active {
+  border-right: 4px solid rgba(235, 112, 5, 0.724);
+}
+.nav.active {
+  border-right: 4px solid rgba(235, 112, 5, 0.724);
+}
+
+.nav:hover{
+  background-color:  #FDF1E6;
 }
 
 .sidebarLink {
   text-decoration: none;
-  color: black !important;
-  font-size: 0.9rem;
-  line-height: 35px;
-  font-weight: 500;
+  color: black;
+  font-size: 1rem;
+  line-height: 120%;
+  font-weight: 400;
+  padding: 6.4px 0;
 }
 
 .sidebarLink:hover {
-  transition: all 0.2s ease;
-  color: orange;
+  color: black;
+}
+.sidebarLink:focus{
+  outline: none;
 }
 
-.sidebarMenuItem:hover img {
-  transform: scale(1.2);
-  transition: all 0.2s ease;
+.sidebarMenuItem:hover a {
+  font-weight: 700;
 }
 
-.sidebarMenu:hover {
-  cursor: pointer;
-  filter: invert(0.5) sepia(4) saturate(6) hue-rotate(0deg);
-  border-right: 5px solid rgba(240, 148, 67, 0.724);
+.sidebarMenuItem.active .sidebarLink {
+  color: #EB7005;
+  font-weight: 700;
 }
+
+.sidebarMenu.active {
+  /* background-color:  #FDF1E6; */
+  border-right: 5px solid rgba(235, 112, 5, 0.724);
+}
+
+.sidebarMenuItem.active .sidebarLink:hover::after {
+  width: 0;
+}
+
+.sidebarMenuItem.active .sidebarLink::after {
+  width: 0;
+}
+
+.otherItemsContainer,
+.settingsHelpContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nav:focus-within {
+  outline: none;
+  border: 4px solid rgba(235, 112, 5, 0.724);
+}
+
+
