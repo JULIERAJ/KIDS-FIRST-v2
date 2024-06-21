@@ -1,0 +1,43 @@
+.login__title {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  margin-bottom: 8%;
+}
+
+.forget__password {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--main-orange) !important;
+  margin-top:10px;
+  padding-left: 0;
+}
+
+.or__lanes {
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.customButton {
+  margin-top: 24px;
+  width: 442px;
+  height: 56px;
+  background-color: #eb7005;
+  font-family: Roboto;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25.2px;
+  text-align: center;
+  color: #fcfcfc;
+}
+
+.customButton:hover,
+.customButton:active,
+.customButton:focus-visible,
+.customButton:focus {
+  color: #eb7005 !important;
+}

@@ -173,7 +173,7 @@ input:focus::placeholder {
 .customButton:active,
 .customButton:focus-visible,
 .customButton:focus {
-  color: #eb7005;
+  color: #eb7005 !important;
 }
 .socialButton {
   margin-top: 24px;
