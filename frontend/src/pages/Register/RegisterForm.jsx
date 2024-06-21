@@ -354,7 +354,7 @@ export const RegisterForm = (props) => {
           size='lg'
           variant='light'
         >
-          <span className={styles.signUpText}>Sign up</span>
+          Sign up
         </Button>
 
         {/* Horizontal line with "Or" surrounded by dashes */}
