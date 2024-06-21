@@ -20,6 +20,7 @@ const registration = async (req, res) => {
       return res.status(400).json({ message: 'First name is required' });
     }
     let user = await principleService.findUser(email);
+
     if (user) {
       return res
         .status(409)
