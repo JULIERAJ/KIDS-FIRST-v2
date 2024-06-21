@@ -1,12 +1,9 @@
-
 const { response } = require('express');
 const jwt = require('jsonwebtoken');
 const fetch = require('node-fetch');
-
 const emailService = require('../service/email-service');
 const familyService = require('../service/family-service');
 const principleService = require('../service/principle-service');
-
 require('dotenv').config({ path: './.env.local' });
 // 1 upper/lower case letter, 1 number, 1 special symbol
 // eslint-disable-next-line max-len
@@ -17,13 +14,11 @@ const jwtOptions = {
 };
 const registration = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
-
   try {
     // check that first name is entered
     if (!firstName) {
       return res.status(400).json({ message: 'First name is required' });
     }
-
     let user = await principleService.findUser(email);
     if (user) {
       return res
@@ -40,7 +35,6 @@ const registration = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email' });
     } else if (!user) {
       user = await principleService.registration(firstName, lastName, email, password);
-
       const emailVerificationToken = await jwt.sign(
         { email },
         process.env.JWT_EMAIL_VERIFICATION_SECRET,
@@ -120,19 +114,16 @@ const login = async (req, res) => {
     if (!isEmailCorrect) {
       return res.status(400).json({ error: 'Invalid email address' });
     }
-
     const user = await principleService.findUser(email);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-
     const isPasswordCorrect = password && await principleService.isPasswordCorrect(email, password);
     if (!isPasswordCorrect) {
       return res.status(401).json({ error: 'Password is not correct' });
     }
     // when the user login, then find that user's family(s), then push the info  to the front
     const principleFamily = await familyService.findPrincipleFamilyName(user._id);
-
     return res.status(200).json({
       email: user.email,
       id: user._id,
@@ -196,10 +187,8 @@ const loginSocial = async (req, res) => {
       charset = '!@#$%^&*()' + '0123456789' + 'abcdefghijklmnopqrstuvwxyz' + 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       newPassword = '';
       for (let i = 0; i < 10; i++) {
-        // eslint-disable-next-line no-undef
         newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
       }
-      // eslint-disable-next-line no-undef
       return newPassword;
     }
     let password = generatePassword();
@@ -209,12 +198,9 @@ const loginSocial = async (req, res) => {
     );
     principleService.activateAccount(user.email);
   }
-
   const principleFamily = await familyService.findPrincipleFamilyName(user._id);
   return res.status(200).json({
-    // eslint-disable-next-line no-undef
     email: user.email,
-    // eslint-disable-next-line no-undef
     id: user._id,
     familyId: principleFamily.id,
     familyName: principleFamily.familyName
