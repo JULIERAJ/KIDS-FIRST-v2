@@ -1,6 +1,7 @@
-const events = [
+/* eslint-disable import/no-anonymous-default-export */
+export default [
   {
-    id: '1',
+    id: 1,
     title: 'James-All Day Event very long title',
     kidsName: 'James',
     start: new Date(2024, 1, 1, 8, 0), // Start time: 8:00 AM
@@ -8,9 +9,10 @@ const events = [
     type: 'Solo event (your ex-partner will not be present at this event)',
     desc: 'A description for All Day Event very long title',
     color: '#C29EEF'
+
   },
   {
-    id: '2',
+    id: 2,
     title: 'James-Multi-day Event',
     kidsName: 'James',
     start: new Date(2024, 3, 20, 19, 30, 0),
@@ -20,7 +22,7 @@ const events = [
     color: '#C29EEF'
   },
   {
-    id: '3',
+    id: 3,
     title: 'Viki-Dentist Appointment',
     kidsName: 'Viki',
     start: new Date(2024, 2, 13, 10, 0), // Start time: 10:00 AM
@@ -30,7 +32,7 @@ const events = [
     color: '#FF6B6D'
   },
   {
-    id: '4',
+    id: 4,
     title: 'James-Dentist Appointment',
     kidsName: 'James',
     start: new Date(2024, 2, 6, 14, 0), // Start time: 2:00 PM
@@ -40,7 +42,7 @@ const events = [
     color: '#C29EEF'
   },
   {
-    id: '5',
+    id: 5,
     title: 'Sarah-Tennis practice',
     kidsName: 'Sarah',
     start: new Date(2024, 2, 18, 16, 0), // Start time: 4:00 PM
@@ -50,7 +52,7 @@ const events = [
     color: '#FFD666'
   },
   {
-    id: '6',
+    id: 6,
     title: 'Viki-Conference',
     kidsName: 'Viki',
     start: new Date(2024, 3, 11, 9, 0), // Start time: 9:00 AM
@@ -60,7 +62,7 @@ const events = [
     color: '#FF6B6D'
   },
   {
-    id: '7',
+    id: 7,
     title: 'James-Meeting with Rose',
     kidsName: 'James',
     start: new Date(2024, 3, 12, 10, 30), // Start time: 10:30 AM
@@ -70,7 +72,7 @@ const events = [
     color: '#C29EEF'
   },
   {
-    id: '8',
+    id: 8,
     title: 'Sarah-Lunch at Restaurant (March 22)',
     kidsName: 'Sarah',
     start: new Date(2024, 2, 22, 9, 0), // Start time: March 22, 2024, 9:00 AM
@@ -80,7 +82,7 @@ const events = [
     color: '#FFD666'
   },
   {
-    id: '9',
+    id: 9,
     title: 'Sarah-Dinner at Home (March 9)',
     kidsName: 'Sarah',
     start: new Date(2024, 2, 9, 16, 0), // Start time: March 9, 2024, 4:00 PM
@@ -90,7 +92,7 @@ const events = [
     color: '#FFD666'
   },
   {
-    id: '10',
+    id: 10,
     title: 'Sarah-Lunch at Restaurant',
     kidsName: 'Sarah',
     start: new Date(2024, 3, 12, 17, 0), // Start time: 12:30 PM
@@ -100,7 +102,7 @@ const events = [
     color: '#FFD666'
   },
   {
-    id: '11',
+    id: 11,
     title: 'Viki-Class Registration',
     kidsName: 'Viki',
     start: new Date(2024, 3, 12, 17, 0), // Start time: 2:00 PM
@@ -110,7 +112,7 @@ const events = [
     color: '#FF6B6D'
   },
   {
-    id: '12',
+    id: 12,
     title: 'James-Happy Hour',
     kidsName: 'James',
     start: new Date(2024, 3, 12, 18, 0), // Start time: 6:00 PM
@@ -120,7 +122,7 @@ const events = [
     color: '#C29EEF'
   },
   {
-    id: '13',
+    id: 13,
     title: 'Sarah-Dinner with Joe',
     kidsName: 'Sarah',
     start: new Date(2024, 3, 12, 19, 0), // Start time: 7:00 PM
@@ -130,7 +132,7 @@ const events = [
     color: '#FFD666'
   },
   {
-    id: '14',
+    id: 14,
     title: 'Viki-Birthday Party',
     kidsName: 'Viki',
     start: new Date(2024, 3, 13, 9, 0), // Start time: 9:00 AM
@@ -140,5 +142,3 @@ const events = [
     color: '#FF6B6D'
   }
 ];
-
-export default events;
