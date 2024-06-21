@@ -1,0 +1,12 @@
+.dashboard{
+  display: flex;
+  background-color: #F2F5F5;
+}
+.sidebar{
+  position: fixed;
+}
+
+.content {
+  width: 100%;
+  padding: 14px;
+}

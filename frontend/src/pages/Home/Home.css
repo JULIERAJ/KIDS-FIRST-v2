@@ -38,15 +38,15 @@ body.home {
 .home-signup-btn {
   box-sizing: border-box;
   border-radius: 7px !important;
-  background: #f08324 !important;
-  border: solid 2px #f08324 !important;
-  color: #000 !important;
+  background: #eb7005 !important;
+  border: solid 2px #eb7005 !important;
+  color: #fcfcfc !important;
   width: 108px;
   height: 42px;
   margin-right: 0px;
   font-family: Roboto, sans-serif;
   font-weight: 500 !important;
-  color: #2b2b2b;
+  color: #fcfcfc;
   text-decoration: none;
 }
 
@@ -78,14 +78,14 @@ body.home {
 .home-signup-btn-2 {
   box-sizing: border-box;
   border-radius: 7px !important;
-  background:  #f08324 !important;
-  border: solid 2px #f08324 !important;
+  background:  #eb7005 !important;
+  border: solid 2px #eb7005 !important;
   margin-top: 80px;
   padding: 14px;
   width: 202px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500 !important;
-  color: #000 !important;
+  color: #fcfcfc !important;
   font-size: 22px !important;
 }
 
@@ -93,6 +93,7 @@ body.home {
 .home-signup-btn-2:hover {
 	background: #ffffff !important;
 	border: solid 2px #f08324 !important;
+  color: #081821 !important;
 }
 
 .value {
@@ -116,7 +117,7 @@ body.home {
   margin-bottom: 68px;
   text-transform: uppercase;
   font-family: Roboto, sans-serif;
-  font-size: 46px;
+  font-size: 40px;
   line-height: 1.45;
 }
 
@@ -135,8 +136,9 @@ body.home {
   margin-bottom: 50px;
   text-transform: uppercase;
   font-family: Roboto, sans-serif;
-  font-size: 46px;
+  font-size: 40px;
   line-height: 1.45;
+  color: 081821;
 }
 
 .right-blurb {
@@ -160,11 +162,11 @@ body.home {
   height: calc(100% - 90px);
   width: 55%;
   padding-left: 5%;
-  font-size: 46px;
+  font-size: 32px;
   line-height: 50px;
   margin-top: 100px;
   font-family: Roboto, sans-serif;
-  color: #000;
+  color: #081821;
 }
 
 .left-blurb h1 {

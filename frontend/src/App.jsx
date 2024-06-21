@@ -1,9 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+
+import { EventProvider } from './components/Calendar/EventContext';
+import KFCalendar from './components/Calendar/KFCalendar';
+import EventModal from './components/EventModal/EventModal';
+
+import HomeDashboard from './components/HomeDashboard/HomeDashboard';
 import LandingLayout from './components/LandingLayout';
-import Sidebar from './components/Sidebar/Sidebar';
 import Activate from './pages/Activate/Activate';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
+
 // import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
@@ -29,15 +35,21 @@ const App = () => (
           element={<Activate />}
         />
         {/* <Route path='/family' element={<Family />} /> */}
-        <Route path='/member' element={<FinalPanel />} /> 
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/member' element={<FinalPanel />} />
+
+        <Route path="/dashboard/*" element={<Dashboard />}>
+          <Route path="calendarview" element={<EventProvider><KFCalendar /></EventProvider>} />
+          <Route path='homedashboard' element={<HomeDashboard />} />
+        </Route>
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route
           path='/reset-password/:email/:resetPasswordToken'
           element={<ResetPassword />}
         />
-        <Route path='/sidebar' element={<Sidebar />} />
-      </Route>
+
+        <Route path="/eventmodal" element={<EventModal />} />
+
+         </Route>
     </Routes>
   </BrowserRouter>
 );

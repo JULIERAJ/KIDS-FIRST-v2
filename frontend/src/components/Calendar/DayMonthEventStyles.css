@@ -1,0 +1,44 @@
+.titleStyle {
+    font-family: Roboto;
+    color: #081821;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18.75px;
+    text-align: left;
+    margin-left: 0px;
+    position: absolute;
+    top: 5px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+
+.descStyle {
+    font-family: Roboto;
+    color: #081821;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    opacity: 0.75;
+}
+
+.DayEventContentWrapperStyle {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 0px;
+}
+
+.DayEventTimingStyle {
+    font-size: 14px;
+    opacity: 0.4;
+    font-weight: 200;
+    line-height: 40px;
+    top: 10px;
+    margin-left: auto;
+    margin-right: 5px;
+}
