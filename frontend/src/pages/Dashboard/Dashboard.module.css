@@ -1,22 +1,23 @@
 .dashboard{
   display: flex;
   background-color: #F2F5F5;
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px 12px 24px calc(168px + 24px);
 }
 
 
 .content {
-  margin-left: 168px;
-  width: calc(100% - 168px);
-  padding: 14px;
+  width: 100%;
   background-color: #F2F5F5;
 }
 
 @media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
+  .dashboard {
+    padding: 24px 12px;
   }
   .content {
-    margin-left: 200px;
-    width: calc(100% - 200px);
+    margin: 0 24px;
+    width: calc(100% - 24px);
   }
 }

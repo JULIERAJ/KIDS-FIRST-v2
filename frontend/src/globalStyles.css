@@ -81,11 +81,16 @@
   color: var(--main-black);
   background-color: var(--main-white);
   opacity: 0.7;
-} 
+}
 
 .tertiary-btn {
   font-size: 14px;
   line-height: 21px;
   background-color: var(--main-white) !important;
   color: var(--main-black) !important;
+}
+
+/* Hide icons until fonts are loaded */
+.fonts-loading .material-symbols-rounded {
+  visibility: hidden;
 }

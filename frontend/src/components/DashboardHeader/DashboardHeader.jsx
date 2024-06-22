@@ -6,7 +6,7 @@ import styles from './DashboardHeader.module.css';
 
 const DashboardHeader = ({ title }) => {
   return (
-    <Container as='aside' className={`${styles.Dashboard}`}>
+    <Container fluid as='aside' className={`${styles.Dashboard}`}>
       <div className={`${styles.heading}`}>
         <h2 className={`${styles.rightAlign}`}>{title}</h2>
       </div>
