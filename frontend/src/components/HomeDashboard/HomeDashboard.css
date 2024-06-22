@@ -7,12 +7,6 @@
   justify-content: space-around;
 }
 
-.cardContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px; /* Gap between cards */
-  justify-content: center; /* Center cards horizontally */
-}
 
 .eventMessage {
   display: flex;
