@@ -226,7 +226,7 @@ const EventModal = ({ onClose }) => {
 };
 
 EventModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default EventModal;
