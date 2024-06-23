@@ -13,12 +13,55 @@
 }
 
 .login__title {
-  font-weight: 700;
+  font-family: Roboto;
   font-size: 32px;
+  font-weight: 700;
   line-height: 38.4px;
+  letter-spacing: -0.01em;
   text-align: center;
+  margin-bottom: 24px;
+  color: var(--fg-Primary, #081821);
 }
 
+.orDivider {
+  margin-top: 24px;
+  text-align: center;
+  margin: 20px 0;
+}
+.dashLine {
+  position: relative;
+  color: #454848;
+}
+
+.dashLine:before,
+.dashLine:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 200px;
+  height: 1px;
+  background-color: #454848;
+}
+
+.dashLine:before {
+  left: -220px;
+}
+
+.dashLine:after {
+  right: -220px;
+}
+.orText {
+  width: 24px;
+  height: 22px;
+  top: -1px;
+  left: 209px;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22.4px;
+  text-align: center;
+  color: #454848;
+}
 
 
 .forget__password {

@@ -10,14 +10,11 @@ import styles from './Sigin.module.css';
 import { login, loginFacebook, loginSocial } from '../../api';
 import FormEmailInput from '../../components/form/FormEmailInput';
 import FormPasswordInput from '../../components/form/FormPasswordInput';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 // import TextLink from '../../components/TextLink';
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
 import { EMAIL_REG_EXP } from '../../utils/index';
-import TextLink from '../../components/TextLink';
-
-const HeaderLink = <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />;
 
 export default function Signin() {
   const [email, setEmail] = useState('');
@@ -168,11 +165,11 @@ export default function Signin() {
               variant="light">
               Log In
             </Button>
-                    <div className={styles.orDivider}>
-                      <span className={styles.dashLine}></span>
-                      <span className={styles.orText}>Or</span>
-                      <span className={styles.dashLine}></span>
-                    </div>
+            <div className={styles.orDivider}>
+          <span className={styles.dashLine}></span>
+          <span className={`${styles.orText}`}>Or</span>
+          <span className={styles.dashLine}></span>
+        </div>
 
                     <Row className={styles.socialButton}>
                       <Col xs={12} md={6}>
