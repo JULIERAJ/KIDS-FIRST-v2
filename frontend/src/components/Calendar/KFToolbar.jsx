@@ -74,7 +74,7 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
         <div className="buttonsContainer">
           {/* Big button */}
           <div className="bigButtonContainer">
-            <button onClick={handleCreateButtonClick} className="styles.bigButton"
+            <div onClick={handleCreateButtonClick} className="bigButton"
               style={{ border: '2px solid #EB7005' }}>
               {/* smaller buttons inside big button */}
               <div className="smallButtonsContainer">
@@ -91,7 +91,7 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
                   </button>
                 ))}
               </div>
-            </button>
+            </div>
           </div>
           {/* Create button */}
           <button onClick={() => { openModal(); handleCreateButtonClick(); }} className="createButton">
