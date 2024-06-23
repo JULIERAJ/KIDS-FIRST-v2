@@ -1,0 +1,68 @@
+
+.Dashboard {
+  position: relative;
+  background-color: #fdfdfd;
+  border-radius: 16px;
+  border: 1px solid #e5e5e5;
+  height: 104px;
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+}
+
+.rightAlign {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28.8px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  width:218px;
+  height: 60px;
+  gap: 16px;
+}
+
+.leftAlign {
+  font-family: Roboto, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28.8px;
+  text-align: center;
+  width: 137px;
+  height: 29px;
+  top: -1px;
+  left: 1.86px;
+}
+
+.circleContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #EB7005;
+  border-radius: 50%;
+}
+
+.circleText {
+  font-family: Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 25.78px;
+  text-align: center;
+  color: rgba(252, 252, 252, 1);
+  width: 27px;
+  height: 26px;
+  top: 17px;
+  left: 16px;
+}
+

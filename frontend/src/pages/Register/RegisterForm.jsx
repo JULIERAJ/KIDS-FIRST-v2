@@ -4,6 +4,7 @@
    password, and confirming the password.
   It includes form fields for email, password, and password confirmation, along with validation checks for each field.
 */
+//import { jwtDecode } from 'jwt-decode';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Form, Button } from 'react-bootstrap';
@@ -226,6 +227,9 @@ export const RegisterForm = (props) => {
       })
       .catch(() => {
         setSuccessSo(false);
+        setErrMsgSocial(
+          'Log-in unsuccessful. Please try again later, or sign-up.'
+        );
       });
   };
 

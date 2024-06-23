@@ -1,62 +1,98 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { Image, Container, Col, Nav, Row, Tab } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Image, Container, Nav, Navbar } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Sidebar.module.css';
 import { SIDEBAR_DATA } from './sidebarData';
 
-import kidsFirstLogo from '../../media/logo/kids_first_logo_beta.png';
+import kidsFirstLogo from '../../media/logo/LOGO-BYME.png';
 
-const SidebarItemsCard = ({ title, icon, path, alt }) => {
+const SidebarItemsCard = ({ title, icon, activeIcon, hoverIcon, path, isActive, onClick }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const handleClick = () => {
+    onClick(path);
+  };
   return (
-    <Tab.Container>
-      <Row className={styles.rowContainer}>
-        <Col className={styles.sidebarMenu}>
-          <Nav>
-            <Nav.Item
-              className={styles.sidebarMenuItem}
-              id={window.location.pathname === path ? 'active' : ''}>
-              <Image
-                src={icon}
-                alt={alt}
-                style={{
-                  width: '20.63px',
-                  height: '19.25px',
-                }}
-              />
-              <Nav.Link
-                eventKey='link-1'
-                to={path}
-                className={styles.sidebarLink}>
-                {title}
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Col>
-      </Row>
-    </Tab.Container>
+    <>
+      <Nav
+        className={`${styles.nav} ${isActive ? styles.active : ''}`}>
+        <Nav.Item
+          className={`${styles.sidebarMenuItem} ${isActive ? styles.active : ''}`}
+          id={window.location.pathname === path ? 'active' : ''}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}>
+          {isActive ? activeIcon : (isHovered ? hoverIcon : icon)}
+          <NavLink
+            eventkey='link-1'
+            to={path}
+            className={styles.sidebarLink}
+            onClick={handleClick}>
+            {title}
+          </NavLink>
+        </Nav.Item>
+      </Nav>
+    </>
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ setTitle }) => {
+  const [activeLink, setActiveLink] = useState(null);
+
+  const handleClick = (path, title) => {
+    setActiveLink(path);
+    setTitle(title);
+  };
+
+  // Separate sidebar items into two arrays: one for "Settings" and "Help", and the other for all others
+  const settingsHelpItems = SIDEBAR_DATA.filter(item => item.title === 'Help' || item.title === 'Settings');
+  const otherItems = SIDEBAR_DATA.filter(item => item.title !== 'Help' && item.title !== 'Settings');
+
   return (
-    <Container as='aside' className={`${styles.sidebar} no-gutter`}>
-      <Container as='div' className={styles.sidebarHeader}>
-        <Image src={kidsFirstLogo} alt='mainLogo' />
-      </Container>
-      {SIDEBAR_DATA.map((item, key) => (
-        <SidebarItemsCard key={key} {...item} />
-      ))}
-    </Container>
+    <Navbar expand="lg" className="bg-body-tertiary">
+      <div className={`${styles.sidebar} no-gutter`}>
+        <Container as='div' className={styles.sidebarHeader}>
+          <Image src={kidsFirstLogo} alt='mainLogo' />
+        </Container>
+        <div className={`${styles.sidebarMenu}`}>
+          {/* Render div for all other items */}
+          <div className={styles.otherItemsContainer}>
+            {otherItems.map((item, key) => (
+              <SidebarItemsCard key={key} {...item}
+                isActive={item.path === activeLink}
+                onClick={() => handleClick(item.path, item.title)}
+              />
+            ))}
+          </div>
+
+          {/* Render div for "Settings" and "Help" items */}
+          <div className={styles.settingsHelpContainer}>
+            {settingsHelpItems.map((item, key) => (
+              <SidebarItemsCard key={key} {...item}
+                isActive={item.path === activeLink}
+                onClick={() => handleClick(item.path, item.title)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </Navbar>
   );
 };
 
 SidebarItemsCard.propTypes = {
-  title: PropTypes.string,
-  icon: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.node.isRequired,
+  activeIcon: PropTypes.node.isRequired,
+  hoverIcon:  PropTypes.node.isRequired,
   path: PropTypes.string,
   alt: PropTypes.string,
   onClick: PropTypes.func,
+  isActive: PropTypes.bool
+};
+
+Sidebar.propTypes = {
+  setTitle: PropTypes.func
 };
 
 export default Sidebar;

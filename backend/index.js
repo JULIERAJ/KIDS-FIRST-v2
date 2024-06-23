@@ -13,6 +13,7 @@ const loginSocialRoutes = require('./routes/loginSocial');
 const memberRoutes = require('./routes/member');
 const registerRoutes = require('./routes/register');
 const resetPasswordRoutes = require('./routes/reset-password');
+// eslint-disable-next-line no-unused-vars, import/order
 const { loginSocial } = require('./controllers/principle-controller');
 require('dotenv').config({ path: './.env.local' });
 mongoose.set('strictQuery', true);

@@ -39,6 +39,7 @@ const EmailVerify = ({ userData }) => {
       <div className={styles.verifyText}>
         <p>A verification email has been sent to {email}.</p>
         <p>Please verify your email address to log in to KIDS FIRST.</p>
+       
       </div>
       <div className={styles.resendEmailLink}>
         {/* Disable the link and show loading indicator if isLoading is true or email has already been resent*/}
@@ -56,5 +57,6 @@ const EmailVerify = ({ userData }) => {
 };
 EmailVerify.propTypes = {
   userData: PropTypes.object
+ 
 };
 export default EmailVerify; 

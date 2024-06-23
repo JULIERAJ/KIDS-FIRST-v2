@@ -1,0 +1,216 @@
+/* Styles for week header */
+/* .day-header {
+  padding: 20px;
+} */
+/* :root {
+  --event-width: 100%;
+} */
+
+
+.weekday {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+.day {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+/* Apply color for today's date */
+.day-header .weekday.today {
+  color: #EB7005;
+  font-weight: bold;
+}
+
+.day-header .day.today {
+  color: #EB7005;
+  font-weight: bold;
+}
+
+/* calendar body styles for monthly view: */
+.rbc-date-cell {
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    /* Align to the left */
+    font-weight: 500;
+  }
+}
+
+
+/* Target the monthly headers */
+.rbc-month-view {
+  background-color: #FFFEF9;
+}
+
+.rbc-month-view .rbc-off-range-bg {
+  background-color: #FFFEF9;
+  font-weight: normal;
+}
+
+.rbc-date-cell.rbc-off-range button {
+  font-weight: 500;
+  /* Semi-bold */
+}
+
+/* .rbc-month-view,
+.rbc-time-view
+ {
+  border-top: none;
+} */
+
+.rbc-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+
+  /* span{
+      font-weight: normal;
+      display: inline-block;
+  } */
+
+  /* .rbc.button.link{
+      display: block;
+  } */
+}
+
+/* .rbc-button-link span[role="columnheader"] {
+  display: block;
+} */
+
+/* Styles rbc-header for month view */
+.rbc-header span[role="columnheader"] {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+/* cyan date identity for today including a polygon and a rectangle */
+.rbc-date-cell.rbc-now.rbc-current button.rbc-button-link {
+  /* position: relative; */
+  padding-left: 10px;
+  padding-right: 14px;
+  background-color: #34BDC3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+}
+
+.rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::before {
+  content: '';
+  /* position: absolute;
+   top: 0;
+  left: 0;  */
+  width: 50%;
+  height: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #34BDC3;
+}
+
+.rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid #34BDC3;
+  transform: translateX(100%);
+}
+
+
+/* date identity for today : Straight cyan horizontal line */
+.rbc-date-cell.rbc-now.rbc-current button.rbc-button-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  transform: translateY(-50%);
+  width: 100px;
+  height: 2px;
+  background-color: #34BDC3;
+}
+
+/* Adjust the styles for time slots */
+/* .rbc-timeslot-group {
+  display: flex;
+  flex-direction: column;
+  height: 50px; 
+} */
+
+.rbc-time-slot:has(.rbc-label) {
+  margin-top: 0px;
+}
+
+
+.rbc-time-gutter.rbc-time-column {
+  padding-right: 20px
+}
+
+/* .rbc-background-event {
+  opacity: 0.6;
+} */
+
+.rbc-event-label {
+  display: none !important;
+}
+
+.rbc-day-slot .rbc-event-content {
+  width: 100%;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 0px;
+  flex: 1 1 0;
+  word-wrap: break-word;
+  line-height: 1;
+  height: 100%;
+  min-height: 1em;
+}
+
+.event-box {
+  display: block !important;
+  /* width: 60%; */
+  border-radius: 10px;
+}
+
+.kids-events-container {
+  align-items: center;
+}
+
+.rbc-event-content {
+  margin-left: 5px;
+}
+
+/* 
+.rbc-row {
+  min-height: auto !important;
+}
+*/
+.rbc-time-content {
+  overflow-y: auto;
+  max-height: 100%;
+
+}
+
+.day-view-event[role="button"] {
+  width: calc(100% / var(--event-count)) !important;
+}
+
+.week-view-event[role="button"] {
+  width: calc(100% / var(--event-count)) !important;
+}
