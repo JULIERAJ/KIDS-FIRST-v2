@@ -17,10 +17,6 @@ import googleIcon from '../../media/icons/google.png';
 
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// const HeaderLink = (
-//   <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />
-// );
-
 export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
