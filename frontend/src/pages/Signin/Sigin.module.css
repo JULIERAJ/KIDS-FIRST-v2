@@ -1,10 +1,25 @@
-/* new */
-.login__title {
-  font-weight: 500;
-  font-size: 36px;
-  line-height: 42px;
-  margin-bottom: 8%;
+.page {
+  height: 1024px;
+  background-color: #eff0f0;
 }
+.page__window {
+  max-width: 910px;
+  height: 840px;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+.page__wrapper {
+  padding: 56px 234px 104px;
+}
+
+.login__title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38.4px;
+  text-align: center;
+}
+
+
 
 .forget__password {
   font-family: Roboto;
@@ -13,7 +28,6 @@
   font-size: 16px;
   line-height: 21px;
   color: var(--main-orange) !important;
-  margin-top:10px;
   padding-left: 0;
 }
 
@@ -41,4 +55,43 @@
 .customButton:focus-visible,
 .customButton:focus {
   color: #eb7005 !important;
+}
+
+.checkboxContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.checkboxLabel{
+  padding-left: 8px;
+}
+.checkboxInput{
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+.registerLink{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--main-orange) !important;
+  padding-left: 10px;
+
+}
+.alreadyMember{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.emailLabel,
+.PasswordLabel {
+  margin-top: 24px;
+  font-family: Roboto;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 15.36px;
+  letter-spacing: 2%;
+  color: #081821;
 }

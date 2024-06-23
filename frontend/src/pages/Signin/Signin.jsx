@@ -14,8 +14,10 @@ import Header from '../../components/Header/Header';
 // import TextLink from '../../components/TextLink';
 import facebookIcon from '../../media/icons/facebook.png';
 import googleIcon from '../../media/icons/google.png';
+import { EMAIL_REG_EXP } from '../../utils/index';
+import TextLink from '../../components/TextLink';
 
-const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const HeaderLink = <TextLink title="Not a member?" to="/register" linkTitle="Sign up" />;
 
 export default function Signin() {
   const [email, setEmail] = useState('');
@@ -46,18 +48,21 @@ export default function Signin() {
         })
         .catch(({ response }) => {
           if (response.status === 404) {
-            setErrorMesasage('This account doesn\'t exist. Please enter a different email address or try "Sign Up".');
+            setErrorMesasage(
+              'This account doesn\'t exist. Please enter a different email address or try "Sign Up".');
           } else if (response.status === 401) {
-            setErrorMesasage('Invalid password or email address');
+            setErrorMesasage(
+              'Invalid password or email address');
           } else {
-            setErrorMesasage('An unknown error occurred. Please try again later.');
+            setErrorMesasage(
+              'An unknown error occurred. Please try again later.');
           }
         });
     }
   };
   // Function to validate email format
   const validateEmail = (emailValue) => {
-    return regexEmail.test(emailValue);
+    return EMAIL_REG_EXP.test(emailValue);
   };
 
   const handleEmailChange = (e) => {
@@ -112,7 +117,7 @@ export default function Signin() {
               <Col
                 className={`d-flex justify-content-center align-items-center ${styles.page__wrapper}`}>
                 <div>
-                  <h1 className={styles.page__title}>Welcome to Kids First</h1>
+                  <h2 className={styles.login__title}>Welcome back to Kids First </h2>
                   <Form
                     className='py-4'
                     onSubmit={handleLogin}
@@ -135,40 +140,41 @@ export default function Signin() {
                       onChange={handlePasswordChange}
                       showPassword={showPassword}
                       setShowPassword={setShowPassword}
-                      // isInvalid={!!errorMessageWithInclude}
                       errors={errorMesasage}
                       labelClassName={styles.PasswordLabel}
-                      // successMessage={successMessage}
-                      // onFocus={handleFocus}
-                      // onBlur={handleBlur}
                       showTextPassword={showTextPassword}
                     />
-                    <div className="checkbox mb-3">
+                    <div className={styles.checkboxContainer}>
+                      <div>
                       <input
+                        className={styles.checkboxInput}
                         type="checkbox"
                         value="remember-me"
                         checked={rememberMe}
                         onChange={(e) => setRememberMe(e.target.checked)}
                       />
-                      <label> Remember me</label>
-                      <a className="btn forget-password" href="/forgot-password">
+                      <label className={styles.checkboxLabel}> Remember me</label>
+                      </div>
+                      <div>
+                      <a className={`btn ${styles.forget__password}`} href="/forgot-password">
                         Forgot your password?
                       </a>
+                      </div>
                     </div>
                     <Button
-                      className='primary-btn w-100 my-3'
-                      type='submit'
-                      size='lg'
-                      variant='light'>
-                      Log In
-                    </Button>
+              className={`primary-btn w-100 my-3 ${styles.customButton}`}
+              type="submit"
+              size="lg"
+              variant="light">
+              Log In
+            </Button>
                     <div className={styles.orDivider}>
                       <span className={styles.dashLine}></span>
-                      <span className={`${styles.orText}`}>Or</span>
+                      <span className={styles.orText}>Or</span>
                       <span className={styles.dashLine}></span>
                     </div>
 
-                    <Row className="py-5">
+                    <Row className={styles.socialButton}>
                       <Col xs={12} md={6}>
                         <LoginSocialGoogle
                           client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
@@ -205,7 +211,7 @@ export default function Signin() {
                     </Row>
                     <Row className='justify-content-center'>
                       <div className={styles.alreadyMember}>
-                      Not a member?
+                        Not a member?
                         <NavLink className={styles.registerLink} to="/register">Sign up</NavLink>
                       </div>
                     </Row>
