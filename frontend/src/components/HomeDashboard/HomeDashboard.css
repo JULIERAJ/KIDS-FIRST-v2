@@ -7,6 +7,7 @@
   justify-content: space-around;
 }
 
+
 .eventMessage {
   display: flex;
   flex-direction: row;
@@ -108,7 +109,7 @@
 .right-column {
   width: 601px;
   height: 353px;
-  padding: 10px;
+  padding: 10px 10px 10px 0;
 }
 
 .event-boxes {
@@ -168,7 +169,7 @@
 /* .rbc-timeslot-group {
 display: flex;
 flex-direction: column;
-height: 50px; 
+height: 50px;
 } */
 
 .rbc-time-slot:has(.rbc-label) {

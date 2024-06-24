@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaCircle } from 'react-icons/fa6';
+import "./HomeDashboard.css";
 
 // Add your custom styles directly into the component file
 const customStyles = {
@@ -31,9 +32,12 @@ const DayCard = ({ day, date, events, isToday }) => {
   return (
     <Card
       style={{
+        flex: '1 1 230px',
         borderRadius: '24px',
         marginTop: '10px',
-        width: '170px',
+        maxWidth:'230px',
+        minWidth:'140px',
+        width: '100%',
         height: '245px',
       }}
     >
@@ -44,7 +48,7 @@ const DayCard = ({ day, date, events, isToday }) => {
           borderTopLeftRadius: '24px',
           borderTopRightRadius: '24px',
           height: '60.6px',
-          width: '170px',
+          width: '100%',
         }}
       >
         <div
