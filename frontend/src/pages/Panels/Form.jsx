@@ -1,11 +1,11 @@
 import { Button } from 'react-bootstrap';
-
-import styles from './Form.module.css';
-import FormInputs from './FormInputs';
-
-import Header from '../.././components/Header';
 import { createMember } from '../../api';
 import useFormContext from '../../hooks/useFormContext';
+
+import FormInputs from './FormInputs';
+import Header from '../.././components/Header';
+
+import styles from './Form.module.css';
 
 const widget = <h3>Welcome!</h3>;
 
@@ -86,7 +86,7 @@ const Form = () => {
             disabled={disableNext}
             className={`primary-btn ${nextHide} ${styles.nextBtn}`}
           >
-            Next
+            Next Step
           </Button>
         )}
 
