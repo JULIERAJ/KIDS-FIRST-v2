@@ -28,35 +28,33 @@ const Activate = () => {
   };
 
   // Function to fetch user data and check for link expiration
-  const fetchData = async () => {
-    try {
-      const { data } = await activate(email, emailVerificationToken);
-      setUserData(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error:', error);
-      // Check if the link has expired
-      if (error.response && error.response.data && error.response.data.message === 'jwt expired') {
-        setExpired(true);
-      }
-      setLoading(false);
-    }
-  };
-  
-  // Fetch data when the component mounts
   useEffect(() => {
-    fetchData(); 
-  }, []); // Empty dependency array to run the effect only once
-  
+    const fetchData = async () => {
+      try {
+        const { data } = await activate(email, emailVerificationToken);
+        setUserData(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error:', error);
+        // Check if the link has expired
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message === 'jwt expired'
+        ) {
+          setExpired(true);
+        }
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [email, emailVerificationToken]);
+
   return (
     <>
       <Header
         widget={
-          <TextLink
-            title='Already a member?'
-            to='/signin'
-            linkTitle='Log in'
-          />
+          <TextLink title='Already a member?' to='/signin' linkTitle='Log in' />
         }
       />
       <Container className='content-layout py-4'>
@@ -67,9 +65,9 @@ const Activate = () => {
           {loading && <p>Loading...</p>}
 
           {/* Show success message if email is activated */}
-          { (!loading && userData.emailIsActivated) && (
+          {!loading && userData.emailIsActivated && (
             <>
-              <FeedbackBlock message={userData.message} image={SuccessImg}/>
+              <FeedbackBlock message={userData.message} image={SuccessImg} />
               <div className={styles.text}>
                 <p> Your email address has been verified</p>
                 <p>To proceed, click next</p>
@@ -80,19 +78,18 @@ const Activate = () => {
                   type='submit'
                   size='lg'
                   variant='light'
-                  onClick={handleClick}
-                >
+                  onClick={handleClick}>
                   Log In
                 </Button>
               </div>
             </>
           )}
-          { (!loading && !userData.emailIsActivated && expired) && (
+          {!loading && !userData.emailIsActivated && expired && (
             <div>
               <p>The link was expired</p>
             </div>
           )}
-          { (!loading && !userData.emailIsActivated && !expired) && (
+          {!loading && !userData.emailIsActivated && !expired && (
             <div>
               <p>Something went wrong</p>
             </div>

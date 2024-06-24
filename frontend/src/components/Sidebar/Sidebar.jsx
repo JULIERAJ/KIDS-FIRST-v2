@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image, Container, Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Sidebar.module.css';
 import { SIDEBAR_DATA } from './sidebarData';
@@ -10,28 +10,44 @@ import kidsFirstLogo from '../../media/logo/LOGO-BYME.png';
 
 const SidebarItemsCard = ({ title, icon, activeIcon, hoverIcon, path, isActive, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const handleClick = () => {
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (isActive) {
+      navigate(path);
+    }
+  }, [isActive, path, navigate]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
     onClick(path);
   };
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick(e);
+    }
+  };
+
+
   return (
     <>
-      <Nav
-        className={`${styles.nav} ${isActive ? styles.active : ''}`}>
-        <Nav.Item
-          className={`${styles.sidebarMenuItem} ${isActive ? styles.active : ''}`}
-          id={window.location.pathname === path ? 'active' : ''}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}>
+      <Nav.Item
+        className={`${styles.nav} ${isActive ? styles.active : ''}`}
+        id={window.location.pathname === path ? 'active' : ''}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        >
           {isActive ? activeIcon : (isHovered ? hoverIcon : icon)}
-          <NavLink
-            eventkey='link-1'
-            to={path}
-            className={styles.sidebarLink}
-            onClick={handleClick}>
+          <span className={`${styles.sidebarMenuItem}`}>
             {title}
-          </NavLink>
-        </Nav.Item>
-      </Nav>
+          </span>
+      </Nav.Item>
     </>
   );
 };

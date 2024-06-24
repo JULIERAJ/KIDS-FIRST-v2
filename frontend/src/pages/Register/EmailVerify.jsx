@@ -44,6 +44,7 @@ const EmailVerify = ({ userData }) => {
       <div className={styles.resendEmailLink}>
         {/* Disable the link and show loading indicator if isLoading is true or email has already been resent*/}
         {!emailResent && (
+          /* eslint-disable-next-line */
           <a href='' onClick={handleResendEmail} disabled={isLoading}>
             {isLoading ? 'Resending...' : 'Resend Email'}
           </a>
