@@ -30,6 +30,7 @@
     "web-vitals": "^4.2.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@eslint/js": "^9.5.0",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
