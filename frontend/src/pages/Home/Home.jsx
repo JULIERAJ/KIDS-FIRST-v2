@@ -84,6 +84,7 @@ export default function Home() {
           </div>
         </div>
         <span className="more-link">
+         {/* eslint-disable-next-line */}
           <a href="#" alt="">
             More Features
           </a>
@@ -95,11 +96,11 @@ export default function Home() {
           <div className="left-blurbs">
             <p>KIDSFIRST Takes A Different Approach To Reduce Conflicts Revolving;</p>
             <br />
-            <p>We Understand Who The Users Are, A Diverse Group Of Co-Parnets</p>
+            <p>We Understand Who The Users Are, A Diverse Group Of Co-Partners</p>
             <p>With Different Backgrounds And Needs.</p>
             <br />
             <p>Our Solutions Can Accommodate Parents’ Needs With A Simple And</p>
-            <p>Parctical App Design And A Clever Tool For Peaceful Communication.</p> 
+            <p>Particular App Design And A Clever Tool For Peaceful Communication.</p> 
           </div>
           <div className="video-section">
             <img src={video} alt=""></img>

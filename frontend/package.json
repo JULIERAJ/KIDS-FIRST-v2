@@ -6,7 +6,6 @@
     "@emailjs/browser": "^4.3.3",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@eslint/js": "^9.5.0",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "@react-oauth/google": "^0.12.1",
@@ -31,7 +30,7 @@
     "web-vitals": "^4.2.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.1.1",
+    "@eslint/js": "^9.5.0",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.34.3",
