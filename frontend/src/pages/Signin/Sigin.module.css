@@ -8,8 +8,16 @@
   border-radius: 16px;
   background-color: #ffffff;
 }
+.formContainer {
+  width: 442px;
+  height: 623px;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+}
 .page__wrapper {
-  padding: 56px 234px 104px;
+   padding: 56px 264px 104px;
 }
 
 .login__title {
