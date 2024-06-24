@@ -5,7 +5,14 @@ import { FaChevronDown, FaPlusCircle } from 'react-icons/fa'; // Importing the c
 
 import styles from './EventModal.module.css';
 
-const CustomDropdown = ({ value, onChange, options, placeholder, hasPlusIcon, hasChevronIcon }) => {
+const CustomDropdown = ({
+  value,
+  onChange,
+  options,
+  placeholder,
+  hasPlusIcon,
+  hasChevronIcon,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionSelect = (option) => {
@@ -14,18 +21,20 @@ const CustomDropdown = ({ value, onChange, options, placeholder, hasPlusIcon, ha
   };
 
   return (
-    <div className={styles.customDropdown} style={{ width: '465px', height: '48px' }}>
+    <div
+      className={styles.customDropdown}
+      style={{ width: '465px', height: '48px' }}>
       <div className={styles.inputContainer}>
         <div className={styles.selectWithIcon}>
           <Form.Control
-            as="select"
+            as='select'
             value={value}
             onChange={(e) => onChange(e.target.value)}
             className={styles.selectField}
             custom
             style={{ height: '48px' }}
           >
-            <option value="" disabled hidden>{placeholder}</option>
+            <option value='' disabled hidden>{placeholder}</option>
             {options.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))}
@@ -33,7 +42,6 @@ const CustomDropdown = ({ value, onChange, options, placeholder, hasPlusIcon, ha
           {hasPlusIcon && value === '' && <FaPlusCircle className={styles.dropdownIcon}
             style={{ color: 'gray', fontSize: '24px', marginRight: '90%' }} />}
           {hasChevronIcon && <FaChevronDown className={styles.dropdownIcon} onClick={() => setIsOpen(!isOpen)} />}
-
         </div>
       </div>
       {isOpen && (
@@ -79,7 +87,7 @@ const EventModal = ({ onClose }) => {
 
   const handleShareWithChange = (value) => {
     setShareWith(value);
-    if (value === 'Enter Parent\'s Name') {
+    if (value === "Enter Parent's Name") {
       setShowParentInput(true);
     } else {
       setShowParentInput(false);
@@ -89,89 +97,136 @@ const EventModal = ({ onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let shareWithDisplay = shareWith;
-    if (shareWith === 'Enter Parent\'s Name') {
+    if (shareWith === "Enter Parent's Name") {
       shareWithDisplay = parentName;
     }
     const resultString = `Title: ${title}\nDescription: ${description}\nStart Date:
      ${startDate}\nStart Time: ${startTime}\nEnd Date: ${endDate}\nEnd Time: ${endTime}\nSelected Kids:
       ${selectedKids}\nShare With: ${shareWithDisplay}\nRepeat: ${repeat}\nLocation: ${location}`;
     alert(`Event Data:\n${resultString}`);
+
     onClose();
   };
 
   return (
     <Modal show={true} onHide={onClose}>
-      <Modal.Header closeButton className={styles.modalHeader} style={{
-        background: '#FFD666',
-        width: '589px', height: '80px'
-      }}>
-        <Modal.Title className={styles.modalTitle} style={{
-          color: '#FFFEF9', fontSize: '22px',
-          marginLeft: '38%'
-        }}>Event Details</Modal.Title>
+      <Modal.Header
+        closeButton
+        className={styles.modalHeader}
+        style={{ background: '#FFD666', width: '589px', height: '80px' }}>
+        <Modal.Title
+          className={styles.modalTitle}
+          style={{ color: '#FFFEF9', fontSize: '22px', marginLeft: '38%' }}>
+          Event Details
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ background: '#F0F2F2', width: '589px' }}>
-        <Form onSubmit={handleSubmit} style={{ background: '#F0F2F2', width: '456px', marginLeft: '48px' }}>
+        <Form
+          onSubmit={handleSubmit}
+          style={{ background: '#F0F2F2', width: '456px', marginLeft: '48px' }}>
           <Form.Group>
             <Form.Label className={styles.formLabel}>Title:</Form.Label>
-            <Form.Control type="text" value={title} onChange={(e) => setTitle(e.target.value)}
-              placeholder="Enter title" required style={{ width: '465px', height: '48px' }} />
+            <Form.Control
+              type='text'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder='Enter title'
+              required
+              style={{ width: '465px', height: '48px' }}
+            />
           </Form.Group>
           <Form.Group>
-            <Form.Label className={styles.formLabel} style={{ marginTop: '10px', marginBottom: '10px' }}>
-              Description:</Form.Label>
-            <Form.Control as="textarea" value={description} onChange={(e) => setDescription(e.target.value)}
-              placeholder="Description" />
+            <Form.Label
+              className={styles.formLabel}
+              style={{ marginTop: '10px', marginBottom: '10px' }}>
+              Description:
+            </Form.Label>
+            <Form.Control
+              as='textarea'
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder='Description'
+            />
           </Form.Group>
           <Form.Group>
-            <Form.Label className={styles.formLabel} style={{ marginTop: '10px', marginBottom: '10px' }}>
-              Date & Time:</Form.Label>
+            <Form.Label
+              className={styles.formLabel}
+              style={{ marginTop: '10px', marginBottom: '10px' }}>
+              Date & Time:
+            </Form.Label>
             <div className={styles.dateTimeInputs}>
               <div>
-                <Form.Control type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
+                <Form.Control
+                  type='date'
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                  required
+                />
               </div>
               <div style={{ display: 'flex', marginLeft: '40px' }}>
-                <Form.Control type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} required />
+                <Form.Control
+                  type='time'
+                  value={startTime}
+                  onChange={(e) => setStartTime(e.target.value)}
+                  required
+                />
                 <div style={{ marginLeft: '10px' }}>
                   <Form.Check
                     className={styles.customCheckbox}
-                    type="checkbox"
+                    type='checkbox'
                     checked={allDay}
                     onChange={handleAllDayChange}
                   />
                 </div>
               </div>
-              <Form.Label style={{ marginLeft: '10px', marginTop: '8px' }}>All Day</Form.Label>
+              <Form.Label style={{ marginLeft: '10px', marginTop: '8px' }}>
+                All Day
+              </Form.Label>
             </div>
             <div className={styles.dateTimeInputs}>
               <div>
-                <Form.Control type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} required />
+                <Form.Control
+                  type='date'
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                  required
+                />
               </div>
               <div style={{ marginLeft: '40px' }}>
-                <Form.Control type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} required />
+                <Form.Control
+                  type='time'
+                  value={endTime}
+                  onChange={(e) => setEndTime(e.target.value)}
+                  required
+                />
               </div>
             </div>
           </Form.Group>
           <Form.Group>
-            <Form.Label className={styles.formLabel} style={{ marginBottom: '15px' }}>
+            <Form.Label
+              className={styles.formLabel}
+              style={{ marginBottom: '15px' }}>
               Kid(s):
             </Form.Label>
             <CustomDropdown
               value={selectedKids}
               onChange={setSelectedKids}
               options={['red', 'yellow', 'purple']}
-              placeholder=""
+              placeholder=''
               hasPlusIcon={true}
               style={{ width: '365px', height: '48px' }}
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label className={styles.formLabel} style={{ marginTop: '15px', marginBottom: '15px' }}>
-              Share with:</Form.Label>
+            <Form.Label
+              className={styles.formLabel}
+              style={{ marginTop: '15px', marginBottom: '15px' }}>
+              Share with:
+            </Form.Label>
             <div className={styles.selectWithIcon}>
               {showParentInput ? (
                 <Form.Control
-                  type="text"
+                  type='text'
                   value={parentName}
                   onChange={(e) => setParentName(e.target.value)}
                   placeholder="Enter parent's name"
@@ -180,14 +235,15 @@ const EventModal = ({ onClose }) => {
                 />
               ) : (
                 <Form.Control
-                  as="select"
+                  as='select'
                   value={shareWith}
                   onChange={(e) => handleShareWithChange(e.target.value)}
                   custom
-                  style={{ width: '465px', height: '48px' }}
-                >
-                  <option value="Only Me">Only Me</option>
-                  <option value="Enter Parent's Name">Enter Parent&apos;s Name</option>
+                  style={{ width: '465px', height: '48px' }}>
+                  <option value='Only Me'>Only Me</option>
+                  <option value="Enter Parent's Name">
+                    Enter Parent&apos;s Name
+                  </option>
                 </Form.Control>
               )}
               <FaChevronDown className={styles.dropdownIcon} />
@@ -195,30 +251,47 @@ const EventModal = ({ onClose }) => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label className={styles.formLabel} style={{
-              marginTop: '15px', marginBottom: '0px',
-              width: '465px', height: '48px'
-            }}>
+            <Form.Label
+              className={styles.formLabel}
+              style={{
+                marginTop: '15px',
+                marginBottom: '0px',
+                width: '465px',
+                height: '48px',
+              }}>
               Repeat:
             </Form.Label>
             <CustomDropdown
               value={repeat}
               onChange={setRepeat}
               options={['Never', 'Everyday', 'Every Week', 'Every Month']}
-              hasPlusIcon={false} // No plus icon for the "Repeat" dropdown
-              hasChevronIcon={true} // Add a chevron icon for the "Repeat" dropdown
+              hasPlusIcon={false} // No plus icon for the 'Repeat' dropdown
+              hasChevronIcon={true} // Add a chevron icon for the 'Repeat' dropdown
               style={{ width: '465px', height: '48px' }} // Add height and width styles here
             />
           </Form.Group>
           <Form.Group style={{ marginBottom: '20px' }}>
-            <Form.Label className={styles.formLabel} style={{ marginTop: '10px', marginBottom: '10px' }}>
+            <Form.Label
+              className={styles.formLabel}
+              style={{ marginTop: '10px', marginBottom: '10px' }}>
               Location:
             </Form.Label>
-            <Form.Control type="text" value={location} onChange={(e) => setLocation(e.target.value)}
-              placeholder="Event Location" required style={{ width: '465px', height: '48px' }} />
+            <Form.Control
+              type='text'
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder='Event Location'
+              required
+              style={{ width: '465px', height: '48px' }}
+            />
           </Form.Group>
-          <Button variant="primary" type="submit" className={styles.submitButton} style={{ color: '#7A7D7D' }}>
-            Create Event</Button>
+          <Button
+            variant='primary'
+            type='submit'
+            className={styles.submitButton}
+            style={{ color: '#7A7D7D' }}>
+            Create Event
+          </Button>
         </Form>
       </Modal.Body>
     </Modal>
