@@ -26,20 +26,20 @@ const CustomDropdown = ({ value, onChange, options, placeholder, hasPlusIcon, ha
             style={{ height: '48px' }}
           >
             <option value="" disabled hidden>{placeholder}</option>
-            {options.map((option, index) => (
-              <option key={index} value={option}>{option}</option>
+            {options.map((option) => (
+              <option key={option} value={option}>{option}</option>
             ))}
           </Form.Control>
           {hasPlusIcon && value === '' && <FaPlusCircle className={styles.dropdownIcon}
             style={{ color: 'gray', fontSize: '24px', marginRight: '90%' }} />}
           {hasChevronIcon && <FaChevronDown className={styles.dropdownIcon} onClick={() => setIsOpen(!isOpen)} />}
-        
+
         </div>
       </div>
       {isOpen && (
         <div className={styles.dropdownOptions}>
-          {options.map((option, index) => (
-            <div key={index} onClick={() => handleOptionSelect(option)}>
+          {options.map((option) => (
+            <div key={option} onClick={() => handleOptionSelect(option)}>
               {option}
             </div>
           ))}
@@ -101,13 +101,17 @@ const EventModal = ({ onClose }) => {
 
   return (
     <Modal show={true} onHide={onClose}>
-      <Modal.Header closeButton className={styles.modalHeader} style={{ background:'#FFD666',
-        width: '589px', height: '80px' }}>
-        <Modal.Title className={styles.modalTitle} style={{ color: '#FFFEF9', fontSize: '22px',
-          marginLeft:'38%' }}>Event Details</Modal.Title>
+      <Modal.Header closeButton className={styles.modalHeader} style={{
+        background: '#FFD666',
+        width: '589px', height: '80px'
+      }}>
+        <Modal.Title className={styles.modalTitle} style={{
+          color: '#FFFEF9', fontSize: '22px',
+          marginLeft: '38%'
+        }}>Event Details</Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ background: '#F0F2F2', width: '589px' }}>
-        <Form onSubmit={handleSubmit} style={{ background: '#F0F2F2', width: '456px',marginLeft:'48px' }}>
+        <Form onSubmit={handleSubmit} style={{ background: '#F0F2F2', width: '456px', marginLeft: '48px' }}>
           <Form.Group>
             <Form.Label className={styles.formLabel}>Title:</Form.Label>
             <Form.Control type="text" value={title} onChange={(e) => setTitle(e.target.value)}
@@ -120,13 +124,13 @@ const EventModal = ({ onClose }) => {
               placeholder="Description" />
           </Form.Group>
           <Form.Group>
-            <Form.Label className={styles.formLabel} style={{ marginTop:'10px', marginBottom:'10px' }}>
+            <Form.Label className={styles.formLabel} style={{ marginTop: '10px', marginBottom: '10px' }}>
               Date & Time:</Form.Label>
             <div className={styles.dateTimeInputs}>
               <div>
                 <Form.Control type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
               </div>
-              <div style={{ display: 'flex', marginLeft:'40px' }}>
+              <div style={{ display: 'flex', marginLeft: '40px' }}>
                 <Form.Control type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} required />
                 <div style={{ marginLeft: '10px' }}>
                   <Form.Check
@@ -137,19 +141,19 @@ const EventModal = ({ onClose }) => {
                   />
                 </div>
               </div>
-              <Form.Label style={{ marginLeft: '10px', marginTop:'8px' }}>All Day</Form.Label>
+              <Form.Label style={{ marginLeft: '10px', marginTop: '8px' }}>All Day</Form.Label>
             </div>
             <div className={styles.dateTimeInputs}>
               <div>
                 <Form.Control type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} required />
               </div>
-              <div style={{ marginLeft:'40px' }}>
+              <div style={{ marginLeft: '40px' }}>
                 <Form.Control type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} required />
               </div>
             </div>
           </Form.Group>
           <Form.Group>
-            <Form.Label className={styles.formLabel}style={{ marginBottom:'15px' }}>
+            <Form.Label className={styles.formLabel} style={{ marginBottom: '15px' }}>
               Kid(s):
             </Form.Label>
             <CustomDropdown
@@ -162,7 +166,7 @@ const EventModal = ({ onClose }) => {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label className={styles.formLabel}style={{ marginTop:'15px', marginBottom:'15px' }}>
+            <Form.Label className={styles.formLabel} style={{ marginTop: '15px', marginBottom: '15px' }}>
               Share with:</Form.Label>
             <div className={styles.selectWithIcon}>
               {showParentInput ? (
@@ -191,8 +195,10 @@ const EventModal = ({ onClose }) => {
           </Form.Group>
 
           <Form.Group>
-            <Form.Label className={styles.formLabel} style={{ marginTop:'15px', marginBottom:'0px',
-              width: '465px', height: '48px' }}>
+            <Form.Label className={styles.formLabel} style={{
+              marginTop: '15px', marginBottom: '0px',
+              width: '465px', height: '48px'
+            }}>
               Repeat:
             </Form.Label>
             <CustomDropdown
@@ -204,8 +210,8 @@ const EventModal = ({ onClose }) => {
               style={{ width: '465px', height: '48px' }} // Add height and width styles here
             />
           </Form.Group>
-          <Form.Group style={{ marginBottom:'20px' }}>
-            <Form.Label className={styles.formLabel} style={{ marginTop:'10px', marginBottom:'10px' }}>
+          <Form.Group style={{ marginBottom: '20px' }}>
+            <Form.Label className={styles.formLabel} style={{ marginTop: '10px', marginBottom: '10px' }}>
               Location:
             </Form.Label>
             <Form.Control type="text" value={location} onChange={(e) => setLocation(e.target.value)}
@@ -220,7 +226,7 @@ const EventModal = ({ onClose }) => {
 };
 
 EventModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default EventModal;
