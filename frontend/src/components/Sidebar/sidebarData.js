@@ -2,41 +2,46 @@
 export const SIDEBAR_DATA = [
   {
     title: 'Home',
-    icon: <span className="material-symbols-rounded home "
-      style={{ 'fontSize': '32px' }}>home</span>,
-    activeIcon:<span className="material-symbols-rounded home "
-      style={{ 'fontSize': '32px',
+    icon:
+    (<span className="material-symbols-rounded "style={{ 'fontSize': '32px' }}>
+      home
+      </span>),
+    activeIcon: (
+    <span className="material-symbols-rounded "
+      style={{
+        'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
-    >home</span>,
+    >home</span>
+    ),
     hoverIcon:
-    <span className="material-symbols-rounded home "
+    <span className="material-symbols-rounded "
       style={{
         'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>home</span>,
     path: '/dashboard/homedashboard',
-    alt: 'dashboard-icon',
+    alt: 'home',
   },
   {
     title: 'Calendar',
-    icon: <span className="material-symbols-rounded home "
+    icon: <span className="material-symbols-rounded "
       style={{ 'fontSize': '32px' }}>calendar_month</span>,
-    activeIcon:<span className="material-symbols-rounded home "
+    activeIcon:<span className="material-symbols-rounded "
       style={{ 'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40',
         color: '#DB5C00'
       }}
     >calendar_month</span>,
     hoverIcon:
-    <span className="material-symbols-rounded home "
+    <span className="material-symbols-rounded"
       style={{
         'fontSize': '32px',
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>calendar_month</span>,
     path: '/dashboard/calendarview',
-    alt: 'calendar-icon',
+    alt: 'calendar',
   },
   {
     title: 'Messages',
@@ -55,7 +60,7 @@ export const SIDEBAR_DATA = [
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>chat</span>,
     path: '/dashboard/messages',
-    alt: 'messages-icon',
+    alt: 'messages',
   },
   {
     title: 'Album',
@@ -74,7 +79,7 @@ export const SIDEBAR_DATA = [
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>photo_library</span>,
     path: '/dashboard/album',
-    alt: 'album-icon',
+    alt: 'album',
   },
   {
     title: 'Kids’ Info',
@@ -93,7 +98,7 @@ export const SIDEBAR_DATA = [
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>face</span>,
     path: '/dashboard/kids',
-    alt: 'kids-icon',
+    alt: 'kids',
   },
   {
     title: 'Settings',
@@ -112,7 +117,7 @@ export const SIDEBAR_DATA = [
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>settings</span>,
     path: '/dashboard/settings',
-    alt: 'settings-icon',
+    alt: 'settings',
   },
   {
     title: 'Help',
@@ -131,6 +136,6 @@ export const SIDEBAR_DATA = [
         fontVariationSettings: '"FILL" 1, "wght" 400, "GRAD" 0, "opsz" 40'
       }}>help</span>,
     path: '/dashboard/help',
-    alt: 'help-icon',
+    alt: 'help',
   },
 ];

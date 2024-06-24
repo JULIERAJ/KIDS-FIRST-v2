@@ -32,34 +32,22 @@ const CustomDropdown = ({
             onChange={(e) => onChange(e.target.value)}
             className={styles.selectField}
             custom
-            style={{ height: '48px' }}>
-            <option value='' disabled hidden>
-              {placeholder}
-            </option>
-            {options.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
+            style={{ height: '48px' }}
+          >
+            <option value="" disabled hidden>{placeholder}</option>
+            {options.map((option) => (
+              <option key={option} value={option}>{option}</option>
             ))}
           </Form.Control>
-          {hasPlusIcon && value === '' && (
-            <FaPlusCircle
-              className={styles.dropdownIcon}
-              style={{ color: 'gray', fontSize: '24px', marginRight: '90%' }}
-            />
-          )}
-          {hasChevronIcon && (
-            <FaChevronDown
-              className={styles.dropdownIcon}
-              onClick={() => setIsOpen(!isOpen)}
-            />
-          )}
+          {hasPlusIcon && value === '' && <FaPlusCircle className={styles.dropdownIcon}
+            style={{ color: 'gray', fontSize: '24px', marginRight: '90%' }} />}
+          {hasChevronIcon && <FaChevronDown className={styles.dropdownIcon} onClick={() => setIsOpen(!isOpen)} />}
         </div>
       </div>
       {isOpen && (
         <div className={styles.dropdownOptions}>
-          {options.map((option, index) => (
-            <div key={index} onClick={() => handleOptionSelect(option)}>
+          {options.map((option) => (
+            <div key={option} onClick={() => handleOptionSelect(option)}>
               {option}
             </div>
           ))}
@@ -311,7 +299,7 @@ const EventModal = ({ onClose }) => {
 };
 
 EventModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default EventModal;

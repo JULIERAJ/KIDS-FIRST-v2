@@ -9,12 +9,12 @@ import WeeksOverview from "./WeeksOverview"; // Import WeeksOverview component
 
 const HomeDashboard = () => {
   return (
-    <Container>
+    <Container fluid>
       <Row>
         {/* Weeks Overview */}
         <WeeksOverview />
       </Row>
-      
+
       <Row style={{marginTop : 40}}>
         {/* Pending Events */}
         <Col  >
@@ -25,7 +25,7 @@ const HomeDashboard = () => {
           <MessageNotification />
         </Col>
       </Row>
-      
+
     </Container>
   );
 };
