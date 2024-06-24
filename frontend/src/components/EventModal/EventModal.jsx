@@ -34,7 +34,7 @@ const CustomDropdown = ({
             custom
             style={{ height: '48px' }}
           >
-            <option value="" disabled hidden>{placeholder}</option>
+            <option value='' disabled hidden>{placeholder}</option>
             {options.map((option) => (
               <option key={option} value={option}>{option}</option>
             ))}
@@ -265,8 +265,8 @@ const EventModal = ({ onClose }) => {
               value={repeat}
               onChange={setRepeat}
               options={['Never', 'Everyday', 'Every Week', 'Every Month']}
-              hasPlusIcon={false} // No plus icon for the "Repeat" dropdown
-              hasChevronIcon={true} // Add a chevron icon for the "Repeat" dropdown
+              hasPlusIcon={false} // No plus icon for the 'Repeat' dropdown
+              hasChevronIcon={true} // Add a chevron icon for the 'Repeat' dropdown
               style={{ width: '465px', height: '48px' }} // Add height and width styles here
             />
           </Form.Group>

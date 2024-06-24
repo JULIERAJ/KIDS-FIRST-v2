@@ -103,8 +103,8 @@ const KFToolbar = ({
         {/* Container for buttons */}
         <div className='buttonsContainer'>
           {/* Big button */}
-          <div className="bigButtonContainer">
-            <div onClick={handleCreateButtonClick} className="bigButton"
+          <div className='bigButtonContainer'>
+            <div onClick={handleCreateButtonClick} className='bigButton'
               style={{ border: '2px solid #EB7005' }}>
               {/* smaller buttons inside big button */}
               <div className='smallButtonsContainer'>
@@ -155,14 +155,14 @@ const KFToolbar = ({
           // Find the first event with the current kid's name
           const event = events.find(event => event.kidsName === kidsName);
           return event ? (
-            <div className="wrapper" key={eventId}>
-              <div className="circle" style={{ backgroundColor: event.color }}>
+            <div className='wrapper' key={eventId}>
+              <div className='circle' style={{ backgroundColor: event.color }}>
                 <span className='initial'>{kidsName.charAt(0)}</span>
               </div>
-              <div className="info-wrapper">
-                <p className="kid-name">{kidsName}</p>
+              <div className='info-wrapper'>
+                <p className='kid-name'>{kidsName}</p>
                 {/* Toggle button */}
-                <button className="toggle-event-button" onClick={() =>
+                <button className='toggle-event-button' onClick={() =>
                   handleFilterEvents(kidsName)}> {selectedChildren.includes(kidsName) ?
                     <AiOutlineClose /> : <FiPlus />}</button>
               </div>
