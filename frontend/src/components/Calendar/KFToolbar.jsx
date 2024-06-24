@@ -43,7 +43,12 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
   };
 
   // Get unique kid names
-  const uniqueKidNames = Array.from(new Set(events.map(event => event.kidsName)));
+  const uniqueKidNames = events.reduce((acc, event) => {
+    if (!acc.some(e => e.kidsName === event.kidsName)) {
+      acc.push({ kidsName: event.kidsName, eventId: event.id });
+    }
+    return acc;
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -101,25 +106,26 @@ const KFToolbar = ({ activeView, setActiveView, onView, label, views, onNavigate
       {/* Container for kid events */}
       <div className="kid-events-container">
         {/* Iterate over unique kid names and create circles */}
-        {uniqueKidNames.map((kidName, index) => {
+        {uniqueKidNames.map(({ eventId, kidsName }) => {
           // Find the first event with the current kid's name
-          const event = events.find(event => event.kidsName === kidName);
+          const event = events.find(event => event.kidsName === kidsName);
           return event ? (
-            <div className="wrapper" key={index}>
+            <div className="wrapper" key={eventId}>
               <div className="circle" style={{ backgroundColor: event.color }}>
-                <span className='initial'>{kidName.charAt(0)}</span>
+                <span className='initial'>{kidsName.charAt(0)}</span>
               </div>
               <div className="info-wrapper">
-                <p className="kid-name">{kidName}</p>
+                <p className="kid-name">{kidsName}</p>
                 {/* Toggle button */}
                 <button className="toggle-event-button" onClick={() =>
-                  handleFilterEvents(kidName)}> {selectedChildren.includes(kidName) ?
+                  handleFilterEvents(kidsName)}> {selectedChildren.includes(kidsName) ?
                     <AiOutlineClose /> : <FiPlus />}</button>
               </div>
             </div>
           ) : null;
         })}
       </div>
+
       {isModalOpen && <EventModal onClose={() => setIsModalOpen(false)} />}
     </div>
   );

@@ -10,9 +10,9 @@ const Footer = () => {
   return (
     <footer>
       <ListGroup className={styles.footer__list}>
-        {footerLink.map((link, i) => {
+        {footerLink.map((link) => {
           return (
-            <ListGroup.Item key={i} className={styles.footer__link}>
+            <ListGroup.Item key={link.url} className={styles.footer__link}>
               <Link to={link.url}>{link.title}</Link>
             </ListGroup.Item>
           );
