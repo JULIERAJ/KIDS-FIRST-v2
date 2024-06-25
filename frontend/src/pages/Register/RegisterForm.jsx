@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Form, Button } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import {
   GoogleLoginButton,
@@ -49,8 +49,6 @@ export const RegisterForm = (props) => {
   const [successSo, setSuccessSo] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [errMsg, setErrMsg] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [success, setSuccess] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
   // eslint-disable-next-line no-unused-vars
@@ -64,6 +62,7 @@ export const RegisterForm = (props) => {
     special: false,
     length: false,
   });
+  const navigate = useNavigate();
 
   // Effect hook to handle errors received from the backend
   useEffect(() => {
@@ -223,7 +222,7 @@ export const RegisterForm = (props) => {
         setSuccessSo(true);
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
-        window.location.href = '/member';
+        navigate('/dashboard');
       })
       .catch(() => {
         setSuccessSo(false);
@@ -239,7 +238,7 @@ export const RegisterForm = (props) => {
         setSuccessSo(true);
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
-        window.location.href = '/member';
+        navigate('/dashboard');
       })
       .catch(() => {
         setSuccessSo(false);

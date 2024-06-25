@@ -31,7 +31,6 @@ const CustomDropdown = ({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             className={styles.selectField}
-            custom
             style={{ height: '48px' }}
           >
             <option value='' disabled hidden>{placeholder}</option>
@@ -61,9 +60,9 @@ CustomDropdown.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  hasPlusIcon: PropTypes.bool.isRequired,
-  hasChevronIcon: PropTypes.bool.isRequired,
+  placeholder: PropTypes.string,
+  hasPlusIcon: PropTypes.bool,
+  hasChevronIcon: PropTypes.bool,
 };
 
 const EventModal = ({ onClose }) => {
@@ -238,7 +237,6 @@ const EventModal = ({ onClose }) => {
                   as='select'
                   value={shareWith}
                   onChange={(e) => handleShareWithChange(e.target.value)}
-                  custom
                   style={{ width: '465px', height: '48px' }}>
                   <option value='Only Me'>Only Me</option>
                   <option value="Enter Parent's Name">

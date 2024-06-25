@@ -38,6 +38,7 @@
   letter-spacing: 2%;
   color: #081821;
 }
+
 .emailLabel,
 .PasswordLabel {
   margin-top: 24px;
@@ -48,6 +49,7 @@
   letter-spacing: 2%;
   color: #081821;
 }
+
 .optionalText {
   font-family: Roboto;
   font-size: 16px;
@@ -92,6 +94,7 @@
 .dashLine:after {
   right: -220px;
 }
+
 .orText {
   width: 24px;
   height: 22px;
@@ -104,10 +107,12 @@
   text-align: center;
   color: #454848;
 }
+
 .alreadyMember {
   text-align: center;
   margin-top: 20px;
 }
+
 .loginLink {
   cursor: pointer;
   color: #f08324;
@@ -116,6 +121,7 @@
   width: 400;
   padding-left: 5px;
 }
+
 .loginLink:hover,
 .loginLink:active {
   color: #f08324;
@@ -151,11 +157,13 @@
 input:focus::placeholder {
   color: transparent;
 }
+
 .signUpButton {
   width: 62px;
   height: 25px;
   margin-top: 24px;
 }
+
 .customButton {
   margin-top: 24px;
   width: 442px;
@@ -175,6 +183,7 @@ input:focus::placeholder {
 .customButton:focus {
   color: #eb7005 !important;
 }
+
 .socialButton {
   margin-top: 24px;
 }
