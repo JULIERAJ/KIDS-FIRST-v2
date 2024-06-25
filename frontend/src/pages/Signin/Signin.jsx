@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
@@ -26,6 +26,7 @@ export default function Signin() {
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [emailError, setEmailError] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -43,7 +44,7 @@ export default function Signin() {
           } else {
             sessionStorage.setItem('storedUser', user);
           }
-          window.location.href = '/dashboard';
+          navigate('/dashboard');
         })
         .catch(({ response }) => {
           if (response.status === 404) {
@@ -83,7 +84,7 @@ export default function Signin() {
       .then((res) => {
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
-        window.location.href = '/dashboard';
+        navigate('/dashboard');
       })
       .catch(() => {
         setErrorMesasage(
@@ -98,7 +99,7 @@ export default function Signin() {
         const user = JSON.stringify(res.data);
 
         localStorage.setItem('storedUser', user);
-        window.location.href = '/dashboard';
+        navigate('/dashboard');
         console.groupCollapsed(response.data);
       })
       .catch(() => {
