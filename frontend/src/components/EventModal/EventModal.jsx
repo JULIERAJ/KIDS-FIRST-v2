@@ -31,7 +31,6 @@ const CustomDropdown = ({
             value={value}
             onChange={(e) => onChange(e.target.value)}
             className={styles.selectField}
-            custom
             style={{ height: '48px' }}
           >
             <option value='' disabled hidden>{placeholder}</option>
