@@ -37,3 +37,23 @@
   color: #F08324;
   text-decoration:none;
 }
+
+.customButton {
+  margin-top: 24px;
+  width: 442px;
+  height: 56px;
+  background-color: #eb7005;
+  font-family: Roboto;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25.2px;
+  text-align: center;
+  color: #fcfcfc;
+}
+
+.customButton:hover,
+.customButton:active,
+.customButton:focus-visible,
+.customButton:focus {
+  color: #eb7005 !important;
+}

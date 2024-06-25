@@ -74,7 +74,7 @@ const Activate = () => {
               </div>
               <div>
                 <Button
-                  className='primary-btn w-100 my-5'
+                  className={`primary-btn w-100 my-3 ${styles.customButton}`}
                   type='submit'
                   size='lg'
                   variant='light'
