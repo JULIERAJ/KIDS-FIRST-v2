@@ -238,7 +238,6 @@ const EventModal = ({ onClose }) => {
                   as='select'
                   value={shareWith}
                   onChange={(e) => handleShareWithChange(e.target.value)}
-                  custom="true"
                   style={{ width: '465px', height: '48px' }}>
                   <option value='Only Me'>Only Me</option>
                   <option value="Enter Parent's Name">
