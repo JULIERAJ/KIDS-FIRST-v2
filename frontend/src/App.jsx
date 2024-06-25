@@ -8,7 +8,6 @@ import LandingLayout from './components/LandingLayout';
 import Activate from './pages/Activate/Activate';
 import Dashboard from './pages/Dashboard/Dashboard';
 
-// import Family from './pages/Family';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
@@ -34,8 +33,6 @@ const App = () => (
           path='/activate/:email/:emailVerificationToken'
           element={<Activate />}
         />
-        {/* <Route path='/family' element={<Family />} /> */}
-
         <Route path='/dashboard/*' element={<Dashboard />}>
           <Route
             path='calendarview'
