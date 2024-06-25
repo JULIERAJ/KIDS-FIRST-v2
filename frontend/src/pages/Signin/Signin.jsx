@@ -83,7 +83,7 @@ export default function Signin() {
       .then((res) => {
         const user = JSON.stringify(res.data);
         localStorage.setItem('storedUser', user);
-        window.location.href = '/member';
+        window.location.href = '/dashboard';
       })
       .catch(() => {
         setErrorMesasage(
@@ -98,7 +98,7 @@ export default function Signin() {
         const user = JSON.stringify(res.data);
 
         localStorage.setItem('storedUser', user);
-        window.location.href = '/member';
+        window.location.href = '/dashboard';
         console.groupCollapsed(response.data);
       })
       .catch(() => {

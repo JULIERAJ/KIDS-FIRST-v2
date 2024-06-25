@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { EventProvider } from './components/Calendar/EventContext';
 import KFCalendar from './components/Calendar/KFCalendar';
-// import EventModal from './components/EventModal/EventModal';
 
 import HomeDashboard from './components/HomeDashboard/HomeDashboard';
 import LandingLayout from './components/LandingLayout';
@@ -13,7 +12,6 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import FeaturesPage from './pages/FeaturesPage';
 import ForgetPassword from './pages/ForgetPassword';
 import Home from './pages/Home';
-import FinalPanel from './pages/Panels/FinalPanel';
 import Register from './pages/Register';
 import ResetPassword from './pages/ResetPassword';
 import Signin from './pages/Signin';
@@ -37,7 +35,6 @@ const App = () => (
           element={<Activate />}
         />
         {/* <Route path='/family' element={<Family />} /> */}
-        <Route path='/member' element={<FinalPanel />} />
 
         <Route path='/dashboard/*' element={<Dashboard />}>
           <Route
