@@ -1,13 +1,17 @@
 .sidebar {
-  background-color:#FDFDFD;
+  background-color: #FDFDFD;
   border-radius: 20px;
   border: 1px solid #e5e5e5;
-  font-size: 0.9rem;
+  padding: 0;
+  height: calc(100vh - 48px);
+  position: fixed;
+  top: 24px;
+  left: 12px;
+  width: calc(168px - 12px);
+  z-index: 1000;
+  display: flex;
   flex-direction: column;
-  padding: 0px;
-  min-height: 707px;
-  height: 100vh;
-  justify-content: flex-start;
+  min-height: 721px;
 }
 
 .sidebarHeader {
@@ -19,9 +23,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 168px;
-  min-height: 586px;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 }
 
 .sidebarMenuItem {
@@ -29,25 +32,15 @@
   align-items: center;
   gap: 8px;
   padding: 24px 0px 24px 16px;
-}
-
-.rowContainer{
-  height: 80px;
-}
-
-.nav{
   width: 100%;
+  cursor: pointer;
+  border-right: 4px solid transparent;
+  background-color: transparent;
+  outline: none;
 }
 
-.nav:active {
-  border-right: 4px solid rgba(235, 112, 5, 0.724);
-}
-.nav.active {
-  border-right: 4px solid rgba(235, 112, 5, 0.724);
-}
-
-.nav:hover{
-  background-color:  #FDF1E6;
+.sidebarMenuItem:hover{
+  font-weight: 700;
 }
 
 .sidebarLink {
@@ -58,34 +51,9 @@
   font-weight: 400;
   padding: 6.4px 0;
 }
-
 .sidebarLink:hover {
   color: black;
-}
-.sidebarLink:focus{
-  outline: none;
-}
 
-.sidebarMenuItem:hover a {
-  font-weight: 700;
-}
-
-.sidebarMenuItem.active .sidebarLink {
-  color: #EB7005;
-  font-weight: 700;
-}
-
-.sidebarMenu.active {
-  /* background-color:  #FDF1E6; */
-  border-right: 5px solid rgba(235, 112, 5, 0.724);
-}
-
-.sidebarMenuItem.active .sidebarLink:hover::after {
-  width: 0;
-}
-
-.sidebarMenuItem.active .sidebarLink::after {
-  width: 0;
 }
 
 .otherItemsContainer,
@@ -95,9 +63,45 @@
   width: 100%;
 }
 
-.nav:focus-within {
-  outline: none;
-  border: 4px solid rgba(235, 112, 5, 0.724);
+.nav {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+.nav:active, .nav.active {
+  border-right: 4px solid #EB7005;
+  color: #DB5C00;
+  font-weight: 700;
 }
 
+.nav:active, .nav.active:hover{
+  font-weight: 900;
+}
+.nav:focus-within {
+  outline: none;
+  border: 4px solid #EF8A37;
+}
 
+.nav:hover{
+  background-color: #FDF1E6;
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: calc(100% - 24px);
+    height: auto;
+    position: relative;
+    margin: 24px 12px;
+  }
+
+  .sidebarHeader,
+  .sidebarMenu {
+    padding: 8px;
+  }
+
+  .sidebarMenu {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+}

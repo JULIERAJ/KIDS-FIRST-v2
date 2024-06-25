@@ -25,7 +25,6 @@ export default function Signin() {
   const [errorMesasage, setErrorMesasage] = useState('');
   const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
   const [emailError, setEmailError] = useState('');
-  const [showTextPassword, setShowTextPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = (e) => {
@@ -77,7 +76,6 @@ export default function Signin() {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    // setShowTextPassword('');
   };
 
   const handleFacebookLoginSuccess = (response) => {
@@ -144,7 +142,6 @@ export default function Signin() {
                       setShowPassword={setShowPassword}
                       errors={errorMesasage}
                       labelClassName={styles.PasswordLabel}
-                      showTextPassword={showTextPassword}
                     />
                     <div className={styles.checkboxContainer}>
                       <div>

@@ -291,7 +291,6 @@ export const RegisterForm = (props) => {
         className='py-4'
         onSubmit={handleSubmit}
         noValidate
-        // validated={validated}
       >
         <Row className={styles.TextInputField}>
           <Col>
@@ -343,8 +342,6 @@ export const RegisterForm = (props) => {
           showTextPassword={showTextPassword}
         />
 
-        {/* // </MessageBar> */}
-        {/* )} */}
         {!successSo && <MessageBar variant='error'>{errMsgSocial}</MessageBar>}
 
         <Button
@@ -353,22 +350,16 @@ export const RegisterForm = (props) => {
           size='lg'
           variant='light'
         >
-          <span className={styles.signUpText}>Sign up</span>
+          Sign up
         </Button>
-
-        {/* Horizontal line with "Or" surrounded by dashes */}
-        {/* <div className={styles.orDivider}>
-          <span className={styles.dashLine}></span> Or{' '}
-          <span className={styles.dashLine}></span>
-        </div> */}
         <div className={styles.orDivider}>
           <span className={styles.dashLine}></span>
-          <span className={`${styles.orText}`}>Or</span>
+          <span className={styles.orText}>Or</span>
           <span className={styles.dashLine}></span>
         </div>
         {/* <div className={styles.signUpText}>Or</div> */}
 
-        <Row className='socialButton'>
+        <Row className={styles.socialButton}>
           <Col xs={12} md={6}>
             <LoginSocialGoogle
               client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
@@ -376,7 +367,7 @@ export const RegisterForm = (props) => {
               onReject={(err) => {
                 setErrMsg(
                   `You are not able to login with Google.
-                   Please try again later`
+                  Please try again later`
                 );
                 console.log(err);
               }}

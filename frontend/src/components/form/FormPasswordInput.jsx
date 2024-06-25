@@ -17,7 +17,7 @@ const FormPasswordInput = ({
   setShowPassword, // Function to toggle password visibility
   errors,
   successMessage,
-  showTextPassword,
+
   ...rest
 }) => {
   // Function to prevent copy and paste actions on the input field
@@ -41,7 +41,6 @@ const FormPasswordInput = ({
       isInvalid={!!errors}
       errorMessage={errors}
       successMessage={successMessage}
-      showTextPassword={showTextPassword}
       {...rest}
     />
   );
