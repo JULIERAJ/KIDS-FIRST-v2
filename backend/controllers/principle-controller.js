@@ -198,9 +198,10 @@ const loginFacebook = async (req, res) => {
       const password = data.email + process.env.JWT_EMAIL_VERIFICATION_SECRET;
       const emailIsActivated = true;
       await principleService.registration(
+        '',
+        '',
         data.email,
-        password,
-        emailIsActivated
+        password
       );
       const token = jwt.sign(
         { email: data.email },
@@ -242,7 +243,7 @@ const loginSocial = async (req, res) => {
   let user = await principleService.findUser(userID);
   if (!user) {
     let password = generatePassword();
-    user = await principleService.registration(userID, password);
+    user = await principleService.registration('', '', userID, password);
     principleService.activateAccount(user.email);
   }
   const principleFamily = await familyService.findPrincipleFamilyName(user._id);

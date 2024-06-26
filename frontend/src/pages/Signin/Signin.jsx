@@ -145,7 +145,7 @@ export default function Signin() {
               </Col>
               <Col xs={12} md={6}>
                 <LoginSocialFacebook
-                  appId={process.env.APP_ID}
+                  appId={process.env.REACT_APP_APP_ID}
                   onResolve={(response) => {
                     handleFacebookLoginSuccess(response);
                     console.log(response);
